@@ -1,15 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<%- include('./component/head', { title: '점빵' }) %>
-	</head>
-	<body>
-		<div id="jumbbang">
-			<%- include('./component/header') %>
-			<main>컨텐츠 내용</main>
-			<%- include('./component/footer') %>
-		</div>
-	</body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('./component/head', { title: '점빵' }) %>
+</head>
+
+<body>
+  <div id="jumbbang">
+    <%- include('./component/header') %>
+    <main id="main">
+      <section class="main-search">
+        <div class="main-serch-bar">
+          <div class="text">
+            <p>숨겨진 보물을 찾는 곳</p>
+            <p>완두점빵에서 찾았다.</p>
+          </div>
+          <div class="search-bar">
+            <input placeholder="찾으시는 매물을 입력해주세요">
+          </div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnradio" id="btnRadio1" autocomplete="off" checked>
+          <label class="btn btn-outline-primary" for="btnRadio1">중고거래</label>
+          <input type="radio" class="btn-check" name="btnradio" id="btnRadio2" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btnRadio2">물물교환</label>
+        </div>
+        <div class="best-product-img">
+          <div class="best-market">
+            <div class="first-product">
+              <img src="" alt="">
+              <div class="product-info">
+                <p class="subject">상품명</p>
+                <p class="price">금액</p>
+              </div>
+            </div>
+          </div>
+          <div class="best-trade"></div>
+        </div>
+  </div>
+  </section>
+  <section class="main-review">
+    <div class="main-review-inner">
+      <div class="main-review-txt">
+        <p>완두점빵</p>
+        <p>화제의 거래 후기</p>
+        <a href="">더보기</a>
+      </div>
+      <div class="main-review-container">
+        <ul class="main-review-cards">
+          <li class="main-review-card">
+            <div class="user-profile">
+              <img src="" alt="">
+            </div>
+            <div>
+              <div class="user-id">아이디</div>
+              <div class="user-review">글 내용</div>
+            </div>
+          </li>
+          <li class="main-review-card">
+            <div class="user-profile">
+              <img src="" alt="">
+            </div>
+            <div>
+              <div class="user-id">아이디</div>
+              <div class="user-review">글 내용</div>
+            </div>
+          </li>
+          <li class="main-review-card">
+            <div class="user-profile">
+              <img src="" alt="">
+            </div>
+            <div>
+              <div class="user-id">아이디</div>
+              <div class="user-review">글 내용</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="main-product">
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+      <label class="btn btn-outline-primary" for="btnradio1">중고거래</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btnradio2">물물교환</label>
+    </div>
+    <div class="main-product-img">
+      <div class="main-product-market">
+        <!-- masonry 라이브러리 적용 -->
+        <div class="grid">
+          <div class="grid-item">1</div>
+          <div class="grid-item grid-item--width2">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item grid-item--width2">4</div>
+          <div class="grid-item  grid-item--width2">5</div>
+          <div class="grid-item">6</div>
+          <div class="grid-item  grid-item--width2">7</div>
+          <div class="grid-item">8</div>
+        </div>
+        <a href="">더보기</a>
+      </div>
+      <div class="main-product-trade"></div>
+    </div>
+  </section>
+  </main>
+  <%- include('./component/footer') %>
+  </div>
+</body>
+
 </html>
