@@ -30,6 +30,7 @@ if (document.querySelector('.swiper-container')) {
 			prevEl: '.swiper-container .swiper-button-prev',
 		},
 	});
+	bgc(slideImgs);
 }
 
 // 팝오버
