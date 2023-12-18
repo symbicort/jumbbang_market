@@ -7,29 +7,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/static', express.static(__dirname + '/static'));
 
-/* app.get('/', (req, res) => {
-	res.render('index', { title: '점빵' });
-}); */
+//메인, 회원가입, 로그인, 회원탈퇴, 마이페이지, 고객센터,
 const indexRouter = require('./routes/index');
 app.use('/', indexRouter);
 
+//중고거래
 const marketRouter = require('./routes/market');
-app.use('/market', marketRouter);
-/*
-// 임시 : 중고거래
-app.get('/market', (req, res) => {
-	res.render('market', { title: '중고거래 - 점빵' });
-});
-// 임시 : 중고거래
-app.get('/login', (req, res) => {
-	res.render('login', { title: '로그인 - 점빵' });
-}); */
+app.use('/', marketRouter);
 
 // TODO: 404 처리
 app.get('*', (req, res) => {
-  res.render('404');
+	res.render('404');
 });
 
 app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
+	console.log(`http://localhost:${PORT}`);
 });
