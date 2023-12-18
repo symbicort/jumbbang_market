@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('./component/head', { title: '중고거래 - 점빵' }) %>
+		<!-- swiper css -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+		<!-- swiper js -->
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+		<link rel="stylesheet" href="/static/market.min.css" />
+	</head>
+	<body>
+		<div id="jumbbang">
+			<%- include('./component/header') %>
+			<main class="container marketWrite">
+				<h1 class="h2 fw-bold">등록</h1>
+				<form class="needs-validation mt-3" novalidate>
+					<input type="text" name="writerId" id="writerId" hidden />
+					<div class="row g-3">
+						<div class="">
+							<label for="subject" class="form-label">상품 제목</label>
+							<input
+								type="text"
+								class="form-control"
+								name="subject"
+								id="subject"
+								placeholder="제목"
+								value=""
+								required="" />
+							<div class="invalid-feedback">ID는 필수 입니다</div>
+						</div>
+
+						<div class="col-12">
+							<label for="comment" class="form-label">상품 설명</label>
+							<textarea
+								type="text"
+								class="form-control"
+								name="comment"
+								id="comment"
+								rows="5"
+								placeholder="설명"
+								required=""></textarea>
+							<div class="invalid-feedback">상품 설명은 필수 입니다</div>
+						</div>
+						<div class="">
+							<label for="state" class="form-label">거래 방식</label>
+							<select class="form-select" id="state" name="state">
+								<option value="1">판매중</option>
+								<option value="2">예약중</option>
+								<option value="3">거래완료</option>
+								<option value="4">나눔</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label for="priceFirst" class="form-label">시작가</label>
+							<input
+								type="number"
+								class="form-control"
+								name="priceFirst"
+								id="priceFirst"
+								min="1000"
+								step="1000"
+								placeholder="1000원 단위"
+								required="" />
+							<div class="invalid-feedback">시작가는 필수 입니다</div>
+						</div>
+
+						<div class="col-md-4">
+							<label for="priceDirect" class="form-label">즉구가</label>
+							<input
+								type="number"
+								class="form-control"
+								name="priceDirect"
+								id="priceDirect"
+								min="1000"
+								step="1000"
+								placeholder="1000원 단위"
+								required="" />
+							<div class="invalid-feedback">즉구가는 필수 입니다</div>
+						</div>
+
+						<div class="col-md-4">
+							<label for="dateLimit" class="form-label">경매 종료일</label>
+							<input
+								type="text"
+								class="form-control"
+								name="dateLimit"
+								id="dateLimit"
+								placeholder="2024-01-01"
+								required="" />
+							<div class="invalid-feedback">경매 종료일은 필수 입니다</div>
+						</div>
+						<div class="col">
+							<label for="image" class="form-label">상품 이미지(최소 1개 필요)</label>
+							<input type="file" class="form-control" name="image" id="image" placeholder="" required="" multiple />
+							<div class="invalid-feedback">이미지는 필수 입니다</div>
+						</div>
+					</div>
+					<hr class="my-4" />
+
+					<button class="w-100 btn-primary btn-lg" type="submit" id="btnAdd">등록</button>
+				</form>
+			</main>
+			<%- include('./component/footer') %>
+		</div>
+
+		<script src="/static/js/market.js"></script>
+		<script>
+			(() => {
+				'use strict';
+
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				const forms = document.querySelectorAll('.needs-validation');
+
+				// Loop over them and prevent submission
+				Array.from(forms).forEach((form) => {
+					form.addEventListener(
+						'submit',
+						(event) => {
+							if (!form.checkValidity()) {
+								event.preventDefault();
+								event.stopPropagation();
+							}
+
+							form.classList.add('was-validated');
+						},
+						false
+					);
+				});
+			})();
+		</script>
+	</body>
+</html>

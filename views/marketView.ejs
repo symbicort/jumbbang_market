@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('./component/head', { title: '중고거래 - 점빵' }) %>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap"
+			rel="stylesheet" />
+		<!-- swiper css -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+		<!-- swiper js -->
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+		<link rel="stylesheet" href="/static/market.min.css" />
+	</head>
+	<body>
+		<div id="jumbbang">
+			<%- include('./component/header') %>
+			<main class="marketView">
+				<article class="container">
+					<div class="d-flex gap-3 align-items-center mb-3">
+						<h1 id="article-title" class="subject h2 fw-bold">샤넬 향수 N°5</h1>
+					</div>
+					<section id="article-images" class="row">
+						<div id="image-slider" class="col-lg-8">
+							<div class="swiper-container img">
+								<!-- Additional required wrapper -->
+								<div class="swiper-wrapper">
+									<!-- Slides ::슬라이더 -->
+									<!-- 	<div class="swiper-slide image" style="background-image: url(/static/imgs/test.jpg)"></div>
+									<div class="swiper-slide image" style="background-image: url(/static/imgs/test.jpg)"></div>
+									<div class="swiper-slide image" style="background-image: url(/static/imgs/test.jpg)"></div> -->
+								</div>
+								<!-- If we need pagination ::페이지 네비게이션(선택) -->
+								<div class="swiper-pagination"></div>
+								<!-- If we need navigation buttons ::양옆 좌우 버튼(선택) -->
+								<div class="swiper-button-next"></div>
+								<div class="swiper-button-prev"></div>
+							</div>
+						</div>
+						<div class="col-lg-4 d-sm-flex d-md-block mt-5 mt-lg-0 justify-content-between align-items-center">
+							<div>
+								<div class="d-md-flex d-lg-block justify-content-between align-items-center">
+									<a id="article-profile-link" href="/profile" class="d-inline-flex gap-3 align-items-center">
+										<div id="article-profile-image">
+											<img
+												alt="푸푸"
+												src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png" />
+										</div>
+										<div id="article-profile-left">
+											<div id="nick" class="fw-bold">코코</div>
+											<div id="address">성남시 분당구</div>
+										</div>
+									</a>
+									<div id="article-profile-right" class="mt-3 mt-md-0 mt-lg-3">
+										<dl id="temperature-wrap" class="d-flex d-lg-grid justify-content-between align-items-center gap-3">
+											<dt>
+												<button
+													type="button"
+													class="ibt-info"
+													data-bs-toggle="popover"
+													data-bs-placement="right"
+													data-bs-custom-class="custom-popover"
+													data-bs-title="매너 지수"
+													data-bs-content="1점: 위험, 2점: 주의, 3점: 보통, 4점: 친절, 5점: 우수">
+													매너 지수
+												</button>
+												<span id="mannerPoint">3</span>
+											</dt>
+											<dd class="ico-face" data-lv="3"></dd>
+											<dd><a href="/chats" id="btnChat" class="btn-primary w-100 text-center">채팅</a></dd>
+										</dl>
+									</div>
+								</div>
+								<ul class="row price mt-3">
+									<li class="col-md-12 col-lg-12">
+										<div>
+											<span class="d-flex justify-content-between align-items-center">
+												<span class="txt">시작가</span>
+												<span>
+													<span id="article-category" class="category"> 뷰티 </span> ∙
+													<span id="article-category" class="category"> 수량 : 1 </span>
+												</span>
+											</span>
+											<span class="price" id="priceFirst">100,000</span>
+											<p class="period">
+												<time class="data">2023-11-23</time> ~
+												<time>2023-12-30</time>
+											</p>
+										</div>
+									</li>
+									<li class="col-md-6 col-lg-12">
+										<div>
+											<span class="txt">현재가</span><span class="price" id="priceLast">150,000</span>
+											<button type="button" class="btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalBid">
+												입찰하기
+											</button>
+											<!-- <button
+												data-bs-toggle="collapse"
+												data-bs-delay='{"show":5000,"hide":3500}'
+												href="#lyBid"
+												aria-expanded="false"
+												class="btn-primary w-100">
+												입찰하기
+											</button> -->
+										</div>
+									</li>
+									<li class="col-md-6 col-lg-12">
+										<div>
+											<span class="txt">즉구가</span><span class="price" id="price">200,000</span>
+											<button type="button" class="btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalBuy">
+												구매하기
+											</button>
+											<!-- <button
+												id="btnBuy"
+												data-bs-toggle="collapse"
+												data-bs-delay='{"show":5000,"hide":3500}'
+												href="#lyBuy"
+												aria-expanded="false"
+												class="btn-primary w-100">
+												구매하기
+											</button> -->
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+					<section id="article-profile" class="my-3"></section>
+
+					<section id="article-description">
+						<div class="content my-5">
+							<p>
+								이번 홀리데이 시즌, 샤넬은 리미티드 에디션 화이트 & 골드 케이스를 공개합니다.<br />
+								N°5 오 드 빠르펭이 담긴 우아한 보틀을 만나보세요.<br /><br />
+								구성<br /><br />
+								오 드 빠르펭은 플로랄 향과 알데하이드를 혼합한 향기에서 영감을 받아 탄생하였습니다.<br />
+								메이 로즈와 쟈스민이 선사하는 플로랄 부케는 시트러스 향의 탑 노트에 밝은 빛을 채워 줍니다.<br />
+								알데하이드가 향수에 특별한 매력을 더하는 동안, 바닐라 어코드가 부드럽게 퍼져 관능적인 잔향을 선사합니다.
+							</p>
+						</div>
+						<p id="article-counts">
+							<span class="bookmarkHit" aria-label="관심">70</span> ∙
+							<span class="chatHit" aria-label="채팅">36</span> ∙
+							<span class="hit" aria-label="조회">2221</span>
+						</p>
+					</section>
+				</article>
+
+				<section id="article-detail-hot-more" class="container my-5 pt-5">
+					<div class="d-flex justify-content-between align-items-center">
+						<h3 class="h2 fw-bold">관련 상품</h3>
+						<!-- <div id="hot-more-link"><a href="/articles">더 구경하기</a></div> -->
+					</div>
+					<section class="cards-wrap">
+						<article class="card">
+							<a class="card-link" href="/articles/1">
+								<div class="card-photo">
+									<img alt="오락기" src="/static/imgs/test.jpg" />
+								</div>
+								<div class="card-desc">
+									<h2 class="card-title">오락기</h2>
+									<div class="card-price">1,000원</div>
+									<div class="card-region-name">인천 계양구 효성동</div>
+									<div class="card-counts">
+										<span class="bookmarkHit" aria-label="관심">70</span> ∙
+										<span class="chatHit" aria-label="채팅">36</span> ∙
+										<span class="hit" aria-label="조회">2221</span>
+									</div>
+								</div>
+							</a>
+						</article>
+						<article class="card">
+							<a class="card-link" href="/articles/1">
+								<div class="card-photo">
+									<img alt="오락기" src="/static/imgs/test.jpg" />
+								</div>
+								<div class="card-desc">
+									<h2 class="card-title">오락기</h2>
+									<div class="card-price">1,000원</div>
+									<div class="card-region-name">인천 계양구 효성동</div>
+									<div class="card-counts">
+										<span class="bookmarkHit" aria-label="관심">70</span> ∙
+										<span class="chatHit" aria-label="채팅">36</span> ∙
+										<span class="hit" aria-label="조회">2221</span>
+									</div>
+								</div>
+							</a>
+						</article>
+						<article class="card">
+							<a class="card-link" href="/articles/1">
+								<div class="card-photo">
+									<img alt="오락기" src="/static/imgs/test.jpg" />
+								</div>
+								<div class="card-desc">
+									<h2 class="card-title">오락기</h2>
+									<div class="card-price">1,000원</div>
+									<div class="card-region-name">인천 계양구 효성동</div>
+									<div class="card-counts">
+										<span class="bookmarkHit" aria-label="관심">70</span> ∙
+										<span class="chatHit" aria-label="채팅">36</span> ∙
+										<span class="hit" aria-label="조회">2221</span>
+									</div>
+								</div>
+							</a>
+						</article>
+						<article class="card">
+							<a class="card-link" href="/articles/1">
+								<div class="card-photo">
+									<img alt="오락기" src="/static/imgs/test.jpg" />
+								</div>
+								<div class="card-desc">
+									<h2 class="card-title">오락기</h2>
+									<div class="card-price">1,000원</div>
+									<div class="card-region-name">인천 계양구 효성동</div>
+									<div class="card-counts">
+										<span class="bookmarkHit" aria-label="관심">70</span> ∙
+										<span class="chatHit" aria-label="채팅">36</span> ∙
+										<span class="hit" aria-label="조회">2221</span>
+									</div>
+								</div>
+							</a>
+						</article>
+						<article class="card">
+							<a class="card-link" href="/articles/1">
+								<div class="card-photo">
+									<img alt="오락기" src="/static/imgs/test.jpg" />
+								</div>
+								<div class="card-desc">
+									<h2 class="card-title">오락기</h2>
+									<div class="card-price">1,000원</div>
+									<div class="card-region-name">인천 계양구 효성동</div>
+									<div class="card-counts">
+										<span class="bookmarkHit" aria-label="관심">70</span> ∙
+										<span class="chatHit" aria-label="채팅">36</span> ∙
+										<span class="hit" aria-label="조회">2221</span>
+									</div>
+								</div>
+							</a>
+						</article>
+						<article class="card">
+							<a class="card-link" href="/articles/1">
+								<div class="card-photo">
+									<img alt="오락기" src="/static/imgs/test.jpg" />
+								</div>
+								<div class="card-desc">
+									<h2 class="card-title">오락기</h2>
+									<div class="card-price">1,000원</div>
+									<div class="card-region-name">인천 계양구 효성동</div>
+									<div class="card-counts">
+										<span class="bookmarkHit" aria-label="관심">70</span> ∙
+										<span class="chatHit" aria-label="채팅">36</span> ∙
+										<span class="hit" aria-label="조회">2221</span>
+									</div>
+								</div>
+							</a>
+						</article>
+						<article class="card">
+							<a class="card-link" href="/articles/1">
+								<div class="card-photo">
+									<img alt="오락기" src="/static/imgs/test.jpg" />
+								</div>
+								<div class="card-desc">
+									<h2 class="card-title">오락기</h2>
+									<div class="card-price">1,000원</div>
+									<div class="card-region-name">인천 계양구 효성동</div>
+									<div class="card-counts">
+										<span class="bookmarkHit" aria-label="관심">70</span> ∙
+										<span class="chatHit" aria-label="채팅">36</span> ∙
+										<span class="hit" aria-label="조회">2221</span>
+									</div>
+								</div>
+							</a>
+						</article>
+						<article class="card">
+							<a class="card-link" href="/articles/1">
+								<div class="card-photo">
+									<img alt="오락기" src="/static/imgs/test.jpg" />
+								</div>
+								<div class="card-desc">
+									<h2 class="card-title">오락기</h2>
+									<div class="card-price">1,000원</div>
+									<div class="card-region-name">인천 계양구 효성동</div>
+									<div class="card-counts">
+										<span class="bookmarkHit" aria-label="관심">70</span> ∙
+										<span class="chatHit" aria-label="채팅">36</span> ∙
+										<span class="hit" aria-label="조회">2221</span>
+									</div>
+								</div>
+							</a>
+						</article>
+					</section>
+				</section>
+				<%- include('./component/footer') %>
+			</main>
+			<%- include('./component/marketFooter') %>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="modalBid" tabindex="-1" aria-labelledby="modalBidLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="modalBidLabel">입찰 하기</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<ul class="mb-3 text-center">
+							<li class="mb-4 fs-5">
+								현재 <strong class="priceLast fw-bold">150,000</strong>원 부터<br class="d-md-none" />
+								입찰하실 수 있습니다
+							</li>
+							<li class="p-1">
+								입찰 수량: <input type="number" class="form-control" id="currency" min="1" value="1" />
+							</li>
+							<li class="p-1">
+								입찰 금액:
+								<input
+									type="number"
+									class="form-control"
+									min="150000"
+									step="1000"
+									value="150000"
+									placeholder="1000원 단위"
+									pattern="^\d*(\,\d{0,3})?$" />
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button class="btn-primary" data-bs-dismiss="modal">취소</button>
+						<button class="btn-primary" id="btnBid">입찰하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //modal -->
+		<!-- Modal -->
+		<div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="modalBuyLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="modalBuyLabel">즉시 구매</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body text-center">
+						<ul class="mb-3">
+							<li class="p-1">
+								입찰 수량: <input type="number" class="form-control" id="currency" min="1" value="1" />
+							</li>
+							<li class="p-1">
+								입찰 금액:
+								<input
+									type="number"
+									class="form-control"
+									min="200000"
+									step="1000"
+									value="200000"
+									disabled
+									pattern="^\d*(\,\d{0,3})?$" />
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button class="btn-primary" data-bs-dismiss="modal">취소</button>
+						<button class="btn-primary" id="btnBid">구매하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //modal -->
+		<script src="/static/js/market.js"></script>
+	</body>
+</html>
