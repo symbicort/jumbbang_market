@@ -132,3 +132,21 @@ table {
   box-sizing: border-box;
   outline: none;
 }
+
+a {
+  color: #000;
+}
+a:link,
+a:visited {
+  text-decoration: none;
+}
+/* a:visited,
+a:active {
+  color: #83a793;
+} */
+
+button {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+}

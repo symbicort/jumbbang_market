@@ -1,0 +1,109 @@
+#mypage {
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mypage-inner {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+}
+
+/* 프로필 및 목록 */
+.mypage-group {
+  width: 300px;
+  height: 600px;
+  border-radius: 16px;
+  background-color: #83a793;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}
+
+.mypage-user-profile {
+  margin-top: 2em;
+  text-align: center;
+  border-bottom: 1px solid #fff;
+}
+.mypage-user-img {
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #fff;
+  overflow: hidden;
+  background-size: cover;
+}
+
+.mypage-user-id {
+  margin: 1.2em 0 1.8em 0;
+}
+
+.mypage-history {
+  border-bottom: 1px solid #fff;
+  margin-bottom: 1em;
+}
+
+.mypage-history > div {
+  margin: 1em 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.mypage-history-ul {
+  margin-bottom: 1em;
+}
+
+.mypage-history-li {
+  margin: 0.5em 0;
+}
+
+.mypage-review-chat {
+  border-bottom: 1px solid #fff;
+  margin-bottom: 1em;
+}
+.mypage-review-chat > div {
+  margin: 1em 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.mypage-review-chat-ul {
+  margin-bottom: 1em;
+}
+.mypage-review-chat-li {
+  margin: 0.5em 0;
+}
+
+.mypage-my-profile > div {
+  margin: 1em 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* 내역 관련 */
+.mypage-record {
+  width: 100%;
+}
+.mypage-record-inner {
+  width: 96%;
+  margin-left: auto;
+}
+
+.mypage-record-title {
+  font-size: 1.5rem;
+  margin: 1em 0 2em 0;
+}
+
+.mypage-record-tab > ul {
+  display: flex;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #adadad;
+}
+
+.mypage-record-tab > ul > li {
+  font-size: 1.2rem;
+  padding: 0 1em;
+}

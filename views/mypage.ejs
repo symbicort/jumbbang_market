@@ -11,56 +11,65 @@
   <div id="jumbbang">
     <%- include('./component/header') %>
     <main id="mypage">
-      <section class="mypage-group">
-        <div class="mypage-user-profile">
-          <img src="" alt="">프로필이미지
-          <div class="mypage-user-id">아이디</div>
-        </div>
-        <div class="mypage-history">
-          <span>나의거래</span>
-          <ul class="mypage-history-ul">
-            <li class="mypage-history-li">관심목록</li>
-            <li class="mypage-history-li">판매내역</li>
-            <li class="mypage-history-li">구매내역</li>
-          </ul>
-        </div>
-        <div class="mypage-review-chat">
-          <span>후기/채팅</span>
-          <ul class="mypage-review-chat-ul">
-            <li class="mypage-review-chat-li">내가쓴글</li>
-            <li class="mypage-review-chat-li">채팅내역</li>
-          </ul>
-        </div>
-        <div>
-          <span>나의계정</span>
-        </div>
-      </section>
-      <section class="mypage-record">
-        <h2 class="mypage-record-title">판매내역</h2>
-        <div class="mypage-record-tab">
-          <ul>
-            <li>판매중</li>
-            <li>예약중</li>
-            <li>거래완료</li>
-            <li>숨김</li>
-          </ul>
-        </div>
-        <div class="mypage-record-product">
-          <div class="mypage-record-product-list">
-            <ul>
-              <li>
+      <div class="mypage-inner">
+        <section class="mypage-group">
+          <div class="mypage-group-inner">
+            <div class="mypage-user-profile">
+              <div class="mypage-user-img">
                 <img src="" alt="">
-                <div>
-                  <span class="date">등록일</span>
-                  <span class="record-product-title"></span>
-                  <span class="record-product-tag">상품명</span>
-                  <span class="record-product-price">금액</span>
-                </div>
-              </li>
-            </ul>
+              </div>
+              <div class="mypage-user-id">아이디</div>
+            </div>
+            <div class="mypage-history">
+              <div>나의거래</div>
+              <ul class="mypage-history-ul">
+                <li class="mypage-history-li">관심목록</li>
+                <li class="mypage-history-li">판매내역</li>
+                <li class="mypage-history-li">구매내역</li>
+              </ul>
+            </div>
+            <div class="mypage-review-chat">
+              <div>후기/채팅</div>
+              <ul class="mypage-review-chat-ul">
+                <li class="mypage-review-chat-li">내가쓴글</li>
+                <li class="mypage-review-chat-li">채팅내역</li>
+              </ul>
+            </div>
+            <div class="mypage-my-profile">
+              <div>나의계정</div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+        <!-- 내역 탭 -->
+        <section class="mypage-record">
+          <div class="mypage-record-inner">
+            <h2 class="mypage-record-title">판매내역</h2>
+            <div class="mypage-record-tab">
+              <ul>
+                <li>판매중</li>
+                <li>예약중</li>
+                <li>거래완료</li>
+                <li>숨김</li>
+              </ul>
+            </div>
+            <div class="mypage-record-product">
+              <div class="mypage-record-product-list">
+                <ul>
+                  <li>
+                    <img src="" alt="">
+                    <div>
+                      <div class="date">등록일</div>
+                      <div class="record-product-title"></div>
+                      <div class="record-product-tag">상품명</div>
+                      <div class="record-product-price">금액</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
     <%- include('./component/footer') %>
   </div>
