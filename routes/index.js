@@ -14,6 +14,8 @@ router.get('/mypage', controller.getMypage);
 router.get('/profile', controller.getProfile);
 router.get('/search', controller.getSearch);
 router.get('/cs', controller.getCs);
+router.get('/chats', controller.getChats);
+router.get('/chats/:id', controller.getChats);
 
 // module.exports를 통해서 router를 등록해줘야 다른 모듈에서 사용 가능함함.
 module.exports = router;

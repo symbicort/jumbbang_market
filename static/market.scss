@@ -45,7 +45,6 @@ $color4: #140b46; //
 body {
 	min-width: 280px;
 	font-family: 'Noto Sans KR', sans-serif;
-	// font-family: 'Dongle', sans-serif;
 }
 .strike {
 	text-decoration: line-through;
@@ -176,33 +175,14 @@ input:checked + .ibt-filter:before {
 	gap: 5px;
 	align-items: center;
 	span {
-		/* position: absolute;
-		top: -10px;
-		right: -10px;
-		display: inline-flex;
-		justify-content: center;
-		width: 20px;
-		height: 20px;
-		font-size: 15px;
-		line-height: 18px;
-		border-radius: 50%;
-		background-color: #fff;
-		box-shadow: 0 0 5px $color3; */
 	}
 	$smile1: '\F31D', '\F323', '\F327', '\F321', '\F329';
 	$smile2: '\F31C', '\F322', '\F324', '\F320', '\F328';
 	@for $i from 1 through length($smile1) {
-		// &[data-lv='#{$i}']:before {
-		// 	content: nth($smile2, $i);
-		// 	color: #ffbc00;
-		// 	font-size: 2rem;
-		// 	// clip-path: polygon(0 47%, 100% 48%, 100% 100%, 0% 100%);
-		// }
 		&[data-lv='#{$i}']:after {
 			content: nth($smile1, $i);
 			color: #ffbc00;
 			font-size: 2rem;
-			// clip-path: polygon(0 47%, 100% 48%, 100% 100%, 0% 100%);
 		}
 	}
 }
@@ -223,10 +203,6 @@ li {
 	padding: 0;
 }
 
-// .form-control,
-// .form-select {
-// 	border-color: $color4;
-// }
 .btn-primary {
 	@include btA;
 }
@@ -305,7 +281,6 @@ li {
 			background-size: contain;
 			background-size: cover;
 			background-repeat: no-repeat;
-			// background-color: #eee;
 			img {
 				opacity: 0;
 			}
@@ -480,20 +455,10 @@ li {
 	@media screen and (min-width: 320px) and (max-width: 767px) {
 		grid-template-columns: repeat(2, 1fr);
 	}
-	// @media screen and (min-width: 567px) {
-	// 	grid-template-columns: repeat(2, 1fr);
-	// }
 	@media screen and (min-width: 768px) {
 		grid-template-columns: repeat(4, 1fr);
 	}
-	// @media screen and (min-width: 992px) {
-	// 	grid-template-columns: repeat(4, 1fr);
-	// }
 
-	.card {
-		// width: calc(25% - 16px);
-		// margin-right: 16px;
-	}
 	.card-top,
 	.card {
 		// width: 223px;
