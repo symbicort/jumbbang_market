@@ -5,20 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%- include('./component/head', { title: '회원 가입 - 점빵' }) %>
-  <style>
-    main {
-      height: calc(100vh - 120px - 80px);
-      overflow-y: auto;
-    }
-  </style>
 </head>
 
 <body>
-  <div id="jumbbang">
+  <div id="jumbbang" class="jumbbang">
     <%- include('./component/header') %>
-    <main id="register" class="d-flex justify-content-center align-items-center">
+    <main id="register" class="main-user d-flex justify-content-center align-items-center">
       <form class="w-50">
-        <div class="py-3 text-center">
+        <div class="py-4 text-center">
           <h2 class="fs-2">회원가입</h2>
         </div>
         <div class="container row justify-content-center">

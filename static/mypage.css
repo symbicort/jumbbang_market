@@ -1,21 +1,27 @@
+/* 공통 */
+.sub-title {
+  margin: 1em 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* 마이페이지 목록 */
+
 #mypage {
-  height: calc(100vh - 200px);
-  overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: 120px;
 }
 
 .mypage-inner {
-  width: 80%;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
+  flex: 1;
+  justify-content: center;
 }
 
 /* 프로필 및 목록 */
 .mypage-group {
   width: 300px;
-  height: 600px;
   border-radius: 16px;
   background-color: #83a793;
   display: flex;
@@ -39,18 +45,12 @@
 }
 
 .mypage-user-id {
-  margin: 1.2em 0 1.8em 0;
+  margin: 1.5em 0 1.8em 0;
 }
 
 .mypage-history {
   border-bottom: 1px solid #fff;
   margin-bottom: 1em;
-}
-
-.mypage-history > div {
-  margin: 1em 0;
-  font-size: 1.2rem;
-  font-weight: 500;
 }
 
 .mypage-history-ul {
@@ -65,11 +65,7 @@
   border-bottom: 1px solid #fff;
   margin-bottom: 1em;
 }
-.mypage-review-chat > div {
-  margin: 1em 0;
-  font-size: 1.2rem;
-  font-weight: 500;
-}
+
 .mypage-review-chat-ul {
   margin-bottom: 1em;
 }
@@ -77,13 +73,14 @@
   margin: 0.5em 0;
 }
 
+.mypage-my-profile {
+  padding-bottom: 1em;
+}
 .mypage-my-profile > div {
-  margin: 1em 0;
-  font-size: 1.2rem;
-  font-weight: 500;
+  margin: 0.5em 0;
 }
 
-/* 내역 관련 */
+/* 탭 내역 */
 .mypage-record {
   width: 100%;
 }

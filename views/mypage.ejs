@@ -8,9 +8,9 @@
 </head>
 
 <body>
-  <div id="jumbbang">
+  <div id="jumbbang" class=".jumbbang">
     <%- include('./component/header') %>
-    <main id="mypage">
+    <main id="mypage" class="main-user">
       <div class="mypage-inner">
         <section class="mypage-group">
           <div class="mypage-group-inner">
@@ -21,7 +21,7 @@
               <div class="mypage-user-id">아이디</div>
             </div>
             <div class="mypage-history">
-              <div>나의거래</div>
+              <div class="sub-title">나의거래</div>
               <ul class="mypage-history-ul">
                 <li class="mypage-history-li">관심목록</li>
                 <li class="mypage-history-li">판매내역</li>
@@ -29,14 +29,16 @@
               </ul>
             </div>
             <div class="mypage-review-chat">
-              <div>후기/채팅</div>
+              <div class="sub-title">후기/채팅</div>
               <ul class="mypage-review-chat-ul">
                 <li class="mypage-review-chat-li">내가쓴글</li>
                 <li class="mypage-review-chat-li">채팅내역</li>
               </ul>
             </div>
             <div class="mypage-my-profile">
-              <div>나의계정</div>
+              <div class="sub-title">나의계정</div>
+              <div class="logout">로그아웃</div>
+              <div>정보수정</div>
             </div>
           </div>
         </section>

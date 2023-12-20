@@ -5,22 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%- include('./component/head', { title: '로그인 - 점빵' }) %>
-
-  <style>
-    main {
-      height: calc(100vh - 120px - 80px);
-      overflow-y: auto;
-    }
-  </style>
 </head>
 
 <body>
-  <div id="jumbbang">
-    <%- include('./component/header') %>
-    <main class="form-signin w-100 d-flex justify-content-center align-items-center">
-      <form class="w-25">
+  <%- include('./component/header') %>
+  <main class="main-user form-signin">
+    <div class="login-inner">
+      <form id="loginForm" class="w-25">
         <h1 class="h3 mb-3 fw-normal text-center">로그인</h1>
-
         <div class="form-floating mb-2">
           <input id="userid" type="text" class="form-control" placeholder="id">
           <label for="userid">아이디를 입력해주세요.</label>
@@ -41,9 +33,9 @@
           </div>
         </div>
       </form>
-    </main>
-    <%- include('./component/footer') %>
-  </div>
+    </div>
+  </main>
+  <%- include('./component/footer') %>
 </body>
 
 </html>

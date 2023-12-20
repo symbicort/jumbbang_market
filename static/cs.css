@@ -1,40 +1,32 @@
-#cs {
-  height: calc(100vh - 120px - 80px);
-  overflow-y: auto;
-}
-
 .cs-inner {
-  width: 80%;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
 .cs-info {
   background-color: #83a793;
-  padding: 3em 0;
+  padding: 3em 0 5em 0;
   color: #fff;
 }
 
 .cs-h2 {
   font-size: 2rem;
-  margin-bottom: 0.8em;
-}
-
-.cs-inner > p:nth-child(2) {
-  margin-bottom: 0.3em;
-}
-
-.cs-FAQ {
-  margin-top: 3em;
-}
-.accordion {
-  width: 60%;
-  margin: 0 auto;
-}
-
-.email-inquery {
-  width: 150px;
-  height: 40px;
-  border-radius: 5px;
-  background-color: #fff;
   margin-top: 1em;
+  margin-bottom: 1.3em;
+}
+
+.search-bar.cs {
+  width: 60%;
+  margin-bottom: 1.2em;
+  box-shadow: none;
+}
+
+.FAQ-title {
+  text-align: center;
+  margin: 3em 0 1em 0;
+  font-size: 1.5rem;
+}
+
+.accordion {
+  margin-bottom: 5em;
 }
