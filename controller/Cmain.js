@@ -34,7 +34,28 @@ exports.getCs = (req, res) => {
 	res.render('cs');
 };
 
-//채팅
+//채팅 목록/채팅 하기
 exports.getChats = (req, res) => {
-	res.render('chats');
+	const isChatId = req.params.id;
+	if (isChatId == undefined) {
+		res.render('chats', { isChatId: false });
+	} else {
+		res.render(`chats`, { isChatId: true });
+	}
+};
+//채팅 나가기
+exports.getChatLogout = (req, res) => {
+	try {
+		res.redirect('/chats');
+	} catch (err) {
+		console.log('err: ', err);
+	}
+};
+//보낸 후기
+exports.getReviewPost = (req, res) => {
+	res.render(`reviewPost`);
+};
+//받은 후기
+exports.getReviewReceive = (req, res) => {
+	res.render(`reviewReceive`);
 };
