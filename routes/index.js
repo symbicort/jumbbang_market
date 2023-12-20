@@ -16,6 +16,9 @@ router.get('/search', controller.getSearch);
 router.get('/cs', controller.getCs);
 router.get('/chats', controller.getChats);
 router.get('/chats/:id', controller.getChats);
+router.get('/chatLogout/:id', controller.getChatLogout);
+router.get('/reviewPost/:id', controller.getReviewPost);
+router.get('/reviewReceive/:id', controller.getReviewReceive);
 
 // module.exports를 통해서 router를 등록해줘야 다른 모듈에서 사용 가능함함.
 module.exports = router;
