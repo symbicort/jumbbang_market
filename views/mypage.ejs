@@ -21,7 +21,7 @@
             <!-- 탭 버튼 -->
             <div class="mypage-tab">
               <ul class="mypage-tab-list">
-                <li class="on"><a href="#sale-tab1">판매중</a></li>
+                <li><a href="#sale-tab1" class="tab-btn active">판매중</a></li>
                 <li><a href="#sale-tab2" class="tab-btn">예약중</a></li>
                 <li><a href="#" class="tab-btn">거래완료</a></li>
                 <li><a href="#" class="tab-btn">숨김</a></li>
@@ -29,7 +29,7 @@
               </ul>
             </div>
             <div class="mypage-tab-content">
-              <div id="sale-tab1" class="tab-con" style="display: block;">
+              <div id="sale-tab1" class="tab-con">
                 <ul class="mypage-tab-ul">
                   <li class="mypage-tab-li">
                     <img src="" alt="">
@@ -65,28 +65,19 @@
 
   <!-- 탭 -->
   <script>
-    const tabList = document.querySelectorAll('.tab_menu .list li');
-    const contents = document.querySelectorAll('.tab_menu .cont_area .cont')
-    let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
+    const tabmenus = document.querySelectorAll('.mypage-tab-list .tab-btn');
 
-    for (var i = 0; i < tabList.length; i++) {
-      tabList[i].querySelector('.btn').addEventListener('click', function(e) {
-        e.preventDefault();
-        for (var j = 0; j < tabList.length; j++) {
-          // 나머지 버튼 클래스 제거
-          tabList[j].classList.remove('is_on');
-
-          // 나머지 컨텐츠 display:none 처리
-          contents[j].style.display = 'none';
-        }
-
-        // 버튼 관련 이벤트
-        this.parentNode.classList.add('is_on');
-
-        // 버튼 클릭시 컨텐츠 전환
-        activeCont = this.getAttribute('href');
-        document.querySelector(activeCont).style.display = 'block';
+    tabmenus.forEach(function(els, index) {
+      els.addEventListener('click', function() {
+        tabChange((index + 1));
       });
+    });
+
+    function tabChange(num) {
+      document.querySelector('.tab-con.active').classList.remove('active');
+      document.querySelector('.tab-btn' + num).classList.add('active');
+      document.querySelector('.tab-con.active').classList.remove('active');
+      document.querySelector('.tab-con' + num).classList.add('active');
     }
   </script>
 </body>
