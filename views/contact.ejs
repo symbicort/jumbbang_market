@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('./component/head', { title: '문의 하기 - 점빵' }) %>
+		<link rel="stylesheet" href="/static/contact.min.css" />
+	</head>
+	<body>
+		<div id="jumbbang">
+			<%- include('./component/header') %>
+			<main class="container">
+				<form name="contactForm" class="contactForm">
+					<h1 class="h3 fw-bold mb-4">문의 하기</h1>
+					<div>
+						<label for="subject" class="form-label">제목</label>
+						<input type="text" id="subject" class="subject form-control" />
+					</div>
+					<div class="my-3">
+						<label for="content" class="form-label">내용</label>
+						<textarea class="content form-control" id="content" rows="5"></textarea>
+					</div>
+					<div class="btns text-end my-4">
+						<button class="btn-primary">문의하기</button>
+					</div>
+				</form>
+			</main>
+			<%- include('./component/footer') %>
+		</div>
+	</body>
+</html>

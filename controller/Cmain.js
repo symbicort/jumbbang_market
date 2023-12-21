@@ -58,3 +58,8 @@ exports.getReviewPost = (req, res) => {
 exports.getReviewReceive = (req, res) => {
 	res.render(`reviewReceive`);
 };
+
+//문의 하기
+exports.getContact = (req, res) => {
+	res.render('contact');
+};
