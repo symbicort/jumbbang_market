@@ -5,8 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%- include('./component/head', { title: '완두점빵' }) %>
-  <!-- masonry -->
-  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <link rel="stylesheet" href="/static/market.min.css">
 </head>
 
 <body>
@@ -115,9 +114,138 @@
           <label class="tab-label" for="tab1">중고거래</label>
           <input type="radio" name="tab" id="tab2" class="tab-input">
           <label class="tab-label" for="tab2">물물교환</label>
-          <div class="trade-con1">중고거래</div>
-          <div class="change-con2">물물교환</div>
+          <div class="trade-con1">
+            <section class="cards-wrap">
+              <!-- 경매 상품인 경우 : 가격 노출 -->
+              <article class="card">
+                <a class="card-link" href="/articles/1">
+                  <div class="card-photo">
+                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+                  </div>
+                  <div class="card-desc">
+                    <h2 class="card-title">오락기1</h2>
+                    <div class="card-price">1,000원</div>
+                    <div class="card-region-name">인천 계양구</div>
+                    <div class="card-counts">
+                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
+                      <span class="chatHit" aria-label="채팅">36</span> ∙
+                      <span class="hit" aria-label="조회">2221</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <!-- //경매 상품인 경우 : 가격 노출 -->
+
+              <!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
+              <article class="card">
+                <a class="card-link" href="/articles/1">
+                  <div class="card-photo">
+                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+                  </div>
+                  <div class="card-desc">
+                    <h2 class="card-title">오락기</h2>
+                    <div class="card-price-share">나눔</div>
+                    <div class="card-region-name">인천 계양구</div>
+                    <div class="card-counts">
+                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
+                      <span class="chatHit" aria-label="채팅">36</span> ∙
+                      <span class="hit" aria-label="조회">2221</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
+
+              <!-- 샘플용 : 18개 -->
+              <% for(let i=1;i <= 6;i++ ){ %>
+              <article class="card">
+                <a class="card-link" href="/articles/1">
+                  <div class="card-photo">
+                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+                  </div>
+                  <div class="card-desc">
+                    <h2 class="card-title">오락기</h2>
+                    <div class="card-price">1,000원</div>
+                    <div class="card-region-name">인천 계양구</div>
+                    <div class="card-counts">
+                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
+                      <span class="chatHit" aria-label="채팅">36</span> ∙
+                      <span class="hit" aria-label="조회">2221</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <% } %>
+              <!-- //샘플용 : 18개 -->
+            </section>
+          </div>
+          <div class="change-con2">
+            <section class="cards-wrap">
+              <!-- 경매 상품인 경우 : 가격 노출 -->
+              <article class="card">
+                <a class="card-link" href="/articles/1">
+                  <div class="card-photo">
+                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+                  </div>
+                  <div class="card-desc">
+                    <h2 class="card-title">오락기2</h2>
+                    <div class="card-price">1,000원</div>
+                    <div class="card-region-name">인천 계양구</div>
+                    <div class="card-counts">
+                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
+                      <span class="chatHit" aria-label="채팅">36</span> ∙
+                      <span class="hit" aria-label="조회">2221</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <!-- //경매 상품인 경우 : 가격 노출 -->
+
+              <!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
+              <article class="card">
+                <a class="card-link" href="/articles/1">
+                  <div class="card-photo">
+                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+                  </div>
+                  <div class="card-desc">
+                    <h2 class="card-title">오락기</h2>
+                    <div class="card-price-share">나눔</div>
+                    <div class="card-region-name">인천 계양구</div>
+                    <div class="card-counts">
+                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
+                      <span class="chatHit" aria-label="채팅">36</span> ∙
+                      <span class="hit" aria-label="조회">2221</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
+
+              <!-- 샘플용 : 18개 -->
+              <% for(let i=1;i <= 6;i++ ){ %>
+              <article class="card">
+                <a class="card-link" href="/articles/1">
+                  <div class="card-photo">
+                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+                  </div>
+                  <div class="card-desc">
+                    <h2 class="card-title">오락기</h2>
+                    <div class="card-price">1,000원</div>
+                    <div class="card-region-name">인천 계양구</div>
+                    <div class="card-counts">
+                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
+                      <span class="chatHit" aria-label="채팅">36</span> ∙
+                      <span class="hit" aria-label="조회">2221</span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <% } %>
+              <!-- //샘플용 : 18개 -->
+            </section>
+          </div>
         </div>
+        <a href="#" style="display:block; margin:5em 0 2em 0;">더보기<i class="bi bi-arrow-right"></i></a>
       </div>
     </section>
   </main>

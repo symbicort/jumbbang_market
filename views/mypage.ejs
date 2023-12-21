@@ -11,70 +11,84 @@
   <%- include('./component/header') %>
   <main id="mypage" class="main-user">
     <div class="mypage-inner">
-      <section class="mypage-group">
-        <div class="mypage-group-inner">
-          <div class="mypage-user-profile">
-            <div class="mypage-user-img">
-              <img src="" alt="">
-            </div>
-            <div class="mypage-user-id">아이디</div>
-          </div>
-          <div class="mypage-history">
-            <div class="sub-title">나의거래</div>
-            <ul class="mypage-history-ul">
-              <li class="mypage-history-li">관심목록</li>
-              <li class="mypage-history-li">판매내역</li>
-              <li class="mypage-history-li">구매내역</li>
-            </ul>
-          </div>
-          <div class="mypage-review-chat">
-            <div class="sub-title">후기/채팅</div>
-            <ul class="mypage-review-chat-ul">
-              <li class="mypage-review-chat-li">내가쓴글</li>
-              <li class="mypage-review-chat-li">채팅내역</li>
-            </ul>
-          </div>
-          <div class="mypage-my-profile">
-            <div class="sub-title">나의계정</div>
-            <div class="logout">로그아웃</div>
-            <div>정보수정</div>
-          </div>
-        </div>
-      </section>
-      <!-- 내역 탭 -->
-      <!-- 구매 내역에는 받은후기보기 추가 -->
-      <section class="mypage-record">
-        <div class="mypage-record-inner">
-          <h2 class="mypage-record-title">판매내역</h2>
-          <div class="mypage-record-tab">
-            <ul>
-              <li><a href="#">판매중</a></li>
-              <li><a href="#">예약중</a></li>
-              <li><a href="#">거래완료</a></li>
-              <li><a href="#">숨김</a></li>
-              <li><a href="#">보낸후기보기</a></li>
-            </ul>
-          </div>
-          <div class="mypage-record-product">
-            <div class="mypage-record-product-list">
-              <ul>
-                <li>
-                  <img src="" alt="">
-                  <div>
-                    <div class="date">등록일</div>
-                    <div class="record-product-title"></div>
-                    <div class="record-product-tag">상품명</div>
-                    <div class="record-product-price">금액</div>
-                  </div>
-                </li>
+      <div class="mypage-profile-list">
+        <%- include('./component/mypageMenu') %>
+        <!-- 내역 탭 -->
+        <!-- 구매 내역에는 받은후기 추가 -->
+        <section class="mypage-record">
+          <div class="mypage-record-inner">
+            <h2 class="mypage-record-title">판매내역</h2>
+            <!-- 탭 버튼 -->
+            <div class="mypage-tab">
+              <ul class="mypage-tab-list">
+                <li class="on"><a href="#sale-tab1">판매중</a></li>
+                <li><a href="#sale-tab2" class="tab-btn">예약중</a></li>
+                <li><a href="#" class="tab-btn">거래완료</a></li>
+                <li><a href="#" class="tab-btn">숨김</a></li>
+                <li><a href="#" class="tab-btn">보낸후기</a></li>
               </ul>
             </div>
+            <div class="mypage-tab-content">
+              <div id="sale-tab1" class="tab-con" style="display: block;">
+                <ul class="mypage-tab-ul">
+                  <li class="mypage-tab-li">
+                    <img src="" alt="">
+                    <div>
+                      <div class="date">등록일</div>
+                      <div class="record-product-title"></div>
+                      <div class="record-product-tag">상품명1</div>
+                      <div class="record-product-price">금액</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div id="sale-tab2" class="tab-con">
+                <ul class="mypage-tab-ul">
+                  <li class="mypage-tab-li">
+                    <img src="" alt="">
+                    <div>
+                      <div class="date">등록일</div>
+                      <div class="record-product-title"></div>
+                      <div class="record-product-tag">상품명2</div>
+                      <div class="record-product-price">금액</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   </main>
   <%- include('./component/footer') %>
+
+  <!-- 탭 -->
+  <script>
+    const tabList = document.querySelectorAll('.tab_menu .list li');
+    const contents = document.querySelectorAll('.tab_menu .cont_area .cont')
+    let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
+
+    for (var i = 0; i < tabList.length; i++) {
+      tabList[i].querySelector('.btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        for (var j = 0; j < tabList.length; j++) {
+          // 나머지 버튼 클래스 제거
+          tabList[j].classList.remove('is_on');
+
+          // 나머지 컨텐츠 display:none 처리
+          contents[j].style.display = 'none';
+        }
+
+        // 버튼 관련 이벤트
+        this.parentNode.classList.add('is_on');
+
+        // 버튼 클릭시 컨텐츠 전환
+        activeCont = this.getAttribute('href');
+        document.querySelector(activeCont).style.display = 'block';
+      });
+    }
+  </script>
 </body>
 
 </html>

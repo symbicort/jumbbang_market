@@ -13,9 +13,15 @@
 
 .mypage-inner {
   max-width: 1280px;
+  height: 100%;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+}
+
+.mypage-profile-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 /* 프로필 및 목록 */
@@ -82,6 +88,7 @@
 /* 탭 내역 */
 .mypage-record {
   width: 100%;
+  height: 100%;
 }
 .mypage-record-inner {
   width: 96%;
@@ -90,16 +97,20 @@
 
 .mypage-record-title {
   font-size: 1.5rem;
-  margin: 1em 0 2em 0;
+  margin: 4em 0 2em 0;
 }
 
-.mypage-record-tab > ul {
+.mypage-tab > ul {
   display: flex;
   padding-bottom: 1em;
   border-bottom: 1px solid #adadad;
 }
 
-.mypage-record-tab > ul > li {
+.mypage-tab > ul > li {
   font-size: 1.2rem;
   padding: 0 1em;
+}
+
+.tab-con {
+  display: none;
 }
