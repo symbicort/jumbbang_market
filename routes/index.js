@@ -15,7 +15,7 @@ router.get('/profile', controller.getProfile);
 router.get('/search', controller.getSearch);
 router.get('/cs', controller.getCs);
 router.get('/chats', controller.getChats);
-router.get('/chats/:id', controller.getChats);
+router.get('/chatRoom/:id', controller.getChatRoom);
 router.get('/chatLogout/:id', controller.getChatLogout);
 router.get('/reviewPost/:id', controller.getReviewPost);
 router.get('/reviewReceive/:id', controller.getReviewReceive);

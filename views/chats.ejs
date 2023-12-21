@@ -1,103 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('./component/head', { title: '채팅 - 점빵' }) %>
+		<link rel="stylesheet" href="/static/chats.min.css" />
+	</head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%- include('./component/head', { title: '채팅 - 점빵' }) %>
-  <link rel="stylesheet" href="/static/chats.min.css" />
-</head>
-
-<body>
-  <div id="jumbbang">
-    <%- include('./component/header') %>
-    <main class="container">
-      <div class="chatsWrap py-5">
-        <!-- <h1>My Chat</h1> -->
-        <% if(!isChatId){ %>
-        <ul class="chatList">
-          <% for(let i=0;i < 4;i++ ){ %>
-          <li id="minji_xkjehshad<%= i %>">
-            <a href="/chats/minji_xkjehshad<%= i %>">
-              <div class="profile1" style="background-image: url(/static/imgs/profile1.webp)"></div>
-              <div class="txt">
-                <strong class="subject h5">상품제목<%= i %></strong>
-                <p>
-                  <span class="userid">상대방 아이디</span>
-                  <span class="date">2023-12-20</span>
-                </p>
-              </div>
-            </a>
-            <a href="/chatLogout/minji_xkjehshad<%= i %>" class="ibt-chatLogout"></a>
-          </li>
-          <% } %>
-        </ul>
-        <% }else{ %>
-
-        <form name="chating" class="chating d-none">
-          <div class="users">
-            <ul>
-              <li>
-                <div class="profile1" style="background-image: url(/static/imgs/profile1.webp)"></div>
-                <p id="nick1" class="nick">민지</p>
-              </li>
-              <li>
-                <div class="profile2" style="background-image: url(/static/imgs/profile2.webp)"></div>
-                <p id="nick2" class="nick">하니</p>
-              </li>
-            </ul>
-          </div>
-          <ul id="server-result" class="talkList">
-            <li class="me">
-              <span>잘 받았습니다<br /><br /><br /><br />asf</span>
-            </li>
-            <li class="other">
-              <span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
-              <span>감사합니다~~감사합니다~~감사합니다~~<br /><br /><br /><br />감사합니다~~</span>
-            </li>
-            <li class="other">
-              <span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
-              <span>감사합니다~~감사합니다~~감사합니다~~<br /><br /><br /><br />감사합니다~~</span>
-            </li>
-            <li class="other">
-              <span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
-              <span>감사합니다~~감사합니다~~감사합니다~~<br /><br /><br /><br />감사합니다~~</span>
-            </li>
-            <li class="other">
-              <span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
-              <span>감사합니다~~감사합니다~~감사합니다~~<br /><br /><br /><br />감사합니다~~</span>
-            </li>
-            <li class="other">
-              <span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
-              <span>감사합니다~~감사합니다~~감사합니다~~<br /><br /><br /><br />감사합니다~~</span>
-            </li>
-          </ul>
-          <div class="inputField">
-            <input type="text" id="msg" required placeholder="Message..." onkeydown="if(window.event.keyCode == 13){send()}" />
-            <button type="button" onclick="send()"></button>
-          </div>
-        </form>
-
-        <div class="mt-5">
-          <a href="/chatLogout/minji_xkjehshad" class="btn-primary w-100 d-block text-center">채팅 나가기</a>
-        </div>
-        <% } %>
-      </div>
-    </main>
-    <%- include('./component/footer') %>
-  </div>
-  <script>
-    (function() {
-      //응답이 true, false 값일때 ejs를 문자로 인식하여  다시 boolean 값으로 처리 해줌
-      const isChatId = !Boolean('<%= isChatId %>');
-      const chating = document.querySelector('.chating');
-      if (isChatId) {
-        chating.classList.add('d-none');
-      } else {
-        chating?.classList.remove('d-none');
-      }
-    })();
-  </script>
-</body>
-
+	<body>
+		<div id="jumbbang">
+			<%- include('./component/header') %>
+			<main class="container">
+				<div class="chatsWrap py-5">
+					<!-- <h1>My Chat</h1> -->
+					<ul class="chatList">
+						<% for(let i=0;i < 4;i++ ){ %>
+						<li id="minji_xkjehshad<%= i %>">
+							<a href="/chatRoom/minji_xkjehshad<%= i %>">
+								<div class="profile1" style="background-image: url(/static/imgs/profile1.webp)"></div>
+								<div class="txt">
+									<strong class="subject h5">상품제목<%= i %></strong>
+									<p>
+										<span class="userid">상대방 아이디</span>
+										<span class="date">2023-12-20</span>
+									</p>
+								</div>
+							</a>
+							<a href="/chatLogout/minji_xkjehshad<%= i %>" class="ibt-chatLogout"></a>
+						</li>
+						<% } %>
+					</ul>
+				</div>
+			</main>
+			<%- include('./component/footer') %>
+		</div>
+	</body>
 </html>

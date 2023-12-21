@@ -34,14 +34,13 @@ exports.getCs = (req, res) => {
 	res.render('cs');
 };
 
-//채팅 목록/채팅 하기
+//채팅 목록
 exports.getChats = (req, res) => {
-	const isChatId = req.params.id;
-	if (isChatId == undefined) {
-		res.render('chats', { isChatId: false });
-	} else {
-		res.render(`chats`, { isChatId: true });
-	}
+	res.render(`chats`);
+};
+//채팅 방
+exports.getChatRoom = (req, res) => {
+	res.render(`chatRoom`);
 };
 //채팅 나가기
 exports.getChatLogout = (req, res) => {
