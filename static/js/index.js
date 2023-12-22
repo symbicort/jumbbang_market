@@ -58,6 +58,13 @@ async function tryLogin(){
             userpw: form.pw.value
         }
     }).then((res) => {
-        console.log(res);
+        console.log('로그인 결과',res.data.result)
+        if(res.data.result){
+            alert('로그인 성공');
+            document.location.href = '/'
+        } else{
+            alert('로그인 실패, 다시 시도해주세요');
+            form.pw.value = ''
+        }
     })
 }

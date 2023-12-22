@@ -27,7 +27,7 @@
 				<!-- //상품 정보, 채팅 상대방 정보 form -->
 				<article class="container">
 					<div class="d-flex gap-3 align-items-center mb-3">
-						<h1 id="article-title" class="subject h2 fw-bold">샤넬 향수 N°5</h1>
+						<h1 id="article-title" class="subject h2 fw-bold"><%= postdata.subject %></h1>
 					</div>
 					<section id="article-images" class="row">
 						<div id="image-slider" class="col-lg-8">
@@ -56,7 +56,7 @@
 												src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png" />
 										</div>
 										<div id="article-profile-left">
-											<div id="nick" class="fw-bold">코코</div>
+											<div id="nick" class="fw-bold"><%= postdata.userid %></div>
 											<div id="address">성남시 분당구</div>
 										</div>
 									</a>
@@ -89,21 +89,21 @@
 										<div>
 											<span class="d-flex justify-content-between align-items-center">
 												<span class="txt">시작가</span>
-												<span>
+												<!-- <span>
 													<span id="article-category" class="category"> 뷰티 </span> ∙
 													<span id="article-category" class="category"> 수량 : 1 </span>
-												</span>
+												</span> -->
 											</span>
-											<span class="price" id="priceFirst">100,000</span>
+											<span class="price" id="priceFirst"><%= postdata.priceFirst %></span>
 											<p class="period">
-												<time class="data">2023-11-23</time> ~
-												<time>2023-12-30</time>
+												<time class="data"><%= postdata.createdAt %></time> ~
+												<time><%= postdata.dateLimit %></time>
 											</p>
 										</div>
 									</li>
 									<li class="col-md-6 col-lg-12">
 										<div>
-											<span class="txt">현재가</span><span class="price" id="priceLast">150,000</span>
+											<span class="txt">현재가</span><span class="price" id="priceLast"><%= postdata.priceLast %></span>
 											<button type="button" class="btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalBid">
 												입찰하기
 											</button>
@@ -111,7 +111,7 @@
 									</li>
 									<li class="col-md-6 col-lg-12">
 										<div>
-											<span class="txt">즉구가</span><span class="price" id="price">200,000</span>
+											<span class="txt">즉구가</span><span class="price" id="price"><%= postdata.priceDirect %></span>
 											<button type="button" class="btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalBuy">
 												구매하기
 											</button>
@@ -127,18 +127,13 @@
 					<section id="article-description">
 						<div class="content my-5">
 							<p>
-								이번 홀리데이 시즌, 샤넬은 리미티드 에디션 화이트 & 골드 케이스를 공개합니다.<br />
-								N°5 오 드 빠르펭이 담긴 우아한 보틀을 만나보세요.<br /><br />
-								구성<br /><br />
-								오 드 빠르펭은 플로랄 향과 알데하이드를 혼합한 향기에서 영감을 받아 탄생하였습니다.<br />
-								메이 로즈와 쟈스민이 선사하는 플로랄 부케는 시트러스 향의 탑 노트에 밝은 빛을 채워 줍니다.<br />
-								알데하이드가 향수에 특별한 매력을 더하는 동안, 바닐라 어코드가 부드럽게 퍼져 관능적인 잔향을 선사합니다.
+								<%= postdata.content %>
 							</p>
 						</div>
 						<p id="article-counts">
-							<span class="bookmarkHit" aria-label="관심">70</span> ∙
+							<span class="bookmarkHit" aria-label="관심"><%= postdata.bookmark_hit %></span> ∙
 							<span class="chatHit" aria-label="채팅">36</span> ∙
-							<span class="hit" aria-label="조회">2221</span>
+							<span class="hit" aria-label="조회"><%= postdata.hit %></span>
 						</p>
 					</section>
 				</article>

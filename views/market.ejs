@@ -65,11 +65,10 @@
 						</div>
 						<section class="cards-wrap">
 							<% for(let i = 0; i < postData.length; i++) { %>
-								<%- console.log(i) %>
 								<article class="card">
 									<a class="card-link" href="/articles/<%= postData[0]._id %>">
 										<div class="card-photo">
-											<img alt="오락기" src="<%= postData[0].images[0] %>" crossorigin="Anonymous" />
+											<img alt="오락기" src="<%= postData[i].images[0] %>" crossorigin="Anonymous" />
 										</div>
 										<div class="card-desc">
 											<h2 class="card-title"><%= postData[i].subject %></h2>
