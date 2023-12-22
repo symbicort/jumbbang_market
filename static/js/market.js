@@ -77,3 +77,4 @@ function directChat() {
     // const postName = "하하";
     window.location.href = `/chatroom?postName=${postName}&myName=${myname}&productId=${productId}`;
 }
+

@@ -22,5 +22,11 @@ router.get("/bookmark", controller.getBookmark);
 router.get("/sales", controller.getSales);
 router.get("/purchase", controller.getPurchase);
 
+// 회원 가입(POST)
+router.post("/register", controller.postRegister);
+
+// 로그인(POST)
+router.post("/login", controller.postlogin);
+
 // module.exports를 통해서 router를 등록해줘야 다른 모듈에서 사용 가능함함.
 module.exports = router;

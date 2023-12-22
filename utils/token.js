@@ -12,14 +12,12 @@ const makeRefreshToken = (userid) => {
             expiresIn: "7d",
         });
 
-        const result = tokenModel.updateOne(
+        tokenModel.updateOne(
             { user_id: userid },
             { $set: { user_id: userid, refreshToken: refToken } },
             { upsert: true }
         ).exec();
-        
-        console.log('make refresh token complete', result);
-
+    
         return refToken;
     } catch (error) {
         console.error('upload to token db error', error);
