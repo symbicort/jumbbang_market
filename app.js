@@ -1,25 +1,41 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const PORT = 8000;
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
+app.set("views", "./views");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/static', express.static(__dirname + '/static'));
+app.use("/static", express.static(__dirname + "/static"));
 
 //메인, 회원가입, 로그인, 회원탈퇴, 마이페이지, 고객센터,
-const indexRouter = require('./routes/index');
-app.use('/', indexRouter);
+const indexRouter = require("./routes/index");
+app.use("/", indexRouter);
 
 //중고거래
-const marketRouter = require('./routes/market');
-app.use('/', marketRouter);
+const marketRouter = require("./routes/market");
+app.use("/", marketRouter);
+
+// 채팅
+const chatRouter = require("./routes/chat");
+app.use("/", chatRouter);
+
+// socket
+const http = require("http");
+const server = http.createServer(app);
+const socketController = require("./controller/Csocket")(server);
+// socket 기능
+app.use("/chatroom", socketController);
 
 // TODO: 404 처리
-app.get('*', (req, res) => {
-  res.render('404');
+app.get("*", (req, res) => {
+    res.render("404");
 });
 
+// DB 연동
+const connect = require("./model/index");
+connect();
+
 app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
+    console.log(`http://localhost:${PORT}`);
 });

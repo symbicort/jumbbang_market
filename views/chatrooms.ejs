@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<%- include('./component/head', { title: '채팅 - 점빵' }) %>
+		<script src="https://kit.fontawesome.com/837ff3adc1.js" crossorigin="anonymous" async></script>
+		<link rel="stylesheet" href="/static/chats.min.css" />
+</head>
+
+<body>
+	<div id="jumbbang">
+		<%- include('./component/header') %>
+			<main class="container">
+				<div class="chatsWrap py-5">
+					<!-- <h1>My Chat</h1> -->
+					<ul class="chatList">
+						<% for(let i=0;i < mychatrooms.length;i++ ){ %>
+							<li id="minji_xkjehshad<%= i %>">
+								<a href="/chatRoom/minji_xkjehshad<%= i %>">
+									<div class="profile1" style="background-image: url(/static/imgs/profile2.webp)">
+									</div>
+									<div class="txt">
+										<strong class="subject h5">
+											<%= mychatrooms[i].productId%>
+										</strong>
+										<p>
+											<span class="userid">
+												<%= mychatrooms[i].takeId %>
+											</span>
+											<span class="date">
+												<%= mychatrooms[i].createdAt %>
+											</span>
+										</p>
+									</div>
+								</a>
+								<div class="btns">
+									<button class="ibt-report" aria-label="신고하기"></button>
+									<a onclick="exit()" class="ibt-chatLogout"></a>
+								</div>
+							</li>
+							<% } %>
+					</ul>
+				</div>
+			</main>
+			<%- include('./component/footer') %>
+	</div>
+	<script src="../static/js/socket.js"></script>
+</body>
+
+</html>
