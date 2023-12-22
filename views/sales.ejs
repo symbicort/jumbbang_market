@@ -3,13 +3,81 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<%- include('./component/head', { title: '판매 내역 - 점빵' }) %>
+		<%- include('./component/head', { title: '마이페이지 - 점빵' }) %>
 	</head>
+
 	<body>
-		<div id="jumbbang">
-			<%- include('./component/header') %>
-			<main>판매내역</main>
-			<%- include('./component/footer') %>
-		</div>
+		<%- include('./component/header') %>
+		<main id="mypage" class="main-user">
+			<div class="mypage-inner">
+				<div class="mypage-profile-list">
+					<%- include('./component/mypageMenu') %>
+					<!-- 내역 탭 -->
+					<!-- 구매 내역에는 받은후기 추가 -->
+					<section class="mypage-record">
+						<div class="mypage-record-inner">
+							<h2 class="mypage-record-title">판매내역</h2>
+							<!-- 탭 버튼 -->
+							<div class="mypage-tab">
+								<ul class="mypage-tab-list">
+									<li><a href="#sale-tab1" class="tab-btn active">판매중</a></li>
+									<li><a href="#sale-tab2" class="tab-btn">예약중</a></li>
+									<li><a href="#" class="tab-btn">거래완료</a></li>
+									<li><a href="#" class="tab-btn">숨김</a></li>
+									<li><a href="#" class="tab-btn">보낸후기</a></li>
+								</ul>
+							</div>
+							<div class="mypage-tab-content">
+								<div id="sale-tab1" class="tab-con">
+									<ul class="mypage-tab-ul">
+										<li class="mypage-tab-li">
+											<img src="" alt="" />
+											<div>
+												<div class="date">등록일</div>
+												<div class="record-product-title"></div>
+												<div class="record-product-tag">상품명1</div>
+												<div class="record-product-price">금액</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div id="sale-tab2" class="tab-con">
+									<ul class="mypage-tab-ul">
+										<li class="mypage-tab-li">
+											<img src="" alt="" />
+											<div>
+												<div class="date">등록일</div>
+												<div class="record-product-title"></div>
+												<div class="record-product-tag">상품명2</div>
+												<div class="record-product-price">금액</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</main>
+		<%- include('./component/footer') %>
+
+		<!-- 탭 -->
+		<script>
+			const tabmenus = document.querySelectorAll('.mypage-tab-list .tab-btn');
+
+			tabmenus.forEach(function (els, index) {
+				els.addEventListener('click', function () {
+					tabChange(index + 1);
+				});
+			});
+
+			function tabChange(num) {
+				document.querySelector('.tab-con.active').classList.remove('active');
+				document.querySelector('.tab-btn' + num).classList.add('active');
+				document.querySelector('.tab-con.active').classList.remove('active');
+				document.querySelector('.tab-con' + num).classList.add('active');
+			}
+		</script>
 	</body>
 </html>

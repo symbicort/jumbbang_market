@@ -21,7 +21,7 @@ exports.getRegister = (req, res) => {
 exports.getMypage = (req, res) => {
 	res.render('mypage');
 };
-//프로필
+//프로필(정보수정)
 exports.getProfile = (req, res) => {
 	res.render('profile');
 };
@@ -58,8 +58,23 @@ exports.getReviewPost = (req, res) => {
 exports.getReviewReceive = (req, res) => {
 	res.render(`reviewReceive`);
 };
-
-//문의 하기
+//후기 작성
+exports.getReviewWrite = (req, res) => {
+	res.render(`reviewWrite`);
+};
+//관심 목록
 exports.getContact = (req, res) => {
 	res.render('contact');
+};
+//관심 목록
+exports.getBookmark = (req, res) => {
+	res.render('bookmark');
+};
+//판매 내역
+exports.getSales = (req, res) => {
+	res.render('sales');
+};
+//구매 내역
+exports.getPurchase = (req, res) => {
+	res.render('purchase');
 };
