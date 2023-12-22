@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const app = express();
 const PORT = 8000;
 
@@ -15,6 +16,9 @@ app.use('/utils', express.static(__dirname + '/utils'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: '*'
+}));
 
 const { swaggerUi, specs } = require('./swagger') ;
 

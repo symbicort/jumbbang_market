@@ -64,27 +64,27 @@
 							</ul>
 						</div>
 						<section class="cards-wrap">
-							
-							<!-- 샘플용 : 18개 -->
-							<% for(let i=1;i <= 18;i++ ){ %>
-							<article class="card">
-								<a class="card-link" href="/articles/1">
-									<div class="card-photo">
-										<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-									</div>
-									<div class="card-desc">
-										<h2 class="card-title">오락기</h2>
-										<div class="card-price">1,000원</div>
-										<div class="card-region-name">인천 계양구</div>
-										<div class="card-counts">
-											<span class="bookmarkHit" aria-label="관심">70</span> ∙
-											<span class="chatHit" aria-label="채팅">36</span> ∙
-											<span class="hit" aria-label="조회">12312</span>
+							<% for(let i = 0; i < postData.length; i++) { %>
+								<%- console.log(i) %>
+								<article class="card">
+									<a class="card-link" href="/articles/<%= postData[0]._id %>">
+										<div class="card-photo">
+											<img alt="오락기" src="<%= postData[0].images[0] %>" crossorigin="Anonymous" />
 										</div>
-									</div>
-								</a>
-							</article>
+										<div class="card-desc">
+											<h2 class="card-title"><%= postData[i].subject %></h2>
+											<div class="card-price"><%= postData[i].priceLast %></div>
+											<div class="card-region-name">인천 계양구</div>
+											<div class="card-counts">
+												<span class="bookmarkHit" aria-label="관심"><%= postData[i].bookmark_hit %> </span> ∙
+												<span class="chatHit" aria-label="채팅">36</span> ∙
+												<span class="hit" aria-label="조회"><%= postData[i].hit %></span>
+											</div>
+										</div>
+									</a>
+								</article>
 							<% } %>
+							
 							<!-- //샘플용 : 18개 -->
 						</section>
 						<div class="pageBar mt-5">

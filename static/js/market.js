@@ -3,7 +3,7 @@ async function bgc(slideImgs) {
     const colorThief = new ColorThief();
     await slideImgs.forEach((img, i) => {
         const html = `
-      <div class="swiper-slide image" style="background-image: url(${img});"><img src='${img}' id='newimage${i}' crossorigin="Anonymous"></div>
+        <div class="swiper-slide image" style="background-image: url(${img});"><img src='${img}' id='newimage${i}' crossorigin="Anonymous"></div>
 		`;
         const slider = document.querySelector(".swiper-wrapper");
         slider.insertAdjacentHTML("beforeend", html);
