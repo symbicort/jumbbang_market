@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" c />
+		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" c />
 		<%- include('./component/head', { title: '중고거래 - 점빵' }) %>
 		<link rel="stylesheet" href="/static/market.min.css" />
@@ -11,9 +11,9 @@
 			<%- include('./component/header') %>
 			<main class="container">
 				<div id="marketList">
-					<section id="article-detail-hot-more" class="container my-5 pt-3">
+					<section id="article-detail-hot-more" class="container pt-3">
 						<div class="d-flex justify-content-between align-items-center pb-4">
-							<div class="d-flex gap-3">
+							<div class="d-flex align-items-end gap-2">
 								<h3 class="h2 fw-bold mb-0">중고 거래</h3>
 								<input type="checkbox" name="filter" id="filter" hidden />
 								<label
@@ -26,9 +26,9 @@
 							</div>
 							<div class="sort">
 								<input type="radio" name="sort" id="sort1" value="1" checked hidden />
-								<label class="bt-recommend" for="sort1">추천순</label>
+								<label class="bt-recent" for="sort1">최신순</label>
 								<input type="radio" name="sort" id="sort2" value="2" hidden />
-								<label class="bt-recent" for="sort2">최신순</label>
+								<label class="bt-recommend" for="sort2">추천순</label>
 								<input type="radio" name="sort" id="sort3" value="3" hidden />
 								<label class="bt-down" for="sort3">가격 낮은순</label>
 								<input type="radio" name="sort" id="sort4" value="4" hidden />
@@ -118,7 +118,7 @@
 										<div class="card-counts">
 											<span class="bookmarkHit" aria-label="관심">70</span> ∙
 											<span class="chatHit" aria-label="채팅">36</span> ∙
-											<span class="hit" aria-label="조회">2221</span>
+											<span class="hit" aria-label="조회">12312</span>
 										</div>
 									</div>
 								</a>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<%- include('./component/head', { title: '중고거래 - 점빵' }) %>
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap"
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('./component/head', { title: '중고거래 - 점빵' }) %>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap"
 			rel="stylesheet" />
 		<!-- swiper css -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -13,11 +13,11 @@
 		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 		<link rel="stylesheet" href="/static/market.min.css" />
-</head>
+	</head>
 
-<body>
-	<div id="jumbbang">
-		<%- include('./component/header') %>
+	<body>
+		<div id="jumbbang">
+			<%- include('./component/header') %>
 			<main class="marketView">
 				<!-- 상품 정보, 채팅 상대방 정보 form -->
 				<form name="info">
@@ -46,14 +46,13 @@
 								<div class="swiper-button-prev"></div>
 							</div>
 						</div>
-						<div
-							class="col-lg-4 d-sm-flex d-md-block mt-5 mt-lg-0 justify-content-between align-items-center">
+						<div class="col-lg-4 d-sm-flex d-md-block mt-5 mt-lg-0 justify-content-between align-items-center">
 							<div>
 								<div class="d-md-flex d-lg-block justify-content-between align-items-center">
-									<a id="article-profile-link" href="/profile"
-										class="d-inline-flex gap-3 align-items-center">
+									<a id="article-profile-link" href="/profile" class="d-inline-flex gap-3 align-items-center">
 										<div id="article-profile-image">
-											<img alt="푸푸"
+											<img
+												alt="푸푸"
 												src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png" />
 										</div>
 										<div id="article-profile-left">
@@ -62,11 +61,14 @@
 										</div>
 									</a>
 									<div id="article-profile-right" class="mt-3 mt-md-0 mt-lg-3">
-										<dl id="temperature-wrap"
-											class="d-flex d-lg-grid justify-content-between align-items-center gap-3">
+										<dl id="temperature-wrap" class="d-flex d-lg-grid justify-content-between align-items-center gap-3">
 											<dt>
-												<button type="button" class="ibt-info" data-bs-toggle="popover"
-													data-bs-placement="right" data-bs-custom-class="custom-popover"
+												<button
+													type="button"
+													class="ibt-info"
+													data-bs-toggle="popover"
+													data-bs-placement="right"
+													data-bs-custom-class="custom-popover"
 													data-bs-title="매너 지수"
 													data-bs-content="1점: 위험, 2점: 주의, 3점: 보통, 4점: 친절, 5점: 우수">
 													매너 지수
@@ -75,8 +77,9 @@
 											</dt>
 											<dd class="ico-face" data-lv="3"></dd>
 											<dd>
-												<a onclick="directChat()" id="btnChat"
-													class="btn-primary w-100 text-center">채팅</a>
+												<input type="checkbox" id="bookmark" name="bookmark" hidden />
+												<label for="bookmark" class="ibt-bookmark btn-primary" aria-label="관심 추가"></label>
+												<a onclick="directChat()" id="btnChat" class="btn-primary w-100 text-center">채팅</a>
 											</dd>
 										</dl>
 									</div>
@@ -100,10 +103,8 @@
 									</li>
 									<li class="col-md-6 col-lg-12">
 										<div>
-											<span class="txt">현재가</span><span class="price"
-												id="priceLast">150,000</span>
-											<button type="button" class="btn-primary w-100" data-bs-toggle="modal"
-												data-bs-target="#modalBid">
+											<span class="txt">현재가</span><span class="price" id="priceLast">150,000</span>
+											<button type="button" class="btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalBid">
 												입찰하기
 											</button>
 										</div>
@@ -111,8 +112,7 @@
 									<li class="col-md-6 col-lg-12">
 										<div>
 											<span class="txt">즉구가</span><span class="price" id="price">200,000</span>
-											<button type="button" class="btn-primary w-100" data-bs-toggle="modal"
-												data-bs-target="#modalBuy">
+											<button type="button" class="btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalBuy">
 												구매하기
 											</button>
 										</div>
@@ -290,75 +290,79 @@
 				<%- include('./component/footer') %>
 			</main>
 			<%- include('./component/marketFooter') %>
-	</div>
+		</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="modalBid" tabindex="-1" aria-labelledby="modalBidLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<form name="formBid">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="modalBidLabel">입찰 하기</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<ul class="mb-3 text-center">
-							<li class="mb-4 fs-5">
-								<!-- .priceLast: 현재가(입찰중인 현재 불러온 값) -->
-								현재 <strong class="priceLast fw-bold">150,000</strong>원 부터<br class="d-md-none" />
-								입찰하실 수 있습니다
-							</li>
-							<li class="p-1">
-								입찰 수량: <input type="number" class="form-control" id="currency" min="1" value="1" />
-							</li>
-							<li class="p-1">
-								입찰 금액:
-								<!-- min: 현재가(입찰중인 현재 불러온 값), value: 현재가(사용자가 조정한 값) -->
-								<input type="number" class="form-control" min="150000" step="1000" value="150000"
-									placeholder="1000원 단위" />
-							</li>
-						</ul>
-					</div>
-					<div class="modal-footer">
-						<button class="btn-primary" data-bs-dismiss="modal">취소</button>
-						<button class="btn-primary" id="btnBid">입찰하기</button>
-					</div>
-				</form>
+		<!-- Modal -->
+		<div class="modal fade" id="modalBid" tabindex="-1" aria-labelledby="modalBidLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<form name="formBid">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="modalBidLabel">입찰 하기</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<ul class="mb-3 text-center">
+								<li class="mb-4 fs-5">
+									<!-- .priceLast: 현재가(입찰중인 현재 불러온 값) -->
+									현재 <strong class="priceLast fw-bold">150,000</strong>원 부터<br class="d-md-none" />
+									입찰하실 수 있습니다
+								</li>
+								<li class="p-1">
+									입찰 수량: <input type="number" class="form-control" id="currency" min="1" value="1" />
+								</li>
+								<li class="p-1">
+									입찰 금액:
+									<!-- min: 현재가(입찰중인 현재 불러온 값), value: 현재가(사용자가 조정한 값) -->
+									<input
+										type="number"
+										class="form-control"
+										min="150000"
+										step="1000"
+										value="150000"
+										placeholder="1000원 단위" />
+								</li>
+							</ul>
+						</div>
+						<div class="modal-footer">
+							<button class="btn-primary" data-bs-dismiss="modal">취소</button>
+							<button class="btn-primary" id="btnBid">입찰하기</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- //modal -->
-	<!-- Modal -->
-	<div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="modalBuyLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<form name="formBuy">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="modalBuyLabel">즉시 구매</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body text-center">
-						<ul class="mb-3">
-							<li class="p-1">
-								입찰 수량: <input type="number" class="form-control" id="currency" min="1" value="1" />
-							</li>
-							<li class="p-1">
-								입찰 금액:
-								<!-- 가격 조정 불가 : 즉구가 불러온 값 value에 기입 -->
-								<input type="number" class="form-control" value="200000" disabled />
-							</li>
-						</ul>
-					</div>
-					<div class="modal-footer">
-						<button class="btn-primary" data-bs-dismiss="modal">취소</button>
-						<button class="btn-primary" id="btnBid">구매하기</button>
-					</div>
-				</form>
+		<!-- //modal -->
+		<!-- Modal -->
+		<div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="modalBuyLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<form name="formBuy">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="modalBuyLabel">즉시 구매</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body text-center">
+							<ul class="mb-3">
+								<li class="p-1">
+									입찰 수량: <input type="number" class="form-control" id="currency" min="1" value="1" />
+								</li>
+								<li class="p-1">
+									입찰 금액:
+									<!-- 가격 조정 불가 : 즉구가 불러온 값 value에 기입 -->
+									<input type="number" class="form-control" value="200000" disabled />
+								</li>
+							</ul>
+						</div>
+						<div class="modal-footer">
+							<button class="btn-primary" data-bs-dismiss="modal">취소</button>
+							<button class="btn-primary" id="btnBid">구매하기</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- //modal -->
-	<script src="/static/js/market.js"></script>
-</body>
-
+		<!-- //modal -->
+		<script src="/static/js/market.js"></script>
+	</body>
 </html>

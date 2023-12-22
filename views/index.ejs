@@ -1,255 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('./component/head', { title: '완두점빵' }) %>
+		<link rel="stylesheet" href="/static/market.min.css" />
+	</head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%- include('./component/head', { title: '완두점빵' }) %>
-  <link rel="stylesheet" href="/static/market.min.css">
-</head>
+	<body>
+		<%- include('./component/header') %>
+		<main id="main">
+			<section class="main-search">
+				<div class="main-search-inner">
+					<div class="main-search-bar">
+						<div class="text">
+							<p>당신이 숨겨 놓은 보물</p>
+							<p>완두점빵에서 찾았다.</p>
+						</div>
+						<div class="main-search-area">
+							<div class="search-bar">
+								<input id="searchInput" placeholder="찾으시는 매물을 입력해주세요." />
+								<button class="main-search-btn" onclick="search();">검색</button>
+							</div>
+						</div>
+					</div>
+					<div class="main-best-product">
+						<div id="carouselExampleIndicators" class="carousel slide">
+							<div class="carousel-indicators">
+								<button
+									type="button"
+									data-bs-target="#carouselExampleIndicators"
+									data-bs-slide-to="0"
+									class="active"
+									aria-current="true"
+									aria-label="Slide 1"></button>
+								<button
+									type="button"
+									data-bs-target="#carouselExampleIndicators"
+									data-bs-slide-to="1"
+									aria-label="Slide 2"></button>
+								<button
+									type="button"
+									data-bs-target="#carouselExampleIndicators"
+									data-bs-slide-to="2"
+									aria-label="Slide 3"></button>
+							</div>
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img
+										src="https://cdn.ccdailynews.com/news/photo/202104/2050116_530468_210.png"
+										class="d-block w-100"
+										alt="..." />
+								</div>
+								<div class="carousel-item">
+									<img
+										src="https://cdn.ccdailynews.com/news/photo/202104/2050116_530468_210.png"
+										class="d-block w-100"
+										alt="..." />
+								</div>
+								<div class="carousel-item">
+									<img
+										src="https://cdn.ccdailynews.com/news/photo/202104/2050116_530468_210.png"
+										class="d-block w-100"
+										alt="..." />
+								</div>
+							</div>
+							<button
+								class="carousel-control-prev"
+								type="button"
+								data-bs-target="#carouselExampleIndicators"
+								data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button
+								class="carousel-control-next"
+								type="button"
+								data-bs-target="#carouselExampleIndicators"
+								data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="main-review">
+				<div class="main-review-inner">
+					<div class="main-review-txt">
+						<p>완두점빵</p>
+						<p>화제의 거래 후기</p>
+						<a href="#">더보기<i class="bi bi-arrow-right"></i></a>
+					</div>
+					<div class="main-review-container">
+						<ul class="main-review-items">
+							<li class="main-review-item">
+								<a href="#">
+									<div class="user-profile">
+										<div class="user-profile-wrap">
+											<img src="" alt="" />
+										</div>
+									</div>
+									<div class="user-text">
+										<div class="user-id">아이디</div>
+										<div class="user-review">글 내용</div>
+									</div>
+								</a>
+							</li>
+							<li class="main-review-item">
+								<a href="#">
+									<div class="user-profile">
+										<div class="user-profile-wrap">
+											<img src="" alt="" />
+										</div>
+									</div>
+									<div class="user-text">
+										<div class="user-id">아이디</div>
+										<div class="user-review">글 내용</div>
+									</div>
+								</a>
+							</li>
+							<li class="main-review-item">
+								<a href="#">
+									<div class="user-profile">
+										<div class="user-profile-wrap">
+											<img src="" alt="" />
+										</div>
+									</div>
+									<div class="user-text">
+										<div class="user-id">아이디</div>
+										<div class="user-review">글 내용</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section class="tab-main-product">
+				<div class="tab-main-product-inner">
+					<div class="tab-product">
+						<input type="radio" name="tab" id="tab1" class="tab-input" checked />
+						<label class="tab-label" for="tab1">중고거래</label>
+						<input type="radio" name="tab" id="tab2" class="tab-input" />
+						<label class="tab-label" for="tab2">물물교환</label>
+						<div class="trade-con1">
+							<section class="cards-wrap">
+								<!-- 경매 상품인 경우 : 가격 노출 -->
+								<article class="card">
+									<a class="card-link" href="/articles/1">
+										<div class="card-photo">
+											<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+										</div>
+										<div class="card-desc">
+											<h2 class="card-title">오락기1</h2>
+											<div class="card-price">1,000원</div>
+											<div class="card-region-name">인천 계양구</div>
+											<div class="card-counts">
+												<span class="bookmarkHit" aria-label="관심">70</span> ∙
+												<span class="chatHit" aria-label="채팅">36</span> ∙
+												<span class="hit" aria-label="조회">2221</span>
+											</div>
+										</div>
+									</a>
+								</article>
+								<!-- //경매 상품인 경우 : 가격 노출 -->
 
-<body>
-  <%- include('./component/header') %>
-  <main id="main">
-    <section class="main-search">
-      <div class="main-search-inner">
-        <div class="main-search-bar">
-          <div class="text">
-            <p>당신이 숨겨 놓은 보물</p>
-            <p>완두점빵에서 찾았다.</p>
-          </div>
-          <div class="main-search-area">
-            <div class="search-bar">
-              <input id="searchInput" placeholder="찾으시는 매물을 입력해주세요.">
-              <button class="main-search-btn">검색</button>
-            </div>
-          </div>
-        </div>
-        <div class="main-best-product">
-          <div id="carouselExampleIndicators" class="carousel slide">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="https://cdn.ccdailynews.com/news/photo/202104/2050116_530468_210.png" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="https://cdn.ccdailynews.com/news/photo/202104/2050116_530468_210.png" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="https://cdn.ccdailynews.com/news/photo/202104/2050116_530468_210.png" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="main-review">
-      <div class="main-review-inner">
-        <div class="main-review-txt">
-          <p>완두점빵</p>
-          <p>화제의 거래 후기</p>
-          <a href="#">더보기<i class="bi bi-arrow-right"></i></a>
-        </div>
-        <div class="main-review-container">
-          <ul class="main-review-items">
-            <li class="main-review-item">
-              <a href="#">
-                <div class="user-profile">
-                  <div class="user-profile-wrap">
-                    <img src="" alt="">
-                  </div>
-                </div>
-                <div class="user-text">
-                  <div class="user-id">아이디</div>
-                  <div class="user-review">글 내용</div>
-                </div>
-              </a>
-            </li>
-            <li class="main-review-item">
-              <a href="#">
-                <div class="user-profile">
-                  <div class="user-profile-wrap">
-                    <img src="" alt="">
-                  </div>
-                </div>
-                <div class="user-text">
-                  <div class="user-id">아이디</div>
-                  <div class="user-review">글 내용</div>
-                </div>
-              </a>
-            </li>
-            <li class="main-review-item">
-              <a href="#">
-                <div class="user-profile">
-                  <div class="user-profile-wrap">
-                    <img src="" alt="">
-                  </div>
-                </div>
-                <div class="user-text">
-                  <div class="user-id">아이디</div>
-                  <div class="user-review">글 내용</div>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    <section class="tab-main-product">
-      <div class="tab-main-product-inner">
-        <div class="tab-product">
-          <input type="radio" name="tab" id="tab1" class="tab-input" checked>
-          <label class="tab-label" for="tab1">중고거래</label>
-          <input type="radio" name="tab" id="tab2" class="tab-input">
-          <label class="tab-label" for="tab2">물물교환</label>
-          <div class="trade-con1">
-            <section class="cards-wrap">
-              <!-- 경매 상품인 경우 : 가격 노출 -->
-              <article class="card">
-                <a class="card-link" href="/articles/1">
-                  <div class="card-photo">
-                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">오락기1</h2>
-                    <div class="card-price">1,000원</div>
-                    <div class="card-region-name">인천 계양구</div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
-                      <span class="chatHit" aria-label="채팅">36</span> ∙
-                      <span class="hit" aria-label="조회">2221</span>
-                    </div>
-                  </div>
-                </a>
-              </article>
-              <!-- //경매 상품인 경우 : 가격 노출 -->
+								<!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
+								<article class="card">
+									<a class="card-link" href="/articles/1">
+										<div class="card-photo">
+											<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+										</div>
+										<div class="card-desc">
+											<h2 class="card-title">오락기</h2>
+											<div class="card-price-share">나눔</div>
+											<div class="card-region-name">인천 계양구</div>
+											<div class="card-counts">
+												<span class="bookmarkHit" aria-label="관심">70</span> ∙
+												<span class="chatHit" aria-label="채팅">36</span> ∙
+												<span class="hit" aria-label="조회">2221</span>
+											</div>
+										</div>
+									</a>
+								</article>
+								<!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
 
-              <!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
-              <article class="card">
-                <a class="card-link" href="/articles/1">
-                  <div class="card-photo">
-                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">오락기</h2>
-                    <div class="card-price-share">나눔</div>
-                    <div class="card-region-name">인천 계양구</div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
-                      <span class="chatHit" aria-label="채팅">36</span> ∙
-                      <span class="hit" aria-label="조회">2221</span>
-                    </div>
-                  </div>
-                </a>
-              </article>
-              <!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
+								<!-- 샘플용 : 18개 -->
+								<% for(let i=1;i <= 6;i++ ){ %>
+								<article class="card">
+									<a class="card-link" href="/articles/1">
+										<div class="card-photo">
+											<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+										</div>
+										<div class="card-desc">
+											<h2 class="card-title">오락기</h2>
+											<div class="card-price">1,000원</div>
+											<div class="card-region-name">인천 계양구</div>
+											<div class="card-counts">
+												<span class="bookmarkHit" aria-label="관심">70</span> ∙
+												<span class="chatHit" aria-label="채팅">36</span> ∙
+												<span class="hit" aria-label="조회">2221</span>
+											</div>
+										</div>
+									</a>
+								</article>
+								<% } %>
+								<!-- //샘플용 : 18개 -->
+							</section>
+						</div>
+						<div class="change-con2">
+							<section class="cards-wrap">
+								<!-- 경매 상품인 경우 : 가격 노출 -->
+								<article class="card">
+									<a class="card-link" href="/articles/1">
+										<div class="card-photo">
+											<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+										</div>
+										<div class="card-desc">
+											<h2 class="card-title">오락기2</h2>
+											<div class="card-price">1,000원</div>
+											<div class="card-region-name">인천 계양구</div>
+											<div class="card-counts">
+												<span class="bookmarkHit" aria-label="관심">70</span> ∙
+												<span class="chatHit" aria-label="채팅">36</span> ∙
+												<span class="hit" aria-label="조회">2221</span>
+											</div>
+										</div>
+									</a>
+								</article>
+								<!-- //경매 상품인 경우 : 가격 노출 -->
 
-              <!-- 샘플용 : 18개 -->
-              <% for(let i=1;i <= 6;i++ ){ %>
-              <article class="card">
-                <a class="card-link" href="/articles/1">
-                  <div class="card-photo">
-                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">오락기</h2>
-                    <div class="card-price">1,000원</div>
-                    <div class="card-region-name">인천 계양구</div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
-                      <span class="chatHit" aria-label="채팅">36</span> ∙
-                      <span class="hit" aria-label="조회">2221</span>
-                    </div>
-                  </div>
-                </a>
-              </article>
-              <% } %>
-              <!-- //샘플용 : 18개 -->
-            </section>
-          </div>
-          <div class="change-con2">
-            <section class="cards-wrap">
-              <!-- 경매 상품인 경우 : 가격 노출 -->
-              <article class="card">
-                <a class="card-link" href="/articles/1">
-                  <div class="card-photo">
-                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">오락기2</h2>
-                    <div class="card-price">1,000원</div>
-                    <div class="card-region-name">인천 계양구</div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
-                      <span class="chatHit" aria-label="채팅">36</span> ∙
-                      <span class="hit" aria-label="조회">2221</span>
-                    </div>
-                  </div>
-                </a>
-              </article>
-              <!-- //경매 상품인 경우 : 가격 노출 -->
+								<!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
+								<article class="card">
+									<a class="card-link" href="/articles/1">
+										<div class="card-photo">
+											<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+										</div>
+										<div class="card-desc">
+											<h2 class="card-title">오락기</h2>
+											<div class="card-price-share">나눔</div>
+											<div class="card-region-name">인천 계양구</div>
+											<div class="card-counts">
+												<span class="bookmarkHit" aria-label="관심">70</span> ∙
+												<span class="chatHit" aria-label="채팅">36</span> ∙
+												<span class="hit" aria-label="조회">2221</span>
+											</div>
+										</div>
+									</a>
+								</article>
+								<!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
 
-              <!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
-              <article class="card">
-                <a class="card-link" href="/articles/1">
-                  <div class="card-photo">
-                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">오락기</h2>
-                    <div class="card-price-share">나눔</div>
-                    <div class="card-region-name">인천 계양구</div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
-                      <span class="chatHit" aria-label="채팅">36</span> ∙
-                      <span class="hit" aria-label="조회">2221</span>
-                    </div>
-                  </div>
-                </a>
-              </article>
-              <!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
-
-              <!-- 샘플용 : 18개 -->
-              <% for(let i=1;i <= 6;i++ ){ %>
-              <article class="card">
-                <a class="card-link" href="/articles/1">
-                  <div class="card-photo">
-                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">오락기</h2>
-                    <div class="card-price">1,000원</div>
-                    <div class="card-region-name">인천 계양구</div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
-                      <span class="chatHit" aria-label="채팅">36</span> ∙
-                      <span class="hit" aria-label="조회">2221</span>
-                    </div>
-                  </div>
-                </a>
-              </article>
-              <% } %>
-              <!-- //샘플용 : 18개 -->
-            </section>
-          </div>
-        </div>
-        <a href="#" style="display:block; margin:5em 0 2em 0;">더보기<i class="bi bi-arrow-right"></i></a>
-      </div>
-    </section>
-  </main>
-  <%- include('./component/footer') %>
-</body>
-
+								<!-- 샘플용 : 18개 -->
+								<% for(let i=1;i <= 6;i++ ){ %>
+								<article class="card">
+									<a class="card-link" href="/articles/1">
+										<div class="card-photo">
+											<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+										</div>
+										<div class="card-desc">
+											<h2 class="card-title">오락기</h2>
+											<div class="card-price">1,000원</div>
+											<div class="card-region-name">인천 계양구</div>
+											<div class="card-counts">
+												<span class="bookmarkHit" aria-label="관심">70</span> ∙
+												<span class="chatHit" aria-label="채팅">36</span> ∙
+												<span class="hit" aria-label="조회">2221</span>
+											</div>
+										</div>
+									</a>
+								</article>
+								<% } %>
+								<!-- //샘플용 : 18개 -->
+							</section>
+						</div>
+					</div>
+					<a href="#" style="display: block; margin: 5em 0 2em 0">더보기<i class="bi bi-arrow-right"></i></a>
+				</div>
+			</section>
+		</main>
+		<%- include('./component/footer') %>
+		<script>
+			function search() {
+				location.href = '/search?q=오락기';
+			}
+		</script>
+	</body>
 </html>
