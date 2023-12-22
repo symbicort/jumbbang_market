@@ -1,4 +1,8 @@
 const express = require("express");
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = 8000;
 
@@ -7,6 +11,14 @@ app.set("views", "./views");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/static", express.static(__dirname + "/static"));
+app.use('/utils', express.static(__dirname + '/utils'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+const { swaggerUi, specs } = require('./swagger') ;
+
+dotenv.config();
 
 //메인, 회원가입, 로그인, 회원탈퇴, 마이페이지, 고객센터,
 const indexRouter = require("./routes/index");
