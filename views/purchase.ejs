@@ -8,7 +8,34 @@
 	<body>
 		<div id="jumbbang">
 			<%- include('./component/header') %>
-			<main>구매내역</main>
+			<main>
+				<h1>구매내역</h1>
+				<style>
+					li {
+						margin-left: 10px;
+					}
+					li:before {
+						content: '- ';
+					}
+				</style>
+				<ul>
+					<li>
+						<a href="/articles/1">상품 제목</a>
+						<p><a href="/reviewPost/1" class="btn btn-primary">보낸 후기</a></p>
+						<p><a href="/reviewReceive/1" class="btn btn-primary">받은 후기</a></p>
+					</li>
+					<li>
+						<a href="/articles/1">상품 제목</a>
+						<p><a href="/reviewPost">보낸 후기</a></p>
+						<p><a href="/reviewReceive">받은 후기</a></p>
+					</li>
+					<li>
+						<a href="/articles/1">상품 제목</a>
+						<p><a href="/reviewPost">보낸 후기</a></p>
+						<p><a href="/reviewReceive">받은 후기</a></p>
+					</li>
+				</ul>
+			</main>
 			<%- include('./component/footer') %>
 		</div>
 	</body>
