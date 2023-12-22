@@ -1,7 +1,18 @@
-//const Comment = require('../models/Cproduct');
+const marketModel = require('../model/market');
+const {postUpload, deleteProfileImg} = require('../utils/imgUploader');
+const jwt = require('jsonwebtoken');
 
-exports.market = (req, res) => {
-	res.render('market');
+const {verifyToken } = require('../utils/token')
+
+exports.market = async (req, res) => {
+    marketModel.find()
+    .exec()
+    .then((result) => {
+        console.log('Found data:', {postData: result});
+        res.render('market', {postData: result});
+    }).catch((error) => {
+        console.error('Error finding data:', error);
+});
 };
 
 exports.getView = (req, res) => {
