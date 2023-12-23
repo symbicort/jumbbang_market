@@ -482,6 +482,27 @@ li {
 		gap: 15px;
 	}
 }
+.pageBar {
+	text-align: center;
+	.btn-primary {
+		padding: 0.75rem 1.5rem;
+		border: 1px solid #adadad;
+		border-radius: 2rem;
+		color: #8d8b8b;
+		display: inline-flex;
+		justify-content: center;
+		gap: 5px;
+		min-width: 200px;
+		width: auto !important;
+		background-color: transparent;
+		&:after {
+			content: '\F64D';
+			display: inline-block;
+			vertical-align: middle;
+			font-family: 'Bootstrap-icons';
+		}
+	}
+}
 .cards-wrap {
 	display: grid;
 	// display: flex;
