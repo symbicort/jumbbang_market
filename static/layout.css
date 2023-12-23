@@ -264,13 +264,14 @@
 .footer-inner {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 1.2rem 0 2rem 0;
 }
 .bottom-footer {
   padding: 3rem 0;
 }
 
 .footer-logo {
-  width: 180px;
+  width: 140px;
   display: block;
   cursor: pointer;
   padding: 1rem 0;
