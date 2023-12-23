@@ -1,34 +1,56 @@
+/* 메인페이지 공통 */
+
+main {
+  margin-top: 12rem;
+}
+.main-sub-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  padding: 2.4rem 0 1rem 0;
+}
+
+.main-sub-txt {
+  font-size: 1.2rem;
+  padding-bottom: 2.4rem;
+}
+
+/* 메인 슬라이드 */
 .main-search-inner {
   max-width: 1280px;
   margin: 0 auto;
-  display: flex;
+  /* display: flex; */
   align-items: center;
+  position: relative;
 }
 
 .main-search-bar {
-  width: 55%;
+  width: 50%;
+  position: absolute;
+  top: 12em;
+  left: 5em;
+  z-index: 11;
 }
 
 .main-search-bar .text {
-  margin: 8em 0 3em 0;
+  color: #fff;
 }
 
 .main-search-bar .text > p:nth-child(1) {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5em;
 }
 
 .main-search-bar .text > p:nth-child(2) {
-  font-size: 2rem;
+  font-size: 3rem;
+  margin-bottom: 0.5em;
 }
 
 .search-bar {
-  width: 90%;
+  width: 100%;
   height: 60px;
   background-color: #f5f5f5;
   border-radius: 30px;
-  box-shadow: 5px 5px 5px #adadad;
-  margin-bottom: 12em;
+  margin-top: 8em;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -50,7 +72,7 @@
 .main-search-btn {
   width: 120px;
   height: 40px;
-  background-color: #83a793;
+  background-color: #008000;
   margin-right: 0.8em;
   border-radius: 20px;
   color: #fff;
@@ -58,121 +80,45 @@
 }
 
 /* 상품 이미지 슬라이드 */
-.main-best-product {
-  width: 45%;
+/* .main-best-product {
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+  background-color: red;
+} */
+
+.carousel-inner {
+  height: 60vh;
 }
 
 .carousel-item {
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-/* 후기 작성 */
-.main-review {
   width: 100%;
-  background-color: #83a793;
-}
-
-.main-review-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-}
-
-.main-review-txt {
-  width: 20%;
-  margin: 4.5em 0;
-  color: #fff;
-}
-
-.main-review-txt > p:nth-child(1) {
-  font-size: 1.2rem;
-}
-
-.main-review-txt > p:nth-child(2) {
-  margin: 0.3em 0 1.2em 0;
-  font-size: 1.5rem;
-}
-
-.main-review-txt > a {
-  color: #fff;
-}
-
-.main-review-container {
-  width: 80%;
-  display: flex;
-  align-items: center;
-}
-
-.main-review-items {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.main-review-item {
-  width: 32%;
-  background-color: #f5f5f5;
-  display: flex;
-}
-
-.main-review-item > a {
-  width: 100%;
-  display: flex;
-}
-
-.user-profile {
-  width: 40%;
-  position: relative;
-  overflow: hidden;
-  margin: 0.6em 0.8em;
-}
-
-.user-profile-wrap {
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: relative;
-  background-color: #8d8b8b;
-  border-radius: 50%;
-  font-size: 0;
-}
-
-.user-profile-wrap::after {
-  display: block;
-  content: '';
-  padding-bottom: 100%;
-}
-
-.user-profile > img {
+  background-color: #000;
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  width: 5%;
+}
+
+.bg-opacity {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-}
-
-.user-text {
-  width: 60%;
-}
-
-.user-text > .user-id {
-  margin: 2em 0 1em 0;
+  background-color: #000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.3;
 }
 
 /* 상품 탭 */
-.tab-main-product {
+.tab-main-product-inner {
   max-width: 1280px;
   margin: 0 auto;
-  text-align: center;
   padding-top: 5em;
-  padding-bottom: 5em;
-}
-
-.tab-product {
-  font-size: 0;
 }
 
 .tab-input {
@@ -181,17 +127,20 @@
 
 .tab-label {
   display: inline-block;
-  background-color: #adadad;
-  width: 150px;
-  height: 50px;
-  line-height: 50px;
+  border: 1px solid #adadad;
+  color: #8d8b8b;
   font-size: 1.2rem;
+  border-radius: 2rem;
+  padding: 0.75rem 1.5rem;
+  line-height: 1;
+  font-weight: 500;
   cursor: pointer;
-  margin-bottom: 3em;
+  margin: 0 0.5rem 2.4rem 0;
 }
 
 .tab-product .tab-input:checked + label {
-  background-color: #83a793;
+  background-color: #008000;
+  border: 0;
   color: #fff;
 }
 
@@ -203,4 +152,160 @@
 .tab-product #tab1:checked ~ .trade-con1,
 .tab-product #tab2:checked ~ .change-con2 {
   display: block;
+}
+
+.btn-container {
+  padding: 4rem 0 5rem 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.more-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #adadad;
+  border-radius: 2rem;
+  color: #8d8b8b;
+}
+
+.more-btn:hover {
+  background-color: #008000;
+  color: #fff;
+}
+
+/* 후기 작성 */
+.main-review {
+  width: 100%;
+  background-color: #ffd700;
+  padding-bottom: 3rem;
+}
+
+.main-review-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.main-review-txt > a {
+  color: #fff;
+}
+
+.main-review-container {
+  display: flex;
+  align-items: center;
+}
+
+.main-review-items {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.main-review-item {
+  width: 23%;
+  background-color: #f5f5f5;
+  height: 340px;
+  border-radius: 12px;
+}
+
+.main-review-item > a {
+  width: 100%;
+  display: block;
+}
+
+.review-user-info {
+  display: flex;
+}
+.user-profile {
+  position: relative;
+  overflow: hidden;
+  margin: 1rem 1rem;
+}
+
+.user-profile-img {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  background-color: #8d8b8b;
+  border-radius: 50%;
+  background-image: url(https://cdn.ccdailynews.com/news/photo/202104/2050116_530468_210.png);
+  background-size: cover;
+}
+
+.user-text > .user-id {
+  margin: 2rem 0 0.5rem 0;
+}
+
+.user-review {
+  padding: 1rem 1.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 이벤트 배너 */
+.event-banner-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.banner {
+  width: 49%;
+  height: 12rem;
+  border-radius: 12px;
+  margin: 10rem 0;
+  background-color: red;
+}
+
+/* 홍보 영상 */
+#promotion {
+  margin-bottom: 10rem;
+}
+.promotion-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+}
+
+.promotion-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  padding-bottom: 1rem;
+}
+
+.promotion-title ~ p:nth-of-type(2) {
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  margin: 2rem 0 1.2rem 0;
+}
+
+.promotion-title ~ p:nth-of-type(3) {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.pro-left {
+  width: 40%;
+}
+
+.pro-right {
+  width: 60%;
+  display: flex;
+}
+
+.youtube-inner {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
+.youtube-inner iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 12px;
 }

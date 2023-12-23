@@ -1,35 +1,46 @@
 <header id="header">
-  <div class="header-inner">
-    <div class="header-inner-top">
+  <div class="header-inner-top">
+    <div class="header-inner top">
       <div class="logo-wrap">
         <h1 class="logo">
           <a href="/">
             <img class="logo-img" src="/static/imgs/logo.png" alt="로고" />
           </a>
         </h1>
+      </div>
+      <ul class="subnav-user">
+        <li>
+          <i class="fa-regular fa-bell"></i>
+          <ul class="notify">
+            <li><a href="#">
+                <i class="fa-regular fa-envelope"></i>
+                <span>1개의 알림이 왔습니다.</span>
+              </a></li>
+            <li><a href="#">
+                <i class="fa-regular fa-envelope"></i>
+                <span>채팅 내역을 확인해주세요.</span>
+              </a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/login">로그인</a>
+        </li>
+        <li>
+          <a href="/register">회원가입</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="header-inner">
+    <nav id="nav">
+      <div class="menu">
+        <div class="icon-bg">
+          <i class="fa-solid fa-bars"></i>
+        </div>
         <ul class="page-link">
           <li><a href="/market">중고거래</a></li>
           <li><a href="/change">물물교환</a></li>
         </ul>
-      </div>
-      <div class="utility-wrap">
-        <div class="search sub-header">
-          <i class="bi bi-search fs-5"></i>
-        </div>
-        <div class="info">
-          <i class="bi bi-bell fs-5"></i>
-        </div>
-        <div class="user-info">
-          <a href="/login" class="user-info-btn">
-            <i class="bi bi-person-circle fs-5"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-    <nav id="nav">
-      <div class="menu">
-        <i class="bi bi-justify fs-3 hambugerbtn"></i>
-        <p>카테고리</p>
       </div>
       <div class="menu-sidebar">
         <ul class="menu-category d-none">
@@ -62,20 +73,20 @@
           </li>
         </ul>
       </div>
-      <ul class="etc">
-        <li>
-          <i class="bi bi-pencil-square"></i>
-          <a href="#">커뮤니티</a>
-        </li>
-        <li>
-          <i class="bi bi-headset"></i>
-          <a href="/cs">고객센터</a>
-        </li>
-        <li>
-          <i class="bi bi-chat-right-text"></i>
-          <a href="/chats">채팅</a>
-        </li>
-      </ul>
+      <div class="utility-wrap">
+        <div class="info">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div class="user-info">
+          <i class="fa-regular fa-user"></i>
+          <ul class="user-list">
+            <li><a href="/mypage">마이페이지</a></li>
+            <li><a href="/chats">나의채팅</a></li>
+            <li><a href="#">커뮤니티</a></li>
+            <li><a href="/cs">고객센터</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
   </div>
 </header>

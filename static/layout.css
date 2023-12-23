@@ -4,8 +4,12 @@
   position: fixed;
   top: 0;
   background-color: #fff;
-  border-bottom: 1px solid #adadad;
-  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 50;
+}
+
+.header-inner-top {
+  border-bottom: 1px solid #f5f5f5;
 }
 
 .header-inner {
@@ -13,12 +17,11 @@
   margin: 0 auto;
 }
 
-.header-inner-top {
+.header-inner.top {
   width: 100%;
-  height: 70px;
   display: flex;
   align-items: flex-end;
-  padding-bottom: 0.5em;
+  padding: 2.5rem 0 1.5rem 0;
 }
 
 .logo-wrap {
@@ -31,48 +34,109 @@
 }
 
 .page-link > li {
-  font-size: 1.2rem;
-  padding-left: 0.5em;
-  padding-bottom: 0.3em;
-}
-
-.page-link > li:first-child:after {
-  content: '';
-  border-left: 2px solid #adadad;
-  margin-left: 0.5em;
+  padding-left: 1.5rem;
 }
 
 .page-link > li > a {
   cursor: pointer;
-  color: #525252;
+  display: block;
+  color: #333;
+  font-size: 1.2rem;
+  padding: 1rem 0;
 }
 
 .logo-img {
   width: 180px;
 }
 
-.utility-wrap {
+.subnav-user {
   display: flex;
   margin-left: auto;
 }
-
-.sub-header {
-  display: none;
+.subnav-user > li {
+  font-size: 1.1rem;
+  color: #333;
+  padding-left: 1rem;
+  position: relative;
 }
 
-.info > i {
+.subnav-user li::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -9px;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 12px;
+  background-color: #ccc;
+}
+
+.subnav-user li:first-child::before,
+.subnav-user li:last-child::before {
+  content: none;
+}
+
+.subnav-user a {
+  text-decoration: none;
+  color: #333;
   cursor: pointer;
 }
 
-.user-info {
-  margin-left: 0.8em;
+.fa-bell {
+  position: relative;
+  display: inline-block;
+}
+
+.fa-bell:hover .notify {
+  display: block;
+}
+
+.notify {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 180px;
+  height: 200px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-indent: 2px;
+  overflow: hidden;
+}
+
+.notify > li > a {
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+}
+.notify > li > a:hover {
+  background-color: #008000;
+  color: #fff;
+}
+
+.notify > li > a {
+  display: flex;
+  align-items: center;
+}
+
+.fa-envelope {
+  margin-right: 4px;
+  text-indent: 14px;
+}
+
+.fa-envelope ~ span {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 #nav {
-  height: 50px;
   display: flex;
   align-items: center;
   position: relative;
+  padding: 1rem 0;
 }
 
 .menu {
@@ -80,12 +144,22 @@
   align-items: center;
 }
 
-.menu > p {
-  margin-left: 0.3em;
+.icon-bg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
-
-.hambugerbtn {
+.menu .fa-bars {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
   cursor: pointer;
+  color: #333;
 }
 
 /* 좌측 사이드바...?? */
@@ -105,7 +179,7 @@
   position: absolute;
   top: 50px;
   left: 0;
-  text-indent: 0.5em;
+  text-indent: 0.5rem;
   z-index: 10;
   width: 200px;
   height: auto;
@@ -124,7 +198,7 @@
 
 .menu-category-list > a {
   display: block;
-  padding: 0.8em 0.3em;
+  padding: 0.8rem 0.3rem;
 }
 
 .menu-category-list > a:hover {
@@ -132,30 +206,103 @@
   color: #fff;
 }
 
-.etc {
+.utility-wrap {
   display: flex;
   margin-left: auto;
 }
-.etc > li {
-  margin-left: 1em;
-  cursor: pointer;
+
+.info .fa-magnifying-glass {
+  font-size: 1.8rem;
+  color: #333;
 }
 
-/* 메인 */
-main {
-  margin-top: 120px;
+.user-info {
+  margin-left: 1.5rem;
+}
+
+.user-info .fa-user {
+  font-size: 1.8rem;
+  color: #333;
+  position: relative;
+  display: inline-block;
+}
+
+.fa-user:hover .user-list {
+  display: block;
+}
+
+.user-list {
+  display: none;
+  position: absolute;
+  top: 70%;
+  right: 0;
+  width: 180px;
+  height: auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-indent: 24px;
+  overflow: hidden;
+}
+
+.user-list > li > a {
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+}
+.user-list > li > a:hover {
+  background-color: #008000;
+  color: #fff;
 }
 
 /* 푸터 */
 #footer {
   width: 100%;
-  height: 80px;
-  text-align: center;
-  line-height: 80px;
   background-color: #f5f5f5;
+}
+
+.top-footer {
+  background-color: #008000;
+  width: 100%;
+  padding: 1.6rem 0;
 }
 
 .footer-inner {
   max-width: 1280px;
   margin: 0 auto;
+}
+
+.footer-inner > ul {
+  display: flex;
+}
+
+.footer-inner > ul > li > a {
+  display: block;
+  color: #fff;
+  margin-right: 3rem;
+}
+
+.bottom-footer {
+  padding: 3rem 0;
+}
+
+.footer-logo {
+  width: 180px;
+  display: block;
+  cursor: pointer;
+  padding: 1rem 0;
+}
+
+.footer-logo > img {
+  max-width: 100%;
+}
+
+.footer-info {
+  margin-top: 0.5rem;
+}
+
+.footer-inner span {
+  display: inline-block;
+  margin: 0 0.5rem 0.3rem 0;
+  color: #333;
 }
