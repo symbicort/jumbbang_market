@@ -57,26 +57,29 @@ const socket = io();
 //     }
 // });
 
-function exit() {
+function exit(roomid, from) {
     console.log("나가기 기능");
-    console.log(room);
+    console.log(roomid);
+    console.log(from);
     axios({
         method: "delete",
         url: "/chatroom",
-        data: { roomid: room },
+        data: { roomid: roomid },
     })
         .then(() => {
+            if (!from) {
+                window.history.back();
+            } else {
+                window.location.href = `/getchatrooms?myName=${myName}`;
+            }
+            socket.disconnect();
             console.log("채팅방 나가기 성공");
             // 채팅방을 나간 후에 페이지 이동
-            window.location.href = `/getchatrooms?myName=${myName}`;
         })
         .catch((error) => {
             console.error("채팅방 나가기 실패", error);
             // 실패 시 처리 로직 추가
         });
-
-    window.location.href = `/getchatrooms?myName=${myName}`;
-    socket.disconnect();
 }
 
 // 채팅 보내기

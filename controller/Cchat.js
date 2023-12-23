@@ -5,7 +5,7 @@ const market = require("../model/market");
 const moment = require("moment");
 
 exports.getChats = async (req, res) => {
-    const { postName, myName, productId } = req.query;
+    const { postName, myName, productId, from } = req.query;
     console.log("chatrooms check", postName, myName, productId);
     // productId를 기준으로 채팅방 검색
     const savedChatRooms = await chatrooms.find({
@@ -26,6 +26,7 @@ exports.getChats = async (req, res) => {
             savedChats,
             myname: myName,
             yourname: postName,
+            from,
         });
     } else {
         console.log("savedChatRooms", savedChatRooms);
@@ -36,6 +37,7 @@ exports.getChats = async (req, res) => {
             savedChats,
             myname: myName,
             yourname: postName,
+            from,
         });
     }
 };
@@ -108,5 +110,5 @@ exports.chatExit = async (req, res) => {
     const { roomid } = req.body;
     const result = await chatrooms.findOneAndDelete({ productId: roomid });
     console.log("result", result);
-    res.redirect("/getchatrooms");
+    res.send({ result });
 };
