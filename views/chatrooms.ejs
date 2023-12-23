@@ -17,13 +17,15 @@
 					<!-- <h1>My Chat</h1> -->
 					<ul class="chatList">
 						<% for(let i=0;i < mychatrooms.length;i++ ){ %>
-							<li id="minji_xkjehshad<%= i %>">
-								<a href="/chatRoom/minji_xkjehshad<%= i %>">
+							<li>
+								<a
+									href="/chatroom?postName=<%= mychatrooms[i].takeId%>&myName=<%= mychatrooms[i].sendId%>&productId=<%= mychatrooms[i].productId%>">
 									<div class="profile1" style="background-image: url(/static/imgs/profile2.webp)">
 									</div>
 									<div class="txt">
+										<input type="hidden" id="productid" value="<%= mychatrooms[i].productId %>">
 										<strong class="subject h5">
-											<%= mychatrooms[i].productId%>
+											<%= productNames[i].subject%>
 										</strong>
 										<p>
 											<span class="userid">
@@ -46,7 +48,10 @@
 			</main>
 			<%- include('./component/footer') %>
 	</div>
-	<script src="../static/js/socket.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"
+		integrity="sha512-/l6vieC+YxaZywUhmqs++8uF9DeMvJE61ua5g+UK0TuHZ4TkTgB1Gm1n0NiA86uEOM9JJ6JUwyR0hboKO0fCng=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="../static/js/chatrooms.js"></script>
 </body>
 
 </html>

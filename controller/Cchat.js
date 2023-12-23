@@ -1,19 +1,20 @@
-const express = require("express");
-const router = express.Router();
 // 채팅 controller
 const chats = require("../model/chats");
 const chatrooms = require("../model/chatrooms");
+const market = require("../model/market");
+const user = require("../model/user");
 const moment = require("moment");
-const Socketcontrol = require("../controller/Csocket");
 
 exports.getChats = async (req, res) => {
     const { postName, myName, productId } = req.query;
-    console.log(postName, myName, productId);
+    const postname = await user.findOne({ _id: postName });
+    console.log(postname);
+    const postnick = postname.nick;
+    console.log("chatrooms check", postnick, myName, productId);
     // productId를 기준으로 채팅방 검색
     const savedChatRooms = await chatrooms.find({
         productId: productId,
     });
-    // console.log("savedChatRooms", savedChatRooms);
     let savedChats;
     if (savedChatRooms.length <= 0) {
         const newChatRoom = await chatrooms.create({
@@ -21,21 +22,21 @@ exports.getChats = async (req, res) => {
             takeId: postName,
             productId: productId,
         });
+        console.log("newChatRoom", newChatRoom);
+        savedChats = [];
         // 저장된 채팅 데이터
-        savedChats = false;
         res.render("chats", {
-            nowRoomId: newChatRoom._id,
+            nowRoomId: newChatRoom.productId,
             savedChats,
             myname: myName,
             yourname: postName,
         });
-        // console.log("newChatRoom", newChatRoom);
     } else {
         console.log("savedChatRooms", savedChatRooms);
-        savedChats = await chats.find({ roomId: savedChatRooms[0]._id });
+        savedChats = await chats.find({ roomId: savedChatRooms[0].productId });
         console.log("savedChats", savedChats);
         res.render("chats", {
-            nowRoomId: savedChatRooms[0]._id,
+            nowRoomId: savedChatRooms[0].productId,
             savedChats,
             myname: myName,
             yourname: postName,
@@ -72,9 +73,24 @@ exports.getChatrooms = async (req, res) => {
             };
         });
     }
-    // console.log(mychatrooms);
-    res.render("chatrooms", { mychatrooms });
-    // res.render("chatrooms");
+    console.log("mychatrooms", mychatrooms);
+    let productNames = [];
+    for (let i = 0; i < mychatrooms.length; i++) {
+        try {
+            const productName = await market.findOne({
+                _id: mychatrooms[i].productId,
+            });
+            if (productName) {
+                productNames.push(productName);
+            } else {
+                console.log("상품을 찾을 수 없습니다.");
+            }
+        } catch (error) {
+            console.log("상품 조회 오류 >", error);
+        }
+    }
+    console.log("productNames", productNames);
+    res.render("chatrooms", { mychatrooms, productNames });
 };
 
 exports.postChat = async (req, res) => {
@@ -89,7 +105,8 @@ exports.postChat = async (req, res) => {
     res.send({ newMsg });
 };
 
-exports.chatExit = (req, res) => {
-    const { myName } = req.query;
-    res.send();
+exports.chatExit = async (req, res) => {
+    const { roomid } = req.body;
+    const result = await chatrooms.findOneAndDelete({ productId: roomid });
+    console.log("result", result);
 };
