@@ -4,9 +4,19 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<%- include('./component/head', { title: '404 - 점빵' }) %>
+		<link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet" />
+		<style></style>
 	</head>
 	<body>
-		<div>PAGE NOT FOUND</div>
-		<a href="/">홈 으로</a>
+		<%- include('./component/header') %>
+		<main class="container">
+			<div class="notfound">
+				<h1>404</h1>
+				<p class="text1">Not Found!</p>
+				<p class="text2 my-5">요청한 페이지를 찾을 수 없습니다</p>
+				<a href="/">홈으로 가기</a>
+			</div>
+		</main>
+		<%- include('./component/footer') %>
 	</body>
 </html>

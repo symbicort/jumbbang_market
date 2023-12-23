@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -84,12 +84,12 @@ time,
 mark,
 audio,
 video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -103,42 +103,42 @@ hgroup,
 menu,
 nav,
 section {
-  display: block;
+	display: block;
 }
 body {
-  line-height: 1;
+	line-height: 1;
 }
 ol,
 ul {
-  list-style: none;
+	list-style: none;
 }
 blockquote,
 q {
-  quotes: none;
+	quotes: none;
 }
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
-  content: none;
+	content: '';
+	content: none;
 }
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 * {
-  box-sizing: border-box;
-  outline: none;
+	box-sizing: border-box;
+	outline: none;
 }
 
 a {
-  color: #000;
+	color: #000;
 }
 a:link,
 a:visited {
-  text-decoration: none;
+	text-decoration: none;
 }
 /* a:visited,
 a:active {
@@ -147,38 +147,38 @@ a:active {
 
 /* 로그인, 회원가입 세로 높이 유지 */
 .main-user {
-  height: calc(100vh - 200px);
-  position: relative;
+	height: calc(100vh - 200px);
+	position: relative;
 }
 
 .login-inner {
-  max-width: 1280px;
-  height: 100%;
-  margin: auto;
-  position: relative;
+	max-width: 1280px;
+	height: 100%;
+	margin: auto;
+	position: relative;
 }
 
 #loginForm {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 /* 버튼 */
 button {
-  border: 0;
-  outline: 0;
-  background-color: transparent;
+	border: 0;
+	outline: 0;
+	background-color: transparent;
 }
 
 /* 부트스트랩 버튼 색상 변경 */
 .btn-primary {
-  --bs-btn-bg: #83a793;
-  --bs-btn-border-color: #627e6f;
+	--bs-btn-bg: #83a793;
+	--bs-btn-border-color: #627e6f;
 }
 
-/* 
+/*
     --bs-btn-color: #fff;
 --bs-btn-bg: #0d6efd;
 --bs-btn-border-color: #0d6efd;
@@ -194,3 +194,51 @@ button {
 --bs-btn-disabled-bg: #0d6efd;
 --bs-btn-disabled-border-color: #0d6efd;
 */
+
+/* 404 페이지 */
+.notfound {
+	position: relative;
+	max-width: 600px;
+	min-height: 600px;
+	margin: 5rem auto;
+	padding: 5rem 0 5rem 250px;
+	text-align: left;
+	font-family: 'Rubik Doodle Shadow';
+}
+.notfound:before {
+	content: '';
+	position: absolute;
+	top: 5rem;
+	bottom: 0;
+	left: 0;
+	width: 200px;
+	filter: grayscale(1);
+	background: url('/static/imgs/jumbbang.png') 0 0 no-repeat;
+	background-size: 200px;
+}
+.notfound h1 {
+	font-size: 5rem;
+}
+.notfound p.text1 {
+	font-size: 3rem;
+}
+.notfound p.text2 {
+	font-size: 1.2rem;
+}
+.notfound a:hover {
+	text-decoration: underline;
+}
+@media screen and (max-width: 575px) {
+	.notfound {
+		padding: 5rem 0;
+		text-align: center;
+	}
+	.notfound:before {
+		content: '';
+		position: static;
+		display: inline-block;
+		width: 200px;
+		height: 200px;
+		background-position: center 0;
+	}
+}
