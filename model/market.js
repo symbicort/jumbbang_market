@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 
 const marketSchema = new Schema({
     userid: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     },
     category: {
         type: String,
@@ -53,10 +54,6 @@ const marketSchema = new Schema({
     },
     images: {
         type: [String]
-    },
-    user_info: {
-        type: Schema.Types.ObjectId,
-        ref: 'user', 
     },
 }, {
     timestamps: true 

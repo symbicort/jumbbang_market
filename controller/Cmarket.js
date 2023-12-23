@@ -6,10 +6,10 @@ const jwt = require('jsonwebtoken');
 const {verifyToken } = require('../utils/token')
 
 exports.market = async (req, res) => {
-    marketModel.find().populate('user_info')
+    marketModel.find().populate('userid')
     .exec()
     .then((result) => {
-        console.log('DB 정보 추출', result);
+        console.log('DB 정보 추출', result[0].userid.userid);
         res.render('market', {postData: result});
     }).catch((error) => {
         console.error('Error finding data:', error);
@@ -19,11 +19,11 @@ exports.market = async (req, res) => {
 exports.getView = async (req, res) => {
 	const postId = req.params.id;
 
-	marketModel.findById(postId).exec()
+	marketModel.findById(postId).populate('userid').exec()
 	.then((result) => {
 		// 결과를 처리하는 로직
-		res.render('marketView', {postdata: result})
 		console.log(result);
+		res.render('marketView', {postdata: result})
 	}).catch((err) => {
 	// 에러를 처리하는 로직
 	console.error(err);
@@ -46,7 +46,6 @@ exports.getWrite = async (req, res) => {
             } else{
                 res.render('login');
             }
-            
         } catch(err) {
             console.error('메인 페이지 랜딩 에러', err);
         }
@@ -80,10 +79,12 @@ exports.addPost = async (req, res) => {
 		console.log('유저 정보', decodedjwt.userId)
         const userId = decodedjwt.userId;
 
+		const user_info = await userModel.findOne({userid: userId})
+
         const date = new Date();
 
         await marketModel.create({
-            userid: userId, 
+            userid: user_info, 
             category: category,
             state: state,
             subject: subject,

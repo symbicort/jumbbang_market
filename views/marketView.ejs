@@ -61,9 +61,9 @@
 										</div>
 										<div id="article-profile-left">
 											<div id="nick" class="fw-bold">
-												<%= postdata.userid %>
+												<%= postdata.userid.nick%>
 											</div>
-											<div id="address">성남시 분당구</div>
+											<div id="address"><%= postdata.userid.address%></div>
 										</div>
 									</a>
 									<div id="article-profile-right" class="mt-3 mt-md-0 mt-lg-3">
@@ -378,10 +378,12 @@
 	<script src="/static/js/market.js"></script>
 	<script>
 		let slideImgs = [];
-		<% for (let i = 0; i < postdata.images.length; i++) { %>
-			console.log('이미지 배열 추가', '<%= postdata.images[i] %>');
-			slideImgs.push('<%= postdata.images[i] %>');
-		<% } %>
+		const imgData = `<%= postdata.images %>`;
+		const imgDatas = imgData.split(',');
+		for (let i = 0; i < imgDatas.length; i++) {
+			console.log('이미지 배열 추가', imgDatas[i]);
+			slideImgs.push(imgDatas[i]);
+		}
 
 		console.log(slideImgs);
 		function bgc(slideImgs) {
@@ -408,7 +410,7 @@
 }
 
 	if (document.querySelector(".swiper-container")) {
-    
+		bgc(slideImgs);
 		const swiper1 = new Swiper(".swiper-container", {
         
 			pagination: {
@@ -420,7 +422,6 @@
             prevEl: ".swiper-container .swiper-button-prev",
 			},
     });
-    bgc(slideImgs);
 }
 	</script>
 </body>
