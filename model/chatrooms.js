@@ -15,11 +15,9 @@ const chatroomsSchema = new Schema(
         },
         productId: {
             // markets 스키마와 연결
-            // type: Schema.Types.ObjectId,
-            // ref: "markets",
-            // require: true,
+            type: Schema.Types.ObjectId,
+            ref: "markets",
             type: String,
-            unique: true,
             require: true,
         },
     },
@@ -36,15 +34,10 @@ const chatroomsSchema = new Schema(
 
 chatroomsSchema.pre("save", function (next) {
     const currentDate = new Date();
-
-    // Set updatedAt to the current UTC time
     this.updatedAt = currentDate;
-
-    // Set createdAt only if it's not already set (i.e., when creating a new document)
     if (!this.createdAt) {
         this.createdAt = currentDate;
     }
-
     next();
 });
 

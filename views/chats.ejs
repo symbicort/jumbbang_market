@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<%- include('./component/head', { title: '채팅 - 점빵' }) %>
-		<link rel="stylesheet" href="/static/chats.min.css" />
-	</head>
 
-	<body>
-		<div id="jumbbang">
-			<%- include('./component/header') %>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<%- include('./component/head', { title: '채팅 - 점빵' }) %>
+		<link rel="stylesheet" href="/static/chats.min.css" />
+</head>
+
+<body>
+	<div id="jumbbang">
+		<%- include('./component/header') %>
 			<main class="container">
 				<div class="chatsWrap py-5">
 					<form name="chating" class="chating">
 						<div class="users">
 							<ul>
 								<li>
-									<p id="nick1" class="nick"><%= myname %></p>
-									<div class="profile1" style="background-image: url(/static/imgs/profile1.webp)"></div>
+									<p id="nick1" class="nick">
+										<%= myname %>
+									</p>
+									<div class="profile1" style="background-image: url(/static/imgs/profile1.webp)">
+									</div>
 								</li>
 								<li>
-									<p id="nick2" class="nick"><%= yourname %></p>
-									<div class="profile2" style="background-image: url(/static/imgs/profile2.webp)"></div>
+									<p id="nick2" class="nick">
+										<%= yourname %>
+									</p>
+									<div class="profile2" style="background-image: url(/static/imgs/profile2.webp)">
+									</div>
 								</li>
 							</ul>
 						</div>
@@ -53,20 +60,21 @@
 								<p class="date">오후 12:21</p>
 							</li>
 							<li class="other">
-								<% if (!savedChats) { %> <% for( let i=0; i < savedChats.length; i++ ) { %>
-								<span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
-								<span> <%= savedChats[i].msg %> </span>
-								<p class="date">오후 12:21</p>
-								<% } %> <% } %>
+								<% if (savedChats.length>0) { %>
+									<% for( let i=0; i < savedChats.length; i++ ) { %>
+										<span class="thumb"
+											style="background-image: url(/static/imgs/profile2.webp)"></span>
+										<span>
+											<%= savedChats[i].msg %>
+										</span>
+										<p class="date">오후 12:21</p>
+										<% } %>
+											<% } %>
 							</li>
 						</ul>
 						<div class="inputField">
 							<input type="hidden" id="roomid" value="<%= nowRoomId %>" />
-							<input
-								type="text"
-								id="msg"
-								required
-								placeholder="Message..."
+							<input type="text" id="msg" required placeholder="Message..."
 								onkeydown="if(window.event.keyCode == 13){send()}" />
 							<button type="button" onclick="send()"></button>
 						</div>
@@ -78,7 +86,12 @@
 				</div>
 			</main>
 			<%- include('./component/footer') %>
-		</div>
-		<script src="../static/js/chat.js"></script>
-	</body>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"
+		integrity="sha512-/l6vieC+YxaZywUhmqs++8uF9DeMvJE61ua5g+UK0TuHZ4TkTgB1Gm1n0NiA86uEOM9JJ6JUwyR0hboKO0fCng=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+	<script src="../static/js/chats.js"></script>
+</body>
+
 </html>
