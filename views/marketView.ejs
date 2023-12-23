@@ -376,6 +376,53 @@
 	</div>
 	<!-- //modal -->
 	<script src="/static/js/market.js"></script>
+	<script>
+		let slideImgs = [];
+		<% for (let i = 0; i < postdata.images.length; i++) { %>
+			console.log('이미지 배열 추가', '<%= postdata.images[i] %>');
+			slideImgs.push('<%= postdata.images[i] %>');
+		<% } %>
+
+		console.log(slideImgs);
+		function bgc(slideImgs) {
+			console.log(slideImgs);
+			const colorThief = new ColorThief();
+			slideImgs.forEach((img, i) => {
+			const html = `<div class="swiper-slide image" style="background-image: url(${img});"><img src='${img}' id='newimage${i}' crossorigin="Anonymous"></div>`;
+
+			const slider = document.querySelector(".swiper-wrapper");
+			slider.insertAdjacentHTML("beforeend", html);
+        
+			let sliderImg = document.querySelector("#newimage" + i);
+        
+			if (!sliderImg.complete) {
+				sliderImg.addEventListener("load", function (e) {
+                let color = colorThief.getColor(sliderImg);
+                e.target.parentNode.style.borderColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
+                if (color[0] > 50) {
+                    e.target.parentNode.style.backgroundColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
+                }	
+			});
+			}
+    });
+}
+
+	if (document.querySelector(".swiper-container")) {
+    
+		const swiper1 = new Swiper(".swiper-container", {
+        
+			pagination: {
+            el: ".swiper-pagination",
+			},
+
+			navigation: {
+            nextEl: ".swiper-container .swiper-button-next",
+            prevEl: ".swiper-container .swiper-button-prev",
+			},
+    });
+    bgc(slideImgs);
+}
+	</script>
 </body>
 
 </html>

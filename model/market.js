@@ -54,7 +54,7 @@ const marketSchema = new Schema({
     images: {
         type: [String]
     },
-    user_id: {
+    user_info: {
         type: Schema.Types.ObjectId,
         ref: 'user', 
     },

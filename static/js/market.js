@@ -1,37 +1,37 @@
-const slideImgs = ["/static/imgs/test.jpg", "/static/imgs/test.png"];
-async function bgc(slideImgs) {
-    const colorThief = new ColorThief();
-    await slideImgs.forEach((img, i) => {
-        const html = `
-        <div class="swiper-slide image" style="background-image: url(${img});"><img src='${img}' id='newimage${i}' crossorigin="Anonymous"></div>
-		`;
-        const slider = document.querySelector(".swiper-wrapper");
-        slider.insertAdjacentHTML("beforeend", html);
-        let sliderImg = document.querySelector("#newimage" + i);
-        if (!sliderImg.complete) {
-            sliderImg.addEventListener("load", function (e) {
-                let color = colorThief.getColor(sliderImg);
-                e.target.parentNode.style.borderColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
-                if (color[0] > 50) {
-                    e.target.parentNode.style.backgroundColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
-                }
-            });
-        }
-    });
-}
+// const slideImgs = ["/static/imgs/test.jpg", "/static/imgs/test.png"];
+// async function bgc(slideImgs) {
+//     const colorThief = new ColorThief();
+//     await slideImgs.forEach((img, i) => {
+//         const html = `
+//         <div class="swiper-slide image" style="background-image: url(${img});"><img src='${img}' id='newimage${i}' crossorigin="Anonymous"></div>
+// 		`;
+//         const slider = document.querySelector(".swiper-wrapper");
+//         slider.insertAdjacentHTML("beforeend", html);
+//         let sliderImg = document.querySelector("#newimage" + i);
+//         if (!sliderImg.complete) {
+//             sliderImg.addEventListener("load", function (e) {
+//                 let color = colorThief.getColor(sliderImg);
+//                 e.target.parentNode.style.borderColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
+//                 if (color[0] > 50) {
+//                     e.target.parentNode.style.backgroundColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
+//                 }
+//             });
+//         }
+//     });
+// }
 
-if (document.querySelector(".swiper-container")) {
-    const swiper1 = new Swiper(".swiper-container", {
-        pagination: {
-            el: ".swiper-pagination",
-        },
-        navigation: {
-            nextEl: ".swiper-container .swiper-button-next",
-            prevEl: ".swiper-container .swiper-button-prev",
-        },
-    });
-    bgc(slideImgs);
-}
+// if (document.querySelector(".swiper-container")) {
+//     const swiper1 = new Swiper(".swiper-container", {
+//         pagination: {
+//             el: ".swiper-pagination",
+//         },
+//         navigation: {
+//             nextEl: ".swiper-container .swiper-button-next",
+//             prevEl: ".swiper-container .swiper-button-prev",
+//         },
+//     });
+//     bgc(slideImgs);
+// }
 
 // 팝오버
 const popoverTriggerList = document.querySelectorAll(

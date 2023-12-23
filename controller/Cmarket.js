@@ -6,10 +6,7 @@ const jwt = require('jsonwebtoken');
 const {verifyToken } = require('../utils/token')
 
 exports.market = async (req, res) => {
-    marketModel.find().populate({
-        path: 'user_id',
-        select: 'address email pw'
-    })
+    marketModel.find().populate('user_info')
     .exec()
     .then((result) => {
         console.log('DB 정보 추출', result);
@@ -31,8 +28,6 @@ exports.getView = async (req, res) => {
 	// 에러를 처리하는 로직
 	console.error(err);
 });
-
-	
 };
 
 exports.getWrite = async (req, res) => {
