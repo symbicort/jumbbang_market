@@ -59,3 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 200);
   });
 });
+
+// 채팅방 페이지로 이동
+function goChatrooms() {
+  const myname = 'myname';
+  window.location.href = `/getchatrooms?myName=${myname}`;
+}

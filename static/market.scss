@@ -19,9 +19,24 @@ $bdrs10: 10px;
 $bdrs20: 20px;
 $bdrs100: 20px;
 $color1: #000; // 주 컬러
-$color2: #6aac4b; // 포인트 컬러
+$color2: #57855d; // 포인트 컬러
 $color3: #868e96; // 노트
-$color4: #140b46; //
+// $color4: #44612a;
+// $color4: #59882f;
+$color4: #8b9e70; //버튼 배경 주 컬러
+$color5: #f3c41c; //
+// $priceBgc1: #dcde9f;
+// $priceBgc2: #c0c981;
+// $priceBgc3: #92a65f;
+$priceTxt1: #fff;
+$priceTxt2: #fff;
+$priceTxt3: #fff;
+$priceTxtbg1: #3a6e64;
+$priceTxtbg2: #4ca37e;
+$priceTxtbg3: #f36e72;
+$priceBgc1: #f3f3f3;
+$priceBgc2: #fff9ec;
+$priceBgc3: #fff1f0;
 
 //주 버튼
 @mixin btA {
@@ -53,6 +68,10 @@ body {
 }
 label {
   cursor: pointer;
+}
+
+main.container {
+  padding: 3rem 0;
 }
 // 임시 : 해더 푸터가 구분이 안가서 해둠
 // header {
@@ -97,7 +116,8 @@ $ibtn: (
   'info': '\F431',
   'write': '\F64D',
   'bookmark': '\F417',
-  'filter': '\F3C5',
+  'filter': '\F3E1',
+  //\F3C5
 );
 @each $name, $ico in $ibtn {
   [class^='ibt-'] {
@@ -124,9 +144,15 @@ $ibtn: (
 }
 input:checked + .ibt-bookmark:before {
   content: '\F415';
+  color: #fff;
+}
+.ibt-filter {
+  width: 20px;
+  font-size: 1.3rem;
 }
 input:checked + .ibt-filter:before {
   content: '\F3C4';
+  content: '\F3E0';
 }
 [class*='bt-'] {
   display: inline-flex;
@@ -176,14 +202,13 @@ input:checked + .ibt-filter:before {
   display: flex;
   gap: 5px;
   align-items: center;
-  span {
-  }
+
   $smile1: '\F31D', '\F323', '\F327', '\F321', '\F329';
   $smile2: '\F31C', '\F322', '\F324', '\F320', '\F328';
   @for $i from 1 through length($smile1) {
     &[data-lv='#{$i}']:after {
       content: nth($smile1, $i);
-      color: #ffbc00;
+      color: $color5;
       font-size: 2rem;
     }
   }
@@ -227,8 +252,6 @@ li {
       margin-bottom: 10px;
     }
   }
-}
-.ibt-write {
 }
 #marketList {
   .sort {
@@ -290,14 +313,22 @@ li {
 
     .swiper-button-next,
     .swiper-button-prev {
+      z-index: 1;
       color: $color2;
       margin-top: -2rem;
       padding: 2rem;
+      color: $color4;
       border-radius: $bdrs10;
       background-color: #fff8;
       @media screen and (max-width: 767px) {
         transform: scale(0.7);
       }
+    }
+    .swiper-pagination {
+      z-index: 1;
+    }
+    .swiper-pagination-bullet-active {
+      background-color: $color4;
     }
   }
   #article-profile-image {
@@ -316,7 +347,7 @@ li {
     display: inline-block;
     min-width: 120px;
     @include btA;
-    background-color: #140b46;
+    // background-color: #140b46;
   }
   [id^='price'] {
     font-weight: 700;
@@ -333,16 +364,40 @@ li {
         height: 100%;
       }
       &:nth-child(1) > div {
-        background-color: #d6f1ff;
+        color: $priceTxtbg1;
+        .txt {
+          color: $priceTxt1;
+          background-color: $priceTxtbg1;
+        }
+        background-color: $priceBgc1;
+        button {
+          background-color: $priceTxtbg1;
+        }
         a {
           display: block;
         }
       }
       &:nth-child(2) > div {
-        background-color: #e3efe5;
+        color: $priceTxtbg2;
+        .txt {
+          color: $priceTxt2;
+          background-color: $priceTxtbg2;
+        }
+        background-color: $priceBgc2;
+        button {
+          background-color: $priceTxtbg2;
+        }
       }
       &:nth-child(3) > div {
-        background-color: #dbd4f1;
+        color: $priceTxtbg3;
+        .txt {
+          color: $priceTxt3;
+          background-color: $priceTxtbg3;
+        }
+        background-color: $priceBgc3;
+        button {
+          background-color: $priceTxtbg3;
+        }
       }
       .period {
         padding: 10px 0;
@@ -355,7 +410,7 @@ li {
         font-size: 12px;
         padding: 5px 10px;
         border-radius: 3px;
-        border: 1px solid #000;
+        // border: 1px solid #000;
       }
       &.price {
         font-size: 2rem;
@@ -367,9 +422,6 @@ li {
           content: '₩ ';
         }
       }
-    }
-    #priceLast {
-      color: $color2;
     }
   }
   .lyBidBuy {
@@ -472,6 +524,7 @@ li {
 .cards-wrap .card-link {
   text-decoration: none;
   color: #212529;
+  text-align: left;
 }
 
 .cards-wrap .card-top .card-photo,
@@ -484,13 +537,14 @@ li {
   background-color: #f8f9fa;
   box-sizing: border-box;
   border: 1px solid $bdc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2.4rem 1.2rem -2rem #3d3d3d55;
 }
 
 .cards-wrap .card-top .card-photo img,
 .cards-wrap .card .card-photo img {
   position: absolute;
   top: 0;
+  left: 0;
   bottom: 0;
   width: 100%;
   box-sizing: border-box;
@@ -515,6 +569,7 @@ li {
 .cards-wrap .card-top .card-desc,
 .cards-wrap .card .card-desc {
   margin-top: 12px;
+  padding: 0 5px;
 }
 
 .cards-wrap .card-top .card-desc .card-title,

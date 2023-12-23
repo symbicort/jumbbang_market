@@ -5,6 +5,8 @@ const controller = require('../controller/Cmarket');
 
 router.get('/market', controller.market);
 router.get('/articles/:id', controller.getView);
-router.get('/write', controller.getWrite);
+router.get('/market/write', controller.getWrite);
+
+router.post('/market/write', controller.addPost);
 
 module.exports = router;
