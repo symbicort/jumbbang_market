@@ -23,7 +23,6 @@
 									<div class="profile1" style="background-image: url(/static/imgs/profile2.webp)">
 									</div>
 									<div class="txt">
-										<input type="hidden" id="productid" value="<%= mychatrooms[i].productId %>">
 										<strong class="subject h5">
 											<%= productNames[i].subject%>
 										</strong>
@@ -39,7 +38,7 @@
 								</a>
 								<div class="btns">
 									<button class="ibt-report" aria-label="신고하기"></button>
-									<a onclick="exit()" class="ibt-chatLogout"></a>
+									<a onclick="exit('<%= mychatrooms[i].productId%>')" class="ibt-chatLogout"></a>
 								</div>
 							</li>
 							<% } %>

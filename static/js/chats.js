@@ -59,14 +59,24 @@ const socket = io();
 
 function exit() {
     console.log("나가기 기능");
-    socket.disconnect();
     console.log(room);
     axios({
         method: "delete",
         url: "/chatroom",
         data: { roomid: room },
-    });
-    // window.history.back();
+    })
+        .then(() => {
+            console.log("채팅방 나가기 성공");
+            // 채팅방을 나간 후에 페이지 이동
+            window.location.href = `/getchatrooms?myName=${myName}`;
+        })
+        .catch((error) => {
+            console.error("채팅방 나가기 실패", error);
+            // 실패 시 처리 로직 추가
+        });
+
+    window.location.href = `/getchatrooms?myName=${myName}`;
+    socket.disconnect();
 }
 
 // 채팅 보내기
@@ -76,9 +86,9 @@ function send() {
         method: "post",
         url: "/chatroom",
         data: {
-            roomid: roomid.value,
+            roomid: room,
             sendmsg: msg.value,
-            sendid,
+            sendid: username,
         },
     })
         .then((result) => {

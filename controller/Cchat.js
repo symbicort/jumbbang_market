@@ -2,15 +2,11 @@
 const chats = require("../model/chats");
 const chatrooms = require("../model/chatrooms");
 const market = require("../model/market");
-const user = require("../model/user");
 const moment = require("moment");
 
 exports.getChats = async (req, res) => {
     const { postName, myName, productId } = req.query;
-    const postname = await user.findOne({ _id: postName });
-    console.log(postname);
-    const postnick = postname.nick;
-    console.log("chatrooms check", postnick, myName, productId);
+    console.log("chatrooms check", postName, myName, productId);
     // productId를 기준으로 채팅방 검색
     const savedChatRooms = await chatrooms.find({
         productId: productId,
@@ -76,6 +72,7 @@ exports.getChatrooms = async (req, res) => {
     console.log("mychatrooms", mychatrooms);
     let productNames = [];
     for (let i = 0; i < mychatrooms.length; i++) {
+        console.log(mychatrooms[i].productId);
         try {
             const productName = await market.findOne({
                 _id: mychatrooms[i].productId,
@@ -83,12 +80,14 @@ exports.getChatrooms = async (req, res) => {
             if (productName) {
                 productNames.push(productName);
             } else {
-                console.log("상품을 찾을 수 없습니다.");
+                productNames.push({});
             }
         } catch (error) {
             console.log("상품 조회 오류 >", error);
         }
     }
+    console.log("mychatrooms length", mychatrooms.length);
+    console.log("productNames length", productNames.length);
     console.log("productNames", productNames);
     res.render("chatrooms", { mychatrooms, productNames });
 };
@@ -109,4 +108,5 @@ exports.chatExit = async (req, res) => {
     const { roomid } = req.body;
     const result = await chatrooms.findOneAndDelete({ productId: roomid });
     console.log("result", result);
+    res.redirect("/getchatrooms");
 };

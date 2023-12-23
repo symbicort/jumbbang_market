@@ -73,15 +73,15 @@
 							</li>
 						</ul>
 						<div class="inputField">
-							<input type="hidden" id="roomid" value="<%= nowRoomId %>" />
 							<input type="text" id="msg" required placeholder="Message..."
 								onkeydown="if(window.event.keyCode == 13){send()}" />
 							<button type="button" onclick="send()"></button>
 						</div>
+						<input type="hidden" id="roomid" value="<%= nowRoomId %>">
 					</form>
-
 					<div class="mt-5">
-						<a onclick="exit()" class="btn-primary w-100 d-block text-center">채팅 나가기</a>
+						<a onclick="exit('<%= nowRoomId %>')" class="btn-primary w-100 d-block text-center">채팅
+							나가기</a>
 					</div>
 				</div>
 			</main>
