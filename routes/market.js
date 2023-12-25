@@ -8,5 +8,6 @@ router.get('/articles/:id', controller.getView);
 router.get('/market/write', controller.getWrite);
 
 router.post('/market/write', controller.addPost);
+router.post('/market/bid', controller.enterbid)
 
 module.exports = router;

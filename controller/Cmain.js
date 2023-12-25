@@ -5,8 +5,25 @@ const {upload, deleteProfileImg} = require('../utils/imgUploader');
 const { makeToken, makeRefreshToken, verifyToken } = require('../utils/token')
 
 //메인
-exports.main = (req, res) => {
-	res.render('index');
+exports.main = async (req, res) => {
+	const token = req.cookies.accessToken;
+    const refreshToken = req.cookies.refreshToken;
+
+    if(!token || !refreshToken){
+        res.render('index', {userid: undefined});
+    } else{
+        try{
+            const decodedjwt = await verifyToken(token, refreshToken) ;
+
+            if(decodedjwt.token != undefined){
+                res.render('index', {userid: decodedjwt.userid});
+            } else{
+                res.render('index', {userid: undefined});
+            }
+        } catch(err) {
+            console.error('메인 페이지 랜딩 에러', err);
+        }
+    }
 };
 
 //로그인

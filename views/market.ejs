@@ -68,9 +68,7 @@
 							<% for(let i = 0; i < postData.length; i++) { %>
 								<article class="card">
 									<a class="card-link" href="/articles/<%= postData[i]._id %>">
-										<div class="card-photo">
-											<img alt="post img" src="<%= postData[i].images[0] %>" >
-										</div>
+										<div class="card-photo" style="background-image: url('<%= postData[i].images[0] %>')">
 										<div class="card-desc">
 											<h2 class="card-title"><%= postData[i].subject %></h2>
 											<div class="card-price"><%= postData[i].priceLast %></div>

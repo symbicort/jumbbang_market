@@ -158,7 +158,7 @@
 							<span class="bookmarkHit" aria-label="관심">
 								<%= postdata.bookmark_hit %>
 							</span> ∙
-							<span class="chatHit" aria-label="채팅">36</span> ∙
+							<span class="chatHit" aria-label="채팅"><%= postdata.chat %></span> ∙
 							<span class="hit" aria-label="조회">
 								<%= postdata.hit %>
 							</span>
@@ -338,13 +338,13 @@
 								입찰 금액:
 								<!-- min: 현재가(입찰중인 현재 불러온 값), value: 현재가(사용자가 조정한 값) -->
 								<input type="number" class="form-control" min="<%= postdata.priceLast %>" step="1000" value="<%= postdata.priceLast %>"
-									placeholder="1000원 단위" />
+									placeholder="1000원 단위" name="price"/>
 							</li>
 						</ul>
 					</div>
 					<div class="modal-footer">
-						<button class="btn-primary" data-bs-dismiss="modal">취소</button>
-						<button class="btn-primary" id="btnBid">입찰하기</button>
+						<button type="button" class="btn-primary" data-bs-dismiss="modal">취소</button>
+						<button type="button" class="btn-primary"  id="btnBid" onclick="enterbid()" >입찰하기</button>
 					</div>
 				</form>
 			</div>
@@ -386,13 +386,10 @@
 		const imgData = `<%= postdata.images %>`;
 		const imgDatas = imgData.split(',');
 		for (let i = 0; i < imgDatas.length; i++) {
-			console.log('이미지 배열 추가', imgDatas[i]);
 			slideImgs.push(imgDatas[i]);
 		}
 
-		console.log(slideImgs);
 		function bgc(slideImgs) {
-			console.log(slideImgs);
 			const colorThief = new ColorThief();
 			slideImgs.forEach((img, i) => {
 			const html = `<div class="swiper-slide image" style="background-image: url(${img});"><img src='${img}' id='newimage${i}' crossorigin="Anonymous"></div>`;
