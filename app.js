@@ -64,8 +64,8 @@ app.use("/", chatRouter);
 const http = require("http");
 const server = http.createServer(app);
 // Socket 기능
-// const socketController = require("./socket")(server);
-// app.use("/chatroom", socketController);
+const socketController = require("./socket")(server);
+app.use("/chatroom", socketController);
 
 // TODO: 404 처리
 app.get("*", (req, res) => {
