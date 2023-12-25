@@ -16,19 +16,35 @@ app.use('/utils', express.static(__dirname + '/utils'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors({
-    origin: '*'
-}));
-
-const { swaggerUi, specs } = require('./swagger') ;
 
 dotenv.config();
 
-//메인, 회원가입, 로그인, 회원탈퇴, 마이페이지, 고객센터,
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+    exposedHeaders: ['ETag', 'x-amz-meta-custom-header', 'Content-Type'],
+}));
+
+// Preflight 요청에 대한 응답
+app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:8000');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Credentials', 'true');  // 필요에 따라 추가
+    res.status(204).send();
+});
+
+
+// Swagger 설정 (해당 부분이 추가되었다고 가정)
+const { swaggerUi, specs } = require('./swagger');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+// 메인, 회원가입, 로그인, 회원탈퇴, 마이페이지, 고객센터,
 const indexRouter = require("./routes/index");
 app.use("/", indexRouter);
 
-//중고거래
+// 중고거래
 const marketRouter = require("./routes/market");
 app.use("/", marketRouter);
 
@@ -36,11 +52,11 @@ app.use("/", marketRouter);
 const chatRouter = require("./routes/chat");
 app.use("/", chatRouter);
 
-// socket
+// Socket
 const http = require("http");
 const server = http.createServer(app);
 const socketController = require("./controller/Csocket")(server);
-// socket 기능
+// Socket 기능
 app.use("/chatroom", socketController);
 
 // TODO: 404 처리

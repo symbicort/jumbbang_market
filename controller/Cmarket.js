@@ -9,7 +9,8 @@ exports.market = async (req, res) => {
     marketModel.find().populate('userid')
     .exec()
     .then((result) => {
-        console.log('DB 정보 추출', result[0].userid.userid);
+        console.log('DB 정보 추출', result);
+        res.header("Access-Control-Allow-Origin", "*");
         res.render('market', {postData: result});
     }).catch((error) => {
         console.error('Error finding data:', error);
@@ -23,6 +24,7 @@ exports.getView = async (req, res) => {
 	.then((result) => {
 		// 결과를 처리하는 로직
 		console.log(result);
+        res.header("Access-Control-Allow-Origin", "*");
 		res.render('marketView', {postdata: result})
 	}).catch((err) => {
 	// 에러를 처리하는 로직

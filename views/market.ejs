@@ -63,21 +63,23 @@
 								</li>
 							</ul>
 						</div>
+						
 						<section class="cards-wrap">
 							<% for(let i = 0; i < postData.length; i++) { %>
 								<article class="card">
 									<a class="card-link" href="/articles/<%= postData[i]._id %>">
 										<div class="card-photo">
-											<img alt="오락기" src="<%= postData[i].images[0] %>" crossorigin="Anonymous" />
+											<img alt="post img" src="<%= postData[i].images[0] %>" >
 										</div>
 										<div class="card-desc">
 											<h2 class="card-title"><%= postData[i].subject %></h2>
 											<div class="card-price"><%= postData[i].priceLast %></div>
-											<div class="card-region-name">인천 계양구</div>
+											<div class="card-region-name"><%= postData[i].userid.address %></div>
 											<div class="card-counts">
 												<span class="bookmarkHit" aria-label="관심"><%= postData[i].bookmark_hit %> </span> ∙
-												<span class="chatHit" aria-label="채팅">36</span> ∙
+												<span class="chatHit" aria-label="채팅"><%= postData[i].chat %></span> ∙
 												<span class="hit" aria-label="조회"><%= postData[i].hit %></span>
+												
 											</div>
 										</div>
 									</a>
