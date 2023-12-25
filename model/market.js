@@ -52,6 +52,11 @@ const marketSchema = new Schema({
         required: true,
         default: 0
     },
+    chat: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     images: {
         type: [String]
     },

@@ -13,6 +13,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 		<link rel="stylesheet" href="/static/market.min.css" />
+		<script src="/static/js/market.js"></script>
 </head>
 
 <body>
@@ -104,12 +105,17 @@
 												<%= postdata.priceFirst %>
 											</span>
 											<p class="period">
+												<% const createdAt = new Date(postdata.createdAt); %>
+												<% const formattedCreatedAt = createdAt.getFullYear() + '-' + (createdAt.getMonth() + 1).toString().padStart(2, '0') + '-' + createdAt.getDate().toString().padStart(2, '0'); %>
+												<% const limiteddAt = new Date(postdata.dateLimit); %>
+												<% const formattedlimitedAt = limiteddAt.getFullYear() + '-' + (limiteddAt.getMonth() + 1).toString().padStart(2, '0') + '-' + limiteddAt.getDate().toString().padStart(2, '0'); %>
+
 												<time class="data">
-													<%= postdata.createdAt %>
+													<%= formattedCreatedAt %>
 												</time> ~
 												<time>
-													<%= postdata.dateLimit %>
-												</time>
+													<%= formattedlimitedAt %>
+												</time>												
 											</p>
 										</div>
 									</li>
@@ -322,7 +328,7 @@
 						<ul class="mb-3 text-center">
 							<li class="mb-4 fs-5">
 								<!-- .priceLast: 현재가(입찰중인 현재 불러온 값) -->
-								현재 <strong class="priceLast fw-bold">150,000</strong>원 부터<br class="d-md-none" />
+								현재 <strong class="priceLast fw-bold"><%= postdata.priceLast %></strong>원 부터<br class="d-md-none" />
 								입찰하실 수 있습니다
 							</li>
 							<!-- <li class="p-1">
@@ -331,7 +337,7 @@
 							<li class="p-1">
 								입찰 금액:
 								<!-- min: 현재가(입찰중인 현재 불러온 값), value: 현재가(사용자가 조정한 값) -->
-								<input type="number" class="form-control" min="150000" step="1000" value="150000"
+								<input type="number" class="form-control" min="<%= postdata.priceLast %>" step="1000" value="<%= postdata.priceLast %>"
 									placeholder="1000원 단위" />
 							</li>
 						</ul>
@@ -375,7 +381,6 @@
 		</div>
 	</div>
 	<!-- //modal -->
-	<script src="/static/js/market.js"></script>
 	<script>
 		let slideImgs = [];
 		const imgData = `<%= postdata.images %>`;

@@ -11,13 +11,7 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/static", (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-}, express.static(__dirname + "/static"));
-
+app.use("/static", express.static(__dirname + "/static"));
 app.use('/utils', express.static(__dirname + '/utils'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -25,7 +19,22 @@ app.use(cookieParser());
 
 dotenv.config();
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+    exposedHeaders: ['ETag', 'x-amz-meta-custom-header', 'Content-Type'],
+}));
+
+// Preflight 요청에 대한 응답
+app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:8000');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Credentials', 'true');  // 필요에 따라 추가
+    res.status(204).send();
+});
+
 
 // Swagger 설정 (해당 부분이 추가되었다고 가정)
 const { swaggerUi, specs } = require('./swagger');
