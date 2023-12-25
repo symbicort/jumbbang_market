@@ -1,4 +1,4 @@
-// const chatForm = document.getElementById("chat-form");
+const chatForm = document.getElementById("server-result");
 const getMessages = document.querySelector("#msg").value;
 const setroomName = document.getElementById("room_name");
 const userList = document.getElementById("userList");
@@ -21,10 +21,15 @@ li.append(span);
 const firstChild = chatBox.firstChild;
 chatBox.insertBefore(li, firstChild);
 
+// socket 기능
 const room = document.getElementById("roomid").value;
 const username = myName;
 // console.log(username);
-const socket = io();
+const io = require("socket.io-client");
+const socket = io("http://localhost:8000");
+socket.on("connect", () => {
+    console.log("Socket connected:", socket.id);
+});
 
 socket.emit("joinRoom", { username, room });
 
@@ -34,31 +39,37 @@ socket.on("roomFull", () => {
     window.history.back();
 });
 
-socket.on("roomUsers", ({ room, users }) => {
-    outputRoomName(room);
-    // outputUsers(users);
+socket.on("roomUsers", () => {
+    outputRoomName(getroomname);
 });
 
-socket.on("message", (message) => {
-    console.log(message);
-    outputMessage(message);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+socket.on("message", (data) => {
+    console.log(data);
+    outputMessage(data);
+    chatForm.scrollTop = chatForm.scrollHeight;
 });
 
-function outputMessage(message) {
+function outputMessage(data) {
     const li = document.createElement("li");
-    if (sendidCheck == true) {
+    if (data.id === socket.id) {
+        li.classList.add("me");
+        li.innerHTML = `
+        <span>${data.text}</span>
+        <p class="date">${data.time}</p>`;
+    } else if ((data.name = "notice")) {
+        li.classList.add("notice");
+        li.innerHTML = `<span>${data.text}</span>`;
     } else {
+        li.classList.add("other");
+        li.innerHTML = `
+        <span>${data.text}</span>
+        <p class="date">${data.time}</p>`;
     }
-    li.classList.add("message");
-    div.innerHTML = `
-    <p class="meta">${message.name} <span>${message.time}</span></p>
-    <p class="text">${message.text}</p>`;
-    document.querySelector("#server-result").appendChild(div);
+    document.querySelector("#server-result").appendChild(li);
 }
 
-function outputRoomName() {
-    setroomName.innerText = getroomname;
+function outputRoomName(roomname) {
+    setroomName.innerText = roomname;
 }
 
 // function outputUsers(users) {
@@ -66,13 +77,6 @@ function outputRoomName() {
 //         .map((user) => `<li id=${user.username}>${user.username}</li>`)
 //         .join("")}`;
 // }
-
-// socket.on("updateUsers", (username) => {
-//     const deletelist = document.getElementById(`${username}`);
-//     if (deletelist) {
-//         deletelist.remove();
-//     }
-// });
 
 function exit(roomid, from) {
     console.log("나가기 기능");
@@ -121,5 +125,10 @@ function send() {
     msg.value = "";
     msg.focus();
 
-    socket.emit("chatMessage", msg);
+    const data = {
+        username: username,
+        id: socket.id,
+        msg: msg.value,
+    };
+    socket.emit("chatMessage", data);
 }

@@ -1,10 +1,12 @@
-const express = require("express");
-const router = express.Router();
+const socketIO = require("socket.io");
 
 module.exports = function (server) {
-    const socketIO = require("socket.io");
-    const io = socketIO(server);
-
+    const io = socketIO(server, {
+        cors: {
+            origin: "http://localhost:8000", // 클라이언트의 주소에 맞게 변경
+            methods: ["GET", "POST"],
+        },
+    });
     // socket 연결
     io.on("connection", (socket) => {
         console.log("Socket connection status:", socket.connected);
@@ -28,27 +30,32 @@ module.exports = function (server) {
 
             socket.emit(
                 "message",
-                formatMessage(Announcement, "북적북적에 오신것을 환영합니다!!")
+                formatMessage(
+                    socket,
+                    `${user.username}님 환영합니다!`,
+                    "notice"
+                )
             );
             socket.broadcast
                 .to(user.room)
                 .emit(
                     "message",
                     formatMessage(
-                        Announcement,
-                        `${user.username}님이 입장하셨습니다.`
+                        socket,
+                        `${user.username}님이 입장하셨습니다.`,
+                        "notice"
                     )
                 );
 
-            io.to(user.room).emit("roomUsers", {
-                room: user.room,
-                users: getRoomUsers(user.room),
-            });
+            io.to(user.room).emit("roomUsers");
         });
 
-        socket.on("chatMessage", (msg) => {
+        socket.on("chatMessage", (data) => {
             const user = getCurrentUser(socket.id);
-            io.to(user.room).emit("message", formatMessage(user.username, msg));
+            io.to(user.room).emit(
+                "message",
+                formatMessage(socket, data.msg, data.username)
+            );
         });
 
         socket.on("disconnect", () => {
@@ -57,16 +64,16 @@ module.exports = function (server) {
                 io.to(user.room).emit(
                     "message",
                     formatMessage(
-                        Announcement,
-                        `${user.username}님이 퇴장하셨습니다.`
+                        socket,
+                        `${user.username}님이 퇴장하셨습니다.`,
+                        "notice"
                     )
                 );
-                io.to(user.room).emit("updateUsers", user.username);
                 console.log("삭제할 username >", user.username);
             }
         });
     });
-    return router;
+    return io;
 };
 
 // ----------------------------------
@@ -100,11 +107,12 @@ function getRoomUsers(room) {
 
 // 이름, 메시지에 입력 시간 추가
 const moment = require("moment");
-function formatMessage(name, text) {
+function formatMessage(socket, text, name) {
     return {
+        id: socket.id,
         name,
         text,
         date: moment().format("YYYY-MM-DD"),
-        time: moment().format("h:mm a"),
+        time: moment().format("a h:mm"),
     };
 }
