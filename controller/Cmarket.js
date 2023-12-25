@@ -9,7 +9,7 @@ exports.market = async (req, res) => {
     marketModel.find().populate('userid')
     .exec()
     .then((result) => {
-        console.log('DB 정보 추출', result[0].userid.userid);
+        console.log('DB 정보 추출', result);
         res.render('market', {postData: result});
     }).catch((error) => {
         console.error('Error finding data:', error);
