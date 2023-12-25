@@ -18,26 +18,31 @@ exports.market = async (req, res) => {
 };
 
 exports.getView = async (req, res) => {
-	const postId = req.params.id;
+    const postId = req.params.id;
 
-	marketModel.findById(postId).populate('userid').exec()
-	.then((result) => {
-		// 결과를 처리하는 로직
-		console.log(result);
+    try {
+        // 조회된 데이터를 조회수 1 증가와 함께 가져오기
+        const result = await marketModel.findByIdAndUpdate(postId, 
+            { $inc: { hit: 1 } }, 
+            { new: true }).populate('userid').exec();
+
+        // 결과를 처리하는 로직
+        console.log(result);
         res.header("Access-Control-Allow-Origin", "*");
-		res.render('marketView', {postdata: result})
-	}).catch((err) => {
-	// 에러를 처리하는 로직
-	console.error(err);
-});
+        res.render('marketView', { postdata: result });
+    } catch (err) {
+        // 에러를 처리하는 로직
+        console.error(err);
+        res.status(500).send({ msg: 'Internal server error' });
+    }
 };
 
-exports.getWrite = async (req, res) => {
 
+exports.getWrite = async (req, res) => {
 	const token = req.cookies.accessToken;
     const refreshToken = req.cookies.refreshToken;
 
-    if(!token){
+    if(!token || !refreshToken){
 		res.render('login');
     } else{
         try{
@@ -101,4 +106,42 @@ exports.addPost = async (req, res) => {
         })
         return res.status(200).json({ message: 'Upload successful' });
     });
+};
+
+exports.enterbid = async (req, res) => {
+    console.log('경매 시도');
+    console.log(req.body);
+    const { bidprice, productId } = req.body;
+    const token = req.cookies.accessToken;
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!token || !refreshToken) {
+        res.render('login');
+    } else {
+        try {
+            const decodedjwt = await verifyToken(token, refreshToken);
+            console.log('토큰 유효 검사 결과', decodedjwt);
+
+            if (decodedjwt.token != undefined) {
+                console.log('DB 결과 업데이트 시도');
+                const result = await marketModel.updateOne(
+                    { _id: productId },
+                    {
+                        $set: {
+                            buyer: decodedjwt.userid,
+                            priceLast: bidprice
+                        }
+                    },
+                    { upsert: true }
+                );
+                console.log('데이터 업데이트 실행 결과', result);
+                res.send({ msg: '입찰 성공' });
+            } else {
+                res.render('login');
+            }
+        } catch (err) {
+            console.error('경매 입찰 중 에러', err);
+            res.status(500).send({ msg: '서버 오류' });
+        }
+    }
 };

@@ -57,6 +57,9 @@ const marketSchema = new Schema({
         required: true,
         default: 0
     },
+    buyer: {
+        type: String
+    },
     images: {
         type: [String]
     },

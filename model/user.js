@@ -29,6 +29,15 @@ const userSchema = new Schema({
     image: {
         type: String,
     },
+    boughtItem: {
+        type: [String]
+    },
+    saleItem: {
+        type: [String]
+    },
+    WishlistItem: {
+        type: [String]
+    }
 });
 
 module.exports = mongoose.model("user", userSchema);

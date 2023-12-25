@@ -135,5 +135,27 @@ async function addpost() {
     });
 }
 
+function enterbid(){
+    const currentURL = window.location.href;
+    console.log(currentURL);
 
+    // URL에서 마지막 부분 추출
+    const lastSegment = currentURL.split('/').pop();
+
+    console.log(lastSegment);
+
+    const form = document.forms['formBid'];
+    axios({
+        method: "POST",
+        url: "/market/bid",
+        data: {
+            bidprice: form.price.value,
+            productId: lastSegment
+        }
+    }).then((res) => {
+        console.log(res.data.msg);
+        alert(res.data.msg);
+        location.reload();
+    })
+}
 
