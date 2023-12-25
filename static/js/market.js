@@ -71,10 +71,22 @@ function btnBid() {}
 
 // 중고거래 상세페이지 채팅버튼 함수
 function directChat() {
-    const myname = "myname";
     const productId = document.getElementById("productid").value;
     const postName = document.querySelector("#nick").innerText;
-    window.location.href = `/chatroom?postName=${postName}&myName=${myname}&productId=${productId}`;
+
+    axios({
+        method: "get",
+        url: "/getcurrentuserid",
+    })
+        .then((result) => {
+            const myId = result.data.userid;
+            console.log(myId);
+            // 채팅 페이지로 이동
+            window.location.href = `/chatroom?postName=${postName}&myId=${myId}&productId=${productId}`;
+        })
+        .catch((err) => {
+            console.log("현재아이디찾기 실패", err);
+        });
 }
 
 async function addpost() {

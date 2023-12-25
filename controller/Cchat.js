@@ -1,6 +1,7 @@
 // 채팅 controller
 const chats = require("../model/chats");
 const chatrooms = require("../model/chatrooms");
+const user = require("../model/user");
 const market = require("../model/market");
 const moment = require("moment");
 const jwt = require("jsonwebtoken");
@@ -17,8 +18,9 @@ exports.getChats = async (req, res) => {
             const decodedjwt = await verifyToken(token, refreshToken);
 
             if (decodedjwt.token != undefined) {
-                const { postName, myName, productId, from } = req.query;
-                console.log("chatrooms check", postName, myName, productId);
+                const { postName, myId, productId, from } = req.query;
+                let myname = await getUsernameByUserid(myId);
+                console.log("chatrooms check", postName, myname, productId);
                 // productId를 기준으로 채팅방 검색
                 const savedChatRooms = await chatrooms.find({
                     productId: productId,
@@ -26,7 +28,7 @@ exports.getChats = async (req, res) => {
                 let savedChats;
                 if (savedChatRooms.length <= 0) {
                     const newChatRoom = await chatrooms.create({
-                        sendId: myName,
+                        sendId: myname,
                         takeId: postName,
                         productId: productId,
                     });
@@ -36,7 +38,7 @@ exports.getChats = async (req, res) => {
                     res.render("chats", {
                         nowRoomId: newChatRoom.productId,
                         savedChats,
-                        myname: myName,
+                        myname: myname,
                         yourname: postName,
                         from,
                     });
@@ -49,7 +51,7 @@ exports.getChats = async (req, res) => {
                     res.render("chats", {
                         nowRoomId: savedChatRooms[0].productId,
                         savedChats,
-                        myname: myName,
+                        myname: myname,
                         yourname: postName,
                         from,
                     });
@@ -74,15 +76,17 @@ exports.getChatrooms = async (req, res) => {
 
             if (decodedjwt.token != undefined) {
                 let mychatrooms;
-                const { myName } = req.query;
-                console.log("내 이름 >", myName);
+                const { myId } = req.query;
+                console.log("myId", myId);
+                let myname = await getUsernameByUserid(myId);
+                console.log("내 이름 >", myname);
                 try {
                     const fromMe = await chatrooms.find({
-                        sendId: myName,
+                        sendId: myname,
                     });
                     console.log("내가 보낸 채팅방", fromMe);
                     const toMe = await chatrooms.find({
-                        takeId: myName,
+                        takeId: myname,
                     });
                     console.log("내가 받은 채팅방", toMe);
                     mychatrooms = [...fromMe, ...toMe];
@@ -151,4 +155,34 @@ exports.chatExit = async (req, res) => {
     const result = await chatrooms.findOneAndDelete({ productId: roomid });
     console.log("result", result);
     res.send({ result });
+};
+
+// 현재 로그인 아이디 구하기
+exports.getCurrentUserId = async (req, res) => {
+    try {
+        const token = req.cookies.accessToken;
+        const refreshToken = req.cookies.refreshToken;
+        if (!token) {
+            res.render("login");
+        } else {
+            const decodedjwt = await verifyToken(token, refreshToken);
+            if (decodedjwt.token != undefined) {
+                res.send({ userid: decodedjwt.userid });
+            } else {
+                res.render("login");
+            }
+        }
+    } catch (err) {
+        console.error("getCurrentUserId 에러:", err);
+        res.status(500).json({ error: "서버 에러" });
+    }
+};
+
+const getUsernameByUserid = async function (userid) {
+    const userRecord = await user.findOne({ userid: userid });
+    if (userRecord) {
+        console.log("사용자 닉네임", userRecord.nick);
+        return userRecord.nick;
+    }
+    return null; // or any other desired default value
 };

@@ -10,5 +10,7 @@ router.get("/chatroom", controller.getChats);
 router.post("/chatroom", controller.postChat);
 // 채팅방 삭제
 router.delete("/chatroom", controller.chatExit);
+// 현재 로그인 id 구하기
+router.get("/getcurrentuserid", controller.getCurrentUserId);
 
 module.exports = router;

@@ -3,12 +3,12 @@
 // const roomName = document.getElementById("room-name");
 // const userList = document.getElementById("users");
 
-const { myName } = Qs.parse(location.search, {
+const { myid } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
 });
 
 const room = document.getElementById("roomid").value;
-const username = myName;
+const username = myid;
 
 const socket = io();
 
@@ -70,7 +70,7 @@ function exit(roomid, from) {
             if (!from) {
                 window.history.back();
             } else {
-                window.location.href = `/getchatrooms?myName=${myName}`;
+                window.location.href = `/getchatrooms?myId=${myid}`;
             }
             socket.disconnect();
             console.log("채팅방 나가기 성공");

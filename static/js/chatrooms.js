@@ -1,4 +1,4 @@
-const { myName } = Qs.parse(location.search, {
+const { myId } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
 });
 
@@ -11,7 +11,7 @@ function exit(nowroomid) {
     })
         .then(() => {
             console.log("채팅방 나가기 성공");
-            window.location.href = `/getchatrooms?myName=${myName}`;
+            window.location.href = `/getchatrooms?myId=${myId}`;
         })
         .catch((error) => {
             console.error("채팅방 나가기 실패", error);
