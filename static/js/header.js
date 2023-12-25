@@ -67,10 +67,10 @@ function goChatrooms() {
         url: "/getcurrentuserid",
     })
         .then((result) => {
-            const myId = result.data.userid;
-            console.log(myId);
+            const username = result.data.username;
+            console.log(username);
             // 채팅방 페이지로 이동
-            window.location.href = `/getchatrooms?myId=${myId}`;
+            window.location.href = `/getchatrooms?myName=${username}`;
         })
         .catch((err) => {
             console.log("현재아이디찾기 실패", err);

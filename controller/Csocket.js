@@ -1,15 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Announcement = "공지";
 
 module.exports = function (server) {
     const socketIO = require("socket.io");
     const io = socketIO(server);
 
-    router.get("/chatroom", (req, res) => {
-        // 특정 페이지 뷰를 렌더링
-        res.render("chats");
-    });
     // socket 연결
     io.on("connection", (socket) => {
         console.log("Socket connection status:", socket.connected);

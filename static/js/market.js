@@ -79,10 +79,10 @@ function directChat() {
         url: "/getcurrentuserid",
     })
         .then((result) => {
-            const myId = result.data.userid;
-            console.log(myId);
+            const username = result.data.username;
+            console.log(username);
             // 채팅 페이지로 이동
-            window.location.href = `/chatroom?postName=${postName}&myId=${myId}&productId=${productId}`;
+            window.location.href = `/chatroom?postName=${postName}&myName=${username}&productId=${productId}`;
         })
         .catch((err) => {
             console.log("현재아이디찾기 실패", err);

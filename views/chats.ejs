@@ -14,8 +14,10 @@
 			<main class="container">
 				<div class="chatsWrap py-5">
 					<form name="chating" class="chating">
+						<h3 id="room_name"></h3>
 						<div class="users">
-							<ul>
+							<ul id="userList">
+
 								<li>
 									<p id="nick1" class="nick">
 										<%= myname %>
@@ -33,44 +35,56 @@
 							</ul>
 						</div>
 						<ul id="server-result" class="talkList">
-							<li class="notice"><span>민지님이 입장 하였습니다</span></li>
+							<!-- <li class="notice"><span>민지님이 입장 하였습니다</span></li>
 							<li class="me">
 								<span>잘 받았습니다<br /><br /><br /><br />asf</span>
 								<p class="date">오후 12:20</p>
-							</li>
-							<li class="other">
-								<span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
-								<span>감사합니다~~감사합니다~~감사합니다~~<br /><br /><br /><br />감사합니다~~</span>
-								<p class="date">오후 12:21</p>
-							</li>
-							<li class="other">
-								<span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
-								<span>감사합니다~~감사합니다~~감사합니다~~<br /><br /><br /><br />감사합니다~~</span>
-								<p class="date">오후 12:21</p>
-							</li>
-							<li class="other">
-								<span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
-								<span>감사합니다~~감사합니다~~감사합니다~~<br /><br /><br /><br />감사합니다~~</span>
-								<p class="date">오후 12:21</p>
 							</li>
 							<li class="notice"><span>2023-12-20</span></li>
 							<li class="other">
 								<span class="thumb" style="background-image: url(/static/imgs/profile2.webp)"></span>
 								<span>감사합니다~~감사합니다~~감사합니다~~<br /><br /><br /><br />감사합니다~~</span>
 								<p class="date">오후 12:21</p>
-							</li>
-							<li class="other">
-								<% if (savedChats.length>0) { %>
-									<% for( let i=0; i < savedChats.length; i++ ) { %>
-										<span class="thumb"
-											style="background-image: url(/static/imgs/profile2.webp)"></span>
-										<span>
-											<%= savedChats[i].msg %>
-										</span>
-										<p class="date">오후 12:21</p>
-										<% } %>
-											<% } %>
-							</li>
+							</li> -->
+							<% if (savedChats.length> 0) { %>
+								<% let currentDate=null; %>
+
+									<% for (let i=0; i < savedChats.length; i++) { %>
+										<% const chat=savedChats[i]; %>
+											<% const chatDate=chat.chatDate; %>
+
+												<% if (currentDate !==chatDate) { %>
+													<li class="notice"><span>
+															<%= chatDate %>
+														</span></li>
+													<% currentDate=chatDate; %>
+														<% } %>
+															<%= console.log(chat) %>
+																<% if (chat.sendId==myname) { %>
+																	<li class="me">
+																		<span>
+																			<%= chat.msg %>
+																		</span>
+																		<p class="date">
+																			<%= chat.chatTime %>
+																		</p>
+																	</li>
+																	<% } else { %>
+																		<li class="other">
+																			<span class="thumb"
+																				style="background-image: url(/static/imgs/profile2.webp)"></span>
+																			<span>
+																				<%= chat.msg %>
+																			</span>
+																			<p class="date">
+																				<%= chat.chatTime %>
+																			</p>
+																		</li>
+																		<% } %>
+																			<% } %>
+																				<% } %>
+
+
 						</ul>
 						<div class="inputField">
 							<input type="text" id="msg" required placeholder="Message..."
@@ -78,6 +92,7 @@
 							<button type="button" onclick="send()"></button>
 						</div>
 						<input type="hidden" id="roomid" value="<%= nowRoomId %>">
+						<input type="hidden" id="roomname" value="<%= roomname%>">
 					</form>
 					<div class="mt-5">
 						<a onclick="exit('<%= nowRoomId %>', '<%= from%>')"
