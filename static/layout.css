@@ -1,165 +1,166 @@
 /* 헤더 */
 #header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  z-index: 50;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+	z-index: 50;
 }
 
 .header-inner-top {
-  border-bottom: 1px solid #f5f5f5;
+	border-bottom: 1px solid #f5f5f5;
 }
 
 .header-inner {
-  max-width: 1280px;
-  margin: 0 auto;
+	max-width: 1280px;
+	margin: 0 auto;
 }
 
 .header-inner.top {
-  width: 100%;
-  display: flex;
-  align-items: flex-end;
-  padding: 2.5rem 0 1.5rem 0;
+	width: 100%;
+	display: flex;
+	align-items: flex-end;
+	padding-top: 2.5rem;
+	padding-bottom: 1.5rem;
 }
 
 .logo-wrap {
-  display: flex;
+	display: flex;
 }
 
 .page-link {
-  display: flex;
-  align-items: flex-end;
+	display: flex;
+	align-items: flex-end;
 }
 
 .page-link > li {
-  padding-left: 1.5rem;
+	padding-left: 1.5rem;
 }
 
 .page-link > li > a {
-  cursor: pointer;
-  display: block;
-  color: #333;
-  font-size: 1.2rem;
-  padding: 1rem 0;
+	cursor: pointer;
+	display: block;
+	color: #333;
+	font-size: 1.2rem;
+	padding: 1rem 0;
 }
 
 .logo-img {
-  width: 180px;
+	width: 180px;
 }
 
 .subnav-user {
-  display: flex;
-  margin-left: auto;
+	display: flex;
+	margin-left: auto;
 }
 .subnav-user > li {
-  font-size: 1.1rem;
-  color: #333;
-  padding-left: 1rem;
-  position: relative;
+	font-size: 1.1rem;
+	color: #333;
+	padding-left: 1rem;
+	position: relative;
 }
 
 .subnav-user li::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -9px;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 12px;
-  background-color: #ccc;
+	content: '';
+	position: absolute;
+	top: 50%;
+	right: -9px;
+	transform: translateY(-50%);
+	width: 1px;
+	height: 12px;
+	background-color: #ccc;
 }
 
 .subnav-user li:first-child::before,
 .subnav-user li:last-child::before {
-  content: none;
+	content: none;
 }
 
 .subnav-user a {
-  text-decoration: none;
-  color: #333;
-  cursor: pointer;
+	text-decoration: none;
+	color: #333;
+	cursor: pointer;
 }
 
 .fa-bell {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .fa-bell:hover .notify {
-  display: block;
+	display: block;
 }
 
 .notify {
-  display: none;
-  position: absolute;
-  right: 0;
-  width: 180px;
-  height: 200px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-indent: 2px;
-  overflow: hidden;
+	display: none;
+	position: absolute;
+	right: 0;
+	width: 180px;
+	height: 200px;
+	background-color: #fff;
+	border-radius: 12px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	text-indent: 2px;
+	overflow: hidden;
 }
 
 .notify > li > a {
-  display: block;
-  width: 100%;
-  padding: 1rem 0;
+	display: block;
+	width: 100%;
+	padding: 1rem 0;
 }
 .notify > li > a:hover {
-  background-color: #008000;
-  color: #fff;
+	background-color: #008000;
+	color: #fff;
 }
 
 .notify > li > a {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .fa-envelope {
-  margin-right: 4px;
-  text-indent: 14px;
+	margin-right: 4px;
+	text-indent: 14px;
 }
 
 .fa-envelope ~ span {
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
 }
 
 #nav {
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 1rem 0;
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 1rem 0;
 }
 
 .menu {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .icon-bg {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	position: relative;
 }
 .menu .fa-bars {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 1.5rem;
+	cursor: pointer;
+	color: #333;
 }
 
 /* 좌측 사이드바...?? */
@@ -175,118 +176,119 @@
 } */
 
 .menu-category {
-  background-color: #6b6666;
-  position: absolute;
-  top: 50px;
-  left: 0;
-  text-indent: 0.5rem;
-  z-index: 10;
-  width: 200px;
-  height: auto;
-  border: 1px solid #83a793;
+	background-color: #6b6666;
+	position: absolute;
+	top: 50px;
+	left: 0;
+	text-indent: 0.5rem;
+	z-index: 10;
+	width: 200px;
+	height: auto;
+	border: 1px solid #83a793;
 }
 
 .menu-category-list {
-  width: 100%;
-  background-color: #fff;
-  border-bottom: 1px dotted #83a793;
+	width: 100%;
+	background-color: #fff;
+	border-bottom: 1px dotted #83a793;
 }
 
 .menu-category-list:last-child {
-  border-bottom: 0;
+	border-bottom: 0;
 }
 
 .menu-category-list > a {
-  display: block;
-  padding: 0.8rem 0.3rem;
+	display: block;
+	padding: 0.8rem 0.3rem;
 }
 
 .menu-category-list > a:hover {
-  background-color: #83a793;
-  color: #fff;
+	background-color: #83a793;
+	color: #fff;
 }
 
 .utility-wrap {
-  display: flex;
-  margin-left: auto;
+	display: flex;
+	margin-left: auto;
 }
 
 .info .fa-magnifying-glass {
-  font-size: 1.8rem;
-  color: #333;
+	font-size: 1.8rem;
+	color: #333;
 }
 
 .user-info {
-  margin-left: 1.5rem;
+	margin-left: 1.5rem;
 }
 
 .user-info .fa-user {
-  font-size: 1.8rem;
-  color: #333;
-  position: relative;
-  display: inline-block;
+	font-size: 1.8rem;
+	color: #333;
+	position: relative;
+	display: inline-block;
 }
 
 .fa-user:hover .user-list {
-  display: block;
+	display: block;
 }
 
 .user-list {
-  display: none;
-  position: absolute;
-  top: 70%;
-  right: 0;
-  width: 180px;
-  height: auto;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-indent: 24px;
-  overflow: hidden;
+	display: none;
+	position: absolute;
+	top: 70%;
+	right: 0;
+	width: 180px;
+	height: auto;
+	background-color: #fff;
+	border-radius: 12px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	text-indent: 24px;
+	overflow: hidden;
 }
 
 .user-list > li > a {
-  display: block;
-  width: 100%;
-  padding: 1rem 0;
+	display: block;
+	width: 100%;
+	padding: 1rem 0;
 }
 .user-list > li > a:hover {
-  background-color: #008000;
-  color: #fff;
+	background-color: #008000;
+	color: #fff;
 }
 
 /* 푸터 */
 #footer {
-  width: 100%;
-  background-color: #f5f5f5;
+	width: 100%;
+	background-color: #f5f5f5;
 }
 
 .footer-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1.2rem 0 2rem 0;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding-top: 1.2rem;
+	padding-bottom: 2rem;
 }
 .bottom-footer {
-  padding: 3rem 0;
+	padding: 3rem 0;
 }
 
 .footer-logo {
-  width: 140px;
-  display: block;
-  cursor: pointer;
-  padding: 1rem 0;
+	width: 140px;
+	display: block;
+	cursor: pointer;
+	padding: 1rem 0;
 }
 
 .footer-logo > img {
-  max-width: 100%;
+	max-width: 100%;
 }
 
 .footer-info {
-  margin-top: 0.5rem;
+	margin-top: 0.5rem;
 }
 
 .footer-inner span {
-  display: inline-block;
-  margin: 0 0.5rem 0.3rem 0;
-  color: #333;
+	display: inline-block;
+	margin: 0 0.5rem 0.3rem 0;
+	color: #333;
 }
