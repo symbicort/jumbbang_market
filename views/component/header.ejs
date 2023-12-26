@@ -1,3 +1,12 @@
+<style>
+  #search {
+    display: none;
+  }
+
+  #search.show {
+    display: inline-block;
+  }
+</style>
 <header id="header">
   <div class="header-inner-top">
     <div class="header-inner top">
@@ -96,3 +105,37 @@
 </header>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/static/js/header.js"></script>
+<script>
+  (async () => {
+    await axios({
+      method: 'get',
+      url: '/chklogin',
+    }).then((res) => {
+      console.log('로그인 정보 받아옴', res.data.userid);
+      const loginBtnLi = document.querySelector('.loginBtnLi');
+      const registerBtnLi = document.querySelector('.registerBtnLi');
+      if (res.data.userid == undefined) {
+        loginBtnLi.innerHTML = '<a href="/login">로그인</a>';
+        registerBtnLi.style.display = '';
+      } else {
+        loginBtnLi.innerHTML = `${res.data.userid}님 <a href="/logout">로그아웃</a>`;
+        registerBtnLi.style.display = 'none';
+      }
+    });
+  })();
+
+  function enter() {
+    if (window.event.keyCode == 13) {
+      let val = document.querySelector('#search').value;
+      console.log(val);
+      location.href = `/search?q=${val}`;
+    }
+  }
+
+  function search() {
+    let searchInput = document.querySelector('#search');
+    let val = searchInput.value;
+    searchInput.classList.toggle('show');
+    // location.href = `/search?q=${val}`;
+  }
+</script>

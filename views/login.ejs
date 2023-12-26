@@ -12,14 +12,14 @@
   <%- include('./component/header') %>
   <main class="main-user form-signin">
     <div class="login-inner">
-      <form id="loginForm" class="w-50" style="max-width: 300px;" name="login">
+      <form id="loginForm" class="w-25" name="login">
         <h1 class="h3 mb-3 fw-normal text-center">로그인</h1>
         <div class="form-floating mb-2">
           <input id="userid" type="text" class="form-control" placeholder="id" name="id">
           <label for="userid">아이디를 입력해주세요.</label>
         </div>
         <div class="form-floating">
-          <input id="password" type="password" class="form-control" placeholder="password" name="pw">
+          <input id="password" type="password" class="form-control" placeholder="password" name="pw" onkeydown="if(window.event.keyCode == 13){tryLogin()}">
           <label for="password">비밀번호를 입력해주세요.</label>
         </div><br>
 
