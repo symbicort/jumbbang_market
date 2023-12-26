@@ -18,17 +18,30 @@ exports.getChats = async (req, res) => {
         try {
             const decodedjwt = await verifyToken(token, refreshToken);
             if (decodedjwt.token != undefined) {
+                // 현재 로그인 id, nick 구하기
+                const myid = decodedjwt.userid;
+                const myinfo = await user.findOne({ userid: myid });
+                const myrealname = myinfo.nick;
                 const { postName, myName, productId, from } = req.query;
-                console.log("chatrooms check", postName, myName, productId);
-                let roominfo = await market.findOne({ _id: productId });
-                let roomname = roominfo.subject;
 
+                const yourinfo = await user.findOne({ nick: postName });
+                const yourid = yourinfo.userid;
+                console.log("chatrooms check", postName, myName, productId);
+                console.log("sendid check", myrealname, myName);
+                let roominfo = await market.findOne({
+                    _id: productId,
+                });
+                let roomname = roominfo.subject;
                 // productId를 기준으로 채팅방 검색
-                const savedChatRooms = await chatrooms.find({
+                const savedChatRooms = await chatrooms.findOne({
                     productId: productId,
+                    $or: [
+                        { takeId: myName, sendId: postName },
+                        { takeId: postName, sendId: myName },
+                    ],
                 });
                 let savedChats;
-                if (savedChatRooms.length <= 0) {
+                if (!savedChatRooms) {
                     const newChatRoom = await chatrooms.create({
                         sendId: myName,
                         takeId: postName,
@@ -38,17 +51,18 @@ exports.getChats = async (req, res) => {
                     savedChats = [];
                     // 저장된 채팅 데이터
                     res.render("chats", {
-                        nowRoomId: newChatRoom.productId,
+                        nowRoomId: newChatRoom._id,
                         savedChats,
                         myname: myName,
                         yourname: postName,
                         from,
                         roomname,
+                        myrealname,
                     });
                 } else {
                     console.log("savedChatRooms", savedChatRooms);
                     savedChats = await chats.find({
-                        roomId: savedChatRooms[0].productId,
+                        roomId: savedChatRooms._id,
                     });
                     // 채팅방 날짜 업데이트
                     savedChats = savedChats.map((chat) => {
@@ -60,14 +74,16 @@ exports.getChats = async (req, res) => {
                             chatTime: moment(chat.createdAt).format("a hh:mm"),
                         };
                     });
+                    console.log("myrealname", myrealname);
                     console.log("savedChats", savedChats);
                     res.render("chats", {
-                        nowRoomId: savedChatRooms[0].productId,
+                        nowRoomId: savedChatRooms._id,
                         savedChats,
                         myname: myName,
                         yourname: postName,
                         from,
                         roomname,
+                        myrealname,
                     });
                 }
             } else {
@@ -140,7 +156,7 @@ exports.getChatrooms = async (req, res) => {
                 console.log("mychatrooms length", mychatrooms.length);
                 console.log("productNames length", productNames.length);
                 console.log("productNames", productNames);
-                res.render("chatrooms", { mychatrooms, productNames });
+                res.render("chatrooms", { mychatrooms, productNames, myName });
             } else {
                 res.render("login");
             }
@@ -164,7 +180,7 @@ exports.postChat = async (req, res) => {
 
 exports.chatExit = async (req, res) => {
     const { roomid } = req.body;
-    const result = await chatrooms.findOneAndDelete({ productId: roomid });
+    const result = await chatrooms.findOneAndDelete({ _id: roomid });
     const resultchat = await chats.deleteMany({ roomId: roomid });
     console.log("result", result, resultchat);
     res.send({ result });
@@ -203,3 +219,103 @@ const getUsernameByUserid = async function (userid) {
     }
     console.error("존재하지 않는 아이디입니다.");
 };
+
+exports.socketConnection = (socket, io) => {
+    // socket 연결
+    console.log("Socket connection status:", socket.connected);
+
+    console.log("socket 연결 > ", socket.id);
+    socket.on("joinRoom", ({ username, room }) => {
+        let roomUsers = getRoomUsers(room);
+        console.log("현재 room 인원", roomUsers);
+        if (roomUsers.length >= 2) {
+            socket.emit("roomFull");
+            socket.disconnect();
+            console.log("Socket connection status:", socket.connected);
+            return;
+        }
+        const user = userJoin(socket.id, username, room);
+        socket.join(user.room);
+        roomUsers = getRoomUsers(user.room);
+        console.log("join후 room 인원", roomUsers);
+
+        // socket.emit(
+        //     "message",
+        //     formatMessage(socket, `${user.username}님 환영합니다!`, "notice")
+        // );
+        // socket.broadcast
+        //     .to(user.room)
+        //     .emit(
+        //         "message",
+        //         formatMessage(
+        //             socket,
+        //             `${user.username}님이 입장하셨습니다.`,
+        //             "notice"
+        //         )
+        //     );
+
+        io.to(user.room).emit("roomUsers");
+    });
+
+    socket.on("chatMessage", (data) => {
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit(
+            "message",
+            formatMessage(socket, data.msg, data.username)
+        );
+    });
+
+    socket.on("disconnect", () => {
+        const user = userLeave(socket.id);
+        if (user) {
+            // io.to(user.room).emit(
+            //     "message",
+            //     formatMessage(
+            //         socket,
+            //         `${user.username}님이 퇴장하셨습니다.`,
+            //         "notice"
+            //     )
+            // );
+            console.log("삭제할 username >", user.username);
+        }
+    });
+};
+
+// 채팅 관련 함수
+const users = [];
+
+// 사용자 배열에 user 추가
+function userJoin(id, username, room) {
+    const user = { id, username, room };
+    users.push(user);
+    return user;
+}
+
+// 사용자 배열에서 id가 현재 socket.id인 본인 구하기
+function getCurrentUser(id) {
+    return users.find((user) => user.id === id);
+}
+
+// id로 나갈 사람의 index를 찾고 사용자 배열에서 빼기
+function userLeave(id) {
+    const index = users.findIndex((user) => user.id === id);
+    if (index !== -1) {
+        return users.splice(index, 1)[0];
+    }
+}
+
+//사용자 중 현재 room에 포함된 유저 반환
+function getRoomUsers(room) {
+    return users.filter((user) => user.room === room);
+}
+
+// 이름, 메시지에 입력 시간 추가
+function formatMessage(socket, text, name) {
+    return {
+        id: socket.id,
+        name,
+        text,
+        date: moment().format("YYYY-MM-DD"),
+        time: moment().format("a h:mm"),
+    };
+}

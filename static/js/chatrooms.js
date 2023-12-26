@@ -1,4 +1,4 @@
-const { myId } = Qs.parse(location.search, {
+const { myName } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
 });
 

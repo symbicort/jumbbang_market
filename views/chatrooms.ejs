@@ -27,8 +27,12 @@
 											<%= productNames[i].subject%>
 										</strong>
 										<p>
-											<span class="userid">
-												<%= mychatrooms[i].takeId %>
+											<span id="chatyourname" class="userid">
+												<% if ( myName !=mychatrooms[i].takeId) { %>
+													<%= mychatrooms[i].takeId %>
+														<% } else {%>
+															<%= mychatrooms[i].sendId %>
+																<%}%>
 											</span>
 											<span class="date">
 												<%= mychatrooms[i].createdAt %>

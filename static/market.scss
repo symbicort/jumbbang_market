@@ -59,7 +59,7 @@ $priceBgc3: #fff1f0;
 }
 body {
 	min-width: 280px;
-	font-family: 'Noto Sans KR', sans-serif;
+	// font-family: 'Noto Sans KR', sans-serif;
 }
 .strike {
 	text-decoration: line-through;
@@ -242,7 +242,8 @@ li {
 	align-items: flex-end;
 	transition: transform 0.3s;
 	z-index: 10000;
-	display: none;
+	// display: none;
+	display: flex;
 	&.show {
 		display: flex;
 		> * {

@@ -9,11 +9,11 @@ const { myName } = Qs.parse(location.search, {
 });
 
 // 입장 공지
+const myrealname = document.getElementById("myrealname").value;
 const chatBox = document.getElementById("server-result");
 const li = document.createElement("li");
 const span = document.createElement("span");
-span.textContent =
-    document.getElementById("nick1").innerText + "님이 입장하셨습니다";
+span.textContent = myrealname + "님이 입장하셨습니다";
 li.classList.add("notice");
 li.append(span);
 
@@ -25,8 +25,8 @@ chatBox.insertBefore(li, firstChild);
 const room = document.getElementById("roomid").value;
 const username = myName;
 // console.log(username);
-const io = require("socket.io-client");
-const socket = io("http://localhost:8000");
+
+const socket = io();
 socket.on("connect", () => {
     console.log("Socket connected:", socket.id);
 });
@@ -50,18 +50,23 @@ socket.on("message", (data) => {
 });
 
 function outputMessage(data) {
+    console.log(data);
     const li = document.createElement("li");
+    if (data.name == "notice") {
+        li.classList.add("notice");
+        li.innerHTML = `<span>${data.text}</span>`;
+        document.querySelector("#server-result").appendChild(li);
+        return;
+    }
     if (data.id === socket.id) {
         li.classList.add("me");
         li.innerHTML = `
         <span>${data.text}</span>
         <p class="date">${data.time}</p>`;
-    } else if ((data.name = "notice")) {
-        li.classList.add("notice");
-        li.innerHTML = `<span>${data.text}</span>`;
     } else {
         li.classList.add("other");
         li.innerHTML = `
+        <span class="thumb"style="background-image: url(/static/imgs/profile2.webp)"></span>
         <span>${data.text}</span>
         <p class="date">${data.time}</p>`;
     }
@@ -112,7 +117,7 @@ function send() {
         data: {
             roomid: room,
             sendmsg: msg.value,
-            sendid: username,
+            sendid: myrealname,
         },
     })
         .then((result) => {
@@ -121,14 +126,14 @@ function send() {
         .catch((error) => {
             console.log(error);
         });
-
-    msg.value = "";
-    msg.focus();
-
     const data = {
-        username: username,
+        username: myrealname,
         id: socket.id,
         msg: msg.value,
     };
+    console.log("msg check", msg.value);
+    console.log("chatdata", data);
     socket.emit("chatMessage", data);
+    msg.value = "";
+    msg.focus();
 }
