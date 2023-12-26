@@ -54,10 +54,63 @@ observer.observe(el);
  */
 //중거거래 정렬 : 체크용 (임시)
 const btnSortBtns = document.querySelectorAll("[name=sort]");
+const cardBox = document.getElementById("cards_wrap");
 btnSortBtns.forEach((elm, i) => {
     elm.addEventListener("click", function (e) {
         let val = e.target.value;
-        localStorage.setItem("marketSort", val);
+        // console.log("val", val);
+        axios({
+            method: "get",
+            url: "/marketsort",
+            params: {
+                selectedSort: val,
+            },
+        })
+            .then((result) => {
+                // console.log(cardBox);
+                cardBox.innerHTML = "";
+                console.log(result.data);
+                const sortedArray = result.data.postData;
+                let html = "";
+                for (let i = 0; i < sortedArray.length; i++) {
+                    html += ` <article class="card">
+                    <a class="card-link" href="/articles/${sortedArray[i]._id}">
+                        <div class="card-photo"
+                            style="background-image: url('${sortedArray[i].images[0]}')">
+                            <img alt="오락기" src="${sortedArray[i].images[0]}" crossorigin="anonymous">
+                        </div>
+                        <div class="card-desc">
+                            <h2 class="card-title">
+                            ${sortedArray[i].subject}
+                            </h2>
+                            <div class="card-price">
+                            ${sortedArray[i].priceLast}
+                            </div>
+                            <div class="card-region-name">
+                            ${sortedArray[i].userid.address}
+                            </div>
+                            <div class="card-counts">
+                                <span class="bookmarkHit" aria-label="관심">
+                                ${sortedArray[i].bookmark_hit}
+                                </span> ∙
+                                <span class="chatHit" aria-label="채팅">
+                                ${sortedArray[i].chat}
+                                </span> ∙
+                                <span class="hit" aria-label="조회">
+                                ${sortedArray[i].hit}
+                                </span>
+
+                            </div>
+                        </div>
+                    </a>
+                </article>`;
+                }
+                // console.log("Generated HTML:", html);
+                cardBox.innerHTML = html;
+            })
+            .catch((error) => {
+                console.log("sort error", error);
+            });
     });
 });
 

@@ -21,6 +21,37 @@ exports.market = async (req, res) => {
         });
 };
 
+exports.marketsort = async (req, res) => {
+    const sortnumber = req.query.selectedSort;
+    console.log("sortnumber", sortnumber);
+    let result;
+    if (!sortnumber || sortnumber === "1") {
+        result = await marketModel
+            .find()
+            .populate("userid")
+            .sort({ updatedAt: -1 })
+            .exec();
+    } else if (sortnumber === "2") {
+        result = await marketModel
+            .find()
+            .populate("userid")
+            .sort({ bookmark_hit: -1 })
+            .exec();
+    } else if (sortnumber === "3") {
+        result = await marketModel
+            .find()
+            .populate("userid")
+            .sort({ priceLast: 1 })
+            .exec();
+    } else if (sortnumber === "4") {
+        result = await marketModel
+            .find()
+            .populate("userid")
+            .sort({ priceLast: -1 });
+    }
+    res.send({ postData: result });
+};
+
 exports.getView = async (req, res) => {
     const postId = req.params.id;
 
