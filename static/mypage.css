@@ -7,12 +7,12 @@
 
 /* 마이페이지 목록 */
 #mypage {
-  margin-top: 120px;
+  padding: 5rem 0;
 }
 
 .mypage-inner {
   max-width: 1280px;
-  height: 100%;
+  height: auto;
   margin: 0 auto;
   display: flex;
 }
@@ -27,7 +27,7 @@
 .mypage-group {
   width: 300px;
   border-radius: 16px;
-  background-color: #83a793;
+  background-color: #008000;
   display: flex;
   justify-content: center;
   color: #fff;
@@ -58,11 +58,15 @@
 }
 
 .mypage-history-ul {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .mypage-history-li {
-  margin: 0.5em 0;
+  margin: 0.5rem 0;
+}
+
+.mypage-history-li a {
+  color: #fff;
 }
 
 .mypage-review-chat {
@@ -96,7 +100,7 @@
 
 .mypage-record-title {
   font-size: 2rem;
-  margin: 4em 0 1em 0;
+  margin: 2.5rem 0 1rem 0;
 }
 
 .mypage-tab-menu {
