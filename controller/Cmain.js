@@ -168,7 +168,9 @@ exports.checklogin = async (req,res) => {
     try{
         const chklogin = await loginCheck(token, refreshToken)
 
-        console.log(chklogin)
+        console.log('login 정보 헤더 Response', chklogin)
+
+        res.send(chklogin)
     } catch(err) {
         console.err('로그인 정보 확인 중 에러', err)
     }
