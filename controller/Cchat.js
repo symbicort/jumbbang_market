@@ -18,11 +18,15 @@ exports.getChats = async (req, res) => {
         try {
             const decodedjwt = await verifyToken(token, refreshToken);
             if (decodedjwt.token != undefined) {
+                // 현재 로그인 id, nick 구하기
+                const userid = decodedjwt.userid;
+                const myinfo = await user.findOne({ userid: userid });
+                const myrealname = myinfo.nick;
                 const { postName, myName, productId, from } = req.query;
                 console.log("chatrooms check", postName, myName, productId);
+                console.log("sendid check", myrealname, myName);
                 let roominfo = await market.findOne({ _id: productId });
                 let roomname = roominfo.subject;
-
                 // productId를 기준으로 채팅방 검색
                 const savedChatRooms = await chatrooms.find({
                     productId: productId,
@@ -44,6 +48,7 @@ exports.getChats = async (req, res) => {
                         yourname: postName,
                         from,
                         roomname,
+                        myrealname,
                     });
                 } else {
                     console.log("savedChatRooms", savedChatRooms);
@@ -60,6 +65,7 @@ exports.getChats = async (req, res) => {
                             chatTime: moment(chat.createdAt).format("a hh:mm"),
                         };
                     });
+                    console.log("myrealname", myrealname);
                     console.log("savedChats", savedChats);
                     res.render("chats", {
                         nowRoomId: savedChatRooms[0].productId,
@@ -68,6 +74,7 @@ exports.getChats = async (req, res) => {
                         yourname: postName,
                         from,
                         roomname,
+                        myrealname,
                     });
                 }
             } else {
@@ -140,7 +147,7 @@ exports.getChatrooms = async (req, res) => {
                 console.log("mychatrooms length", mychatrooms.length);
                 console.log("productNames length", productNames.length);
                 console.log("productNames", productNames);
-                res.render("chatrooms", { mychatrooms, productNames });
+                res.render("chatrooms", { mychatrooms, productNames, myName });
             } else {
                 res.render("login");
             }

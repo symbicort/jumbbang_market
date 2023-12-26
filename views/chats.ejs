@@ -34,6 +34,7 @@
 								</li>
 							</ul>
 						</div>
+						<input type="hidden" value="<%= myrealname %>" id="myrealname">
 						<ul id="server-result" class="talkList">
 							<!-- <li class="notice"><span>민지님이 입장 하였습니다</span></li>
 							<li class="me">
@@ -60,7 +61,7 @@
 													<% currentDate=chatDate; %>
 														<% } %>
 															<%= console.log(chat) %>
-																<% if (chat.sendId==myname) { %>
+																<% if (savedChats[i].sendId==myrealname) { %>
 																	<li class="me">
 																		<span>
 																			<%= chat.msg %>

@@ -9,11 +9,11 @@ const { myName } = Qs.parse(location.search, {
 });
 
 // 입장 공지
+const myrealname = document.getElementById("myrealname").value;
 const chatBox = document.getElementById("server-result");
 const li = document.createElement("li");
 const span = document.createElement("span");
-span.textContent =
-    document.getElementById("nick1").innerText + "님이 입장하셨습니다";
+span.textContent = myrealname + "님이 입장하셨습니다";
 li.classList.add("notice");
 li.append(span);
 
@@ -66,6 +66,7 @@ function outputMessage(data) {
     } else {
         li.classList.add("other");
         li.innerHTML = `
+        <span class="thumb"style="background-image: url(/static/imgs/profile2.webp)"></span>
         <span>${data.text}</span>
         <p class="date">${data.time}</p>`;
     }
@@ -116,7 +117,7 @@ function send() {
         data: {
             roomid: room,
             sendmsg: msg.value,
-            sendid: username,
+            sendid: myrealname,
         },
     })
         .then((result) => {
@@ -126,7 +127,7 @@ function send() {
             console.log(error);
         });
     const data = {
-        username: username,
+        username: myrealname,
         id: socket.id,
         msg: msg.value,
     };
