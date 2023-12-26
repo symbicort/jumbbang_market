@@ -207,9 +207,11 @@
   position: relative;
 }
 
-/* .info > input {
-  display: none;
-} */
+#header-input {
+  /* display: none; */
+  border: 0;
+  /* border-bottom: 1px solid #008000; */
+}
 
 .header-small-search {
   font-size: 1.8rem;
