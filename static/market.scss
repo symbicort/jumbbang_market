@@ -242,7 +242,8 @@ li {
 	align-items: flex-end;
 	transition: transform 0.3s;
 	z-index: 10000;
-	display: none;
+	// display: none;
+	display: flex;
 	&.show {
 		display: flex;
 		> * {
