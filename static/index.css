@@ -127,6 +127,10 @@ main {
   background: #fff !important;
 }
 
+.main-search-icon {
+  display: none;
+}
+
 /* 상품 탭 */
 .tab-main-product-inner {
   max-width: 1280px;
@@ -189,6 +193,7 @@ main {
 /* 후기 작성 */
 .main-review {
   width: 100%;
+  margin-top: 3rem;
   padding-top: 3rem;
   background-color: #ffd700;
 }
@@ -276,25 +281,9 @@ main {
   color: #fff;
 }
 
-/* 이벤트 배너 */
-.event-banner-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-.banner {
-  width: 49%;
-  height: 12rem;
-  border-radius: 12px;
-  margin: 10rem 0;
-  background-color: rgb(216, 216, 216);
-}
-
 /* 홍보 영상 */
 #promotion {
-  margin-bottom: 10rem;
+  margin: 10rem 0 8rem 0;
 }
 .promotion-inner {
   max-width: 1280px;
@@ -346,7 +335,53 @@ main {
 }
 
 /* 미디어쿼리 */
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
+  #header,
+  #main,
+  .main-review,
+  #footer {
+    padding: 0 1rem;
+  }
+
+  .main-search-bar .text > p:nth-child(2) {
+    font-size: 2rem;
+  }
+
+  .main-search-btn {
+    display: none;
+  }
+
+  .main-search-icon {
+    display: block;
+    color: #8d8b8b;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+  }
+
+  .main-review-items {
+    flex-wrap: wrap;
+  }
+
+  .main-review-item {
+    width: 49%;
+    background-color: #f5f5f5;
+    height: 340px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .promotion-inner {
+    max-width: 1280px;
+    display: block;
+  }
+
+  .pro-left {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .pro-right {
+    width: 100%;
+  }
 }
-@media screen and (min-width: 360px) {
+@media screen and (max-width: 360px) {
 }

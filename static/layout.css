@@ -135,22 +135,23 @@
 #nav {
   display: flex;
   align-items: center;
-  position: relative;
   padding: 1rem 0;
 }
 
 .menu {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
-.icon-bg {
+.menu-icon-bg {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
+  z-index: 11;
 }
 .menu .fa-bars {
   position: absolute;
@@ -162,34 +163,28 @@
   color: #333;
 }
 
-/* 좌측 사이드바...?? */
-/* .menu-sidebar {
-  width: 300px;
-  height: 100%;
-  background-color: #83a793;
-  position: fixed;
-  top: 0;
-  left: 300px;
-  z-index: 11;
-  transition: all 0.35s;
-} */
-
 .menu-category {
+  display: none;
   background-color: #6b6666;
   position: absolute;
-  top: 50px;
+  top: 52px;
   left: 0;
   text-indent: 0.5rem;
   z-index: 10;
   width: 200px;
   height: auto;
-  border: 1px solid #83a793;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.menu-icon-bg:hover + .menu-category,
+.menu-category:hover {
+  display: block;
+}
 .menu-category-list {
   width: 100%;
   background-color: #fff;
-  border-bottom: 1px dotted #83a793;
 }
 
 .menu-category-list:last-child {
@@ -198,20 +193,25 @@
 
 .menu-category-list > a {
   display: block;
-  padding: 0.8rem 0.3rem;
+  padding: 1rem 0.5rem;
 }
 
 .menu-category-list > a:hover {
-  background-color: #83a793;
+  background-color: #008000;
   color: #fff;
 }
 
 .utility-wrap {
   display: flex;
   margin-left: auto;
+  position: relative;
 }
 
-.info .fa-magnifying-glass {
+/* .info > input {
+  display: none;
+} */
+
+.header-small-search {
   font-size: 1.8rem;
   color: #333;
 }
@@ -223,7 +223,6 @@
 .user-info .fa-user {
   font-size: 1.8rem;
   color: #333;
-  position: relative;
   display: inline-block;
 }
 
@@ -234,7 +233,7 @@
 .user-list {
   display: none;
   position: absolute;
-  top: 70%;
+  top: 30px;
   right: 0;
   width: 180px;
   height: auto;
@@ -289,4 +288,10 @@
   display: inline-block;
   margin: 0 0.5rem 0.3rem 0;
   color: #333;
+}
+
+/* 미디어쿼리 */
+@media screen and (max-width: 768px) {
+}
+@media screen and (max-width: 360px) {
 }
