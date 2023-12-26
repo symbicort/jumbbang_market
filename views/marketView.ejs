@@ -79,6 +79,7 @@
 											</dt>
 											<dd class="ico-face" data-lv="3"></dd>
 											<dd class="d-flex gap-2">
+												<button class="btn-primary" data-bs-toggle="modal" data-bs-target="#modalModify">수정</button>
 												<input type="checkbox" id="bookmark" name="bookmark" hidden />
 
 												<label for="bookmark" class="ibt-bookmark btn-primary" aria-label="관심 추가"></label>
@@ -246,6 +247,77 @@
 						<div class="modal-footer">
 							<button class="btn-primary" data-bs-dismiss="modal">취소</button>
 							<button class="btn-primary" id="btnBid">구매하기</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- //modal -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="modalModify" tabindex="-1" aria-labelledby="modalModifyLabel" aria-hidden="false">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<form name="formBuy">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="modalModifyLabel">수정</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body text-center">
+							<ul class="mb-3">
+								<li class="p-1">
+									<div class="row">
+										<div class="col-3 pt-2">
+											<label for="subject" class="form-label">상품 제목</label>
+										</div>
+										<div class="col-9">
+											<input
+												type="text"
+												class="form-control"
+												name="subject"
+												id="subject"
+												placeholder="제목"
+												value=""
+												required="" />
+											<div class="invalid-feedback">ID는 필수 입니다</div>
+										</div>
+									</div>
+								</li>
+								<li class="p-1">
+									<div class="row">
+										<div class="col-3 pt-2"><label for="comment" class="form-label">상품 설명</label></div>
+										<div class="col-9">
+											<textarea
+												type="text"
+												class="form-control"
+												name="comment"
+												id="comment"
+												rows="5"
+												placeholder="설명"
+												required=""></textarea>
+											<div class="invalid-feedback">상품 설명은 필수 입니다</div>
+										</div>
+									</div>
+								</li>
+								<li class="p-1">
+									<div class="row">
+										<div class="col-3 pt-2"><label for="state" class="form-label">거래 방식</label></div>
+
+										<div class="col-9">
+											<select class="form-select col" id="state" name="state">
+												<option value="1">판매중</option>
+												<option value="3">거래완료</option>
+												<!-- <option value="4">나눔</option> -->
+												<option value="5">숨김</option>
+											</select>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="modal-footer">
+							<button class="btn-primary" data-bs-dismiss="modal">취소</button>
+							<button class="btn-primary" id="btnModify">수정하기</button>
 						</div>
 					</form>
 				</div>
