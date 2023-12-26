@@ -25,8 +25,8 @@ chatBox.insertBefore(li, firstChild);
 const room = document.getElementById("roomid").value;
 const username = myName;
 // console.log(username);
-const io = require("socket.io-client");
-const socket = io("http://localhost:8000");
+
+const socket = io();
 socket.on("connect", () => {
     console.log("Socket connected:", socket.id);
 });
@@ -50,15 +50,19 @@ socket.on("message", (data) => {
 });
 
 function outputMessage(data) {
+    console.log(data);
     const li = document.createElement("li");
+    if (data.name == "notice") {
+        li.classList.add("notice");
+        li.innerHTML = `<span>${data.text}</span>`;
+        document.querySelector("#server-result").appendChild(li);
+        return;
+    }
     if (data.id === socket.id) {
         li.classList.add("me");
         li.innerHTML = `
         <span>${data.text}</span>
         <p class="date">${data.time}</p>`;
-    } else if ((data.name = "notice")) {
-        li.classList.add("notice");
-        li.innerHTML = `<span>${data.text}</span>`;
     } else {
         li.classList.add("other");
         li.innerHTML = `
@@ -121,14 +125,14 @@ function send() {
         .catch((error) => {
             console.log(error);
         });
-
-    msg.value = "";
-    msg.focus();
-
     const data = {
         username: username,
         id: socket.id,
         msg: msg.value,
     };
+    console.log("msg check", msg.value);
+    console.log("chatdata", data);
     socket.emit("chatMessage", data);
+    msg.value = "";
+    msg.focus();
 }

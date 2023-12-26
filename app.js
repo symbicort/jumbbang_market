@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const socketIO = require("socket.io");
+const moment = require("moment");
 const cors = require("cors");
 const app = express();
 const PORT = 8000;
@@ -61,11 +62,11 @@ const chatRouter = require("./routes/chat");
 app.use("/", chatRouter);
 
 // Socket
+const socketCtrl = require("./controller/Cchat");
 const http = require("http");
 const server = http.createServer(app);
-// Socket 기능
-const socketController = require("./socket")(server);
-app.use("/chatroom", socketController);
+const io = socketIO(server);
+io.on("connection", (socket) => socketCtrl.socketConnection(socket, io));
 
 // TODO: 404 처리
 app.get("*", (req, res) => {
@@ -76,6 +77,6 @@ app.get("*", (req, res) => {
 const connect = require("./model/index");
 connect();
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
 });
