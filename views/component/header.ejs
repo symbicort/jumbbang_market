@@ -1,138 +1,141 @@
 <style>
-	#search {
-		display: none;
-	}
-	#search.show {
-		display: inline-block;
-	}
+  #search {
+    display: none;
+  }
+
+  #search.show {
+    display: inline-block;
+  }
 </style>
 <header id="header">
-	<div class="header-inner-top">
-		<div class="header-inner top">
-			<div class="logo-wrap">
-				<h1 class="logo">
-					<a href="/">
-						<img class="logo-img" src="/static/imgs/logo.png" alt="로고" />
-					</a>
-				</h1>
-			</div>
-			<ul class="subnav-user">
-				<li>
-					<i class="fa-regular fa-bell"></i>
-					<ul class="notify">
-						<li>
-							<a href="#">
-								<i class="fa-regular fa-envelope"></i>
-								<span>1개의 알림이 왔습니다.</span>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fa-regular fa-envelope"></i>
-								<span>채팅 내역을 확인해주세요.</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="loginBtnLi">
-					<a href="/login">로그인</a>
-				</li>
-				<li class="registerBtnLi">
-					<a href="/register">회원가입</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="header-inner">
-		<nav id="nav">
-			<div class="menu">
-				<div class="menu-icon-bg">
-					<i class="fa-solid fa-bars"></i>
-				</div>
-				<ul class="menu-category">
-					<!-- d-none -->
-					<li class="menu-category-list">
-						<a href="/market/?category=1">패션</a>
-					</li>
-					<li class="menu-category-list">
-						<a href="/market/?category=2">뷰티</a>
-					</li>
-					<li class="menu-category-list">
-						<a href="/market/?category=3">가전</a>
-					</li>
-					<li class="menu-category-list">
-						<a href="/market/?category=3">모바일/태블릿</a>
-					</li>
-					<li class="menu-category-list">
-						<a href="/market/?category=5">가구/가전</a>
-					</li>
-					<li class="menu-category-list">
-						<a href="/market/?category=6">반려동물/취미</a>
-					</li>
-					<li class="menu-category-list">
-						<a href="/market/?category=7">티켓/쿠폰</a>
-					</li>
-					<li class="menu-category-list">
-						<a href="/market/?category=8">스포츠/레저</a>
-					</li>
-					<li class="menu-category-list">
-						<a href="/market/?category=9">무료나눔</a>
-					</li>
-				</ul>
-				<ul class="page-link">
-					<li><a href="/market">중고거래</a></li>
-					<li><a href="/change">물물교환</a></li>
-				</ul>
-			</div>
-			<div class="utility-wrap">
-				<div class="info">
-					<!-- <input type="text"> -->
-					<i class="fa-solid fa-magnifying-glass header-small-search"></i>
-				</div>
-				<div class="user-info">
-					<i class="fa-regular fa-user"></i>
-					<ul class="user-list">
-						<li><a href="/mypage">마이페이지</a></li>
-						<li><a onclick="goChatrooms()">나의채팅</a></li>
-						<li><a href=" #">커뮤니티</a></li>
-						<li><a href="/cs">고객센터</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
+  <div class="header-inner-top">
+    <div class="header-inner top">
+      <div class="logo-wrap">
+        <h1 class="logo">
+          <a href="/">
+            <img class="logo-img" src="/static/imgs/logo.png" alt="로고" />
+          </a>
+        </h1>
+      </div>
+      <ul class="subnav-user">
+        <li>
+          <i class="fa-regular fa-bell"></i>
+          <ul class="notify">
+            <li>
+              <a href="#">
+                <i class="fa-regular fa-envelope"></i>
+                <span>1개의 알림이 왔습니다.</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-regular fa-envelope"></i>
+                <span>채팅 내역을 확인해주세요.</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/login">로그인</a>
+        </li>
+        <li>
+          <a href="/register">회원가입</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="header-inner">
+    <nav id="nav">
+      <div class="menu">
+        <div class="menu-icon-bg">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        <ul class="menu-category">
+          <!-- d-none -->
+          <li class="menu-category-list">
+            <a href="/market/?category=1">패션</a>
+          </li>
+          <li class="menu-category-list">
+            <a href="/market/?category=2">뷰티</a>
+          </li>
+          <li class="menu-category-list">
+            <a href="/market/?category=3">가전</a>
+          </li>
+          <li class="menu-category-list">
+            <a href="/market/?category=3">모바일/태블릿</a>
+          </li>
+          <li class="menu-category-list">
+            <a href="/market/?category=5">가구/가전</a>
+          </li>
+          <li class="menu-category-list">
+            <a href="/market/?category=6">반려동물/취미</a>
+          </li>
+          <li class="menu-category-list">
+            <a href="/market/?category=7">티켓/쿠폰</a>
+          </li>
+          <li class="menu-category-list">
+            <a href="/market/?category=8">스포츠/레저</a>
+          </li>
+          <li class="menu-category-list">
+            <a href="/market/?category=9">무료나눔</a>
+          </li>
+        </ul>
+        <ul class="page-link">
+          <li><a href="/market">중고거래</a></li>
+          <li><a href="/change">물물교환</a></li>
+        </ul>
+      </div>
+      <div class="utility-wrap">
+        <div class="info">
+          <input type="text" id="header-input">
+          <i class="fa-solid fa-magnifying-glass header-small-search"></i>
+        </div>
+        <div class="user-info">
+          <i class="fa-regular fa-user"></i>
+          <ul class="user-list">
+            <li><a href="/mypage">마이페이지</a></li>
+            <li><a onclick="goChatrooms()">나의채팅</a></li>
+            <li><a href=" #">커뮤니티</a></li>
+            <li><a href="/cs">고객센터</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 </header>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/static/js/header.js"></script>
 <script>
-	(async () => {
-		await axios({
-			method: 'get',
-			url: '/chklogin',
-		}).then((res) => {
-			console.log('로그인 정보 받아옴', res.data.userid);
-			const loginBtnLi = document.querySelector('.loginBtnLi');
-			const registerBtnLi = document.querySelector('.registerBtnLi');
-			if (res.data.userid == undefined) {
-				loginBtnLi.innerHTML = '<a href="/login">로그인</a>';
-				registerBtnLi.style.display = '';
-			} else {
-				loginBtnLi.innerHTML = `${res.data.userid}님 <a href="/logout">로그아웃</a>`;
-				registerBtnLi.style.display = 'none';
-			}
-		});
-	})();
-	function enter() {
-		if (window.event.keyCode == 13) {
-			let val = document.querySelector('#search').value;
-			console.log(val);
-			location.href = `/search?q=${val}`;
-		}
-	}
-	function search() {
-		let searchInput = document.querySelector('#search');
-		let val = searchInput.value;
-		searchInput.classList.toggle('show');
-		// location.href = `/search?q=${val}`;
-	}
+  (async () => {
+    await axios({
+      method: 'get',
+      url: '/chklogin',
+    }).then((res) => {
+      console.log('로그인 정보 받아옴', res.data.userid);
+      const loginBtnLi = document.querySelector('.loginBtnLi');
+      const registerBtnLi = document.querySelector('.registerBtnLi');
+      if (res.data.userid == undefined) {
+        loginBtnLi.innerHTML = '<a href="/login">로그인</a>';
+        registerBtnLi.style.display = '';
+      } else {
+        loginBtnLi.innerHTML = `${res.data.userid}님 <a href="/logout">로그아웃</a>`;
+        registerBtnLi.style.display = 'none';
+      }
+    });
+  })();
+
+  function enter() {
+    if (window.event.keyCode == 13) {
+      let val = document.querySelector('#search').value;
+      console.log(val);
+      location.href = `/search?q=${val}`;
+    }
+  }
+
+  function search() {
+    let searchInput = document.querySelector('#search');
+    let val = searchInput.value;
+    searchInput.classList.toggle('show');
+    // location.href = `/search?q=${val}`;
+  }
 </script>
