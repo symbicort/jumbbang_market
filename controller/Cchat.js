@@ -19,20 +19,29 @@ exports.getChats = async (req, res) => {
             const decodedjwt = await verifyToken(token, refreshToken);
             if (decodedjwt.token != undefined) {
                 // 현재 로그인 id, nick 구하기
-                const userid = decodedjwt.userid;
-                const myinfo = await user.findOne({ userid: userid });
+                const myid = decodedjwt.userid;
+                const myinfo = await user.findOne({ userid: myid });
                 const myrealname = myinfo.nick;
                 const { postName, myName, productId, from } = req.query;
+
+                const yourinfo = await user.findOne({ nick: postName });
+                const yourid = yourinfo.userid;
                 console.log("chatrooms check", postName, myName, productId);
                 console.log("sendid check", myrealname, myName);
-                let roominfo = await market.findOne({ _id: productId });
+                let roominfo = await market.findOne({
+                    _id: productId,
+                });
                 let roomname = roominfo.subject;
                 // productId를 기준으로 채팅방 검색
-                const savedChatRooms = await chatrooms.find({
+                const savedChatRooms = await chatrooms.findOne({
                     productId: productId,
+                    $or: [
+                        { takeId: myName, sendId: postName },
+                        { takeId: postName, sendId: myName },
+                    ],
                 });
                 let savedChats;
-                if (savedChatRooms.length <= 0) {
+                if (!savedChatRooms) {
                     const newChatRoom = await chatrooms.create({
                         sendId: myName,
                         takeId: postName,
@@ -42,7 +51,7 @@ exports.getChats = async (req, res) => {
                     savedChats = [];
                     // 저장된 채팅 데이터
                     res.render("chats", {
-                        nowRoomId: newChatRoom.productId,
+                        nowRoomId: newChatRoom._id,
                         savedChats,
                         myname: myName,
                         yourname: postName,
@@ -53,7 +62,7 @@ exports.getChats = async (req, res) => {
                 } else {
                     console.log("savedChatRooms", savedChatRooms);
                     savedChats = await chats.find({
-                        roomId: savedChatRooms[0].productId,
+                        roomId: savedChatRooms._id,
                     });
                     // 채팅방 날짜 업데이트
                     savedChats = savedChats.map((chat) => {
@@ -68,7 +77,7 @@ exports.getChats = async (req, res) => {
                     console.log("myrealname", myrealname);
                     console.log("savedChats", savedChats);
                     res.render("chats", {
-                        nowRoomId: savedChatRooms[0].productId,
+                        nowRoomId: savedChatRooms._id,
                         savedChats,
                         myname: myName,
                         yourname: postName,
@@ -171,7 +180,7 @@ exports.postChat = async (req, res) => {
 
 exports.chatExit = async (req, res) => {
     const { roomid } = req.body;
-    const result = await chatrooms.findOneAndDelete({ productId: roomid });
+    const result = await chatrooms.findOneAndDelete({ _id: roomid });
     const resultchat = await chats.deleteMany({ roomId: roomid });
     console.log("result", result, resultchat);
     res.send({ result });
