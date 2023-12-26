@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const socketIO = require('socket.io');
 const moment = require('moment');
 const cors = require('cors');
+const cron = require('node-cron');
 const app = express();
 const PORT = 8000;
 
@@ -32,7 +33,7 @@ app.use(
 
 // Preflight 요청에 대한 응답
 app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8000');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   res.header(
     'Access-Control-Allow-Headers',
@@ -73,6 +74,13 @@ app.get('*', (req, res) => {
 // DB 연동
 const connect = require('./model/index');
 connect();
+
+cron.schedule('0 0 * * *', () => {
+  // 비동기 함수를 사용하여 컨트롤러의 로직 실행
+  (async () => {
+    await processPosts();
+  })();
+});
 
 server.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);

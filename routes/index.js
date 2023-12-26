@@ -8,7 +8,7 @@ const controller = require('../controller/Cmain');
 //경로를 컨트롤러와 연결지어 사용 가능
 router.get('/', controller.main);
 router.get('/login', controller.getLogin);
-router.get('/logout', controller.postLogout);
+router.post('/logout', controller.postLogout);
 router.get('/register', controller.getRegister);
 router.get('/mypage', controller.getMypage);
 router.get('/profile', controller.getProfile);
@@ -30,7 +30,14 @@ router.post('/register', controller.postRegister);
 router.post('/login', controller.postlogin);
 
 // 로그인 유저 정보 확인(GET)
-router.get('/chklogin', controller.checklogin)
+router.get('/chklogin', controller.checklogin);
+
+// 회원탈퇴
+router.post('/withdraw', controller.user_withdraw);
+
+router.patch('/edit_user', controller.userInfo_edit);
+
+router.patch('/edit_userI', controller.userInfo_edit_withImg);
 
 // module.exports를 통해서 router를 등록해줘야 다른 모듈에서 사용 가능함함.
 module.exports = router;

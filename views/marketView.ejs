@@ -271,19 +271,19 @@
 					</div>
 					<div class="modal-body text-center">
 						<ul class="mb-3">
-							<li class="p-1">
+							<!-- <li class="p-1">
 								입찰 수량: <input type="number" class="form-control" id="currency" min="1" value="1" />
-							</li>
+							</li> -->
 							<li class="p-1">
-								입찰 금액:
+								즉시 구매 금액:
 								<!-- 가격 조정 불가 : 즉구가 불러온 값 value에 기입 -->
-								<input type="number" class="form-control" value="200000" disabled />
+								<input type="number" class="form-control" name="directprice"  value="<%= postdata.priceDirect %>" disabled />
 							</li>
 						</ul>
 					</div>
 					<div class="modal-footer">
 						<button class="btn-primary" data-bs-dismiss="modal">취소</button>
-						<button class="btn-primary" id="btnBid">구매하기</button>
+						<button class="btn-primary" id="btnBid" onclick="buyDirect()">구매하기</button>
 					</div>
 				</form>
 			</div>

@@ -193,8 +193,8 @@ function enterbid() {
     console.log(currentURL);
 
     // URL에서 마지막 부분 추출
-    const lastSegment = currentURL.split("/").pop();
-
+    const urlWithoutQuery = currentURL.split('?')[0];
+    const lastSegment = urlWithoutQuery.split("/").pop();
     console.log(lastSegment);
 
     const form = document.forms["formBid"];
@@ -203,6 +203,29 @@ function enterbid() {
         url: "/market/bid",
         data: {
             bidprice: form.price.value,
+            productId: lastSegment,
+        },
+    }).then((res) => {
+        console.log(res.data.msg);
+        alert(res.data.msg);
+        location.reload();
+    });
+}
+
+function buyDirect(){
+    const currentURL = window.location.href;
+    console.log(currentURL);
+
+    // URL에서 마지막 부분 추출
+    const urlWithoutQuery = currentURL.split('?')[0];
+    const lastSegment = urlWithoutQuery.split("/").pop();
+    console.log(lastSegment);
+
+    const form = document.forms["formBid"];
+    axios({
+        method: "POST",
+        url: "/market/bid",
+        data: {
             productId: lastSegment,
         },
     }).then((res) => {

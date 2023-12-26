@@ -9,7 +9,7 @@ exports.market = async (req, res) => {
     marketModel
         .find()
         .populate("userid")
-        .sort({ updatedAt: -1 })
+        .sort({ createdAt: -1 })
         .exec()
         .then((result) => {
             console.log("DB 정보 추출", result);
