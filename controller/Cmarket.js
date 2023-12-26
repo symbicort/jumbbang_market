@@ -134,6 +134,7 @@ exports.enterbid = async (req, res) => {
                     },
                     { upsert: true }
                 );
+
                 console.log('데이터 업데이트 실행 결과', result);
                 res.send({ msg: '입찰 성공' });
             } else {

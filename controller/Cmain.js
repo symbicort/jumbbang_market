@@ -3,6 +3,7 @@ const userModel = require('../model/user');
 const { hashPW, comparePW } = require('../utils/crypto');
 const {upload, deleteProfileImg} = require('../utils/imgUploader');
 const { makeToken, makeRefreshToken, verifyToken } = require('../utils/token')
+const {loginCheck } = require('../utils/loginCheck')
 
 //메인
 exports.main = async (req, res) => {
@@ -159,3 +160,7 @@ exports.postlogin = async (req, res) => {
         console.error(err);
     }
 };
+
+exports.checklogin = async (req,res) => {
+
+}

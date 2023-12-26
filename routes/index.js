@@ -29,5 +29,8 @@ router.post('/register', controller.postRegister);
 // 로그인(POST)
 router.post('/login', controller.postlogin);
 
+// 로그인 유저 정보 확인(GET)
+router.get('/chklogin', controller.checklogin)
+
 // module.exports를 통해서 router를 등록해줘야 다른 모듈에서 사용 가능함함.
 module.exports = router;
