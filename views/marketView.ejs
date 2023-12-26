@@ -183,7 +183,7 @@
 					</div>
 					<!-- 관련상품: 최대 8개, (조건 예: 제목에 포함된 단어인 경우 노출) -->
 					<section class="cards-wrap">
-						<% for(let i=0; i < productData.length; i++) { %>
+						<% for(let i=0; i < 4; i++) { %>
 							<article class="card">
 								<a class="card-link" href="/articles/<%= productData[i]._id %>">
 									<div class="card-photo"
@@ -195,7 +195,7 @@
 											<%= productData[i].subject %>
 										</h2>
 										<div class="card-price">
-											<%= productData[i].priceLast %>
+											<%= productData[i].priceLast %>원
 										</div>
 										<div class="card-region-name">
 											<%= productData[i].userid.address %>
