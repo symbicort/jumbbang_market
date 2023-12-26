@@ -10,32 +10,28 @@ const { loginCheck } = require("../utils/loginCheck");
 exports.main = async (req, res) => {
     const token = req.cookies.accessToken;
     const refreshToken = req.cookies.refreshToken;
+    const result = await marketModel
+        .find()
+        .populate("userid")
+        .sort({ hit: -1 });
+    console.log("DB 정보 추출", result);
 
     if (!token || !refreshToken) {
-        res.render("index", { userid: undefined });
+        res.render("index", {
+            userid: undefined,
+            result,
+        });
     } else {
         try {
             const decodedjwt = await verifyToken(token, refreshToken);
-
             if (decodedjwt.token != undefined) {
-                marketModel
-                    .find()
-                    .populate("userid")
-                    .sort({ updatedAt: -1 })
-                    .exec()
-                    .then((result) => {
-                        console.log("DB 정보 추출", result);
-                        res.header("Access-Control-Allow-Origin", "*");
-                        res.render("index", {
-                            userid: decodedjwt.userid,
-                            result,
-                        });
-                    })
-                    .catch((error) => {
-                        console.error("Error finding data:", error);
-                    });
+                res.header("Access-Control-Allow-Origin", "*");
+                res.render("index", {
+                    userid: decodedjwt.userid,
+                    result,
+                });
             } else {
-                res.render("index", { userid: undefined });
+                res.render("index", { userid: undefined, result });
             }
         } catch (err) {
             console.error("메인 페이지 랜딩 에러", err);

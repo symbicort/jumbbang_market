@@ -36,7 +36,7 @@ exports.getView = async (req, res) => {
         const productData = await marketModel
             .find()
             .populate("userid")
-            .sort({ updatedAt: -1 })
+            .sort({ hit: -1 })
             .exec();
 
         // console.log(productData);
