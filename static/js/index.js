@@ -73,15 +73,3 @@ async function tryLogin() {
     }
   });
 }
-
-// 스와이퍼 메인 슬라이드
-new Swiper('#swiper-2', {
-  slidesPerView: 1.5,
-  centeredSlides: true,
-  spaceBetween: 20,
-  lazyLoading: true,
-  //   loop: true,
-  keyboard: {
-    enabled: true,
-  },
-});
