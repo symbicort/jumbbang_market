@@ -96,16 +96,3 @@
 </header>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/static/js/header.js"></script>
-<script>
-  const isLogin = '<%#= userid %>';
-  const loginBtnLi = document.querySelector('.loginBtnLi');
-  const registerBtnLi = document.querySelector('.registerBtnLi');
-  if (isLogin == 'undefined') {
-    loginBtnLi.innerHTML = '<a href="/logout">로그인</a>';
-    registerBtnLi.style.display = '';
-  } else {
-    loginBtnLi.innerHTML = '<a href="/logout">로그아웃</a>';
-    registerBtnLi.style.display = 'none';
-  }
-  console.log(isLogin);
-</script>
