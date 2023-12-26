@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const {verifyToken } = require('../utils/token')
 
 exports.market = async (req, res) => {
-    marketModel.find().populate('userid')
+    marketModel.find().populate('userid').sort({updatedAt: -1})
     .exec()
     .then((result) => {
         console.log('DB 정보 추출', result);

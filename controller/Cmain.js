@@ -162,5 +162,14 @@ exports.postlogin = async (req, res) => {
 };
 
 exports.checklogin = async (req,res) => {
+    const token = req.cookies.accessToken;
+    const refreshToken = req.cookies.refreshToken;
 
+    try{
+        const chklogin = await loginCheck(token, refreshToken)
+
+        console.log(chklogin)
+    } catch(err) {
+        console.err('로그인 정보 확인 중 에러', err)
+    }
 }
