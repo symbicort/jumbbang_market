@@ -8,7 +8,7 @@
 </style>
 <header id="header">
 	<div class="header-inner-top">
-		<div class="header-inner top container">
+		<div class="header-inner top">
 			<div class="logo-wrap">
 				<h1 class="logo">
 					<a href="/">
@@ -34,28 +34,23 @@
 						</li>
 					</ul>
 				</li>
-				<li class="loginBtnLi">
+				<li>
 					<a href="/login">로그인</a>
 				</li>
-				<li class="registerBtnLi">
+				<li>
 					<a href="/register">회원가입</a>
 				</li>
 			</ul>
 		</div>
 	</div>
-	<div class="header-inner container">
+	<div class="header-inner">
 		<nav id="nav">
 			<div class="menu">
-				<div class="icon-bg">
+				<div class="menu-icon-bg">
 					<i class="fa-solid fa-bars"></i>
 				</div>
-				<ul class="page-link">
-					<li><a href="/market">중고거래</a></li>
-					<li><a href="/change">물물교환</a></li>
-				</ul>
-			</div>
-			<div class="menu-sidebar">
-				<ul class="menu-category d-none">
+				<ul class="menu-category">
+					<!-- d-none -->
 					<li class="menu-category-list">
 						<a href="/market/?category=1">패션</a>
 					</li>
@@ -84,11 +79,15 @@
 						<a href="/market/?category=9">무료나눔</a>
 					</li>
 				</ul>
+				<ul class="page-link">
+					<li><a href="/market">중고거래</a></li>
+					<li><a href="/change">물물교환</a></li>
+				</ul>
 			</div>
 			<div class="utility-wrap">
 				<div class="info">
-					<input type="text" id="search" onkeyup="enter(this)" />
-					<button class="btn-search" onclick="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+					<!-- <input type="text"> -->
+					<i class="fa-solid fa-magnifying-glass header-small-search"></i>
 				</div>
 				<div class="user-info">
 					<i class="fa-regular fa-user"></i>
