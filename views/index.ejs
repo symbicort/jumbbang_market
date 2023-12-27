@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/static/market.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <%- include('./component/head', { title: '완두점빵' }) %>
-  
+
 </head>
 
 <body>
@@ -54,11 +54,11 @@
         <h2 class="main-sub-title">BEST</h2>
         <p class="main-sub-txt">오직 완두점빵에서만 만나는, 화제의 그 매물</p>
         <div class="tab-product">
-          <input type="radio" name="tab" id="tab1" class="tab-input" checked />
+          <!-- <input type="radio" name="tab" id="tab1" class="tab-input" checked />
           <label class="tab-label" for="tab1">중고거래</label>
           <input type="radio" name="tab" id="tab2" class="tab-input" />
-          <label class="tab-label" for="tab2">물물교환</label>
-          <div class="trade-con1">
+          <label class="tab-label" for="tab2">물물교환</label> -->
+          <div class="trade-con1" style="display: block;">
             <section class="cards-wrap">
               <!-- 경매 상품인 경우 : 가격 노출 -->
               <% for(let i=0; i < 8; i++) { %>
@@ -137,7 +137,7 @@
               <!-- //샘플용 : 18개 -->
             </section>
           </div>
-          <div class="change-con2">
+          <div class="change-con2" style="display: none;">
             <section class="cards-wrap">
               <!-- 경매 상품인 경우 : 가격 노출 -->
               <article class="card">
@@ -215,81 +215,81 @@
         <p class="main-sub-txt">쿨한 거래, 따뜻한 후기</p>
         <div class="main-review-container">
           <ul class="main-review-items">
-            <li class="main-review-item">
+            <li class="main-review-item col-12 col-md-6 col-lg-3">
               <a href="/reviewReceive/1">
                 <div class="review-user-info">
-                  <div class="user-profile">
+                  <div class="user-profile col-4 col-sm-3 col-md-4">
                     <div class="user-profile-img"></div>
                   </div>
-                  <div class="user-text">
+                  <div class="user-text col-md-8">
                     <div class="user-id">아이디</div>
                     <div class="region">
-                      <span>화곡동</span>
+                      <span>화곡동</span><br class="d-block d-lg-none">
                       <span>단골인증</span>
                     </div>
                   </div>
                 </div>
-                <div class="user-review">
+                <div class="user-review pt-3">
                   안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
                   기분이 좋아요!!
                 </div>
               </a>
             </li>
-            <li class="main-review-item">
+            <li class="main-review-item col-12 col-md-6 col-lg-3">
               <a href="/reviewReceive/1">
                 <div class="review-user-info">
-                  <div class="user-profile">
+                  <div class="user-profile col-4 col-sm-3 col-md-4">
                     <div class="user-profile-img"></div>
                   </div>
-                  <div class="user-text">
+                  <div class="user-text col-md-8">
                     <div class="user-id">아이디</div>
                     <div class="region">
-                      <span>화곡동</span>
+                      <span>화곡동</span><br class="d-block d-lg-none">
                       <span>단골인증</span>
                     </div>
                   </div>
                 </div>
-                <div class="user-review">
+                <div class="user-review pt-3">
                   안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
                   기분이 좋아요!!
                 </div>
               </a>
             </li>
-            <li class="main-review-item">
+            <li class="main-review-item col-12 col-md-6 col-lg-3">
               <a href="/reviewReceive/1">
                 <div class="review-user-info">
-                  <div class="user-profile">
+                  <div class="user-profile col-4 col-sm-3 col-md-4">
                     <div class="user-profile-img"></div>
                   </div>
-                  <div class="user-text">
+                  <div class="user-text col-md-8">
                     <div class="user-id">아이디</div>
                     <div class="region">
-                      <span>화곡동</span>
+                      <span>화곡동</span><br class="d-block d-lg-none">
                       <span>단골인증</span>
                     </div>
                   </div>
                 </div>
-                <div class="user-review">
+                <div class="user-review pt-3">
                   안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
                   기분이 좋아요!!
                 </div>
               </a>
             </li>
-            <li class="main-review-item">
+            <li class="main-review-item col-12 col-md-6 col-lg-3">
               <a href="/reviewReceive/1">
                 <div class="review-user-info">
-                  <div class="user-profile">
+                  <div class="user-profile col-4 col-sm-3 col-md-4">
                     <div class="user-profile-img"></div>
                   </div>
-                  <div class="user-text">
+                  <div class="user-text col-md-8">
                     <div class="user-id">아이디</div>
                     <div class="region">
-                      <span>화곡동</span>
+                      <span>화곡동</span><br class="d-block d-lg-none">
                       <span>단골인증</span>
                     </div>
                   </div>
                 </div>
-                <div class="user-review">
+                <div class="user-review pt-3">
                   안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
                   기분이 좋아요!!
                 </div>
