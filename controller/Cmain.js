@@ -48,7 +48,7 @@ exports.postLogout = async (req, res) => {
     console.log('로그아웃 요청 받음');
     res.cookie('accessToken', '', { expires: new Date(0) });
     res.cookie('refreshToken', '', { expires: new Date(0) });
-    res.redirect('/');
+    res.send({result: '로그아웃 완료'});
 };
 //회원가입
 exports.getRegister = (req, res) => {

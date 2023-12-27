@@ -77,10 +77,28 @@ function goChatrooms() {
     });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  // 이벤트 핸들러 등록 전에 해당 요소가 존재하는지 확인
+  const logoutLink = document.getElementById('logoutLink');
+  if (logoutLink) {
+    document.addEventListener('click', async (event) => {
+      const target = event.target;
+      if (target.id === 'logoutLink') {
+        event.preventDefault();
+        const response = await axios.post('/logout');
+        console.log('로그아웃 결과', response.data);
+        window.location.reload(); // 예: 페이지 새로고침
+      }
+    });
+  }
+});
+
 // 헤더 작은 검색창
-// const headerSearch = document.querySelector('.fa-magnifying-glass');
-// const headerSearchInput = document.getElementById('header-search');
+const headerSearch = document.querySelector('.fa-magnifying-glass');
+const headerSearchInput = document.getElementById('header-search');
 
 headerSearch.addEventListener('click', function () {
-  alert('안녕');
+  console.log(headerSearchInput);
+  headerSearchInput.classList.toggle('active');
+  headerSearchInput.focus();
 });
