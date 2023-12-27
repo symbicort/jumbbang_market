@@ -127,6 +127,9 @@ main {
   background: #fff !important;
 }
 
+.main-search-bar {
+  z-index: 2;
+}
 .main-search-icon {
   display: none;
 }
