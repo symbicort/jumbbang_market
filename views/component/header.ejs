@@ -118,9 +118,10 @@
 				loginBtnLi.innerHTML = '<a href="/login">로그인</a>';
 				registerBtnLi.style.display = '';
 			} else {
-				loginBtnLi.innerHTML = `${res.data.userid}님 <a id="logoutLink">로그아웃</a>`;
+				loginBtnLi.innerHTML = `${res.data.userid}님 <a href="/logout">로그아웃</a>`;
 				registerBtnLi.style.display = 'none';
 			}
 		});
 	})();
+
 </script>

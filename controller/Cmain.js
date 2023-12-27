@@ -41,11 +41,11 @@ exports.getLogin = (req, res) => {
 	res.render('login');
 };
 //로그아웃
-exports.postLogout = async (req, res) => {
+exports.getLogout = (req, res) => {
 	console.log('로그아웃 요청 받음');
 	res.cookie('accessToken', '', { expires: new Date(0) });
 	res.cookie('refreshToken', '', { expires: new Date(0) });
-	res.send({ result: '로그아웃 완료' });
+	res.redirect('/');
 };
 //회원가입
 exports.getRegister = (req, res) => {
@@ -53,6 +53,7 @@ exports.getRegister = (req, res) => {
 };
 //마이페이지
 exports.getMypage = async (req, res) => {
+	console.log('마이페이지 랜딩');
 	const token = req.cookies.accessToken;
 	const refreshToken = req.cookies.refreshToken;
 
@@ -67,21 +68,23 @@ exports.getMypage = async (req, res) => {
 
 				const user = await userModel.findOne({ userid: user_id }).exec();
 
-				const sellobject = await marketModel.find({ userid: user._id.toString() }).populate('userid');
+				console.log('유저 오브젝트 아이디',user._id);
+
+				const sellobject = await marketModel.find({ userid: user._id, state: 1});
+
+				const sellobject1 = await marketModel.find({ userid: user._id, state: { $ne: 1 }});
 
 				const buyobject = await marketModel.find({
 					buyer: decodedjwt.userid,
 				});
 
-				console.log('user 정보', user.userid, user.nick, user.image);
-				console.log('이미지 확인', typeof user.image);
-				console.log('해당 유저 판매 목록', sellobject);
-				console.log('해당 유저 구매 목록', buyobject);
-
 				res.render('mypage', {
 					userid: user.userid,
 					usernickname: user.nick,
 					image: user.image,
+					sellobj: sellobject,
+					sellobj1: sellobject1,
+					buyobj:buyobject
 				});
 			} else {
 				res.render('login');
