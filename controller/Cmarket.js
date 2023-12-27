@@ -226,3 +226,50 @@ exports.enterbid = async (req, res) => {
         }
     }
 };
+
+exports.usercheck = async(req,res) => {
+    console.log()
+    const {productId} = req.body;
+
+    const token = req.cookies.accessToken;
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!token || !refreshToken) {
+        res.send({islogin: false ,result: false});
+    } else {
+        try {
+            console.log('게시물 정보 가져 오기 try')
+            const decodedjwt = await verifyToken(token, refreshToken);
+
+            if (decodedjwt.token != undefined) {
+                console.log("DB 결과 업데이트 시도");
+                const result = await marketModel.findOne(
+                    { _id: productId }).populate('userid').exec();
+
+                console.log("유저 비교 결과", result.userid.userid == decodedjwt.userid);
+                if(result.userid.userid ==  decodedjwt.userid){
+                    res.send({islogin: true ,result: true});
+                } else{
+                    res.send({islogin: true ,result: false});
+                }
+
+            } else {
+                res.send({islogin: false ,result: false});
+            }
+        } catch (err) {
+            console.error("경매 입찰 중 에러", err);
+            res.status(500).send({ msg: "서버 오류" });
+        }
+    }
+}
+
+exports.editArticle = async (req,res) => {
+    const {articleid, subject, content, state} = req.body;
+
+    try{
+        const result = await marketModel.updateOne({_id: articleid}, { $set: { subject: subject, content: content, state: state } })
+        console.log('변경 결과', result);
+        res.send({msg: '게시글 정보 변경 완료 되었습니다.'});
+    } catch(err){
+        console.error('게시물 정보 업데이트 중 에러', err);
+}}

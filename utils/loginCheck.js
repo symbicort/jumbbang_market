@@ -1,8 +1,6 @@
 const { verifyToken } = require('../utils/token')
 
 async function loginCheck(token, refreshToken){
-    console.log('loginChk 함수 내 토큰 검색 결과', token, refreshToken)
-
         if(!token || !refreshToken){
             return {userid: undefined}
         } else{

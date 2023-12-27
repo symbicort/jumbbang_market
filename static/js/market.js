@@ -293,3 +293,54 @@ function buyDirect() {
         location.reload();
     });
 }
+
+function usercheck(){
+    const currentURL = window.location.href;
+
+    const urlWithoutQuery = currentURL.split("?")[0];
+    const lastSegment = urlWithoutQuery.split("/").pop();
+    console.log(lastSegment);
+
+    axios({
+        method: "POST",
+        url: "/market/userchk",
+        data: {
+            productId: lastSegment,
+        },
+    }).then((res) => {
+        console.log(res.data.islogin)
+        if(res.data.islogin == true){
+            if(res.data.result == false){
+                location.reload();
+                alert('본인이 작성한 게시글이 아닙니다');
+            }
+        } else {
+            alert('로그인 상태가 아닙니다.');
+            document.location.href = '/login'
+        }
+    });
+}
+
+async function editarticle(){
+    const currentURL = window.location.href;
+
+    const urlWithoutQuery = currentURL.split("?")[0];
+    const lastSegment = urlWithoutQuery.split("/").pop();
+
+    const subject = document.getElementById('subject');
+    const content = document.getElementById('comment');
+    const state = document.getElementById('state');
+
+    await axios({
+        method: 'PATCH',
+        url: '/market/editArticle',
+        data: {
+            articleid: lastSegment,
+            subject: subject.value,
+            content: content.value,
+            state: state.value
+        },
+    }).then((res) => {
+        alert(res.data.msg);
+    })
+}
