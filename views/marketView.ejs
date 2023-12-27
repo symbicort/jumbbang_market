@@ -116,7 +116,8 @@
 										<div>
 											<span class="txt">현재가</span
 											><span class="price" id="priceLast"> <%= postdata.priceLast %> </span>
-											<button type="button" class="btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalBid">
+											<button type="button" class="btn-primary w-100" id="bidbtn"
+											data-bs-toggle="modal" data-bs-target="#modalBid">
 												입찰하기
 											</button>
 										</div>
@@ -372,6 +373,12 @@
 						prevEl: '.swiper-container .swiper-button-prev',
 					},
 				});
+			}
+
+			const postdata = `<%= postdata.state %>`;
+
+			if(postdata == 2 || postdata == 3){
+
 			}
 		</script>
 	</body>

@@ -283,7 +283,7 @@ function buyDirect() {
     const form = document.forms["formBid"];
     axios({
         method: "POST",
-        url: "/market/bid",
+        url: "/market/directBuy",
         data: {
             productId: lastSegment,
         },
