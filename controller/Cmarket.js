@@ -172,7 +172,7 @@ exports.addPost = async (req, res) => {
             .create({
                 userid: user_info,
                 category: category,
-                state: state,
+                state: 1,
                 subject: subject,
                 content: comment,
                 priceFirst: priceFirst,
@@ -228,7 +228,6 @@ exports.enterbid = async (req, res) => {
 };
 
 exports.usercheck = async(req,res) => {
-    console.log()
     const {productId} = req.body;
 
     const token = req.cookies.accessToken;
@@ -273,3 +272,39 @@ exports.editArticle = async (req,res) => {
     } catch(err){
         console.error('게시물 정보 업데이트 중 에러', err);
 }}
+
+exports.directBuy = async (req,res) => {
+    const {productId} = req.body;
+
+    const token = req.cookies.accessToken;
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!token || !refreshToken) {
+        res.render("login");
+    } else {
+        try {
+            const decodedjwt = await verifyToken(token, refreshToken);
+            console.log("토큰 유효 검사 결과", decodedjwt);
+
+            if (decodedjwt.token != undefined) {
+                console.log("DB 결과 업데이트 시도");
+                const result = await marketModel.updateOne(
+                    { _id: productId },
+                    {
+                        $set: {
+                            buyer: decodedjwt.userid,
+                            state: 2
+                        },
+                    },
+                    { upsert: true }
+                );
+                res.send({ msg: "구매 성공" });
+            } else {
+                res.render("login");
+            }
+        } catch (err) {
+            console.error("구매 중 에러", err);
+            res.status(500).send({ msg: "서버 오류" });
+        }
+    }
+}
