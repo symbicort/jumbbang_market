@@ -8,7 +8,7 @@ const controller = require('../controller/Cmain');
 //경로를 컨트롤러와 연결지어 사용 가능
 router.get('/', controller.main);
 router.get('/login', controller.getLogin);
-router.post('/logout', controller.postLogout);
+router.get('/logout', controller.postLogout);
 router.get('/register', controller.getRegister);
 router.get('/mypage', controller.getMypage);
 router.get('/profile', controller.getProfile);

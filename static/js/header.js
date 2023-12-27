@@ -84,19 +84,3 @@ function goChatrooms() {
 headerSearch.addEventListener('click', function () {
   alert('안녕');
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-  // 이벤트 핸들러 등록 전에 해당 요소가 존재하는지 확인
-  const logoutLink = document.getElementById('logoutLink');
-  if (logoutLink) {
-    document.addEventListener('click', async (event) => {
-      const target = event.target;
-      if (target.id === 'logoutLink') {
-        event.preventDefault();
-        const response = await axios.post('/logout');
-        console.log('로그아웃 결과', response.data);
-        window.location.reload(); // 예: 페이지 새로고침
-      }
-    });
-  }
-});
