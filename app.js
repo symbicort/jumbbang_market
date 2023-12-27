@@ -75,11 +75,11 @@ app.get('*', (req, res) => {
 const connect = require('./model/index');
 connect();
 
-cron.schedule('0 0 * * *', () => {
-  // 비동기 함수를 사용하여 컨트롤러의 로직 실행
-  (async () => {
-    await processPosts();
-  })();
+const {processPosts} = require('./controller/Ccron');
+
+cron.schedule('39 11 * * *', async () => {
+  console.log('cron 실행');
+  await processPosts();
 });
 
 server.listen(PORT, () => {
