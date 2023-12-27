@@ -3,6 +3,16 @@ const getMessages = document.querySelector("#msg").value;
 const setroomName = document.getElementById("room_name");
 const userList = document.getElementById("userList");
 const getroomname = document.getElementById("roomname").value;
+let myprofileimage = document.getElementById("myprofileimage").value;
+let yourprofileimage = document.getElementById("yourprofileimage").value;
+if (!myprofileimage) {
+    myprofileimage =
+        "https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png";
+}
+if (!yourprofileimage) {
+    yourprofileimage =
+        "https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png";
+}
 
 const { myName } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -61,12 +71,17 @@ function outputMessage(data) {
     if (data.id === socket.id) {
         li.classList.add("me");
         li.innerHTML = `
+        <span class="thumb"
+        style="background-image: url('${myprofileimage}')">
+    </span>
         <span>${data.text}</span>
         <p class="date">${data.time}</p>`;
     } else {
         li.classList.add("other");
         li.innerHTML = `
-        <span class="thumb"style="background-image: url(/static/imgs/profile2.webp)"></span>
+        <span class="thumb"
+        style="background-image: url('${yourprofileimage}')">
+    </span>
         <span>${data.text}</span>
         <p class="date">${data.time}</p>`;
     }
