@@ -35,10 +35,10 @@
             </li>
           </ul>
         </li>
-        <li>
+        <li class="loginBtnLi">
           <a href="/login">로그인</a>
         </li>
-        <li>
+        <li class="registerBtnLi">
           <a href="/register">회원가입</a>
         </li>
       </ul>
@@ -51,6 +51,7 @@
           <i class="fa-solid fa-bars"></i>
         </div>
         <ul class="menu-category">
+          <!-- d-none -->
           <li class="menu-category-list">
             <a href="/market/?category=1">패션</a>
           </li>
@@ -86,7 +87,7 @@
       </div>
       <div class="utility-wrap">
         <div class="info">
-          <input type="text" id="header-search">
+          <!-- <input type="text"> -->
           <i class="fa-solid fa-magnifying-glass header-small-search"></i>
         </div>
         <div class="user-info">
@@ -117,7 +118,7 @@
         loginBtnLi.innerHTML = '<a href="/login">로그인</a>';
         registerBtnLi.style.display = '';
       } else {
-        loginBtnLi.innerHTML = `${res.data.userid}님 <a href="/logout">로그아웃</a>`;
+        loginBtnLi.innerHTML = `${res.data.userid}님 <a id="logoutLink">로그아웃</a>`;
         registerBtnLi.style.display = 'none';
       }
     });

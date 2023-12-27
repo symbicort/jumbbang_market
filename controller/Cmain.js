@@ -34,7 +34,7 @@ exports.main = async (req, res) => {
                 res.render("index", { userid: undefined, result });
             }
         } catch (err) {
-            console.error("메인 페이지 랜딩 에러", err);
+            console.error("마이페이지 랜딩 에러", err);
         }
     }
 };
@@ -44,20 +44,85 @@ exports.getLogin = (req, res) => {
     res.render("login");
 };
 //로그아웃
-exports.postLogout = (req, res) => {
-    res.send("로그아웃 되었습니다"); // 예시
+exports.postLogout = async (req, res) => {
+    console.log('로그아웃 요청 받음');
+    res.cookie('accessToken', '', { expires: new Date(0) });
+    res.cookie('refreshToken', '', { expires: new Date(0) });
+    res.send({result: '로그아웃 완료'});
 };
 //회원가입
 exports.getRegister = (req, res) => {
     res.render("register");
 };
 //마이페이지
-exports.getMypage = (req, res) => {
-    res.render("mypage");
+exports.getMypage = async (req, res) => {
+    const token = req.cookies.accessToken;
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!token || !refreshToken) {
+        res.render("login");
+    } else {
+        try {
+            const decodedjwt = await verifyToken(token, refreshToken);
+
+            if (decodedjwt.token != undefined) {
+                const user_id = decodedjwt.userid;
+
+                const user = await userModel.findOne({ userid: user_id }).exec();
+
+                const sellobject = await marketModel.find({ userid: user._id.toString() }).populate('userid');
+
+                const buyobject = await marketModel.find({ buyer: decodedjwt.userid });
+
+                console.log('user 정보', user.userid, user.nick, user.image);
+                console.log('이미지 확인', typeof(user.image))
+                console.log('해당 유저 판매 목록',sellobject);
+                console.log('해당 유저 구매 목록',buyobject);
+
+                res.render("mypage", { userid: user.userid, usernickname: user.nick,  image: user.image });
+
+            } else {
+                res.render("login");
+            }
+        } catch (err) {
+            console.error("메인 페이지 랜딩 에러", err);
+        }
+    }
 };
 //프로필(정보수정)
-exports.getProfile = (req, res) => {
-    res.render("profile");
+exports.getProfile = async (req, res) => {
+    const token = req.cookies.accessToken;
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!token || !refreshToken) {
+        res.render("login");
+    } else {
+        try {
+            const decodedjwt = await verifyToken(token, refreshToken);
+
+            if (decodedjwt.token != undefined) {
+                const user_id = decodedjwt.userid;
+
+                const user = await userModel.findOne({ userid: user_id }).exec();
+
+                console.log('user 정보', user);
+                const userid = user.userid;
+                const userpw = user.pw;
+                const username = user.nick;
+                const email = user.email;
+                const contact = user.contact;
+                const address = user.address;
+
+                console.log('프로필 페이지 랜딩 전 디버깅', userid,username,email, contact, address);
+
+                res.render("profile", { userid,username,email, contact, address});
+            } else {
+                res.render("login");
+            }
+        } catch (err) {
+            console.error("메인 페이지 랜딩 에러", err);
+        }
+    }
 };
 //통합검색
 exports.getSearch = (req, res) => {
@@ -145,7 +210,6 @@ exports.postRegister = async (req, res) => {
 };
 
 exports.postlogin = async (req, res) => {
-    console.log(req.body);
     try {
         const { userid, userpw } = req.body;
         console.log(userid, userpw);
@@ -195,3 +259,110 @@ exports.checklogin = async (req, res) => {
         console.err("로그인 정보 확인 중 에러", err);
     }
 };
+
+exports.user_withdraw = async (req, res) => {
+    try {
+        const { userid, userpw } = req.body;
+
+        const user = await userModel.findOne({userid: userid }).exec(); 
+
+        const isPasswordMatch = comparePW(userpw, user.pw);
+
+        if (isPasswordMatch) {
+            const result = await userModel.findOneAndDelete({userid: userid });
+
+            if (result) {
+                console.log('사용자 탈퇴', userid);
+                res.cookie('accessToken', '', { expires: new Date(0) });
+                res.cookie('refreshToken', '', { expires: new Date(0) });
+                res.send({ result: true });
+            }
+        } else {
+            res.send({ result: false, msg: '비밀번호가 일치하지 않습니다.' });
+        }
+    } catch (err) {
+        console.error('회원 탈퇴 중 에러', err);
+    }
+};
+
+exports.userInfo_edit = async (req,res) => {
+    const {userid, userpw, newpw, usernick, email, contact, addr} = req.body;
+    const User = await userModel.findOne({userid: userid});
+
+    const isPasswordMatch = comparePW(userpw, User.pw);
+        
+    if(isPasswordMatch){
+        if(newpw == ''){
+            const editUser = await userModel.updateOne({userid: userid}, 
+            {
+                nick: usernick,
+                email: email,
+                contact: contact,
+                address: addr
+            })
+            console.log('비밀번호 변경 x', editUser);
+            res.send({result : true, msg: '회원 정보 수정 완료!'})
+        } else{
+            const newpass = hashPW(newpw);
+            const editUser = await userModel.updateOne({userid: userid}, 
+                {
+                    pw: newpass,
+                    nick: usernick,
+                    email: email,
+                    contact: contact, 
+                    address: addr
+                })
+                console.log('비밀번호 변경 O', editUser);
+                res.send({result : true, msg: '회원 정보 수정 완료!'})
+        }   
+    } else{
+        res.send({result : undefined, msg: '비밀번호가 일치하지 않습니다.'})
+    }
+}
+
+exports.userInfo_edit_withImg = async (req,res) => {
+    upload.array('image')(req, res, async (err) => {
+        if (err) {
+            console.error('Error uploading files:', err);
+            return res.status(500).send('Error uploading files');
+        }
+        console.log('파일 등록 req', req.files[0].location, req.body);
+        
+        const {userid, userpw, newpw, usernick, email, contact, addr} = req.body;
+        const imgUrl = req.files[0].location
+        const User = await userModel.findOne({userid: userid});
+
+        const isPasswordMatch = comparePW(userpw, User.pw);
+
+        if(isPasswordMatch){
+            if(newpw == ''){
+                const editUser = await userModel.updateOne({userid: userid}, 
+                {
+                    nick: usernick,
+                    email: email,
+                    contact: contact,
+                    address: addr,
+                    image: imgUrl
+                })
+                console.log('비밀번호 변경 x', editUser);
+                res.send({result : true, msg: '회원 정보 수정 완료!'})
+            } else{
+                const newpass = hashPW(newpw);
+                const editUser = await userModel.updateOne({userid: userid}, 
+                    {
+                        pw: newpass,
+                        nick: usernick,
+                        email: email,
+                        contact: contact, 
+                        address: addr,
+                        image: imgUrl
+                    })
+                    console.log('비밀번호 변경 O', editUser);
+                    res.send({result : true, msg: '회원 정보 수정 완료!'})
+            }   
+        } else{
+            res.send({result : undefined, msg: '비밀번호가 일치하지 않습니다.'})
+        }
+
+    });  
+}

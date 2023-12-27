@@ -81,25 +81,22 @@ function goChatrooms() {
 // const headerSearch = document.querySelector('.fa-magnifying-glass');
 // const headerSearchInput = document.getElementById('header-search');
 
-// function hideInput() {
-//   headerSearchInput.style.display = 'none';
-// }
+headerSearch.addEventListener('click', function () {
+  alert('안녕');
+});
 
-// function addDocumentClickListener() {
-//   document.addEventListener('click', function hideOnOutsideClick(e) {
-//     if (e.target === headerSearch || e.target === headerSearchInput) {
-//       return;
-//     }
-
-//     hideInput();
-//     document.removeEventListener('click', hideOnOutsideClick);
-//   });
-// }
-
-// headerSearch.addEventListener('click', function (event) {
-//   headerSearchInput.style.display = 'inline-block';
-//   addDocumentClickListener();
-//   event.stopPropagation();
-// });
-
-// headerSearchInput.addEventListener('blur', hideInput);
+document.addEventListener('DOMContentLoaded', () => {
+  // 이벤트 핸들러 등록 전에 해당 요소가 존재하는지 확인
+  const logoutLink = document.getElementById('logoutLink');
+  if (logoutLink) {
+    document.addEventListener('click', async (event) => {
+      const target = event.target;
+      if (target.id === 'logoutLink') {
+        event.preventDefault();
+        const response = await axios.post('/logout');
+        console.log('로그아웃 결과', response.data);
+        window.location.reload(); // 예: 페이지 새로고침
+      }
+    });
+  }
+});

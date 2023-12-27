@@ -15,19 +15,23 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+        default: ''
     },
     email: {
         type: String,
-        required: true,
+        default: ''
     },
     contact: {
         type: String,
+        default: ''
     },
     address: {
         type: String,
+        default: '',
     },
     image: {
         type: String,
+        default: ''
     },
     boughtItem: {
         type: [String]

@@ -5,97 +5,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%- include('./component/head', { title: '완두점빵' }) %>
-  <link rel="stylesheet" href="/static/market.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/static/market.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 
 </head>
 
 <body>
   <%- include('./component/header') %>
-  <main id="main">
-    <section class="main-search">
-      <div class="main-search-inner">
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="/static/imgs/slide1.jpg" alt="중고거래1">
+    <main id="main">
+      <section class="main-search">
+        <div class="main-search-inner">
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="/static/imgs/slide1.jpg" alt="중고거래1">
+              </div>
+              <div class="swiper-slide">
+                <img src="/static/imgs/slide2.jpg" alt="중고거래2">
+              </div>
+              <div class="swiper-slide">
+                <img src="/static/imgs/slide3.jpg" alt="중고거래3">
+              </div>
             </div>
-            <div class="swiper-slide">
-              <img src="/static/imgs/slide2.jpg" alt="중고거래2">
+            <div class="slide-bg"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+          <div class="main-search-bar">
+            <div class="text">
+              <p>당신이 숨겨 놓은 보물</p>
+              <p>완두점빵에서 찾았다.</p>
             </div>
-            <div class="swiper-slide">
-              <img src="/static/imgs/slide3.jpg" alt="중고거래3">
+            <div class="main-search-area">
+              <div class="search-bar">
+                <input id="searchInput" placeholder="찾으시는 매물을 입력해주세요." />
+                <button class="main-search-btn" onclick="search()">검색</button>
+                <i class="fa-solid fa-magnifying-glass main-search-icon"></i>
+              </div>
             </div>
           </div>
-          <div class="slide-bg"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
         </div>
-        <div class="main-search-bar">
-          <div class="text">
-            <p>당신이 숨겨 놓은 보물</p>
-            <p>완두점빵에서 찾았다.</p>
-          </div>
-          <div class="main-search-area">
-            <div class="search-bar">
-              <input id="searchInput" placeholder="찾으시는 매물을 입력해주세요." />
-              <button class="main-search-btn" onclick="search()">검색</button>
-              <i class="fa-solid fa-magnifying-glass main-search-icon"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- 신상 카테고리 -->
-    <section class="tab-main-product">
-      <div class="tab-main-product-inner">
-        <h2 class="main-sub-title">BEST</h2>
-        <p class="main-sub-txt">오직 완두점빵에서만 만나는, 화제의 그 매물</p>
-        <div class="tab-product">
-          <input type="radio" name="tab" id="tab1" class="tab-input" checked />
-          <label class="tab-label" for="tab1">중고거래</label>
-          <input type="radio" name="tab" id="tab2" class="tab-input" />
-          <label class="tab-label" for="tab2">물물교환</label>
-          <div class="trade-con1">
-            <section class="cards-wrap">
-              <!-- 경매 상품인 경우 : 가격 노출 -->
-              <% for(let i=0; i < result.length; i++) { %>
-              <article class="card">
-                <a class="card-link" href="/articles/<%= result[i]._id %>">
-                  <div class="card-photo" style="background-image: url('<%= result[i].images[0] %>')">
-                    <img alt="오락기" src="<%= result[i].images[0] %>" crossorigin="anonymous">
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">
-                      <%= result[i].subject %>
-                    </h2>
-                    <div class="card-price">
-                      <%= result[i].priceLast %>
-                    </div>
-                    <div class="card-region-name">
-                      <%= result[i].userid.address %>
-                    </div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">
-                        <%= result[i].bookmark_hit %>
-                      </span> ∙
-                      <span class="chatHit" aria-label="채팅">
-                        <%= result[i].chat %>
-                      </span> ∙
-                      <span class="hit" aria-label="조회">
-                        <%= result[i].hit %>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </article>
-              <% } %>
-              <!-- //경매 상품인 경우 : 가격 노출 -->
+      </section>
+      <!-- 신상 카테고리 -->
+      <section class="tab-main-product">
+        <div class="tab-main-product-inner">
+          <h2 class="main-sub-title">BEST</h2>
+          <p class="main-sub-txt">오직 완두점빵에서만 만나는, 화제의 그 매물</p>
+          <div class="tab-product">
+            <input type="radio" name="tab" id="tab1" class="tab-input" checked />
+            <label class="tab-label" for="tab1">중고거래</label>
+            <input type="radio" name="tab" id="tab2" class="tab-input" />
+            <label class="tab-label" for="tab2">물물교환</label>
+            <div class="trade-con1">
+              <section class="cards-wrap">
+                <!-- 경매 상품인 경우 : 가격 노출 -->
+                <% for(let i=0; i < 8; i++) { %>
+                  <article class="card">
+                    <a class="card-link" href="/articles/<%= result[i]._id %>">
+                      <div class="card-photo" style="background-image: url('<%= result[i].images[0] %>')">
+                        <img alt="오락기" src="<%= result[i].images[0] %>" crossorigin="anonymous">
+                      </div>
+                      <div class="card-desc">
+                        <h2 class="card-title">
+                          <%= result[i].subject %>
+                        </h2>
+                        <div class="card-price">
+                          <%= result[i].priceLast %>원
+                        </div>
+                        <div class="card-region-name">
+                          <%= result[i].userid.address %>
+                        </div>
+                        <div class="card-counts">
+                          <span class="bookmarkHit" aria-label="관심">
+                            <%= result[i].bookmark_hit %>
+                          </span> ∙
+                          <span class="chatHit" aria-label="채팅">
+                            <%= result[i].chat %>
+                          </span> ∙
+                          <span class="hit" aria-label="조회">
+                            <%= result[i].hit %>
+                          </span>
+                        </div>
+                      </div>
+                    </a>
+                  </article>
+                  <% } %>
+                    <!-- //경매 상품인 경우 : 가격 노출 -->
 
-              <!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
-              <!-- <article class="card">
+                    <!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
+                    <!-- <article class="card">
                         <a class="card-link" href="/articles/1">
                           <div class="card-photo" style="background-image: url('/static/imgs/test.jpg')">
                             <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
@@ -112,11 +112,11 @@
                           </div>
                         </a>
                       </article> -->
-              <!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
+                    <!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
 
-              <!-- 샘플용 : 18개 -->
-              <% for(let i=1;i <=6;i++ ){ %>
-              <!-- <article class="card">
+                    <!-- 샘플용 : 18개 -->
+                    <% for(let i=1;i <=6;i++ ){ %>
+                      <!-- <article class="card">
                         <a class="card-link" href="/articles/1">
                           <div class="card-photo" style="background-image: url('/static/imgs/test.jpg')">
                             <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
@@ -133,206 +133,206 @@
                           </div>
                         </a>
                       </article> -->
-              <% } %>
-              <!-- //샘플용 : 18개 -->
-            </section>
-          </div>
-          <div class="change-con2">
-            <section class="cards-wrap">
-              <!-- 경매 상품인 경우 : 가격 노출 -->
-              <article class="card">
-                <a class="card-link" href="/articles/1">
-                  <div class="card-photo">
-                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">오락기2</h2>
-                    <div class="card-price">1,000원</div>
-                    <div class="card-region-name">인천 계양구</div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
-                      <span class="chatHit" aria-label="채팅">36</span> ∙
-                      <span class="hit" aria-label="조회">2221</span>
+                      <% } %>
+                        <!-- //샘플용 : 18개 -->
+              </section>
+            </div>
+            <div class="change-con2">
+              <section class="cards-wrap">
+                <!-- 경매 상품인 경우 : 가격 노출 -->
+                <article class="card">
+                  <a class="card-link" href="/articles/1">
+                    <div class="card-photo">
+                      <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
                     </div>
-                  </div>
-                </a>
-              </article>
-              <!-- //경매 상품인 경우 : 가격 노출 -->
+                    <div class="card-desc">
+                      <h2 class="card-title">오락기2</h2>
+                      <div class="card-price">1,000원</div>
+                      <div class="card-region-name">인천 계양구</div>
+                      <div class="card-counts">
+                        <span class="bookmarkHit" aria-label="관심">70</span> ∙
+                        <span class="chatHit" aria-label="채팅">36</span> ∙
+                        <span class="hit" aria-label="조회">2221</span>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+                <!-- //경매 상품인 경우 : 가격 노출 -->
 
-              <!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
-              <article class="card">
-                <a class="card-link" href="/articles/1">
-                  <div class="card-photo">
-                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">오락기</h2>
-                    <div class="card-price-share">나눔</div>
-                    <div class="card-region-name">인천 계양구</div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
-                      <span class="chatHit" aria-label="채팅">36</span> ∙
-                      <span class="hit" aria-label="조회">2221</span>
+                <!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
+                <article class="card">
+                  <a class="card-link" href="/articles/1">
+                    <div class="card-photo">
+                      <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
                     </div>
-                  </div>
-                </a>
-              </article>
-              <!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
+                    <div class="card-desc">
+                      <h2 class="card-title">오락기</h2>
+                      <div class="card-price-share">나눔</div>
+                      <div class="card-region-name">인천 계양구</div>
+                      <div class="card-counts">
+                        <span class="bookmarkHit" aria-label="관심">70</span> ∙
+                        <span class="chatHit" aria-label="채팅">36</span> ∙
+                        <span class="hit" aria-label="조회">2221</span>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+                <!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
 
-              <!-- 샘플용 : 18개 -->
-              <% for(let i=1;i <=6;i++ ){ %>
-              <article class="card">
-                <a class="card-link" href="/articles/1">
-                  <div class="card-photo">
-                    <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-                  </div>
-                  <div class="card-desc">
-                    <h2 class="card-title">오락기</h2>
-                    <div class="card-price">1,000원</div>
-                    <div class="card-region-name">인천 계양구</div>
-                    <div class="card-counts">
-                      <span class="bookmarkHit" aria-label="관심">70</span> ∙
-                      <span class="chatHit" aria-label="채팅">36</span> ∙
-                      <span class="hit" aria-label="조회">2221</span>
+                <!-- 샘플용 : 18개 -->
+                <% for(let i=1;i <=6;i++ ){ %>
+                  <article class="card">
+                    <a class="card-link" href="/articles/1">
+                      <div class="card-photo">
+                        <img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+                      </div>
+                      <div class="card-desc">
+                        <h2 class="card-title">오락기</h2>
+                        <div class="card-price">1,000원</div>
+                        <div class="card-region-name">인천 계양구</div>
+                        <div class="card-counts">
+                          <span class="bookmarkHit" aria-label="관심">70</span> ∙
+                          <span class="chatHit" aria-label="채팅">36</span> ∙
+                          <span class="hit" aria-label="조회">2221</span>
+                        </div>
+                      </div>
+                    </a>
+                  </article>
+                  <% } %>
+                    <!-- //샘플용 : 18개 -->
+              </section>
+            </div>
+          </div>
+          <div class="btn-container">
+            <a class="more-btn" href="/market">더 많은 매물 보러가기<i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </section>
+      <!-- 리뷰 -->
+      <section class="main-review">
+        <div class="main-review-inner">
+          <h2 class="main-sub-title review">REVIEW</h2>
+          <p class="main-sub-txt">쿨한 거래, 따뜻한 후기</p>
+          <div class="main-review-container">
+            <ul class="main-review-items">
+              <li class="main-review-item">
+                <a href="#">
+                  <div class="review-user-info">
+                    <div class="user-profile">
+                      <div class="user-profile-img"></div>
                     </div>
+                    <div class="user-text">
+                      <div class="user-id">아이디</div>
+                      <div class="region">
+                        <span>화곡동</span>
+                        <span>단골인증</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user-review">
+                    안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
+                    기분이 좋아요!!
                   </div>
                 </a>
-              </article>
-              <% } %>
-              <!-- //샘플용 : 18개 -->
-            </section>
+              </li>
+              <li class="main-review-item">
+                <a href="#">
+                  <div class="review-user-info">
+                    <div class="user-profile">
+                      <div class="user-profile-img"></div>
+                    </div>
+                    <div class="user-text">
+                      <div class="user-id">아이디</div>
+                      <div class="region">
+                        <span>화곡동</span>
+                        <span>단골인증</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user-review">
+                    안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
+                    기분이 좋아요!!
+                  </div>
+                </a>
+              </li>
+              <li class="main-review-item">
+                <a href="#">
+                  <div class="review-user-info">
+                    <div class="user-profile">
+                      <div class="user-profile-img"></div>
+                    </div>
+                    <div class="user-text">
+                      <div class="user-id">아이디</div>
+                      <div class="region">
+                        <span>화곡동</span>
+                        <span>단골인증</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user-review">
+                    안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
+                    기분이 좋아요!!
+                  </div>
+                </a>
+              </li>
+              <li class="main-review-item">
+                <a href="#">
+                  <div class="review-user-info">
+                    <div class="user-profile">
+                      <div class="user-profile-img"></div>
+                    </div>
+                    <div class="user-text">
+                      <div class="user-id">아이디</div>
+                      <div class="region">
+                        <span>화곡동</span>
+                        <span>단골인증</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="user-review">
+                    안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
+                    기분이 좋아요!!
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="btn-container re">
+            <a class="more-btn re" href="#">더 많은 후기 보러가기<i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
-        <div class="btn-container">
-          <a class="more-btn" href="/market">더 많은 매물 보러가기<i class="bi bi-arrow-right"></i></a>
-        </div>
-      </div>
-    </section>
-    <!-- 리뷰 -->
-    <section class="main-review">
-      <div class="main-review-inner">
-        <h2 class="main-sub-title review">REVIEW</h2>
-        <p class="main-sub-txt">쿨한 거래, 따뜻한 후기</p>
-        <div class="main-review-container">
-          <ul class="main-review-items">
-            <li class="main-review-item">
-              <a href="#">
-                <div class="review-user-info">
-                  <div class="user-profile">
-                    <div class="user-profile-img"></div>
-                  </div>
-                  <div class="user-text">
-                    <div class="user-id">아이디</div>
-                    <div class="region">
-                      <span>화곡동</span>
-                      <span>단골인증</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="user-review">
-                  안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
-                  기분이 좋아요!!
-                </div>
-              </a>
-            </li>
-            <li class="main-review-item">
-              <a href="#">
-                <div class="review-user-info">
-                  <div class="user-profile">
-                    <div class="user-profile-img"></div>
-                  </div>
-                  <div class="user-text">
-                    <div class="user-id">아이디</div>
-                    <div class="region">
-                      <span>화곡동</span>
-                      <span>단골인증</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="user-review">
-                  안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
-                  기분이 좋아요!!
-                </div>
-              </a>
-            </li>
-            <li class="main-review-item">
-              <a href="#">
-                <div class="review-user-info">
-                  <div class="user-profile">
-                    <div class="user-profile-img"></div>
-                  </div>
-                  <div class="user-text">
-                    <div class="user-id">아이디</div>
-                    <div class="region">
-                      <span>화곡동</span>
-                      <span>단골인증</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="user-review">
-                  안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
-                  기분이 좋아요!!
-                </div>
-              </a>
-            </li>
-            <li class="main-review-item">
-              <a href="#">
-                <div class="review-user-info">
-                  <div class="user-profile">
-                    <div class="user-profile-img"></div>
-                  </div>
-                  <div class="user-text">
-                    <div class="user-id">아이디</div>
-                    <div class="region">
-                      <span>화곡동</span>
-                      <span>단골인증</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="user-review">
-                  안녕하세요. 오늘은 날씨가 좋네요. 오늘 저는 아이패드를 구매했는데요...너무 좋은 물건 싸게 잘 사서
-                  기분이 좋아요!!
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="btn-container re">
-          <a class="more-btn re" href="#">더 많은 후기 보러가기<i class="bi bi-arrow-right"></i></a>
-        </div>
-      </div>
-    </section>
-    <!-- 유튜브 홍보 -->
-    <section id="promotion">
-      <div class="promotion-inner">
-        <div class="pro-left">
-          <h2 class="promotion-title">TOGETHER-US</h2>
-          <p class="main-sub-txt">완두점빵과 함께하는 환경보호</p>
-          <p>
-            우리 모두가 환경 보호를 실천하고<br />
-            있다는 사실, 알고 있나요?
-          </p>
-          <p>
-            내가 버리는 물건이 누군가에게는 보물이 되어 지구를 지켜요!<br />
-            완두점빵은 여러분과 함께 환경 보호에 앞장서겠습니다.
-          </p>
-        </div>
-        <div class="pro-right">
-          <div class="youtube-inner">
-            <iframe src="https://www.youtube.com/embed/WQy9NSv-CoE" frameborder="0" allowfullscreen></iframe>
+      </section>
+      <!-- 유튜브 홍보 -->
+      <section id="promotion">
+        <div class="promotion-inner">
+          <div class="pro-left">
+            <h2 class="promotion-title">TOGETHER-US</h2>
+            <p class="main-sub-txt">완두점빵과 함께하는 환경보호</p>
+            <p>
+              우리 모두가 환경 보호를 실천하고<br />
+              있다는 사실, 알고 있나요?
+            </p>
+            <p>
+              내가 버리는 물건이 누군가에게는 보물이 되어 지구를 지켜요!<br />
+              완두점빵은 여러분과 함께 환경 보호에 앞장서겠습니다.
+            </p>
+          </div>
+          <div class="pro-right">
+            <div class="youtube-inner">
+              <iframe src="https://www.youtube.com/embed/WQy9NSv-CoE" frameborder="0" allowfullscreen></iframe>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
-  <%- include('./component/footer') %>
-  <script>
-    function search() {
-      location.href = '/search?q=오락기';
-    }
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="/static/js/main.js"></script>
+      </section>
+    </main>
+    <%- include('./component/footer') %>
+      <script>
+        function search() {
+          location.href = '/search?q=오락기';
+        }
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <script src="/static/js/main.js"></script>
 </body>
 
 </html>

@@ -9,7 +9,7 @@ exports.market = async (req, res) => {
     marketModel
         .find()
         .populate("userid")
-        .sort({ updatedAt: -1 })
+        .sort({ createdAt: -1 })
         .exec()
         .then((result) => {
             console.log("DB 정보 추출", result);
@@ -19,6 +19,57 @@ exports.market = async (req, res) => {
         .catch((error) => {
             console.error("Error finding data:", error);
         });
+};
+
+exports.marketsort = async (req, res) => {
+    const sortnumber = req.query.selectedSort;
+    console.log("sortnumber", sortnumber);
+    let result;
+    if (!sortnumber || sortnumber === "1") {
+        result = await marketModel
+            .find()
+            .populate("userid")
+            .sort({ updatedAt: -1 })
+            .exec();
+    } else if (sortnumber === "2") {
+        result = await marketModel
+            .find()
+            .populate("userid")
+            .sort({ bookmark_hit: -1 })
+            .exec();
+    } else if (sortnumber === "3") {
+        result = await marketModel
+            .find()
+            .populate("userid")
+            .sort({ priceLast: 1 })
+            .exec();
+    } else if (sortnumber === "4") {
+        result = await marketModel
+            .find()
+            .populate("userid")
+            .sort({ priceLast: -1 });
+    } else if (sortnumber === "5") {
+        result = await marketModel
+            .find({ priceLast: { $lte: 9999 } })
+            .populate("userid")
+            .sort({ priceLast: 1 });
+    } else if (sortnumber === "6") {
+        result = await marketModel
+            .find({ priceLast: { $gte: 10000, $lte: 49999 } })
+            .populate("userid")
+            .sort({ priceLast: 1 });
+    } else if (sortnumber === "7") {
+        result = await marketModel
+            .find({ priceLast: { $gte: 50000, $lte: 99999 } })
+            .populate("userid")
+            .sort({ priceLast: 1 });
+    } else if (sortnumber === "8") {
+        result = await marketModel
+            .find({ priceLast: { $gte: 100000 } })
+            .populate("userid")
+            .sort({ priceLast: 1 });
+    }
+    res.send({ postData: result });
 };
 
 exports.getView = async (req, res) => {
