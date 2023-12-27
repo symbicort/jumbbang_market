@@ -24,10 +24,16 @@ exports.getChats = async (req, res) => {
                 const myrealname = myinfo.nick;
                 const { postName, myName, productId, from } = req.query;
 
-                const yourinfo = await user.findOne({ nick: postName });
-                const yourid = yourinfo.userid;
+                let yourrealname;
+                if (postName != myrealname) {
+                    yourrealname = postName;
+                } else {
+                    yourrealname = myName;
+                }
+                const yourinfo = await user.findOne({ nick: yourrealname });
                 console.log("chatrooms check", postName, myName, productId);
                 console.log("sendid check", myrealname, myName);
+
                 let roominfo = await market.findOne({
                     _id: productId,
                 });
@@ -57,7 +63,8 @@ exports.getChats = async (req, res) => {
                         yourname: postName,
                         from,
                         roomname,
-                        myrealname,
+                        myinfo,
+                        yourinfo,
                     });
                 } else {
                     console.log("savedChatRooms", savedChatRooms);
@@ -83,7 +90,8 @@ exports.getChats = async (req, res) => {
                         yourname: postName,
                         from,
                         roomname,
-                        myrealname,
+                        myinfo,
+                        yourinfo,
                     });
                 }
             } else {
@@ -138,9 +146,16 @@ exports.getChatrooms = async (req, res) => {
                 }
                 console.log("mychatrooms", mychatrooms);
                 let productNames = [];
+                let yourNames = [];
+                let yourProfileImgs = [];
                 for (let i = 0; i < mychatrooms.length; i++) {
-                    console.log(mychatrooms[i].productId);
+                    // console.log(mychatrooms[i].productId);
                     try {
+                        if (mychatrooms[i].sendId != myName) {
+                            yourNames.push(mychatrooms[i].sendId);
+                        } else {
+                            yourNames.push(mychatrooms[i].takeId);
+                        }
                         const productName = await market.findOne({
                             _id: mychatrooms[i].productId,
                         });
@@ -149,6 +164,16 @@ exports.getChatrooms = async (req, res) => {
                         } else {
                             productNames.push({});
                         }
+                        const profileImg = await user.findOne({
+                            nick: yourNames[i],
+                        });
+                        if (profileImg) {
+                            yourProfileImgs.push(profileImg.image);
+                        } else {
+                            yourProfileImgs.push(
+                                "https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png"
+                            );
+                        }
                     } catch (error) {
                         console.log("상품 조회 오류 >", error);
                     }
@@ -156,7 +181,15 @@ exports.getChatrooms = async (req, res) => {
                 console.log("mychatrooms length", mychatrooms.length);
                 console.log("productNames length", productNames.length);
                 console.log("productNames", productNames);
-                res.render("chatrooms", { mychatrooms, productNames, myName });
+                console.log("yourNames", yourNames);
+                console.log("yourProfileImgs", yourProfileImgs);
+                res.render("chatrooms", {
+                    mychatrooms,
+                    productNames,
+                    myName,
+                    yourNames,
+                    yourProfileImgs,
+                });
             } else {
                 res.render("login");
             }
