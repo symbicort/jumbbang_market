@@ -1,21 +1,25 @@
 <section class="mypage-group">
 	<div class="mypage-group-inner">
 		<div class="mypage-user-profile">
-			<% if (image == '') { %>
-				<div class="mypage-user-img" style="background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');"></div>
-			<% } else { %>
-				<div class="mypage-user-img" style="background-image: url('<%= image %>');"></div>
-			<% } %>			
-			
-			<div class="mypage-user-id"><%= userid %></div>
+			<% if (image=='' ) { %>
+				<div class="mypage-user-img"
+					style="background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');">
+				</div>
+				<% } else { %>
+					<div class="mypage-user-img" style="background-image: url('<%= image %>');"></div>
+					<% } %>
+
+						<div class="mypage-user-id">
+							<%= userid %>
+						</div>
 		</div>
 		<div class="mypage-history">
-			<div class="sub-title">나의거래</div>
-			<ul class="mypage-history-ul">
+			<div class="sub-title">내 거래 목록</div>
+			<!-- <ul class="mypage-history-ul">
 				<li class="mypage-history-li"><a href="/bookmark">관심목록</a></li>
 				<li class="mypage-history-li"><a href="/sales">판매내역</a></li>
 				<li class="mypage-history-li"><a href="/purchase">구매내역</a></li>
-			</ul>
+			</ul> -->
 		</div>
 		<div class="mypage-review-chat">
 			<div class="sub-title">후기/채팅</div>
