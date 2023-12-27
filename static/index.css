@@ -384,4 +384,128 @@ main {
   }
 }
 @media screen and (max-width: 360px) {
+  /* 헤더 메뉴 */
+  #nav {
+    padding: 0.5rem 0;
+  }
+  .menu-icon-bg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .subnav-user > li:nth-child(1),
+  .subnav-user > li:nth-child(3) {
+    display: none;
+  }
+
+  /* 슬라이드 */
+  .swiper {
+    width: 100%;
+    height: 18rem;
+    border-radius: 12px;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+  .subnav-user {
+    display: block;
+  }
+  .page-link {
+    display: none;
+  }
+  .search-bar {
+    display: none;
+  }
+  .main-search-bar {
+    width: 100%;
+    padding: 0 2rem;
+    position: absolute;
+    top: 120px;
+    left: 0;
+    z-index: 11;
+  }
+  .main-search-bar .text > p:nth-child(1) {
+    font-size: 1rem;
+  }
+  .main-search-bar .text > p:nth-child(2) {
+    font-size: 1.5rem;
+  }
+
+  /* 베스트 */
+  .tab-main-product-inner {
+    padding-top: 2em;
+  }
+
+  .main-sub-title {
+    font-size: 1.5rem;
+    padding: 2.4rem 0 1rem 0;
+  }
+
+  .main-sub-txt {
+    font-size: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .tab-label {
+    font-size: 1rem;
+    border-radius: 2rem;
+    padding: 0.7rem 1rem;
+    line-height: 1;
+    margin: 0 0.3rem 2rem 0;
+  }
+
+  .btn-container {
+    padding: 2rem 0;
+  }
+
+  .more-btn {
+    padding: 0.7rem 1rem;
+  }
+
+  /* 리뷰 */
+  .main-review-items {
+    flex-wrap: wrap;
+  }
+
+  .main-review-item {
+    width: 100%;
+    background-color: #f5f5f5;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+  .main-review-item:nth-child(3),
+  .main-review-item:nth-child(4) {
+    display: none;
+  }
+
+  .user-review {
+    padding: 0 1.8rem 1rem 1.8rem;
+  }
+
+  .btn-container.re {
+    padding: 1rem 0 2rem;
+  }
+  .more-btn.re {
+    padding: 0.7rem 1rem;
+  }
+
+  /* 홍보 */
+  #promotion {
+    margin: 5rem 0 5rem 0;
+  }
+
+  .promotion-title {
+    font-size: 1.5rem;
+  }
+  .promotion-title ~ p:nth-of-type(2) {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    margin: 1rem 0 1.2rem 0;
+  }
+  .promotion-title ~ p:nth-of-type(3) {
+    font-size: 1rem;
+    line-height: 1.4rem;
+  }
 }
