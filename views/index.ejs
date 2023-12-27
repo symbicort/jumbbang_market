@@ -40,7 +40,8 @@
             </div>
             <div class="main-search-area">
               <div class="search-bar">
-                <input id="searchInput" placeholder="찾으시는 매물을 입력해주세요." />
+                <input id="searchInput" placeholder="찾으시는 매물을 입력해주세요."
+                  onkeydown="if(window.event.keyCode == 13){search()}" />
                 <button class="main-search-btn" onclick="search()">검색</button>
                 <i class="fa-solid fa-magnifying-glass main-search-icon"></i>
               </div>
@@ -326,11 +327,7 @@
       </section>
     </main>
     <%- include('./component/footer') %>
-      <script>
-        function search() {
-          location.href = '/search?q=오락기';
-        }
-      </script>
+
       <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
       <script src="/static/js/main.js"></script>
 </body>
