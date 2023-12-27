@@ -224,7 +224,7 @@
   right: 32px;
 }
 
-.info:hover #header-search {
+#header-search.active {
   display: block;
 }
 

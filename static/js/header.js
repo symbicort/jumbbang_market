@@ -77,14 +77,6 @@ function goChatrooms() {
     });
 }
 
-// 헤더 작은 검색창
-// const headerSearch = document.querySelector('.fa-magnifying-glass');
-// const headerSearchInput = document.getElementById('header-search');
-
-headerSearch.addEventListener('click', function () {
-  alert('안녕');
-});
-
 document.addEventListener('DOMContentLoaded', () => {
   // 이벤트 핸들러 등록 전에 해당 요소가 존재하는지 확인
   const logoutLink = document.getElementById('logoutLink');
@@ -99,4 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+});
+
+// 헤더 작은 검색창
+const headerSearch = document.querySelector('.fa-magnifying-glass');
+const headerSearchInput = document.getElementById('header-search');
+
+headerSearch.addEventListener('click', function () {
+  console.log(headerSearchInput);
+  headerSearchInput.classList.toggle('active');
+  headerSearchInput.focus();
 });
