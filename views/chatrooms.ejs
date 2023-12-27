@@ -20,21 +20,29 @@
 							<li>
 								<a
 									href="/chatroom?postName=<%= mychatrooms[i].takeId%>&myName=<%= mychatrooms[i].sendId%>&productId=<%= mychatrooms[i].productId%>&from=chatrooms">
-									<div class="profile1" style="background-image: url('<%= yourProfileImgs[i] %>')">
-									</div>
-									<div class="txt">
-										<strong class="subject h5">
-											<%= productNames[i].subject%>
-										</strong>
-										<p>
-											<span id="chatyourname" class="userid">
-												<%= yourNames[i] %>
-											</span>
-											<span class="date">
-												<%= mychatrooms[i].createdAt %>
-											</span>
-										</p>
-									</div>
+									<% if (yourProfileImgs[i]) { %>
+										<div class="profile1"
+											style="background-image: url('<%= yourProfileImgs[i] %>')">
+										</div>
+										<% } else{ %>
+											<div class="profile1"
+												style="background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');">
+											</div>
+											<% } %>
+
+												<div class="txt">
+													<strong class="subject h5">
+														<%= productNames[i].subject%>
+													</strong>
+													<p>
+														<span id="chatyourname" class="userid">
+															<%= yourNames[i] %>
+														</span>
+														<span class="date">
+															<%= mychatrooms[i].createdAt %>
+														</span>
+													</p>
+												</div>
 								</a>
 								<div class="btns">
 									<button class="ibt-report" aria-label="신고하기"></button>
