@@ -187,10 +187,12 @@ main {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.menu-icon-bg:hover + .menu-category,
-.menu-category:hover {
+/* .menu-icon-bg:hover + .menu-category,
+.menu-category:hover  */
+#categoryMenu:checked + .menu-icon-bg + .menu-category {
 	display: block;
 }
+
 .menu-category-list {
 	width: 100%;
 	background-color: #fff;
