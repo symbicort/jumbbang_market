@@ -165,12 +165,72 @@ exports.getChatLogout = (req, res) => {
 	}
 };
 //보낸 후기
-exports.getReviewPost = (req, res) => {
-	res.render(`reviewPost`);
+exports.getReviewPost = async (req, res) => {
+	const token = req.cookies.accessToken;
+	const refreshToken = req.cookies.refreshToken;
+
+	if (!token || !refreshToken) {
+		res.render('login');
+	} else {
+		try {
+			const decodedjwt = await verifyToken(token, refreshToken);
+
+			if (decodedjwt.token != undefined) {
+				const user_id = decodedjwt.userid;
+
+				const user = await userModel.findOne({ userid: user_id }).exec();
+
+				const sellobject = await marketModel.find({ userid: user._id.toString() }).populate('userid');
+
+				const buyobject = await marketModel.find({ buyer: decodedjwt.userid });
+
+				console.log('user 정보', user.userid, user.nick, user.image);
+				console.log('이미지 확인', typeof user.image);
+				console.log('해당 유저 판매 목록', sellobject);
+				console.log('해당 유저 구매 목록', buyobject);
+
+				res.render('reviewPost', { userid: user.userid, usernickname: user.nick, image: user.image });
+			} else {
+				res.render('login');
+			}
+		} catch (err) {
+			console.error('메인 페이지 랜딩 에러', err);
+		}
+	}
 };
 //받은 후기
-exports.getReviewReceive = (req, res) => {
-	res.render(`reviewReceive`);
+exports.getReviewReceive = async (req, res) => {
+	const token = req.cookies.accessToken;
+	const refreshToken = req.cookies.refreshToken;
+
+	if (!token || !refreshToken) {
+		res.render('login');
+	} else {
+		try {
+			const decodedjwt = await verifyToken(token, refreshToken);
+
+			if (decodedjwt.token != undefined) {
+				const user_id = decodedjwt.userid;
+
+				const user = await userModel.findOne({ userid: user_id }).exec();
+
+				const sellobject = await marketModel.find({ userid: user._id.toString() }).populate('userid');
+
+				const buyobject = await marketModel.find({ buyer: decodedjwt.userid });
+
+				console.log('user 정보', user.userid, user.nick, user.image);
+				console.log('이미지 확인', typeof user.image);
+				console.log('해당 유저 판매 목록', sellobject);
+				console.log('해당 유저 구매 목록', buyobject);
+
+				res.render('reviewReceive', { userid: user.userid, usernickname: user.nick, image: user.image });
+			} else {
+				res.render('login');
+			}
+		} catch (err) {
+			console.error('메인 페이지 랜딩 에러', err);
+		}
+	}
 };
 //후기 작성
 exports.getReviewWrite = (req, res) => {
