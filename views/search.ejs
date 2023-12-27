@@ -12,9 +12,11 @@
 			<main>
 				<div class="container">
 					<h1 class="h2 fw-bold pb-4">상품 검색 결과</h1>
+					<% if(searchResult.length>0) { %>
 					<section class="cards-wrap">
 						<!-- 상품 결과 최대 : 8개 -->
 						<!-- 경매 상품인 경우 : 가격 노출 -->
+
 						<% for(let i=0; i < searchResult.length; i++) { %>
 						<article class="card">
 							<a class="card-link" href="/articles/<%= searchResult[i]._id %>">
@@ -56,6 +58,9 @@
 							</article> -->
 						<!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
 					</section>
+					<% }else{ %>
+					<div class="my-5 h5 fw-bold text-center">검색된 결과가 없습니다</div>
+					<% } %>
 				</div>
 			</main>
 			<%- include('./component/footer') %>
