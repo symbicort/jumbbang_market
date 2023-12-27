@@ -10,3 +10,13 @@ var swiper = new Swiper(".mySwiper", {
     mousewheel: true,
     keyboard: true,
 });
+
+const searchInput = document.getElementById("searchInput");
+function searchIndex() {
+    if (searchInput.value) {
+        // console.log(searchInput.value);
+        const searchWord = searchInput.value;
+        searchInput.value = "";
+        window.location.href = `/search?searchWord=${searchWord}`;
+    }
+}

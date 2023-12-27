@@ -103,11 +103,12 @@ headerSearch.addEventListener("click", function () {
     headerSearchInput.focus();
 });
 
-const searchInput = document.getElementById("header-search");
-function search() {
-    if (searchInput.value) {
-        // console.log(searchInput.value);
-        const searchWord = searchInput.value;
+const searchInputHeader = document.getElementById("header-search");
+function searchHeader() {
+    if (searchInputHeader.value) {
+        // console.log(searchInputHeader.value);
+        const searchWord = searchInputHeader.value;
+        searchInputHeader.value = "";
         window.location.href = `/search?searchWord=${searchWord}`;
     }
 }
