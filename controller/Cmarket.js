@@ -35,7 +35,7 @@ exports.marketsort = async (req, res) => {
         result = await marketModel
             .find()
             .populate("userid")
-            .sort({ bookmark_hit: -1 })
+            .sort({ hit: -1 })
             .exec();
     } else if (sortnumber === "3") {
         result = await marketModel
@@ -68,6 +68,18 @@ exports.marketsort = async (req, res) => {
             .find({ priceLast: { $gte: 100000 } })
             .populate("userid")
             .sort({ priceLast: 1 });
+    } else if (sortnumber === "0") {
+        result = await marketModel
+            .find()
+            .populate("userid")
+            .sort({ subject: 1 });
+    } else if (sortnumber == "9") {
+        result = await marketModel
+            .find({
+                $or: [{ state: 2 }, { state: 3 }],
+            })
+            .populate("userid")
+            .sort({ updatedAt: -1 });
     }
     res.send({ postData: result });
 };
@@ -227,54 +239,62 @@ exports.enterbid = async (req, res) => {
     }
 };
 
-exports.usercheck = async(req,res) => {
-    const {productId} = req.body;
+exports.usercheck = async (req, res) => {
+    const { productId } = req.body;
 
     const token = req.cookies.accessToken;
     const refreshToken = req.cookies.refreshToken;
 
     if (!token || !refreshToken) {
-        res.send({islogin: false ,result: false});
+        res.send({ islogin: false, result: false });
     } else {
         try {
-            console.log('게시물 정보 가져 오기 try')
+            console.log("게시물 정보 가져 오기 try");
             const decodedjwt = await verifyToken(token, refreshToken);
 
             if (decodedjwt.token != undefined) {
                 console.log("DB 결과 업데이트 시도");
-                const result = await marketModel.findOne(
-                    { _id: productId }).populate('userid').exec();
+                const result = await marketModel
+                    .findOne({ _id: productId })
+                    .populate("userid")
+                    .exec();
 
-                console.log("유저 비교 결과", result.userid.userid == decodedjwt.userid);
-                if(result.userid.userid ==  decodedjwt.userid){
-                    res.send({islogin: true ,result: true});
-                } else{
-                    res.send({islogin: true ,result: false});
+                console.log(
+                    "유저 비교 결과",
+                    result.userid.userid == decodedjwt.userid
+                );
+                if (result.userid.userid == decodedjwt.userid) {
+                    res.send({ islogin: true, result: true });
+                } else {
+                    res.send({ islogin: true, result: false });
                 }
-
             } else {
-                res.send({islogin: false ,result: false});
+                res.send({ islogin: false, result: false });
             }
         } catch (err) {
             console.error("경매 입찰 중 에러", err);
             res.status(500).send({ msg: "서버 오류" });
         }
     }
-}
+};
 
-exports.editArticle = async (req,res) => {
-    const {articleid, subject, content, state} = req.body;
+exports.editArticle = async (req, res) => {
+    const { articleid, subject, content, state } = req.body;
 
-    try{
-        const result = await marketModel.updateOne({_id: articleid}, { $set: { subject: subject, content: content, state: state } })
-        console.log('변경 결과', result);
-        res.send({msg: '게시글 정보 변경 완료 되었습니다.'});
-    } catch(err){
-        console.error('게시물 정보 업데이트 중 에러', err);
-}}
+    try {
+        const result = await marketModel.updateOne(
+            { _id: articleid },
+            { $set: { subject: subject, content: content, state: state } }
+        );
+        console.log("변경 결과", result);
+        res.send({ msg: "게시글 정보 변경 완료 되었습니다." });
+    } catch (err) {
+        console.error("게시물 정보 업데이트 중 에러", err);
+    }
+};
 
-exports.directBuy = async (req,res) => {
-    const {productId} = req.body;
+exports.directBuy = async (req, res) => {
+    const { productId } = req.body;
 
     const token = req.cookies.accessToken;
     const refreshToken = req.cookies.refreshToken;
@@ -293,7 +313,7 @@ exports.directBuy = async (req,res) => {
                     {
                         $set: {
                             buyer: decodedjwt.userid,
-                            state: 2
+                            state: 2,
                         },
                     },
                     { upsert: true }
@@ -307,4 +327,4 @@ exports.directBuy = async (req,res) => {
             res.status(500).send({ msg: "서버 오류" });
         }
     }
-}
+};
