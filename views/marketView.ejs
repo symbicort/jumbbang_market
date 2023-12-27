@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<%- include('./component/head', { title: '중고거래 - 완두점빵' }) %>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap"
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<%- include('./component/head', { title: '중고거래 - 완두점빵' }) %>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap"
 			rel="stylesheet" />
 		<!-- swiper css -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -14,22 +14,24 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 		<link rel="stylesheet" href="/static/market.min.css" />
 		<script src="/static/js/market.js"></script>
-	</head>
+</head>
 
-	<body>
-		<div id="jumbbang">
-			<%- include('./component/header') %>
+<body>
+	<div id="jumbbang">
+		<%- include('./component/header') %>
 			<main class="marketView">
 				<!-- 상품 정보, 채팅 상대방 정보 form -->
 				<form name="info">
-					<input type="text" name="productId" id="productId" hidden />
-					<input type="text" name="writerId" id="writerId" hidden />
+					<input type="hidden" id="productid" value="<%= postdata._id%>" />
+					<input type="hidden" id="postid" value="<%= postdata.userid.userid%>" />
 				</form>
 				<!-- //상품 정보, 채팅 상대방 정보 form -->
 				<article class="container">
 					<div class="d-flex gap-3 align-items-center mb-3">
-						<h1 id="article-title" class="subject h2 fw-bold"><%= postdata.subject %></h1>
-						<input type="hidden" id="productid" value="<%= postdata._id%>" />
+						<h1 id="article-title" class="subject h2 fw-bold">
+							<%= postdata.subject %>
+						</h1>
+
 					</div>
 					<section id="article-images" class="row">
 						<div id="image-slider" class="col-lg-8">
@@ -48,29 +50,31 @@
 								<div class="swiper-button-prev"></div>
 							</div>
 						</div>
-						<div class="col-lg-4 d-sm-flex d-md-block mt-5 mt-lg-0 justify-content-between align-items-center">
+						<div
+							class="col-lg-4 d-sm-flex d-md-block mt-5 mt-lg-0 justify-content-between align-items-center">
 							<div>
 								<div class="d-md-flex d-lg-block justify-content-between align-items-center">
-									<a id="article-profile-link" href="/profile" class="d-inline-flex gap-3 align-items-center">
+									<a id="article-profile-link" href="/profile"
+										class="d-inline-flex gap-3 align-items-center">
 										<div id="article-profile-image">
-											<img
-												alt="푸푸"
+											<img alt="푸푸"
 												src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png" />
 										</div>
 										<div id="article-profile-left">
-											<div id="nick" class="fw-bold"><%= postdata.userid.nick%></div>
-											<div id="address"><%= postdata.userid.address%></div>
+											<div id="nick" class="fw-bold">
+												<%= postdata.userid.nick%>
+											</div>
+											<div id="address">
+												<%= postdata.userid.address%>
+											</div>
 										</div>
 									</a>
 									<div id="article-profile-right" class="mt-3 mt-md-0 mt-lg-3">
-										<dl id="temperature-wrap" class="d-flex d-lg-grid justify-content-between align-items-center gap-3">
+										<dl id="temperature-wrap"
+											class="d-flex d-lg-grid justify-content-between align-items-center gap-3">
 											<dt>
-												<button
-													type="button"
-													class="ibt-info"
-													data-bs-toggle="popover"
-													data-bs-placement="right"
-													data-bs-custom-class="custom-popover"
+												<button type="button" class="ibt-info" data-bs-toggle="popover"
+													data-bs-placement="right" data-bs-custom-class="custom-popover"
 													data-bs-title="매너 지수"
 													data-bs-content="1점: 위험, 2점: 주의, 3점: 보통, 4점: 친절, 5점: 우수">
 													매너 지수
@@ -79,17 +83,16 @@
 											</dt>
 											<dd class="ico-face" data-lv="3"></dd>
 											<dd class="d-flex gap-2">
-												<button
-													class="btn-primary"
-													data-bs-toggle="modal"
-													data-bs-target="#modalModify"
-													onclick="usercheck()">
+												<button class="btn-primary" data-bs-toggle="modal"
+													data-bs-target="#modalModify" onclick="usercheck()">
 													수정
 												</button>
 												<input type="checkbox" id="bookmark" name="bookmark" hidden />
 
-												<label for="bookmark" class="ibt-bookmark btn-primary" aria-label="관심 추가"></label>
-												<a onclick="directChat()" id="btnChat" class="btn-primary w-100 text-center">채팅</a>
+												<label for="bookmark" class="ibt-bookmark btn-primary"
+													aria-label="관심 추가"></label>
+												<a onclick="directChat()" id="btnChat"
+													class="btn-primary w-100 text-center">채팅</a>
 											</dd>
 										</dl>
 									</div>
@@ -104,43 +107,47 @@
 													<span id="article-category" class="category"> 수량 : 1 </span>
 												</span> -->
 											</span>
-											<span class="price" id="priceFirst"> <%= postdata.priceFirst %> </span>
+											<span class="price" id="priceFirst">
+												<%= postdata.priceFirst %>
+											</span>
 											<p class="period">
-												<% const createdAt=new Date(postdata.createdAt); %> <% const
-												formattedCreatedAt=createdAt.getFullYear() + '-' + (createdAt.getMonth() +
-												1).toString().padStart(2, '0' ) + '-' + createdAt.getDate().toString().padStart(2, '0' ); %> <%
-												const limiteddAt=new Date(postdata.dateLimit); %> <% const
-												formattedlimitedAt=limiteddAt.getFullYear() + '-' + (limiteddAt.getMonth() +
-												1).toString().padStart(2, '0' ) + '-' + limiteddAt.getDate().toString().padStart(2, '0' ); %>
+												<% const createdAt=new Date(postdata.createdAt); %>
+													<% const formattedCreatedAt=createdAt.getFullYear() + '-' +
+														(createdAt.getMonth() + 1).toString().padStart(2, '0' ) + '-' +
+														createdAt.getDate().toString().padStart(2, '0' ); %>
+														<% const limiteddAt=new Date(postdata.dateLimit); %>
+															<% const formattedlimitedAt=limiteddAt.getFullYear() + '-' +
+																(limiteddAt.getMonth() + 1).toString().padStart(2, '0' )
+																+ '-' + limiteddAt.getDate().toString().padStart(2, '0'
+																); %>
 
-												<time class="data"> <%= formattedCreatedAt %> </time> ~
-												<time> <%= formattedlimitedAt %> </time>
+																<time class="data">
+																	<%= formattedCreatedAt %>
+																</time> ~
+																<time>
+																	<%= formattedlimitedAt %>
+																</time>
 											</p>
 										</div>
 									</li>
 									<li class="col-md-6 col-lg-12">
 										<div>
-											<span class="txt">현재가</span
-											><span class="price" id="priceLast"> <%= postdata.priceLast %> </span>
-											<button
-												type="button"
-												class="btn-primary w-100"
-												id="bidbtn"
-												data-bs-toggle="modal"
-												data-bs-target="#modalBid">
+											<span class="txt">현재가</span><span class="price" id="priceLast">
+												<%= postdata.priceLast %>
+											</span>
+											<button type="button" class="btn-primary w-100" id="bidbtn"
+												data-bs-toggle="modal" data-bs-target="#modalBid">
 												입찰하기
 											</button>
 										</div>
 									</li>
 									<li class="col-md-6 col-lg-12">
 										<div>
-											<span class="txt">즉구가</span><span class="price" id="price"> <%= postdata.priceDirect %> </span>
-											<button
-												type="button"
-												class="btn-primary w-100"
-												id="btndirect"
-												data-bs-toggle="modal"
-												data-bs-target="#modalBuy">
+											<span class="txt">즉구가</span><span class="price" id="price">
+												<%= postdata.priceDirect %>
+											</span>
+											<button type="button" class="btn-primary w-100" id="btndirect"
+												data-bs-toggle="modal" data-bs-target="#modalBuy">
 												구매하기
 											</button>
 										</div>
@@ -154,12 +161,20 @@
 
 					<section id="article-description">
 						<div class="content my-5">
-							<p><%= postdata.content %></p>
+							<p>
+								<%= postdata.content %>
+							</p>
 						</div>
 						<p id="article-counts">
-							<span class="bookmarkHit" aria-label="관심"> <%= postdata.bookmark_hit %> </span> ∙
-							<span class="chatHit" aria-label="채팅"> <%= postdata.chat %> </span> ∙
-							<span class="hit" aria-label="조회"> <%= postdata.hit %> </span>
+							<span class="bookmarkHit" aria-label="관심">
+								<%= postdata.bookmark_hit %>
+							</span> ∙
+							<span class="chatHit" aria-label="채팅">
+								<%= postdata.chat %>
+							</span> ∙
+							<span class="hit" aria-label="조회">
+								<%= postdata.hit %>
+							</span>
 						</p>
 					</section>
 				</article>
@@ -171,239 +186,249 @@
 					<!-- 관련상품: 최대 8개, (조건 예: 제목에 포함된 단어인 경우 노출) -->
 					<section class="cards-wrap">
 						<% for(let i=0; i < 4; i++) { %>
-						<article class="card">
-							<a class="card-link" href="/articles/<%= productData[i]._id %>">
-								<div class="card-photo" style="background-image: url('<%= productData[i].images[0] %>')">
-									<img alt="오락기" src="<%= productData[i].images[0] %>" crossorigin="anonymous" />
-								</div>
-								<div class="card-desc">
-									<h2 class="card-title"><%= productData[i].subject %></h2>
-									<div class="card-price"><%= productData[i].priceLast %>원</div>
-									<div class="card-region-name"><%= productData[i].userid.address %></div>
-									<div class="card-counts">
-										<span class="bookmarkHit" aria-label="관심"> <%= productData[i].bookmark_hit %> </span> ∙
-										<span class="chatHit" aria-label="채팅"> <%= productData[i].chat %> </span> ∙
-										<span class="hit" aria-label="조회"> <%= productData[i].hit %> </span>
+							<article class="card">
+								<a class="card-link" href="/articles/<%= productData[i]._id %>">
+									<div class="card-photo"
+										style="background-image: url('<%= productData[i].images[0] %>')">
+										<img alt="오락기" src="<%= productData[i].images[0] %>" crossorigin="anonymous" />
 									</div>
-								</div>
-							</a>
-						</article>
-						<% } %>
+									<div class="card-desc">
+										<h2 class="card-title">
+											<%= productData[i].subject %>
+										</h2>
+										<div class="card-price">
+											<%= productData[i].priceLast %>원
+										</div>
+										<div class="card-region-name">
+											<%= productData[i].userid.address %>
+										</div>
+										<div class="card-counts">
+											<span class="bookmarkHit" aria-label="관심">
+												<%= productData[i].bookmark_hit %>
+											</span> ∙
+											<span class="chatHit" aria-label="채팅">
+												<%= productData[i].chat %>
+											</span> ∙
+											<span class="hit" aria-label="조회">
+												<%= productData[i].hit %>
+											</span>
+										</div>
+									</div>
+								</a>
+							</article>
+							<% } %>
 					</section>
 				</section>
 				<%- include('./component/marketFooter') %>
 			</main>
 			<%- include('./component/footer') %>
-		</div>
+	</div>
 
-		<!-- Modal -->
-		<div class="modal fade" id="modalBid" tabindex="-1" aria-labelledby="modalBidLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<form name="formBid">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="modalBidLabel">입찰 하기</h1>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<ul class="mb-3 text-center">
-								<li class="mb-4 fs-5">
-									<!-- .priceLast: 현재가(입찰중인 현재 불러온 값) -->
-									현재 <strong class="priceLast fw-bold"> <%= postdata.priceLast %> </strong>원 부터<br
-										class="d-md-none" />
-									입찰하실 수 있습니다
-								</li>
-								<!-- <li class="p-1">
+	<!-- Modal -->
+	<div class="modal fade" id="modalBid" tabindex="-1" aria-labelledby="modalBidLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<form name="formBid">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="modalBidLabel">입찰 하기</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<ul class="mb-3 text-center">
+							<li class="mb-4 fs-5">
+								<!-- .priceLast: 현재가(입찰중인 현재 불러온 값) -->
+								현재 <strong class="priceLast fw-bold">
+									<%= postdata.priceLast %>
+								</strong>원 부터<br class="d-md-none" />
+								입찰하실 수 있습니다
+							</li>
+							<!-- <li class="p-1">
 								입찰 수량: <input type="number" class="form-control" id="currency" min="1" value="1" />
 							</li> -->
-								<li class="p-1">
-									입찰 금액:
-									<!-- min: 현재가(입찰중인 현재 불러온 값), value: 현재가(사용자가 조정한 값) -->
-									<input
-										type="number"
-										class="form-control"
-										min="<%= postdata.priceLast %>"
-										step="1000"
-										value="<%= postdata.priceLast %>"
-										placeholder="1000원 단위"
-										name="price" />
-								</li>
-							</ul>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn-primary" data-bs-dismiss="modal">취소</button>
-							<button type="button" class="btn-primary" id="btnBid" onclick="enterbid()">입찰하기</button>
-						</div>
-					</form>
-				</div>
+							<li class="p-1">
+								입찰 금액:
+								<!-- min: 현재가(입찰중인 현재 불러온 값), value: 현재가(사용자가 조정한 값) -->
+								<input type="number" class="form-control" min="<%= postdata.priceLast %>" step="1000"
+									value="<%= postdata.priceLast %>" placeholder="1000원 단위" name="price" />
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn-primary" data-bs-dismiss="modal">취소</button>
+						<button type="button" class="btn-primary" id="btnBid" onclick="enterbid()">입찰하기</button>
+					</div>
+				</form>
 			</div>
 		</div>
-		<!-- //modal -->
-		<!-- Modal -->
-		<div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="modalBuyLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<form name="formBuy">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="modalBuyLabel">즉시 구매</h1>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body text-center">
-							<ul class="mb-3">
-								<!-- <li class="p-1">
+	</div>
+	<!-- //modal -->
+	<!-- Modal -->
+	<div class="modal fade" id="modalBuy" tabindex="-1" aria-labelledby="modalBuyLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<form name="formBuy">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="modalBuyLabel">즉시 구매</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body text-center">
+						<ul class="mb-3">
+							<!-- <li class="p-1">
 								입찰 수량: <input type="number" class="form-control" id="currency" min="1" value="1" />
 							</li> -->
-								<li class="p-1">
-									즉시 구매 금액:
-									<!-- 가격 조정 불가 : 즉구가 불러온 값 value에 기입 -->
-									<input
-										type="number"
-										class="form-control"
-										name="directprice"
-										value="<%= postdata.priceDirect %>"
-										disabled />
-								</li>
-							</ul>
-						</div>
-						<div class="modal-footer">
-							<button class="btn-primary" data-bs-dismiss="modal">취소</button>
-							<button class="btn-primary" onclick="buyDirect()">구매하기</button>
-						</div>
-					</form>
-				</div>
+							<li class="p-1">
+								즉시 구매 금액:
+								<!-- 가격 조정 불가 : 즉구가 불러온 값 value에 기입 -->
+								<input type="number" class="form-control" name="directprice"
+									value="<%= postdata.priceDirect %>" disabled />
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button class="btn-primary" data-bs-dismiss="modal">취소</button>
+						<button class="btn-primary" onclick="buyDirect()">구매하기</button>
+					</div>
+				</form>
 			</div>
 		</div>
-		<!-- //modal -->
+	</div>
+	<!-- //modal -->
 
-		<!-- Modal -->
-		<div class="modal fade" id="modalModify" tabindex="-1" aria-labelledby="modalModifyLabel" aria-hidden="false">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<form name="formBuy">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="modalModifyLabel">수정</h1>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body text-center">
-							<ul class="mb-3">
-								<li class="p-1">
-									<div class="row">
-										<div class="col-3 pt-2">
-											<label for="subject" class="form-label">상품 제목</label>
-										</div>
-										<div class="col-9">
-											<input
-												type="text"
-												class="form-control"
-												name="subject"
-												id="subject"
-												placeholder="제목"
-												value="<%= postdata.subject %>"
-												required="" />
-											<div class="invalid-feedback">ID는 필수 입니다</div>
-										</div>
+	<!-- Modal -->
+	<div class="modal fade" id="modalModify" tabindex="-1" aria-labelledby="modalModifyLabel" aria-hidden="false">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<form name="formBuy">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="modalModifyLabel">수정</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body text-center">
+						<ul class="mb-3">
+							<li class="p-1">
+								<div class="row">
+									<div class="col-3 pt-2">
+										<label for="subject" class="form-label">상품 제목</label>
 									</div>
-								</li>
-								<li class="p-1">
-									<div class="row">
-										<div class="col-3 pt-2"><label for="comment" class="form-label">상품 설명</label></div>
-										<div class="col-9">
-											<textarea
-												type="text"
-												class="form-control"
-												name="comment"
-												id="comment"
-												rows="5"
-												placeholder="설명"
-												required=""
-												value="">
-<%= postdata.content %></textarea
-											>
-											<div class="invalid-feedback">상품 설명은 필수 입니다</div>
-										</div>
+									<div class="col-9">
+										<input type="text" class="form-control" name="subject" id="subject"
+											placeholder="제목" value="<%= postdata.subject %>" required="" />
+										<div class="invalid-feedback">ID는 필수 입니다</div>
 									</div>
-								</li>
-								<li class="p-1">
-									<div class="row">
-										<div class="col-3 pt-2"><label for="state" class="form-label">거래 방식</label></div>
+								</div>
+							</li>
+							<li class="p-1">
+								<div class="row">
+									<div class="col-3 pt-2"><label for="comment" class="form-label">상품 설명</label></div>
+									<div class="col-9">
+										<textarea type="text" class="form-control" name="comment" id="comment" rows="5"
+											placeholder="설명" required="" value=""><%= postdata.content %></textarea>
+										<div class="invalid-feedback">상품 설명은 필수 입니다</div>
+									</div>
+								</div>
+							</li>
+							<li class="p-1">
+								<div class="row">
+									<div class="col-3 pt-2"><label for="state" class="form-label">거래 방식</label></div>
 
-										<div class="col-9">
-											<select class="form-select col" id="state" name="state">
-												<option value="1">판매중</option>
-												<option value="3">거래완료</option>
-												<!-- <option value="4">나눔</option> -->
-												<option value="5">숨김</option>
-											</select>
-										</div>
+									<div class="col-9">
+										<select class="form-select col" id="state" name="state">
+											<option value="1">판매중</option>
+											<option value="3">거래완료</option>
+											<!-- <option value="4">나눔</option> -->
+											<option value="5">숨김</option>
+										</select>
 									</div>
-								</li>
-							</ul>
-						</div>
-						<div class="modal-footer">
-							<button class="btn-primary" data-bs-dismiss="modal">취소</button>
-							<button class="btn-primary" id="btnModify" onclick="editarticle()">수정하기</button>
-						</div>
-					</form>
-				</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button class="btn-primary" data-bs-dismiss="modal">취소</button>
+						<button class="btn-primary" id="btnModify" onclick="editarticle()">수정하기</button>
+					</div>
+				</form>
 			</div>
 		</div>
-		<!-- //modal -->
-		<script>
-			let slideImgs = [];
-			const imgData = `<%= postdata.images %>`;
-			const imgDatas = imgData.split(',');
-			for (let i = 0; i < imgDatas.length; i++) {
-				slideImgs.push(imgDatas[i]);
-			}
+	</div>
+	<!-- //modal -->
+	<script>
+		let slideImgs = [];
+		const imgData = `<%= postdata.images %>`;
+		const imgDatas = imgData.split(',');
+		for (let i = 0; i < imgDatas.length; i++) {
+			slideImgs.push(imgDatas[i]);
+		}
 
-			function bgc(slideImgs) {
-				const colorThief = new ColorThief();
-				slideImgs.forEach((img, i) => {
-					const html = `<div class="swiper-slide image" style="background-image: url(${img});"><img src='${img}' id='newimage${i}' crossorigin="Anonymous"></div>`;
+		function bgc(slideImgs) {
+			const colorThief = new ColorThief();
+			slideImgs.forEach((img, i) => {
+				const html = `<div class="swiper-slide image" style="background-image: url(${img});"><img src='${img}' id='newimage${i}' crossorigin="Anonymous"></div>`;
 
-					const slider = document.querySelector('.swiper-wrapper');
-					slider.insertAdjacentHTML('beforeend', html);
+				const slider = document.querySelector('.swiper-wrapper');
+				slider.insertAdjacentHTML('beforeend', html);
 
-					let sliderImg = document.querySelector('#newimage' + i);
+				let sliderImg = document.querySelector('#newimage' + i);
 
-					if (!sliderImg.complete) {
-						sliderImg.addEventListener('load', function (e) {
-							let color = colorThief.getColor(sliderImg);
-							e.target.parentNode.style.borderColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
-							if (color[0] > 50) {
-								e.target.parentNode.style.backgroundColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
-							}
-						});
-					}
+				if (!sliderImg.complete) {
+					sliderImg.addEventListener('load', function (e) {
+						let color = colorThief.getColor(sliderImg);
+						e.target.parentNode.style.borderColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
+						if (color[0] > 50) {
+							e.target.parentNode.style.backgroundColor = `rgba(${color[0]},${color[1]},${color[2]},.5)`;
+						}
+					});
+				}
+			});
+		}
+
+		if (document.querySelector('.swiper-container')) {
+			bgc(slideImgs);
+			const swiper1 = new Swiper('.swiper-container', {
+				pagination: {
+					el: '.swiper-pagination',
+				},
+
+				navigation: {
+					nextEl: '.swiper-container .swiper-button-next',
+					prevEl: '.swiper-container .swiper-button-prev',
+				},
+			});
+		}
+
+		const postdata = `<%= postdata.state %>`;
+
+		if (postdata == 2 || postdata == 3) {
+			const btnbid = document.getElementById('bidbtn');
+			const btndirect = document.getElementById('btndirect');
+
+			btnbid.disabled = true;
+			btnbid.innerText = '거래 완료';
+
+			btndirect.disabled = true;
+			btndirect.innerText = '거래 완료';
+		}
+		function directChat() {
+			const productid = document.getElementById("productid").value;
+			const postid = document.getElementById("postid").value;
+			console.log(productid, postid);
+
+			axios({
+				method: "get",
+				url: "/getcurrentuserid",
+			})
+				.then((result) => {
+					const userid = result.data.userid;
+					console.log(result.data);
+					// 채팅 페이지로 이동
+					window.location.href = `/chatroom?postid=${postid}&userid=${userid}&productid=${productid}`;
+				})
+				.catch((err) => {
+					console.log("현재아이디찾기 실패", err);
 				});
-			}
+		}
 
-			if (document.querySelector('.swiper-container')) {
-				bgc(slideImgs);
-				const swiper1 = new Swiper('.swiper-container', {
-					pagination: {
-						el: '.swiper-pagination',
-					},
+	</script>
+</body>
 
-					navigation: {
-						nextEl: '.swiper-container .swiper-button-next',
-						prevEl: '.swiper-container .swiper-button-prev',
-					},
-				});
-			}
-
-			const postdata = `<%= postdata.state %>`;
-
-			if (postdata == 2 || postdata == 3) {
-				const btnbid = document.getElementById('bidbtn');
-				const btndirect = document.getElementById('btndirect');
-
-				btnbid.disabled = true;
-				btnbid.innerText = '거래 완료';
-
-				btndirect.disabled = true;
-				btndirect.innerText = '거래 완료';
-			}
-		</script>
-	</body>
 </html>

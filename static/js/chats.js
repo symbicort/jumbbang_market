@@ -14,34 +14,29 @@ if (!yourprofileimage) {
         "https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png";
 }
 
-const { myName } = Qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-});
-
 // 입장 공지
-const myrealname = document.getElementById("myrealname").value;
+const usernick = document.getElementById("usernick").value;
 const chatBox = document.getElementById("server-result");
 const li = document.createElement("li");
 const span = document.createElement("span");
-span.textContent = myrealname + "님이 입장하셨습니다";
+span.textContent = usernick + "님이 입장하셨습니다";
 li.classList.add("notice");
 li.append(span);
-
 // chatBox의 첫 번째 자식 요소로 li를 삽입
 const firstChild = chatBox.firstChild;
 chatBox.insertBefore(li, firstChild);
 
 // socket 기능
 const room = document.getElementById("roomid").value;
-const username = myName;
-// console.log(username);
-
+const userid = document.getElementById("userid").value;
+// 이전 채팅 날짜
+let prevDate = null;
 const socket = io();
 socket.on("connect", () => {
     console.log("Socket connected:", socket.id);
 });
 
-socket.emit("joinRoom", { username, room });
+socket.emit("joinRoom", { userid, room });
 
 socket.on("roomFull", () => {
     alert(`채팅방 인원은 최대 2명입니다`);
@@ -62,11 +57,15 @@ socket.on("message", (data) => {
 function outputMessage(data) {
     console.log(data);
     const li = document.createElement("li");
-    if (data.name == "notice") {
+    const newDate = data.date;
+    if (newDate != prevDate) {
+        // 새로운 날짜를 이전 날짜로 업데이트
+        prevDate = newDate;
         li.classList.add("notice");
-        li.innerHTML = `<span>${data.text}</span>`;
+        li.innerHTML = `<span>${newDate}</span>`;
         document.querySelector("#server-result").appendChild(li);
-        return;
+        li.innerHTML = "";
+        li.classList.remove("notice");
     }
     if (data.id === socket.id) {
         li.classList.add("me");
@@ -92,16 +91,10 @@ function outputRoomName(roomname) {
     setroomName.innerText = roomname;
 }
 
-// function outputUsers(users) {
-//     userList.innerHTML = `${users
-//         .map((user) => `<li id=${user.username}>${user.username}</li>`)
-//         .join("")}`;
-// }
-
 function exit(roomid, from) {
     console.log("나가기 기능");
-    console.log(roomid);
-    console.log(from);
+    // console.log(roomid);
+    // console.log(from);
     axios({
         method: "delete",
         url: "/chatroom",
@@ -109,9 +102,11 @@ function exit(roomid, from) {
     })
         .then(() => {
             if (!from) {
+                // market 접근
                 window.history.back();
             } else {
-                window.location.href = `/getchatrooms?myName=${myName}`;
+                // chatrooms 접근
+                window.location.href = `/getchatrooms?userid=${userid}`;
             }
             socket.disconnect();
             console.log("채팅방 나가기 성공");
@@ -132,7 +127,7 @@ function send() {
         data: {
             roomid: room,
             sendmsg: msg.value,
-            sendid: myrealname,
+            sendid: userid,
         },
     })
         .then((result) => {
@@ -142,7 +137,7 @@ function send() {
             console.log(error);
         });
     const data = {
-        username: myrealname,
+        userid: userid,
         id: socket.id,
         msg: msg.value,
     };

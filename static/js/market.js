@@ -173,71 +173,6 @@ priceSortInput.forEach((elm, i) => {
     });
 });
 
-document.getElementById("drop").addEventListener("change", function () {
-    // 체크박스의 체크 상태 확인
-    if (this.checked) {
-        // 체크된 경우 체크박스의 value 값을 가져와서 출력
-        var checkboxValue = this.value;
-        console.log("체크된 체크박스의 값:", checkboxValue);
-        // 이후에 필요한 로직 수행
-    } else {
-        // 체크가 해제된 경우에 필요한 로직 수행
-        checkboxValue = undefined;
-    }
-    axios({
-        method: "get",
-        url: "/marketsort",
-        params: {
-            selectedSort: checkboxValue,
-        },
-    })
-        .then((result) => {
-            // console.log(cardBox);
-            cardBox.innerHTML = "";
-            // console.log(result.data);
-            const sortedArray = result.data.postData;
-            let html = "";
-            for (let i = 0; i < sortedArray.length; i++) {
-                html += ` <article class="card">
-                    <a class="card-link" href="/articles/${sortedArray[i]._id}">
-                        <div class="card-photo"
-                            style="background-image: url('${sortedArray[i].images[0]}')">
-                            <img alt="오락기" src="${sortedArray[i].images[0]}" crossorigin="anonymous">
-                        </div>
-                        <div class="card-desc">
-                            <h2 class="card-title">
-                            ${sortedArray[i].subject}
-                            </h2>
-                            <div class="card-price">
-                            ${sortedArray[i].priceLast}
-                            </div>
-                            <div class="card-region-name">
-                            ${sortedArray[i].userid.address}
-                            </div>
-                            <div class="card-counts">
-                                <span class="bookmarkHit" aria-label="관심">
-                                ${sortedArray[i].bookmark_hit}
-                                </span> ∙
-                                <span class="chatHit" aria-label="채팅">
-                                ${sortedArray[i].chat}
-                                </span> ∙
-                                <span class="hit" aria-label="조회">
-                                ${sortedArray[i].hit}
-                                </span>
-
-                            </div>
-                        </div>
-                    </a>
-                </article>`;
-            }
-            // console.log("Generated HTML:", html);
-            cardBox.innerHTML = html;
-        })
-        .catch((error) => {
-            console.log("sort error", error);
-        });
-});
-
 //테스트
 const productData = {
     priceFirst: 190000,
@@ -247,24 +182,6 @@ const productData = {
 function btnBid() {}
 
 // 중고거래 상세페이지 채팅버튼 함수
-function directChat() {
-    const productId = document.getElementById("productid").value;
-    const postName = document.querySelector("#nick").innerText;
-
-    axios({
-        method: "get",
-        url: "/getcurrentuserid",
-    })
-        .then((result) => {
-            const username = result.data.username;
-            console.log(username);
-            // 채팅 페이지로 이동
-            window.location.href = `/chatroom?postName=${postName}&myName=${username}&productId=${productId}`;
-        })
-        .catch((err) => {
-            console.log("현재아이디찾기 실패", err);
-        });
-}
 
 async function addpost() {
     const form = document.forms["marketWrite"];

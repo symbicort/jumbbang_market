@@ -21,37 +21,36 @@ exports.getChats = async (req, res) => {
                 // 현재 로그인 id, nick 구하기
                 const myid = decodedjwt.userid;
                 const myinfo = await user.findOne({ userid: myid });
-                const myrealname = myinfo.nick;
-                const { postName, myName, productId, from } = req.query;
-
-                let yourrealname;
-                if (postName != myrealname) {
-                    yourrealname = postName;
+                const { postid, userid, productid, from } = req.query;
+                let yourinfo;
+                if (postid != myid) {
+                    yourinfo = await user.findOne({ userid: postid });
                 } else {
-                    yourrealname = myName;
+                    yourinfo = await user.findOne({ userid: userid });
                 }
-                const yourinfo = await user.findOne({ nick: yourrealname });
-                console.log("chatrooms check", postName, myName, productId);
-                console.log("sendid check", myrealname, myName);
+                console.log("chatrooms check", postid, userid, productid);
+                // console.log("sendid check", userid, myid);
 
+                // market모델에서 게시물 제목 데이터 가져오기
                 let roominfo = await market.findOne({
-                    _id: productId,
+                    _id: productid,
                 });
                 let roomname = roominfo.subject;
-                // productId를 기준으로 채팅방 검색
+                // productid 기준으로 채팅방 검색
                 const savedChatRooms = await chatrooms.findOne({
-                    productId: productId,
+                    productId: productid,
                     $or: [
-                        { takeId: myName, sendId: postName },
-                        { takeId: postName, sendId: myName },
+                        { takeId: userid, sendId: postid },
+                        { takeId: postid, sendId: userid },
                     ],
                 });
+                // 검색한 채팅방의 채팅 내역 저장 변수
                 let savedChats;
                 if (!savedChatRooms) {
                     const newChatRoom = await chatrooms.create({
-                        sendId: myName,
-                        takeId: postName,
-                        productId: productId,
+                        sendId: userid,
+                        takeId: postid,
+                        productId: productid,
                     });
                     console.log("newChatRoom", newChatRoom);
                     savedChats = [];
@@ -59,8 +58,6 @@ exports.getChats = async (req, res) => {
                     res.render("chats", {
                         nowRoomId: newChatRoom._id,
                         savedChats,
-                        myname: myName,
-                        yourname: postName,
                         from,
                         roomname,
                         myinfo,
@@ -71,7 +68,7 @@ exports.getChats = async (req, res) => {
                     savedChats = await chats.find({
                         roomId: savedChatRooms._id,
                     });
-                    // 채팅방 날짜 업데이트
+                    // 채팅방 날짜, 시간 형식 변환 및 저장
                     savedChats = savedChats.map((chat) => {
                         return {
                             ...chat._doc,
@@ -81,13 +78,10 @@ exports.getChats = async (req, res) => {
                             chatTime: moment(chat.createdAt).format("a hh:mm"),
                         };
                     });
-                    console.log("myrealname", myrealname);
                     console.log("savedChats", savedChats);
                     res.render("chats", {
                         nowRoomId: savedChatRooms._id,
                         savedChats,
-                        myname: myName,
-                        yourname: postName,
                         from,
                         roomname,
                         myinfo,
@@ -114,16 +108,16 @@ exports.getChatrooms = async (req, res) => {
 
             if (decodedjwt.token != undefined) {
                 let mychatrooms;
-                const { myName } = req.query;
-                const myinfo = await user.findOne({ nick: myName });
-                console.log("myName", myName);
+                const userid = decodedjwt.userid;
+                const myinfo = await user.findOne({ userid: userid });
+                console.log("userid", userid);
                 try {
                     const fromMe = await chatrooms.find({
-                        sendId: myName,
+                        sendId: userid,
                     });
                     console.log("내가 보낸 채팅방", fromMe);
                     const toMe = await chatrooms.find({
-                        takeId: myName,
+                        takeId: userid,
                     });
                     console.log("내가 받은 채팅방", toMe);
                     mychatrooms = [...fromMe, ...toMe];
@@ -149,19 +143,24 @@ exports.getChatrooms = async (req, res) => {
                 let productNames = [];
                 let yourNames = [];
                 let yourProfileImgs = [];
+                let chatroomids = [];
                 for (let i = 0; i < mychatrooms.length; i++) {
                     // console.log(mychatrooms[i].productId);
                     try {
-                        if (mychatrooms[i].sendId != myName) {
-                            yourNames.push(mychatrooms[i].sendId);
+                        if (mychatrooms[i].sendId != userid) {
+                            yourNames.push(
+                                await getUsernameByUserid(mychatrooms[i].sendId)
+                            );
                         } else {
-                            yourNames.push(mychatrooms[i].takeId);
+                            yourNames.push(
+                                await getUsernameByUserid(mychatrooms[i].takeId)
+                            );
                         }
                         const productName = await market.findOne({
                             _id: mychatrooms[i].productId,
                         });
                         if (productName) {
-                            productNames.push(productName);
+                            productNames.push(productName.subject);
                         } else {
                             productNames.push({});
                         }
@@ -183,16 +182,15 @@ exports.getChatrooms = async (req, res) => {
                 console.log("productNames length", productNames.length);
                 console.log("productNames", productNames);
                 console.log("yourNames", yourNames);
-                console.log("myName", myName);
                 console.log("myinfo.image", myinfo.image);
                 console.log("yourProfileImgs", yourProfileImgs);
                 res.render("chatrooms", {
                     mychatrooms,
                     productNames,
-                    myName,
+                    userid,
                     yourNames,
                     yourProfileImgs,
-                    image: myinfo.image,
+                    myimage: myinfo.image,
                 });
             } else {
                 res.render("login");
@@ -219,32 +217,29 @@ exports.chatExit = async (req, res) => {
     const { roomid } = req.body;
     const result = await chatrooms.findOneAndDelete({ _id: roomid });
     const resultchat = await chats.deleteMany({ roomId: roomid });
-    console.log("result", result, resultchat);
+    console.log("chatExit result", result, resultchat);
     res.send({ result });
 };
 
 // 현재 로그인 아이디 구하기
 exports.getCurrentUserId = async (req, res) => {
-    try {
-        const token = req.cookies.accessToken;
-        const refreshToken = req.cookies.refreshToken;
-        if (!token) {
-            res.render("login");
+    const token = req.cookies.accessToken;
+    const refreshToken = req.cookies.refreshToken;
+    if (!token) {
+        res.render("login");
+    } else {
+        const decodedjwt = await verifyToken(token, refreshToken);
+        const username = await getUsernameByUserid(decodedjwt.userid);
+        const userid = decodedjwt.userid;
+        if (decodedjwt.token != undefined) {
+            console.log(userid, username);
+            res.send({
+                userid: userid,
+                username: username,
+            });
         } else {
-            const decodedjwt = await verifyToken(token, refreshToken);
-            const username = await getUsernameByUserid(decodedjwt.userid);
-            if (decodedjwt.token != undefined) {
-                res.send({
-                    userid: decodedjwt.userid,
-                    username: username,
-                });
-            } else {
-                res.render("login");
-            }
+            res.render("login");
         }
-    } catch (err) {
-        console.error("getCurrentUserId 에러:", err);
-        res.status(500).json({ error: "서버 에러" });
     }
 };
 
@@ -262,7 +257,7 @@ exports.socketConnection = (socket, io) => {
     console.log("Socket connection status:", socket.connected);
 
     console.log("socket 연결 > ", socket.id);
-    socket.on("joinRoom", ({ username, room }) => {
+    socket.on("joinRoom", ({ userid, room }) => {
         let roomUsers = getRoomUsers(room);
         console.log("현재 room 인원", roomUsers);
         if (roomUsers.length >= 2) {
@@ -271,25 +266,10 @@ exports.socketConnection = (socket, io) => {
             console.log("Socket connection status:", socket.connected);
             return;
         }
-        const user = userJoin(socket.id, username, room);
+        const user = userJoin(socket.id, userid, room);
         socket.join(user.room);
         roomUsers = getRoomUsers(user.room);
         console.log("join후 room 인원", roomUsers);
-
-        // socket.emit(
-        //     "message",
-        //     formatMessage(socket, `${user.username}님 환영합니다!`, "notice")
-        // );
-        // socket.broadcast
-        //     .to(user.room)
-        //     .emit(
-        //         "message",
-        //         formatMessage(
-        //             socket,
-        //             `${user.username}님이 입장하셨습니다.`,
-        //             "notice"
-        //         )
-        //     );
 
         io.to(user.room).emit("roomUsers");
     });
@@ -298,22 +278,14 @@ exports.socketConnection = (socket, io) => {
         const user = getCurrentUser(socket.id);
         io.to(user.room).emit(
             "message",
-            formatMessage(socket, data.msg, data.username)
+            formatMessage(socket, data.msg, data.userid)
         );
     });
 
     socket.on("disconnect", () => {
         const user = userLeave(socket.id);
         if (user) {
-            // io.to(user.room).emit(
-            //     "message",
-            //     formatMessage(
-            //         socket,
-            //         `${user.username}님이 퇴장하셨습니다.`,
-            //         "notice"
-            //     )
-            // );
-            console.log("삭제할 username >", user.username);
+            console.log("삭제할 userid >", user.userid);
         }
     });
 };
@@ -322,8 +294,8 @@ exports.socketConnection = (socket, io) => {
 const users = [];
 
 // 사용자 배열에 user 추가
-function userJoin(id, username, room) {
-    const user = { id, username, room };
+function userJoin(id, userid, room) {
+    const user = { id, userid, room };
     users.push(user);
     return user;
 }
