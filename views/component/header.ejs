@@ -86,8 +86,8 @@
       </div>
       <div class="utility-wrap">
         <div class="info">
-          <input type="text" id="header-search">
-          <i class="fa-solid fa-magnifying-glass header-small-search"></i>
+          <input type="text" id="header-search" onkeydown="if(window.event.keyCode == 13){search()}">
+          <i class="fa-solid fa-magnifying-glass header-small-search" onclick="search()"></i>
         </div>
         <div class="user-info">
           <i class="fa-regular fa-user"></i>
@@ -122,19 +122,4 @@
       }
     });
   })();
-
-  function enter() {
-    if (window.event.keyCode == 13) {
-      let val = document.querySelector('#search').value;
-      console.log(val);
-      location.href = `/search?q=${val}`;
-    }
-  }
-
-  function search() {
-    let searchInput = document.querySelector('#search');
-    let val = searchInput.value;
-    searchInput.classList.toggle('show');
-    // location.href = `/search?q=${val}`;
-  }
 </script>

@@ -1,85 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<%- include('./component/head', { title: '통합 검색 - 점빵' }) %>
-	</head>
-	<body>
-		<div id="jumbbang">
-			<%- include('./component/header') %>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<%- include('./component/head', { title: '통합 검색 - 점빵' }) %>
+</head>
+
+<body>
+	<div id="jumbbang">
+		<%- include('./component/header') %>
 			<main class="container">
 				<h1 class="h2">통합 검색</h1>
 				<h2 class="h3">상품 결과</h2>
 				<section class="cards-wrap">
 					<!-- 상품 결과 최대 : 8개 -->
 					<!-- 경매 상품인 경우 : 가격 노출 -->
-					<article class="card">
-						<a class="card-link" href="/articles/1">
-							<div class="card-photo">
-								<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-							</div>
-							<div class="card-desc">
-								<h2 class="card-title">오락기</h2>
-								<div class="card-price">1,000원</div>
-								<div class="card-region-name">인천 계양구</div>
-								<div class="card-counts">
-									<span class="bookmarkHit" aria-label="관심">70</span> ∙
-									<span class="chatHit" aria-label="채팅">36</span> ∙
-									<span class="hit" aria-label="조회">2221</span>
+					<% for(let i=0; i < searchResult.length; i++) { %>
+						<article class="card">
+							<a class="card-link" href="/articles/<%= searchResult[i]._id %>">
+								<div class="card-photo"
+									style="background-image: url('<%= searchResult[i].images[0] %>')">
+									<img alt="오락기" src="<%= searchResult[i].images[0] %>" crossorigin="anonymous">
 								</div>
-							</div>
-						</a>
-					</article>
-					<!-- //경매 상품인 경우 : 가격 노출 -->
+								<div class="card-desc">
+									<h2 class="card-title">
+										<%= searchResult[i].subject %>
+									</h2>
+									<div class="card-price">
+										<%= searchResult[i].priceLast %>원
+									</div>
+									<div class="card-region-name">
+										<%= searchResult[i].userid.address %>
+									</div>
+									<div class="card-counts">
+										<span class="bookmarkHit" aria-label="관심">
+											<%= searchResult[i].bookmark_hit %>
+										</span> ∙
+										<span class="chatHit" aria-label="채팅">
+											<%= searchResult[i].chat %>
+										</span> ∙
+										<span class="hit" aria-label="조회">
+											<%= searchResult[i].hit %>
+										</span>
+									</div>
+								</div>
+							</a>
+						</article>
+						<% } %>
+							<!-- //경매 상품인 경우 : 가격 노출 -->
 
-					<!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
-					<article class="card">
-						<a class="card-link" href="/articles/1">
-							<div class="card-photo">
-								<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-							</div>
-							<div class="card-desc">
-								<h2 class="card-title">오락기</h2>
-								<div class="card-price-share">나눔</div>
-								<div class="card-region-name">인천 계양구</div>
-								<div class="card-counts">
-									<span class="bookmarkHit" aria-label="관심">70</span> ∙
-									<span class="chatHit" aria-label="채팅">36</span> ∙
-									<span class="hit" aria-label="조회">2221</span>
-								</div>
-							</div>
-						</a>
-					</article>
-					<!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
-
-					<!-- 샘플용 : 6개 -->
-					<% for(let i=1;i <= 6;i++ ){ %>
-					<article class="card">
-						<a class="card-link" href="/articles/1">
-							<div class="card-photo">
-								<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
-							</div>
-							<div class="card-desc">
-								<h2 class="card-title">오락기</h2>
-								<div class="card-price">1,000원</div>
-								<div class="card-region-name">인천 계양구</div>
-								<div class="card-counts">
-									<span class="bookmarkHit" aria-label="관심">70</span> ∙
-									<span class="chatHit" aria-label="채팅">36</span> ∙
-									<span class="hit" aria-label="조회">2221</span>
-								</div>
-							</div>
-						</a>
-					</article>
-					<% } %>
-					<!-- //샘플용 : 18개 -->
+							<!-- 나눔인경우 : 가격 -> 나눔으로 표시 -->
+							<!-- <article class="card">
+								<a class="card-link" href="/articles/1">
+									<div class="card-photo">
+										<img alt="오락기" src="/static/imgs/test.jpg" crossorigin="Anonymous" />
+									</div>
+									<div class="card-desc">
+										<h2 class="card-title">오락기</h2>
+										<div class="card-price-share">나눔</div>
+										<div class="card-region-name">인천 계양구</div>
+										<div class="card-counts">
+											<span class="bookmarkHit" aria-label="관심">70</span> ∙
+											<span class="chatHit" aria-label="채팅">36</span> ∙
+											<span class="hit" aria-label="조회">2221</span>
+										</div>
+									</div>
+								</a>
+							</article> -->
+							<!-- //나눔인경우 : 가격 -> 나눔으로 표시 -->
 				</section>
 
 				<h2 class="h3 mt-5">게시물 결과</h2>
 				<div class="my-3">게시물 목록 노출 영역</div>
 			</main>
 			<%- include('./component/footer') %>
-		</div>
-	</body>
+	</div>
+</body>
+
 </html>
