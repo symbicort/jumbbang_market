@@ -125,7 +125,8 @@
 									<li class="col-md-6 col-lg-12">
 										<div>
 											<span class="txt">즉구가</span><span class="price" id="price"> <%= postdata.priceDirect %> </span>
-											<button type="button" class="btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalBuy">
+											<button type="button" class="btn-primary w-100" 
+											id="btndirect" data-bs-toggle="modal" data-bs-target="#modalBuy">
 												구매하기
 											</button>
 										</div>
@@ -252,7 +253,7 @@
 						</div>
 						<div class="modal-footer">
 							<button class="btn-primary" data-bs-dismiss="modal">취소</button>
-							<button class="btn-primary" id="btnBid" onclick="buyDirect()">구매하기</button>
+							<button class="btn-primary" onclick="buyDirect()">구매하기</button>
 						</div>
 					</form>
 				</div>
@@ -378,7 +379,14 @@
 			const postdata = `<%= postdata.state %>`;
 
 			if(postdata == 2 || postdata == 3){
+				const btnbid = document.getElementById('bidbtn');
+				const btndirect = document.getElementById('btndirect');
 
+				btnbid.disabled = true;
+				btnbid.innerText = '거래 완료';
+
+				btndirect.disabled = true;
+				btndirect.innerText = '거래 완료';
 			}
 		</script>
 	</body>
