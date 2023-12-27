@@ -173,6 +173,71 @@ priceSortInput.forEach((elm, i) => {
     });
 });
 
+document.getElementById("drop").addEventListener("change", function () {
+    // 체크박스의 체크 상태 확인
+    if (this.checked) {
+        // 체크된 경우 체크박스의 value 값을 가져와서 출력
+        var checkboxValue = this.value;
+        console.log("체크된 체크박스의 값:", checkboxValue);
+        // 이후에 필요한 로직 수행
+    } else {
+        // 체크가 해제된 경우에 필요한 로직 수행
+        checkboxValue = undefined;
+    }
+    axios({
+        method: "get",
+        url: "/marketsort",
+        params: {
+            selectedSort: checkboxValue,
+        },
+    })
+        .then((result) => {
+            // console.log(cardBox);
+            cardBox.innerHTML = "";
+            // console.log(result.data);
+            const sortedArray = result.data.postData;
+            let html = "";
+            for (let i = 0; i < sortedArray.length; i++) {
+                html += ` <article class="card">
+                    <a class="card-link" href="/articles/${sortedArray[i]._id}">
+                        <div class="card-photo"
+                            style="background-image: url('${sortedArray[i].images[0]}')">
+                            <img alt="오락기" src="${sortedArray[i].images[0]}" crossorigin="anonymous">
+                        </div>
+                        <div class="card-desc">
+                            <h2 class="card-title">
+                            ${sortedArray[i].subject}
+                            </h2>
+                            <div class="card-price">
+                            ${sortedArray[i].priceLast}
+                            </div>
+                            <div class="card-region-name">
+                            ${sortedArray[i].userid.address}
+                            </div>
+                            <div class="card-counts">
+                                <span class="bookmarkHit" aria-label="관심">
+                                ${sortedArray[i].bookmark_hit}
+                                </span> ∙
+                                <span class="chatHit" aria-label="채팅">
+                                ${sortedArray[i].chat}
+                                </span> ∙
+                                <span class="hit" aria-label="조회">
+                                ${sortedArray[i].hit}
+                                </span>
+
+                            </div>
+                        </div>
+                    </a>
+                </article>`;
+            }
+            // console.log("Generated HTML:", html);
+            cardBox.innerHTML = html;
+        })
+        .catch((error) => {
+            console.log("sort error", error);
+        });
+});
+
 //테스트
 const productData = {
     priceFirst: 190000,
@@ -294,7 +359,7 @@ function buyDirect() {
     });
 }
 
-function usercheck(){
+function usercheck() {
     const currentURL = window.location.href;
 
     const urlWithoutQuery = currentURL.split("?")[0];
@@ -308,39 +373,39 @@ function usercheck(){
             productId: lastSegment,
         },
     }).then((res) => {
-        console.log(res.data.islogin)
-        if(res.data.islogin == true){
-            if(res.data.result == false){
+        console.log(res.data.islogin);
+        if (res.data.islogin == true) {
+            if (res.data.result == false) {
                 location.reload();
-                alert('본인이 작성한 게시글이 아닙니다');
+                alert("본인이 작성한 게시글이 아닙니다");
             }
         } else {
-            alert('로그인 상태가 아닙니다.');
-            document.location.href = '/login'
+            alert("로그인 상태가 아닙니다.");
+            document.location.href = "/login";
         }
     });
 }
 
-async function editarticle(){
+async function editarticle() {
     const currentURL = window.location.href;
 
     const urlWithoutQuery = currentURL.split("?")[0];
     const lastSegment = urlWithoutQuery.split("/").pop();
 
-    const subject = document.getElementById('subject');
-    const content = document.getElementById('comment');
-    const state = document.getElementById('state');
+    const subject = document.getElementById("subject");
+    const content = document.getElementById("comment");
+    const state = document.getElementById("state");
 
     await axios({
-        method: 'PATCH',
-        url: '/market/editArticle',
+        method: "PATCH",
+        url: "/market/editArticle",
         data: {
             articleid: lastSegment,
             subject: subject.value,
             content: content.value,
-            state: state.value
+            state: state.value,
         },
     }).then((res) => {
         alert(res.data.msg);
-    })
+    });
 }
