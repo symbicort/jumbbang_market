@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<%- include('./component/head', { title: '중고거래 - 점빵' }) %>
+		<%- include('./component/head', { title: '중고거래 - 완두점빵' }) %>
 		<link
 			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap"
 			rel="stylesheet" />
@@ -79,7 +79,13 @@
 											</dt>
 											<dd class="ico-face" data-lv="3"></dd>
 											<dd class="d-flex gap-2">
-												<button class="btn-primary" data-bs-toggle="modal" data-bs-target="#modalModify" onclick="usercheck()">수정</button>
+												<button
+													class="btn-primary"
+													data-bs-toggle="modal"
+													data-bs-target="#modalModify"
+													onclick="usercheck()">
+													수정
+												</button>
 												<input type="checkbox" id="bookmark" name="bookmark" hidden />
 
 												<label for="bookmark" class="ibt-bookmark btn-primary" aria-label="관심 추가"></label>
@@ -116,8 +122,12 @@
 										<div>
 											<span class="txt">현재가</span
 											><span class="price" id="priceLast"> <%= postdata.priceLast %> </span>
-											<button type="button" class="btn-primary w-100" id="bidbtn"
-											data-bs-toggle="modal" data-bs-target="#modalBid">
+											<button
+												type="button"
+												class="btn-primary w-100"
+												id="bidbtn"
+												data-bs-toggle="modal"
+												data-bs-target="#modalBid">
 												입찰하기
 											</button>
 										</div>
@@ -125,8 +135,12 @@
 									<li class="col-md-6 col-lg-12">
 										<div>
 											<span class="txt">즉구가</span><span class="price" id="price"> <%= postdata.priceDirect %> </span>
-											<button type="button" class="btn-primary w-100" 
-											id="btndirect" data-bs-toggle="modal" data-bs-target="#modalBuy">
+											<button
+												type="button"
+												class="btn-primary w-100"
+												id="btndirect"
+												data-bs-toggle="modal"
+												data-bs-target="#modalBuy">
 												구매하기
 											</button>
 										</div>
@@ -302,7 +316,9 @@
 												rows="5"
 												placeholder="설명"
 												required=""
-												value=""><%= postdata.content %></textarea>
+												value="">
+<%= postdata.content %></textarea
+											>
 											<div class="invalid-feedback">상품 설명은 필수 입니다</div>
 										</div>
 									</div>
@@ -378,7 +394,7 @@
 
 			const postdata = `<%= postdata.state %>`;
 
-			if(postdata == 2 || postdata == 3){
+			if (postdata == 2 || postdata == 3) {
 				const btnbid = document.getElementById('bidbtn');
 				const btndirect = document.getElementById('btndirect');
 

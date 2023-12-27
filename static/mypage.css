@@ -1,183 +1,191 @@
 /* 공통 */
 .sub-title {
-  margin: 1em 0;
-  font-size: 1.2rem;
-  font-weight: 500;
+	margin: 1em 0;
+	font-size: 1.2rem;
+	font-weight: 500;
 }
 
 /* 마이페이지 목록 */
 #mypage {
-  padding: 5rem 0;
+	/* padding: 5rem 0; */
 }
 
 .mypage-inner {
-  max-width: 1280px;
-  height: auto;
-  margin: 0 auto;
-  display: flex;
+	max-width: 1280px;
+	height: auto;
+	margin: 0 auto;
+	display: flex;
 }
 
 .mypage-profile-list {
-  width: 100%;
-  display: flex;
-  align-items: center;
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
 }
 
 /* 프로필 및 목록 */
 .mypage-group {
-  width: 300px;
-  border-radius: 16px;
-  background-color: #008000;
-  display: flex;
-  justify-content: center;
-  color: #fff;
+	width: 300px;
+	border-radius: 16px;
+	background-color: #008000;
+	display: flex;
+	justify-content: center;
+	color: #fff;
 }
-
+.mypage-group .sub-title,
+.mypage-group .sub-title + div,
+.mypage-group .sub-title + ul {
+	padding: 0 10px;
+}
+.mypage-group a {
+	color: #fff;
+}
 .mypage-user-profile {
-  margin-top: 2em;
-  text-align: center;
-  border-bottom: 1px solid #fff;
+	margin-top: 2em;
+	text-align: center;
+	border-bottom: 1px solid #fff;
 }
 .mypage-user-img {
-  margin: 0 auto;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: #fff;
-  overflow: hidden;
-  background-size: cover;
+	margin: 0 auto;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	background-color: #fff;
+	overflow: hidden;
+	background-size: cover;
 }
 
 .mypage-user-id {
-  margin: 1.5em 0 1.8em 0;
+	margin: 1.5em 0 1.8em 0;
 }
 
 .mypage-history {
-  border-bottom: 1px solid #fff;
-  margin-bottom: 1em;
+	border-bottom: 1px solid #fff;
+	margin-bottom: 1em;
 }
 
 .mypage-history-ul {
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 .mypage-history-li {
-  margin: 0.5rem 0;
+	margin: 0.5rem 0;
 }
 
 .mypage-history-li a {
-  color: #fff;
+	color: #fff;
 }
 
 .mypage-review-chat {
-  border-bottom: 1px solid #fff;
-  margin-bottom: 1em;
+	border-bottom: 1px solid #fff;
+	margin-bottom: 1em;
 }
 
 .mypage-review-chat-ul {
-  margin-bottom: 1em;
+	margin-bottom: 1em;
 }
+
 .mypage-review-chat-li {
-  margin: 0.5em 0;
+	margin: 0.5em 0;
 }
 
 .mypage-my-profile {
-  padding-bottom: 1em;
+	padding-bottom: 1em;
 }
 .mypage-my-profile > div {
-  margin: 0.5em 0;
+	margin: 0.5em 0;
 }
 
 /* 탭 버튼 */
 .mypage-record {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 .mypage-record-inner {
-  width: 96%;
-  margin-left: auto;
+	width: 96%;
+	margin-left: auto;
 }
 
 .mypage-record-title {
-  font-size: 2rem;
-  margin: 2.5rem 0 1rem 0;
+	font-size: 2rem;
+	margin: 2.5rem 0 1rem 0;
 }
 
 .mypage-tab-menu {
-  display: flex;
-  border-bottom: 1px solid #adadad;
-  padding-bottom: 1rem;
+	display: flex;
+	border-bottom: 1px solid #adadad;
+	padding-bottom: 1rem;
 }
 
 .mypage-tab-menu > li > a {
-  display: block;
-  width: 120px;
-  height: 40px;
-  margin-right: 0.8rem;
-  border-radius: 20px;
-  border: 1px solid #adadad;
-  color: #8d8b8b;
-  text-align: center;
-  line-height: 40px;
-  font-size: 1.2rem;
+	display: block;
+	width: 120px;
+	height: 40px;
+	margin-right: 0.8rem;
+	border-radius: 20px;
+	border: 1px solid #adadad;
+	color: #8d8b8b;
+	text-align: center;
+	line-height: 40px;
+	font-size: 1.2rem;
 }
 
 .mypage-tab-sale li a.active {
-  background-color: #008000;
-  color: #fff;
+	background-color: #008000;
+	color: #fff;
 }
 
 .mypage-tab-content > div {
-  display: none;
+	display: none;
 }
 
 /* 탭 내역 */
 .mypage-tab-product {
-  display: flex;
-  width: 100%;
-  height: auto;
-  margin: 1rem 0;
+	display: flex;
+	width: 100%;
+	height: auto;
+	margin: 1rem 0;
 }
 
 .mypage-sale-img {
-  width: 30%;
-  height: 12rem;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-right: 1rem;
+	width: 30%;
+	height: 12rem;
+	border-radius: 12px;
+	overflow: hidden;
+	margin-right: 1rem;
 }
 .mypage-sale-img > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background-position: center;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	background-position: center;
 }
 
 .date {
-  color: #333;
-  margin: 1rem 0;
+	color: #333;
+	margin: 1rem 0;
 }
 
 .record-product-title {
-  font-size: 1.6rem;
-  font-weight: 500;
-  margin: 1rem 0;
+	font-size: 1.6rem;
+	font-weight: 500;
+	margin: 1rem 0;
 }
 
 .tag {
-  display: inline-block;
-  width: 100px;
-  height: 36px;
-  border-radius: 6px;
-  background-color: #4d515a;
-  color: #fff;
-  text-align: center;
-  line-height: 36px;
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
+	display: inline-block;
+	width: 100px;
+	height: 36px;
+	border-radius: 6px;
+	background-color: #4d515a;
+	color: #fff;
+	text-align: center;
+	line-height: 36px;
+	font-size: 1.2rem;
+	margin-right: 0.5rem;
 }
 
 .price {
-  font-size: 1.2rem;
-  font-weight: 500;
+	font-size: 1.2rem;
+	font-weight: 500;
 }

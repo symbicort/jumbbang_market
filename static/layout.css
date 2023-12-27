@@ -1,7 +1,15 @@
+body {
+	background-color: #f5f5f5;
+}
+main {
+	padding: 3rem 0;
+	background-color: #fff;
+}
 /* 헤더 */
 #header {
 	width: 100%;
 	position: fixed;
+	position: sticky;
 	top: 0;
 	background-color: #fff;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -21,7 +29,8 @@
 	width: 100%;
 	display: flex;
 	align-items: flex-end;
-	padding: 2.5rem 0 1.5rem 0;
+	padding-top: 2.5rem;
+	padding-bottom: 1.5rem;
 }
 
 .logo-wrap {
@@ -60,19 +69,18 @@
 	position: relative;
 }
 
-.subnav-user li::before {
+.subnav-user li:last-child::before {
 	content: '';
 	position: absolute;
 	top: 50%;
-	right: -9px;
+	left: 9px;
 	transform: translateY(-50%);
 	width: 1px;
 	height: 12px;
 	background-color: #ccc;
 }
 
-.subnav-user li:first-child::before,
-.subnav-user li:last-child::before {
+.subnav-user li:first-child::before {
 	content: none;
 }
 

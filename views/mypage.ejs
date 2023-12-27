@@ -1,144 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('./component/head', { title: '마이페이지 - 완두점빵' }) %>
+	</head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%- include('./component/head', { title: '마이페이지 - 점빵' }) %>
-</head>
+	<body>
+		<%- include('./component/header') %>
+		<main id="mypage">
+			<div class="mypage-inner container">
+				<div class="mypage-profile-list">
+					<%- include('./component/mypageMenu') %>
+					<!-- 내역 탭 -->
+					<!-- 구매 내역에는 받은후기 추가 -->
+					<section class="mypage-record">
+						<div class="mypage-record-inner">
+							<h2 class="mypage-record-title" id="sale-list-tab">판매내역</h2>
+							<!-- 탭 버튼 -->
+							<div class="mypage-tab-sale">
+								<ul class="mypage-tab-menu">
+									<li><a href="#sale-tab1" class="active">판매중</a></li>
+									<li><a href="#sale-tab2">판매 완료</a></li>
+									<li><a href="#sale-tab3">거래완료</a></li>
+								</ul>
+								<div class="mypage-tab-content">
+									<div id="sale-tab1" class="active">
+										<ul class="mypage-tab-ul">
+											<li class="mypage-tab-li">
+												<a class="mypage-tab-product" href="#">
+													<div class="mypage-sale-img">
+														<img
+															src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMLFP4vhJReVETbN7dzW3a5-YzpSS0Be8bw&usqp=CAU"
+															alt="" />
+													</div>
+													<div>
+														<div class="date">2023-12-23</div>
+														<div class="record-product-title">가방 팔아요~</div>
+														<div class="record-product-price">
+															<span class="tag">판매중</span>
+															<span class="price">30,000원</span>
+														</div>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+									<div id="sale-tab2">
+										<ul class="mypage-tab-ul">
+											<li class="mypage-tab-li">
+												<a class="mypage-tab-product" href="#">
+													<div class="mypage-sale-img">
+														<img
+															src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMLFP4vhJReVETbN7dzW3a5-YzpSS0Be8bw&usqp=CAU"
+															alt="" />
+													</div>
+													<div>
+														<div class="date">2023-12-23</div>
+														<div class="record-product-title">가방 팔아요~</div>
+														<div class="record-product-price">
+															<span class="tag">예약중</span>
+															<span class="price">30,000원</span>
+														</div>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+									<div id="sale-tab3">
+										<ul class="mypage-tab-ul">
+											<li class="mypage-tab-li">
+												<a class="mypage-tab-product" href="#">
+													<div class="mypage-sale-img">
+														<img
+															src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMLFP4vhJReVETbN7dzW3a5-YzpSS0Be8bw&usqp=CAU"
+															alt="" />
+													</div>
+													<div>
+														<div class="date">2023-12-23</div>
+														<div class="record-product-title">가방 팔아요~</div>
+														<div class="record-product-price">
+															<span class="tag">거래완료</span>
+															<span class="price">30,000원</span>
+														</div>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+									<div id="sale-tab4">
+										<ul class="mypage-tab-ul">
+											<li class="mypage-tab-li">
+												<a class="mypage-tab-product" href="#">
+													<div class="mypage-sale-img">
+														<img
+															src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMLFP4vhJReVETbN7dzW3a5-YzpSS0Be8bw&usqp=CAU"
+															alt="" />
+													</div>
+													<div>
+														<div class="date">2023-12-23</div>
+														<div class="record-product-title">가방 팔아요~</div>
+														<div class="record-product-price">
+															<span class="tag">숨김</span>
+															<span class="price">30,000원</span>
+														</div>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+									<div id="sale-tab5">000님께서 보낸 후기가 도착했어요.</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</main>
+		<%- include('./component/footer') %>
 
-<body>
-  <%- include('./component/header') %>
-  <main id="mypage">
-    <div class="mypage-inner">
-      <div class="mypage-profile-list">
-        <%- include('./component/mypageMenu') %>
-        <!-- 내역 탭 -->
-        <!-- 구매 내역에는 받은후기 추가 -->
-        <section class="mypage-record">
-          <div class="mypage-record-inner">
-            <h2 class="mypage-record-title" id="sale-list-tab">판매내역</h2>
-            <!-- 탭 버튼 -->
-            <div class="mypage-tab-sale">
-              <ul class="mypage-tab-menu">
-                <li><a href="#sale-tab1" class="active">판매중</a></li>
-                <li><a href="#sale-tab2">판매 완료</a></li>
-                <li><a href="#sale-tab3">거래완료</a></li>
-              </ul>
-              <div class="mypage-tab-content">
-                <div id="sale-tab1" class="active">
-                  <ul class="mypage-tab-ul">
-                    <li class="mypage-tab-li">
-                      <a class="mypage-tab-product" href="#">
-                        <div class="mypage-sale-img">
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMLFP4vhJReVETbN7dzW3a5-YzpSS0Be8bw&usqp=CAU" alt="">
-                        </div>
-                        <div>
-                          <div class="date">2023-12-23</div>
-                          <div class="record-product-title">가방 팔아요~</div>
-                          <div class="record-product-price">
-                            <span class="tag">판매중</span>
-                            <span class="price">30,000원</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div id="sale-tab2">
-                  <ul class="mypage-tab-ul">
-                    <li class="mypage-tab-li">
-                      <a class="mypage-tab-product" href="#">
-                        <div class="mypage-sale-img">
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMLFP4vhJReVETbN7dzW3a5-YzpSS0Be8bw&usqp=CAU" alt="">
-                        </div>
-                        <div>
-                          <div class="date">2023-12-23</div>
-                          <div class="record-product-title">가방 팔아요~</div>
-                          <div class="record-product-price">
-                            <span class="tag">예약중</span>
-                            <span class="price">30,000원</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div id="sale-tab3">
-                  <ul class="mypage-tab-ul">
-                    <li class="mypage-tab-li">
-                      <a class="mypage-tab-product" href="#">
-                        <div class="mypage-sale-img">
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMLFP4vhJReVETbN7dzW3a5-YzpSS0Be8bw&usqp=CAU" alt="">
-                        </div>
-                        <div>
-                          <div class="date">2023-12-23</div>
-                          <div class="record-product-title">가방 팔아요~</div>
-                          <div class="record-product-price">
-                            <span class="tag">거래완료</span>
-                            <span class="price">30,000원</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div id="sale-tab4">
-                  <ul class="mypage-tab-ul">
-                    <li class="mypage-tab-li">
-                      <a class="mypage-tab-product" href="#">
-                        <div class="mypage-sale-img">
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMLFP4vhJReVETbN7dzW3a5-YzpSS0Be8bw&usqp=CAU" alt="">
-                        </div>
-                        <div>
-                          <div class="date">2023-12-23</div>
-                          <div class="record-product-title">가방 팔아요~</div>
-                          <div class="record-product-price">
-                            <span class="tag">숨김</span>
-                            <span class="price">30,000원</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div id="sale-tab5">
-                  000님께서 보낸 후기가 도착했어요.
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </main>
-  <%- include('./component/footer') %>
+		<!-- 탭 -->
+		<script>
+			const targetLink = document.querySelectorAll('.mypage-tab-menu a');
+			const tabContent = document.querySelectorAll('.mypage-tab-content > div ');
+			console.log(tabContent);
+			for (let i = 0; i < targetLink.length; i++) {
+				targetLink[i].addEventListener('click', function (e) {
+					e.preventDefault();
+					const orgTarget = e.target.getAttribute('href');
 
-  <!-- 탭 -->
-  <script>
-    const targetLink = document.querySelectorAll('.mypage-tab-menu a')
-    const tabContent = document.querySelectorAll('.mypage-tab-content > div ')
-    console.log(tabContent);
-    for (let i = 0; i < targetLink.length; i++) {
-      targetLink[i].addEventListener('click', function(e) {
-        e.preventDefault()
-        const orgTarget = e.target.getAttribute('href')
+					const tabTarget = orgTarget.replace('#', '');
 
-        const tabTarget = orgTarget.replace('#', '')
+					for (let j = 0; j < tabContent.length; j++) {
+						tabContent[j].style.display = 'none';
+					}
+					document.getElementById(tabTarget).style.display = 'block';
 
-        for (let j = 0; j < tabContent.length; j++) {
-          tabContent[j].style.display = 'none'
-        }
-        document.getElementById(tabTarget).style.display = 'block'
-
-        for (let k = 0; k < targetLink.length; k++) {
-          targetLink[k].classList.remove('active');
-          e.target.classList.add('active')
-        }
-      })
-    }
-    document.getElementById('sale-tab1').style.display = 'block'
-  </script>
-</body>
-
+					for (let k = 0; k < targetLink.length; k++) {
+						targetLink[k].classList.remove('active');
+						e.target.classList.add('active');
+					}
+				});
+			}
+			document.getElementById('sale-tab1').style.display = 'block';
+		</script>
+	</body>
 </html>

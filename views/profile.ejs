@@ -3,87 +3,104 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<%- include('./component/head', { title: '프로필 - 점빵' }) %>
+		<%- include('./component/head', { title: '프로필 - 완두점빵' }) %>
 		<script src="/static/js/index.js"></script>
 	</head>
 
 	<body>
-		<div id="jumbbang">
-			<%- include('./component/header') %>
-			<main id="register" class="main-user d-flex justify-content-center align-items-center" style="flex: 1">
-				<form style="max-width: 380px" name="profile">
-					<div class="py-4 text-center">
-						<h2 class="fs-2">회원 정보 수정</h2>
-					</div>
-					<div class="row justify-content-center">
-						<div class="pb-2 mb-4 border-bottom text-end">
-							<p class="text-end"><span class="text-danger fw-bold">*</span>아이디는 변경 불가</p><br>
-							<p class="text-end"><span class="text-danger fw-bold">*</span>비밀번호 및 정보 수정 할 경우 <br>기존 비밀번호 입력 필수</p>
-						</div>
-						<div class="row mb-3 justify-content-center">
-							<label for="userid" class="col-sm-4 col-form-label"
-								>아이디<span class="text-danger fw-bold">*</span></label
-							>
-							<div class="col">
-								<input id="userid" type="text" name="id" class="form-control" disabled />
-							</div>
-						</div>
-						<div class="row mb-3 justify-content-center">
-							<label for="password" class="col-sm-4 col-form-label">기존 비밀번호</label>
-							<div class="col">
-								<input id="password" type="password" name="pw"  class="form-control" />
-							</div>
-						</div>
-						<div class="row mb-3 justify-content-center">
-							<label for="passwordCheck" class="col-sm-4 col-form-label">변경할 비밀번호</label>
-							<div class="col">
-								<input id="passwordCheck" type="password" name="newpw" class="form-control" />
-							</div>
-						</div>
-						<div class="row mb-3 justify-content-center">
-							<label for="passwordCheck" class="col-sm-4 col-form-label">변경할 비밀번호 확인</label>
-							<div class="col">
-								<input id="passwordCheck" type="password" name="newpwchk" class="form-control" />
-							</div>
-						</div>
-						<div class="row mb-3 justify-content-center">
-							<label for="nick" class="col-sm-4 col-form-label">닉네임</label>
-							<div class="col">
-								<input id="nick" type="text" name="nick" class="form-control" />
-							</div>
-						</div>
-						<div class="row mb-3 justify-content-center">
-							<label for="email" class="col-sm-4 col-form-label">이메일</label>
-							<div class="col">
-								<input id="email" type="text" class="form-control" name="email" />
-							</div>
-						</div>
-						<div class="row mb-3 justify-content-center">
-							<label for="contact" class="col-sm-4 col-form-label">연락처</label>
-							<div class="col">
-								<input id="contact" type="text" class="form-control" name="contact"/>
-							</div>
-						</div>
-						<div class="row mb-3 justify-content-center">
-							<label for="address" class="col-sm-4 col-form-label">거주지</label>
-							<div class="col">
-								<input id="address" type="address" class="form-control" name="address" />
-							</div>
-						</div>
-						<div class="row mb-3 justify-content-center">
-							<label for="image" class="col-sm-4 col-form-label">프로필 이미지</label>
-							<div class="col">
-								<input id="image" type="file" name="image" class="form-control" />
-							</div>
-						</div>
-					</div>
-					<!-- <div class="d-grid gap-2 row mx-auto"> -->
-					<div class="container row mx-auto justify-content-between">
-						<button id="registerBtn" class="btn-primary btn-md mt-3 mb-3 col-4" type="button" onclick="withdraw()">탈퇴하기</button>
-						<button id="registerBtn" class="btn-primary btn-lg mt-3 mb-3 col-4" type="button" onclick="userInfoEdit()">수정하기</button>
-					</div>
-				</form>
-			</main>
+		<%- include('./component/header') %>
+		<main id="register" class="main-user">
+			<div class="mypage-inner container">
+				<div class="mypage-profile-list">
+					<%- include('./component/mypageMenu') %>
+					<!-- 내역 탭 -->
+					<!-- 구매 내역에는 받은후기 추가 -->
+					<section class="mypage-record">
+						<div class="mypage-record-inner">
+                <form name="profile">
+                  <!-- <div class="py-4 text-center">
+                    <h2 class="fs-2">회원 정보 수정</h2>
+                  </div> -->
+                  <div class="row justify-content-center">
+                    <div class="pb-2 mb-4 border-bottom">
+                      <p><span class="text-danger fw-bold">*</span>아이디는 변경 불가</p>
+                      <br />
+                      <p>
+                        <span class="text-danger fw-bold">*</span>비밀번호 및 정보 수정 할 경우 <br />기존 비밀번호 입력 필수
+                      </p>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                      <label for="userid" class="col-sm-4 col-form-label"
+                        >아이디<span class="text-danger fw-bold">*</span></label
+                      >
+                      <div class="col">
+                        <input id="userid" type="text" name="id" class="form-control" disabled />
+                      </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                      <label for="password" class="col-sm-4 col-form-label">기존 비밀번호</label>
+                      <div class="col">
+                        <input id="password" type="password" name="pw" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                      <label for="passwordCheck" class="col-sm-4 col-form-label">변경할 비밀번호</label>
+                      <div class="col">
+                        <input id="passwordCheck" type="password" name="newpw" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                      <label for="passwordCheck" class="col-sm-4 col-form-label">변경할 비밀번호 확인</label>
+                      <div class="col">
+                        <input id="passwordCheck" type="password" name="newpwchk" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                      <label for="nick" class="col-sm-4 col-form-label">닉네임</label>
+                      <div class="col">
+                        <input id="nick" type="text" name="nick" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                      <label for="email" class="col-sm-4 col-form-label">이메일</label>
+                      <div class="col">
+                        <input id="email" type="text" class="form-control" name="email" />
+                      </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                      <label for="contact" class="col-sm-4 col-form-label">연락처</label>
+                      <div class="col">
+                        <input id="contact" type="text" class="form-control" name="contact" />
+                      </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                      <label for="address" class="col-sm-4 col-form-label">거주지</label>
+                      <div class="col">
+                        <input id="address" type="address" class="form-control" name="address" />
+                      </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                      <label for="image" class="col-sm-4 col-form-label">프로필 이미지</label>
+                      <div class="col">
+                        <input id="image" type="file" name="image" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="d-grid gap-2 row mx-auto"> -->
+                  <div class="container row mx-auto justify-content-between">
+                    <button id="registerBtn" class="btn-primary btn-md mt-3 mb-3 col-4" type="button" onclick="withdraw()">
+                      탈퇴하기
+                    </button>
+                    <button id="registerBtn" class="btn-primary btn-lg mt-3 mb-3 col-4" type="button" onclick="userInfoEdit()">
+                      수정하기
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </section>
+          </div>
+        </div>
+        </main>
 			<%- include('./component/footer') %>
 		</div>
 		<script>
@@ -93,7 +110,7 @@
 			form.nick.value = `<%= username %>`;
 			form.email.value = `<%= email %>`;
 			form.contact.value = `<%= contact %>`;
-			form.address.value = `<%= address %>`
+			form.address.value = `<%= address %>`;
 		</script>
 	</body>
 </html>

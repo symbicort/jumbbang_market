@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<%- include('./component/head', { title: '채팅 - 점빵' }) %>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('./component/head', { title: '채팅 - 완두점빵' }) %>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="/static/chats.min.css" />
-</head>
+	</head>
 
-<body>
-	<div id="jumbbang">
-		<%- include('./component/header') %>
+	<body>
+		<div id="jumbbang">
+			<%- include('./component/header') %>
 			<main class="py-5" style="background-color: #eee">
 				<div class="container">
 					<div class="chatsWrap">
@@ -19,61 +18,49 @@
 						<form name="chating" class="chating">
 							<input type="hidden" value="<%= myinfo.nick %>" id="myrealname" />
 							<ul id="server-result" class="talkList">
-								<% if (savedChats.length> 0) { %> <% let currentDate=null; %>
-										<% for (let i=0; i < savedChats.length; i++) { %>
-											<% const chat=savedChats[i]; %>
-												<% const chatDate=chat.chatDate; %>
-													<% if (currentDate !==chatDate) { %>
-														<li class="notice"><span>
-																<%= chatDate %>
-															</span></li>
-														<% currentDate=chatDate; %>
-															<% } %>
-																<%= console.log(chat) %>
-																	<% if (savedChats[i].sendId==myinfo.nick) { %>
-																		<li class="me">
-																			<% if (myinfo.image) { %>
-																				<span class="thumb"
-																					style="background-image: url('<%= myinfo.image%>')">
-																				</span>
-																				<% } else { %>
-																					<span class="thumb" style="
+								<% if (savedChats.length> 0) { %> <% let currentDate=null; %> <% for (let i=0; i < savedChats.length;
+								i++) { %> <% const chat=savedChats[i]; %> <% const chatDate=chat.chatDate; %> <% if (currentDate
+								!==chatDate) { %>
+								<li class="notice"><span> <%= chatDate %> </span></li>
+								<% currentDate=chatDate; %> <% } %> <%= console.log(chat) %> <% if (savedChats[i].sendId==myinfo.nick) {
+								%>
+								<li class="me">
+									<% if (myinfo.image) { %>
+									<span class="thumb" style="background-image: url('<%= myinfo.image%>')"> </span>
+									<% } else { %>
+									<span
+										class="thumb"
+										style="
 											background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');
 										">
-																					</span>
-																					<% } %>
-																						<span>
-																							<%= chat.msg %>
-																						</span>
-																						<p class="date">
-																							<%= chat.chatTime %>
-																						</p>
-																		</li>
-																		<% } else { %>
-																			<li class="other">
-																				<% if (yourinfo.image) { %>
-																					<span class="thumb"
-																						style="background-image: url('<%= yourinfo.image%>')">
-																					</span>
-																					<% } else { %>
-																						<span class="thumb" style="
+									</span>
+									<% } %>
+									<span> <%= chat.msg %> </span>
+									<p class="date"><%= chat.chatTime %></p>
+								</li>
+								<% } else { %>
+								<li class="other">
+									<% if (yourinfo.image) { %>
+									<span class="thumb" style="background-image: url('<%= yourinfo.image%>')"> </span>
+									<% } else { %>
+									<span
+										class="thumb"
+										style="
 											background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');
 										">
-																						</span>
-																						<% } %>
-																							<span>
-																								<%= chat.msg %>
-																							</span>
-																							<p class="date">
-																								<%= chat.chatTime %>
-																							</p>
-																			</li>
-																			<% } %>
-																				<% } %>
-																					<% } %>
+									</span>
+									<% } %>
+									<span> <%= chat.msg %> </span>
+									<p class="date"><%= chat.chatTime %></p>
+								</li>
+								<% } %> <% } %> <% } %>
 							</ul>
 							<div class="inputField">
-								<input type="text" id="msg" required placeholder="Message..."
+								<input
+									type="text"
+									id="msg"
+									required
+									placeholder="Message..."
 									onkeydown="if(window.event.keyCode == 13){send()}" />
 								<button type="button" onclick="send()"></button>
 							</div>
@@ -83,19 +70,21 @@
 							<input type="hidden" id="yourprofileimage" value="<%= yourinfo.image%>" />
 						</form>
 						<div class="chatFoot">
-							<a onclick="exit('<%= nowRoomId %>', '<%= from%>')"
-								class="btn btn-primary w-100 d-block text-center">채팅 나가기</a>
+							<a onclick="exit('<%= nowRoomId %>', '<%= from%>')" class="btn btn-primary w-100 d-block text-center"
+								>채팅 나가기</a
+							>
 						</div>
 					</div>
 				</div>
 			</main>
 			<%- include('./component/footer') %>
-	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"
-		integrity="sha512-/l6vieC+YxaZywUhmqs++8uF9DeMvJE61ua5g+UK0TuHZ4TkTgB1Gm1n0NiA86uEOM9JJ6JUwyR0hboKO0fCng=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
-	<script src="../static/js/chats.js"></script>
-</body>
-
+		</div>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"
+			integrity="sha512-/l6vieC+YxaZywUhmqs++8uF9DeMvJE61ua5g+UK0TuHZ4TkTgB1Gm1n0NiA86uEOM9JJ6JUwyR0hboKO0fCng=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+		<script src="../static/js/chats.js"></script>
+	</body>
 </html>
