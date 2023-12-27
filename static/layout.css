@@ -102,6 +102,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-indent: 2px;
   overflow: hidden;
+  z-index: 15;
 }
 
 .notify > li > a {
@@ -207,10 +208,24 @@
   position: relative;
 }
 
-#header-input {
-  /* display: none; */
-  border: 0;
-  /* border-bottom: 1px solid #008000; */
+.info {
+  position: relative;
+}
+
+#header-search {
+  display: none;
+  background-color: transparent;
+  border: 1px solid #008000;
+  border-radius: 15px;
+  color: #555;
+  /* margin-right: 0.3rem; */
+  position: absolute;
+  top: 0;
+  right: 32px;
+}
+
+.info:hover #header-search {
+  display: block;
 }
 
 .header-small-search {

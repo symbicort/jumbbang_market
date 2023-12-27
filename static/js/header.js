@@ -78,8 +78,28 @@ function goChatrooms() {
 }
 
 // 헤더 작은 검색창
-const headerSearch = document.querySelector('.fa-magnifying-glass');
+// const headerSearch = document.querySelector('.fa-magnifying-glass');
+// const headerSearchInput = document.getElementById('header-search');
 
-headerSearch.addEventListener('click', function () {
-  alert('안녕');
-});
+// function hideInput() {
+//   headerSearchInput.style.display = 'none';
+// }
+
+// function addDocumentClickListener() {
+//   document.addEventListener('click', function hideOnOutsideClick(e) {
+//     if (e.target === headerSearch || e.target === headerSearchInput) {
+//       return;
+//     }
+
+//     hideInput();
+//     document.removeEventListener('click', hideOnOutsideClick);
+//   });
+// }
+
+// headerSearch.addEventListener('click', function (event) {
+//   headerSearchInput.style.display = 'inline-block';
+//   addDocumentClickListener();
+//   event.stopPropagation();
+// });
+
+// headerSearchInput.addEventListener('blur', hideInput);

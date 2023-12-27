@@ -11,54 +11,54 @@
 <body>
   <div id="jumbbang" class="jumbbang">
     <%- include('./component/header') %>
-    <main id="register" class="main-user d-flex justify-content-center align-items-center">
-      <form class="w-50" name="signup">
+    <main id="register" class="main-user d-flex justify-content-center align-items-center" style="flex: 1">
+      <form style="max-width: 380px;" name="signup">
         <div class="py-4 text-center">
           <h2 class="fs-2">회원가입</h2>
         </div>
-        <div class="container row justify-content-center">
-          <div class="pb-2 col-8 mb-4 border-bottom">
+        <div class="row justify-content-center">
+          <div class="pb-2 mb-4 border-bottom">
             <p class="text-end"><span class="text-danger fw-bold">*</span>필수 사항</p>
           </div>
           <div class="row mb-3 justify-content-center">
-            <label for="userid" class="col-sm-2 col-form-label">아이디<span class="text-danger fw-bold">*</span></label>
-            <div class="col-sm-6">
+            <label for="userid" class="col-sm-4 col-form-label">아이디<span class="text-danger fw-bold">*</span></label>
+            <div class="col">
               <input id="userid" type="text" class="form-control" name="id">
             </div>
           </div>
           <div class="row mb-3 justify-content-center">
-            <label for="password" class="col-sm-2 col-form-label">비밀번호<span class="text-danger fw-bold">*</span></label>
-            <div class="col-sm-6">
+            <label for="password" class="col-sm-4 col-form-label">비밀번호<span class="text-danger fw-bold">*</span></label>
+            <div class="col">
               <input id="password" type="password" name="pw" class="form-control">
             </div>
           </div>
           <div class="row mb-3 justify-content-center">
-            <label for="passwordCheck" class="col-sm-2 col-form-label">비밀번호 확인<span class="text-danger fw-bold">*</span></label>
-            <div class="col-sm-6">
+            <label for="passwordCheck" class="col-sm-4 col-form-label">비밀번호 확인<span class="text-danger fw-bold">*</span></label>
+            <div class="col">
               <input id="passwordCheck" name="passwordCheck" type="password" class="form-control">
             </div>
           </div>
           <div class="row mb-3 justify-content-center">
-            <label for="nick" class="col-sm-2 col-form-label">닉네임</label>
-            <div class="col-sm-6">
+            <label for="nick" class="col-sm-4 col-form-label">닉네임</label>
+            <div class="col">
               <input id="nick" type="text" class="form-control" name="nickname">
             </div>
           </div>
           <div class="row mb-3 justify-content-center">
-            <label for="email" class="col-sm-2 col-form-label">이메일</label>
-            <div class="col-sm-6">
+            <label for="email" class="col-sm-4 col-form-label">이메일</label>
+            <div class="col">
               <input id="email" type="text" class="form-control" name="email">
             </div>
           </div>
           <div class="row mb-3 justify-content-center">
-            <label for="contact" class="col-sm-2 col-form-label">연락처</label>
-            <div class="col-sm-6">
+            <label for="contact" class="col-sm-4 col-form-label">연락처</label>
+            <div class="col">
               <input id="contact" type="text" class="form-control" name="contact">
             </div>
           </div>
           <div class="row mb-3 justify-content-center">
-            <label for="address" class="col-sm-2 col-form-label">거주지<span class="text-danger fw-bold">*</span></label>
-            <div class="col-sm-6">
+            <label for="address" class="col-sm-4 col-form-label">거주지<span class="text-danger fw-bold">*</span></label>
+            <div class="col">
               <input id="address" name="address" type="address" class="form-control">
             </div>
           </div>
