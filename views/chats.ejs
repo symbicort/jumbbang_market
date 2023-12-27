@@ -20,21 +20,34 @@
 
 								<li>
 									<p id="nick1" class="nick">
-										<%= myname %>
+										<%= myinfo.nick %>
 									</p>
-									<div class="profile1" style="background-image: url(/static/imgs/profile1.webp)">
-									</div>
+									<% if (myinfo.image) { %>
+										<div class="profile1" style="background-image: url('<%= myinfo.image%>')">
+										</div>
+										<% } else { %>
+											<div class="profile1"
+												style="background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');">
+											</div>
+											<% } %>
+
 								</li>
 								<li>
 									<p id="nick2" class="nick">
-										<%= yourname %>
+										<%= yourinfo.nick %>
 									</p>
-									<div class="profile2" style="background-image: url(/static/imgs/profile2.webp)">
-									</div>
+									<% if (yourinfo.image) { %>
+										<div class="profile1" style="background-image: url('<%= yourinfo.image%>')">
+										</div>
+										<% } else { %>
+											<div class="profile1"
+												style="background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');">
+											</div>
+											<% } %>
 								</li>
 							</ul>
 						</div>
-						<input type="hidden" value="<%= myrealname %>" id="myrealname">
+						<input type="hidden" value="<%= myinfo.nick %>" id="myrealname">
 						<ul id="server-result" class="talkList">
 							<!-- <li class="notice"><span>민지님이 입장 하였습니다</span></li>
 							<li class="me">
@@ -61,7 +74,7 @@
 													<% currentDate=chatDate; %>
 														<% } %>
 															<%= console.log(chat) %>
-																<% if (savedChats[i].sendId==myrealname) { %>
+																<% if (savedChats[i].sendId==myinfo.nick) { %>
 																	<li class="me">
 																		<span>
 																			<%= chat.msg %>
@@ -72,14 +85,21 @@
 																	</li>
 																	<% } else { %>
 																		<li class="other">
-																			<span class="thumb"
-																				style="background-image: url(/static/imgs/profile2.webp)"></span>
-																			<span>
-																				<%= chat.msg %>
-																			</span>
-																			<p class="date">
-																				<%= chat.chatTime %>
-																			</p>
+																			<% if (yourinfo.image) { %>
+																				<span class="thumb"
+																					style="background-image: url('<%= yourinfo.image%>')">
+																				</span>
+																				<% } else { %>
+																					<span class="thumb"
+																						style="background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');">
+																					</span>
+																					<% } %>
+
+																						<%= chat.msg %>
+																							</span>
+																							<p class="date">
+																								<%= chat.chatTime %>
+																							</p>
 																		</li>
 																		<% } %>
 																			<% } %>
