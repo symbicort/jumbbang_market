@@ -13,7 +13,6 @@ const userSchema = new Schema({
     },
     nick: {
         type: String,
-        required: true,
         unique: true,
         default: ''
     },

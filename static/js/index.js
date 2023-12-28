@@ -1,83 +1,92 @@
-const { Snowball } = require("aws-sdk");
-
 async function register() {
     const form = document.forms["signup"];
 
     if (
         form.id.value.length === 0 ||
-        form.nickname.value.length === 0 ||
         form.pw.value.length === 0 ||
         form.address.value.length === 0
     ) {
-        alert("정보를 모두 기입해주세요");
+        await swal('회원가입 실패', "필수 사항을 모두 입력해주세요", 'error');
         return;
     }
 
     if (form.nickname.value.length > 20) {
-        alert("이름은 20글자 미만입니다!");
+        await swal('회원가입 실패', "닉네임은 20자 미만이에요", 'error');
         return;
     }
 
-    if (form.pw.value !== form.passwordCheck.value) {
-        alert("비밀번호가 일치하지 않습니다. 다시 입력해주세요");
+    const passwordchk = form.pw.value === form.passwordCheck.value;
+
+    if (!passwordchk) {
+        await swal('회원가입 실패', "비밀번호 확인과 비밀번호 정보가 일치하지 않아요", 'error');
         return;
     }
 
-    await axios({
-        method: "POST",
-        url: "/register",
-        data: {
-            userid: form.id.value,
-            userpw: form.pw.value,
-            nickname: form.nickname.value,
-            email: form.email.value,
-            contact: form.contact.value,
-            address: form.address.value,
-        },
-    }).then((res) => {
-        const result = res.data.existUser;
+    try {
+        const response = await axios({
+            method: "POST",
+            url: "/register",
+            data: {
+                userid: form.id.value,
+                userpw: form.pw.value,
+                nickname: form.nickname.value,
+                email: form.email.value,
+                contact: form.contact.value,
+                address: form.address.value,
+            },
+        });
+
+        const result = response.data.existUser;
         console.log(result);
+
         if (!result) {
-            alert("회원가입 성공");
+            await swal('로그인 성공', form.id.value + "님 회원가입이 완료 되었어요", 'success');
             document.location.href = "/";
         } else {
             form.id.value = "";
             form.pw.value = "";
             form.nickname.value = "";
             form.address.value = "";
-            alert("중복된 아이디입니다 다시 입력해주세요");
+            await swal('회원가입 실패', "중복된 아이디입니다 ", 'error');
         }
-    });
+    } catch (error) {
+        console.error("에러 발생:", error);
+        // 에러 처리 로직 추가
+    }
 }
+
 
 async function tryLogin() {
     const form = document.forms["login"];
     if (form.id.value.length === 0 || form.pw.value.length === 0) {
-        alert("정보를 모두 기입해주세요");
+        await swal('로그인 실패', "회원 정보를 입력해주세요", 'error');
         return;
     }
 
-    await axios({
-        method: "POST",
-        url: "/login",
-        data: {
-            userid: form.id.value,
-            userpw: form.pw.value,
-        },
-    }).then((res) => {
-        console.log("로그인 결과", res.data.result);
-        if (res.data.result) {
-            swal('로그인 성공', form.id.value+"님 어서오세요", 'success')
-            .then(function(){
-                document.location.href = "/";
-            })
+    try {
+        const response = await axios({
+            method: "POST",
+            url: "/login",
+            data: {
+                userid: form.id.value,
+                userpw: form.pw.value,
+            },
+        });
+    
+        console.log("로그인 결과", response.data.result);
+    
+        if (response.data.result) {
+            await swal('로그인 성공', form.id.value + "님 어서오세요", 'success');
+            document.location.href = "/";
         } else {
-            swal('로그인 실패', "다시 시도해주세요", 'error')
-            .then(function(){
-                form.pw.value = "";
-            })
+            await swal('로그인 실패', "다시 시도해주세요", 'error');
+            form.pw.value = "";
         }
-    });
+    } catch (error) {
+        console.error("에러 발생:", error);
+        // 에러 처리 로직 추가
+    }
+    
 }
 
 async function withdraw() {
