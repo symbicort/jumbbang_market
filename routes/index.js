@@ -9,6 +9,13 @@ const controller = require('../controller/Cmain');
 
 /**
  * @swagger
+ * tags:
+ *   name: Index
+ *   description: 메인페이지, 로그인 등 유저 관련 작업
+ */
+
+/**
+ * @swagger
  * /:
  *   get:
  *     summary: 메인 페이지 표시
