@@ -249,6 +249,7 @@ main {
 .header-small-search {
 	font-size: 1.8rem;
 	color: #333;
+	cursor: pointer;
 }
 
 .user-info {

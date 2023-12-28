@@ -646,6 +646,9 @@ li {
 	line-height: 1.5;
 	margin-bottom: 4px;
 }
+.cards-wrap .card .card-desc .card-price:before {
+	content: '₩ ';
+}
 .cards-wrap .card .card-desc .card-price-share:after {
 	content: '\F415';
 	font-family: 'Bootstrap-icons';

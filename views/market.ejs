@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" c />
+		<%- include('./component/head', { title: '중고거래 - 완두점빵' }) %>
+	</head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" c />
-	<%- include('./component/head', { title: '중고거래 - 완두점빵' }) %>
-</head>
-
-<body>
-	<div id="jumbbang">
-		<%- include('./component/header') %>
+	<body>
+		<div id="jumbbang">
+			<%- include('./component/header') %>
 			<main>
 				<div id="marketList">
 					<section id="article-detail-hot-more" class="container pt-3">
@@ -17,42 +16,41 @@
 							<div class="d-flex align-items-end gap-2 col-md-6">
 								<h3 class="h2 fw-bold mb-0">중고 거래</h3>
 								<input type="checkbox" name="filter" id="filter" hidden />
-								<label for="filter" class="ibt-filter h3 mb-0" data-bs-toggle="collapse"
-									data-bs-target="#filterBody" aria-expanded="false"
+								<label
+									for="filter"
+									class="ibt-filter h3 mb-0"
+									data-bs-toggle="collapse"
+									data-bs-target="#filterBody"
+									aria-expanded="false"
 									aria-controls="filterBody"></label>
 							</div>
 							<div class="filterBody collapse pt-3 pb-4 col-md-12 order-3" id="filterBody">
 								<ul>
 									<li>
 										<span>
-											<input class="form-check-input" type="checkbox" id="endsale" name="drop"
-												value="9" />
-											<label class="form-check-label" for="drop">판매완료 상품</label></span>
+											<input class="form-check-input" type="checkbox" id="endsale" name="drop" value="9" />
+											<label class="form-check-label" for="drop">판매완료 상품</label></span
+										>
 									</li>
 									<li class="row align-items-start">
 										<span class="col-6 col-md-auto">
-											<input class="form-check-input" type="radio" id="filterPrice0" value="0"
-												name="filterPrice" />
+											<input class="form-check-input" type="radio" id="filterPrice0" value="0" name="filterPrice" />
 											<label class="form-check-label" for="filterPrice0">전체</label>
 										</span>
 										<span class="col-6 col-md-auto">
-											<input class="form-check-input" type="radio" id="filterPrice1" value="5"
-												name="filterPrice" />
+											<input class="form-check-input" type="radio" id="filterPrice1" value="5" name="filterPrice" />
 											<label class="form-check-label" for="filterPrice1">1만원 이하</label>
 										</span>
 										<span class="col-6 col-md-auto">
-											<input class="form-check-input" type="radio" id="filterPrice2" value="6"
-												name="filterPrice" />
+											<input class="form-check-input" type="radio" id="filterPrice2" value="6" name="filterPrice" />
 											<label class="form-check-label" for="filterPrice2">1만원 ~ 5만원 이하</label>
 										</span>
 										<span class="col-6 col-md-auto">
-											<input class="form-check-input" type="radio" id="filterPrice3" value="7"
-												name="filterPrice" />
+											<input class="form-check-input" type="radio" id="filterPrice3" value="7" name="filterPrice" />
 											<label class="form-check-label" for="filterPrice3">5만원 ~ 10만원 이하</label>
 										</span>
 										<span class="col-6 col-md-auto">
-											<input class="form-check-input" type="radio" id="filterPrice4" value="8"
-												name="filterPrice" />
+											<input class="form-check-input" type="radio" id="filterPrice4" value="8" name="filterPrice" />
 											<label class="form-check-label" for="filterPrice4">10만원 이상</label>
 										</span>
 									</li>
@@ -72,39 +70,28 @@
 
 						<section class="cards-wrap" id="cards_wrap">
 							<% for(let i=0; i < postData.length; i++) { %>
-								<article class="card">
-									<a class="card-link" href="/articles/<%= postData[i]._id %>">
-										<div class="card-photo"
-											style="background-image: url('<%= postData[i].images[0] %>')">
-											<img alt="오락기" src="<%= postData[i].images[0] %>" crossorigin="anonymous" />
+							<article class="card">
+								<a class="card-link" href="/articles/<%= postData[i]._id %>">
+									<div class="card-photo" style="background-image: url('<%= postData[i].images[0] %>')">
+										<img alt="오락기" src="<%= postData[i].images[0] %>" crossorigin="anonymous" />
+									</div>
+									<div class="card-desc">
+										<h2 class="card-title"><%= postData[i].subject %></h2>
+										<div class="card-price">
+											<%= postData[i].priceLast.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') %>
 										</div>
-										<div class="card-desc">
-											<h2 class="card-title">
-												<%= postData[i].subject %>
-											</h2>
-											<div class="card-price">
-												<%= postData[i].priceLast %>
-											</div>
-											<div class="card-region-name">
-												<%= postData[i].userid.address %>
-											</div>
-											<div class="card-counts">
-												<span class="bookmarkHit" aria-label="관심">
-													<%= postData[i].bookmark_hit %>
-												</span> ∙
-												<span class="chatHit" aria-label="채팅">
-													<%= postData[i].chat %>
-												</span> ∙
-												<span class="hit" aria-label="조회">
-													<%= postData[i].hit %>
-												</span>
-											</div>
+										<div class="card-region-name"><%= postData[i].userid.address %></div>
+										<div class="card-counts">
+											<span class="bookmarkHit" aria-label="관심"> <%= postData[i].bookmark_hit %> </span> ∙
+											<span class="chatHit" aria-label="채팅"> <%= postData[i].chat %> </span> ∙
+											<span class="hit" aria-label="조회"> <%= postData[i].hit %> </span>
 										</div>
-									</a>
-								</article>
-								<% } %>
+									</div>
+								</a>
+							</article>
+							<% } %>
 
-									<!-- //샘플용 : 18개 -->
+							<!-- //샘플용 : 18개 -->
 						</section>
 						<div class="pageBar mt-5">
 							<button class="btn-primary w-100">더보기</button>
@@ -115,35 +102,35 @@
 				<%- include('./component/marketFooter') %>
 			</main>
 			<%- include('./component/footer') %>
-	</div>
-	<script src="/static/js/market.js"></script>
-	<script>
-		document.getElementById("endsale").addEventListener("change", function () {
-			// 체크박스의 체크 상태 확인
-			if (this.checked) {
-				// 체크된 경우 체크박스의 value 값을 가져와서 출력
-				var checkboxValue = this.value;
-				console.log("체크된 체크박스의 값:", checkboxValue);
-				// 이후에 필요한 로직 수행
-			} else {
-				// 체크가 해제된 경우에 필요한 로직 수행
-				checkboxValue = undefined;
-			}
-			axios({
-				method: "get",
-				url: "/marketsort",
-				params: {
-					selectedSort: checkboxValue,
-				},
-			})
-				.then((result) => {
-					// console.log(cardBox);
-					cardBox.innerHTML = "";
-					// console.log(result.data);
-					const sortedArray = result.data.postData;
-					let html = "";
-					for (let i = 0; i < sortedArray.length; i++) {
-						html += ` <article class="card">
+		</div>
+		<script src="/static/js/market.js"></script>
+		<script>
+			document.getElementById('endsale').addEventListener('change', function () {
+				// 체크박스의 체크 상태 확인
+				if (this.checked) {
+					// 체크된 경우 체크박스의 value 값을 가져와서 출력
+					var checkboxValue = this.value;
+					console.log('체크된 체크박스의 값:', checkboxValue);
+					// 이후에 필요한 로직 수행
+				} else {
+					// 체크가 해제된 경우에 필요한 로직 수행
+					checkboxValue = undefined;
+				}
+				axios({
+					method: 'get',
+					url: '/marketsort',
+					params: {
+						selectedSort: checkboxValue,
+					},
+				})
+					.then((result) => {
+						// console.log(cardBox);
+						cardBox.innerHTML = '';
+						// console.log(result.data);
+						const sortedArray = result.data.postData;
+						let html = '';
+						for (let i = 0; i < sortedArray.length; i++) {
+							html += ` <article class="card">
                     <a class="card-link" href="/articles/${sortedArray[i]._id}">
                         <div class="card-photo"
                             style="background-image: url('${sortedArray[i].images[0]}')">
@@ -174,16 +161,14 @@
                         </div>
                     </a>
                 </article>`;
-					}
-					// console.log("Generated HTML:", html);
-					cardBox.innerHTML = html;
-				})
-				.catch((error) => {
-					console.log("sort error", error);
-				});
-		});
-
-	</script>
-</body>
-
+						}
+						// console.log("Generated HTML:", html);
+						cardBox.innerHTML = html;
+					})
+					.catch((error) => {
+						console.log('sort error', error);
+					});
+			});
+		</script>
+	</body>
 </html>
