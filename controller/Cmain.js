@@ -11,7 +11,6 @@ exports.main = async (req, res) => {
 	const token = req.cookies.accessToken;
 	const refreshToken = req.cookies.refreshToken;
 	const result = await marketModel.find().populate('userid').sort({ hit: -1 });
-	console.log('DB 정보 추출', result);
 
 	if (!token || !refreshToken) {
 		res.render('index', {

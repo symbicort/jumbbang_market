@@ -1,3 +1,5 @@
+const { Snowball } = require("aws-sdk");
+
 async function register() {
     const form = document.forms["signup"];
 
@@ -65,11 +67,15 @@ async function tryLogin() {
     }).then((res) => {
         console.log("로그인 결과", res.data.result);
         if (res.data.result) {
-            alert("로그인 성공");
-            document.location.href = "/";
+            swal('로그인 성공', form.id.value+"님 어서오세요", 'success')
+            .then(function(){
+                document.location.href = "/";
+            })
         } else {
-            alert("로그인 실패, 다시 시도해주세요");
-            form.pw.value = "";
+            swal('로그인 실패', "다시 시도해주세요", 'error')
+            .then(function(){
+                form.pw.value = "";
+            })
         }
     });
 }
