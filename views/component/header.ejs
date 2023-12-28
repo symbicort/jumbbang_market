@@ -115,18 +115,19 @@
 			const loginBtnLi = document.querySelector('.loginBtnLi');
 			const registerBtnLi = document.querySelector('.registerBtnLi');
 			const modifyBtn = document.querySelector('[data-bs-target="#modalModify"]');
-			const postid = document.querySelector('#postid').value;
+			const postid = document.querySelector('#postid')?.value;
 			if (res.data.userid == undefined) {
 				loginBtnLi.innerHTML = '<a href="/login">로그인</a>';
 				registerBtnLi.style.display = '';
-				modifyBtn.style.display = 'none';
+
+				// if (modifyBtn == undefined) return;
 			} else {
 				loginBtnLi.innerHTML = `${res.data.userid}님 <a href="/logout">로그아웃</a>`;
 				registerBtnLi.style.display = 'none';
 				if (location.href.includes('/articles') && postid == res.data.userid) {
-					modifyBtn.style.display = '';
+					if (modifyBtn != undefined) modifyBtn.style.display = '';
 				} else {
-					modifyBtn.style.display = 'none';
+					if (modifyBtn != undefined) modifyBtn.style.display = 'none';
 				}
 			}
 		});
