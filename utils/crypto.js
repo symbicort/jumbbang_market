@@ -1,10 +1,8 @@
 const bcrypt = require('bcrypt');
 
-const saltRounds = 10;
-
 // 1. 비밀번호 해싱 함수
 function hashPW(password) {
-    const salt = bcrypt.genSaltSync(saltRounds); // 솔트 생성
+    const salt = bcrypt.genSaltSync(process.env.saltRounds); // 솔트 생성
     return bcrypt.hashSync(password, salt); // salt를 자동으로 생성
 }
 
