@@ -34,18 +34,16 @@
 														<img src="<%= sellobj[i].images[0] %>" alt="이미지 없음" />
 													</div>
 													<div>
+														<div class="record-product-title mt-2"><%= sellobj[i].subject %></div>
+														<div class="content mb-2"><%= sellobj[i].content %></div>
+														<div class="record-product-price">
+															<span class="tag">판매중</span>
+														</div>
 														<div class="date">
 															<% const createdAt=new Date(sellobj[i].createdAt); %> <% const
 															formattedCreatedAt=createdAt.getFullYear() + '-' + (createdAt.getMonth() +
 															1).toString().padStart(2, '0' ) + '-' + createdAt.getDate().toString().padStart(2, '0' );
 															%> <%= formattedCreatedAt %>
-														</div>
-														<div class="record-product-title"><%= sellobj[i].subject %></div>
-														<div class="record-product-price">
-															<span class="tag">판매중</span>
-														</div>
-														<div class="date">
-															<span class="content"><%= sellobj[i].content %></span>
 														</div>
 													</div>
 												</a>

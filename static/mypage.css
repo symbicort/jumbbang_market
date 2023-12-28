@@ -186,15 +186,17 @@
 .mypage-sale-img + div {
 	width: calc(100% - 265px);
 }
-.date {
-	color: #333;
-	margin: 1rem 0;
+.mypage-tab-li .content {
 	display: -webkit-box;
 	word-wrap: break-word;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+.mypage-tab-li .date {
+	color: #333;
+	margin: 1rem 0;
 }
 
 .record-product-title {

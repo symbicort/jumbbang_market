@@ -72,7 +72,7 @@
                       <%= result[i].subject %>
                     </h2>
                     <div class="card-price">
-                      <%= result[i].priceLast %>원
+                      <%= result[i].priceLast.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') %>
                     </div>
                     <div class="card-region-name">
                       <%= result[i].userid.address %>
