@@ -15,7 +15,6 @@ const chatroomsSchema = new Schema(
         },
         productId: {
             // markets 스키마와 연결
-            type: Schema.Types.ObjectId,
             ref: "markets",
             type: String,
             require: true,
