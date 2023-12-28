@@ -6,19 +6,27 @@ const jwt = require("jsonwebtoken");
 const { verifyToken } = require("../utils/token");
 
 exports.market = async (req, res) => {
-    marketModel
-        .find()
-        .populate("userid")
-        .sort({ createdAt: -1 })
-        .exec()
-        .then((result) => {
-            console.log("DB 정보 추출", result);
-            res.header("Access-Control-Allow-Origin", "*");
-            res.render("market", { postData: result });
-        })
-        .catch((error) => {
-            console.error("Error finding data:", error);
-        });
+    const categoryCode = req.query.category;
+
+    console.log(typeof(categoryCode));
+
+    if(categoryCode == undefined){
+        marketModel.find().populate("userid").sort({ createdAt: -1 }).exec()
+            .then((result) => {
+                res.header("Access-Control-Allow-Origin", "*");
+                res.render("market", { postData: result, categoryCode:  req.query.category});
+            }).catch((error) => {
+                console.error("Error finding data:", error);
+            });
+    } else{
+        marketModel.find({category: categoryCode}).populate("userid").sort({ createdAt: -1 }).exec()
+            .then((result) => {
+                res.header("Access-Control-Allow-Origin", "*");
+                res.render("market", { postData: result, categoryCode:  req.query.category});
+            }).catch((error) => {
+                console.error("Error finding data:", error);
+            });
+    }
 };
 
 exports.marketsort = async (req, res) => {
