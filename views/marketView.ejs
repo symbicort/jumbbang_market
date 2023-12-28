@@ -84,14 +84,17 @@
 											<dd class="d-flex gap-2">
 												<button class="btn-primary" data-bs-toggle="modal"
 													data-bs-target="#modalModify" onclick="usercheck()">
-													수정
-												</button>
-												<input type="checkbox" id="bookmark" name="bookmark" hidden />
+													<button class="btn-primary" data-bs-toggle="modal"
+														data-bs-target="#modalModify" onclick="usercheck()"
+														style="display: none">
+														수정
+													</button>
+													<input type="checkbox" id="bookmark" name="bookmark" hidden />
 
-												<label for="bookmark" class="ibt-bookmark btn-primary"
-													aria-label="관심 추가"></label>
-												<a onclick="directChat()" id="btnChat"
-													class="btn-primary w-100 text-center">채팅</a>
+													<label for="bookmark" class="ibt-bookmark btn-primary"
+														aria-label="관심 추가"></label>
+													<a onclick="directChat()" id="btnChat"
+														class="btn-primary w-100 text-center">채팅</a>
 											</dd>
 										</dl>
 									</div>
