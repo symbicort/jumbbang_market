@@ -78,6 +78,11 @@ main {
   font-weight: 600;
 }
 
+.main-search-btn:hover {
+  background-color: #01a101;
+  color: #fff;
+}
+
 /* 상품 이미지 슬라이드 */
 .swiper {
   width: 100%;
@@ -183,9 +188,9 @@ main {
 .more-btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  border: 1px solid #adadad;
+  border: 1px solid #6b6b6b;
   border-radius: 2rem;
-  color: #8d8b8b;
+  color: #6b6b6b;
 }
 
 .more-btn:hover {
