@@ -82,8 +82,6 @@
 											</dt>
 											<dd class="ico-face" data-lv="3"></dd>
 											<dd class="d-flex gap-2">
-												<button class="btn-primary" data-bs-toggle="modal"
-													data-bs-target="#modalModify" onclick="usercheck()">
 													<button class="btn-primary" data-bs-toggle="modal"
 														data-bs-target="#modalModify" onclick="usercheck()"
 														style="display: none">
@@ -334,20 +332,6 @@
 									</div>
 								</div>
 							</li>
-							<li class="p-1">
-								<div class="row">
-									<div class="col-3 pt-2"><label for="state" class="form-label">거래 방식</label></div>
-
-									<div class="col-9">
-										<select class="form-select col" id="state" name="state">
-											<option value="1">판매중</option>
-											<option value="3">거래완료</option>
-											<!-- <option value="4">나눔</option> -->
-											<option value="5">숨김</option>
-										</select>
-									</div>
-								</div>
-							</li>
 						</ul>
 					</div>
 					<div class="modal-footer">
@@ -408,12 +392,16 @@
 		if (postdata == 2 || postdata == 3) {
 			const btnbid = document.getElementById('bidbtn');
 			const btndirect = document.getElementById('btndirect');
+			const editbtn = document.getElementById('editarticle');
 
 			btnbid.disabled = true;
 			btnbid.innerText = '거래 완료';
 
 			btndirect.disabled = true;
 			btndirect.innerText = '거래 완료';
+
+			editbtn.disabled = true;
+
 		}
 		function directChat() {
 			const productid = document.getElementById('productid').value;
