@@ -193,7 +193,7 @@ async function addpost() {
         form.priceDirect.value == "" ||
         form.dateLimit.value == ""
     ) {
-        alert("정보를 모두 입력해주세요.");
+        await swal('로그인 성공', "정보를 모두 입력해주세요", 'success')
         return;
     }
 
@@ -223,13 +223,13 @@ async function addpost() {
     }).then((res) => {
         console.log(res);
         if (res) {
-            alert("게시물 작성이 완료되었습니다.");
+            swal('게시물 작성 완료', "게시물 작성이 완료 되었습니다.", 'success');
             document.location.href = "/market";
         }
     });
 }
 
-function enterbid() {
+async function enterbid() {
     const currentURL = window.location.href;
     console.log(currentURL);
 
@@ -239,7 +239,7 @@ function enterbid() {
     console.log(lastSegment);
 
     const form = document.forms["formBid"];
-    axios({
+    await axios({
         method: "POST",
         url: "/market/bid",
         data: {
@@ -247,8 +247,7 @@ function enterbid() {
             productId: lastSegment,
         },
     }).then((res) => {
-        console.log(res.data.msg);
-        alert(res.data.msg);
+        swal('경매 참여 완료', bidprice + "원에 입찰하셨습니다.", 'success');
         location.reload();
     });
 }
@@ -271,7 +270,7 @@ function buyDirect() {
         },
     }).then((res) => {
         console.log(res.data.msg);
-        alert(res.data.msg);
+        swal('물품 구매 완료', bidprice + "원에 즉시 구매 하셨습니다.", 'success');
         location.reload();
     });
 }
@@ -294,10 +293,10 @@ function usercheck() {
         if (res.data.islogin == true) {
             if (res.data.result == false) {
                 location.reload();
-                alert("본인이 작성한 게시글이 아닙니다");
+                swal('수정 실패', "본인이 작성한 게시물이 아닙니다", 'error');
             }
         } else {
-            alert("로그인 상태가 아닙니다.");
+            swal('로그인 인증 실패', "로그인 상태가 아닙니다.", 'error');
             document.location.href = "/login";
         }
     });
@@ -323,6 +322,6 @@ async function editarticle() {
             state: state.value,
         },
     }).then((res) => {
-        alert(res.data.msg);
+        swal('게시물 수정 완료',res.data.msg , 'success');
     });
 }

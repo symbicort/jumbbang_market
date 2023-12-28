@@ -93,7 +93,7 @@ async function withdraw() {
     const form = document.forms["profile"];
 
     if (form.pw.value.length == 0) {
-        alert("회원 탈퇴의 경우 기존 비밀번호 입력 필수입니다.");
+        await swal('회원 탈퇴 실패', "비밀번호를 입력해주세요", 'error');
         return;
     }
 
@@ -106,10 +106,10 @@ async function withdraw() {
         },
     }).then((res) => {
         if (res.data.result) {
-            alert("회원탈퇴가 완료 되었습니다.");
+            swal('회원탈퇴 성공', form.id.value + "님 회원탈퇴가 완료 되었습니다", 'success');
             document.location.href = "/";
         } else {
-            alert(res.data.msg);
+            swal('회원 정보 수정 실패', "변경할 비밀번호 정보가 일치하지 않습니다.", 'error');
         }
     });
 }
@@ -118,13 +118,13 @@ async function userInfoEdit() {
     const form = document.forms["profile"];
 
     if (form.pw.value.length == 0) {
-        alert("기존 비밀번호가 일치해야 정보 수정이 가능합니다.");
+        await swal('회원 정보 수정 실패', "기존 비밀번호가 일치해야 정보 수정이 가능합니다.", 'error');
         return;
     }
 
     if (form.newpw.value.length != 0) {
         if (form.newpw.value.length != form.newpwchk.value.length) {
-            alert("변경할 비밀번호 정보가 일치하지 않습니다.");
+            await swal('회원 정보 수정 실패', "변경할 비밀번호 정보가 일치하지 않습니다.", 'error');
             return;
         }
     }
@@ -145,10 +145,10 @@ async function userInfoEdit() {
         })
             .then((res) => {
                 if (res.data.result) {
-                    alert(res.data.msg);
+                    swal('회원 정보 수정 성공',res.data.msg , 'success');
                     document.location.href = "/mypage";
                 } else {
-                    alert(res.data.msg);
+                    swal('회원 정보 수정 실패', res.data.msg, 'error');
                     form.pw.value = "";
                 }
             })
@@ -179,10 +179,10 @@ async function userInfoEdit() {
         })
             .then((res) => {
                 if (res.data.result) {
-                    alert(res.data.msg);
+                    swal('회원 정보 수정 성공',res.data.msg , 'success');
                     document.location.href = "/mypage";
                 } else {
-                    alert(res.data.msg);
+                    swal('회원 정보 수정 실패', res.data.msg, 'error');
                     form.pw.value = "";
                 }
             })
