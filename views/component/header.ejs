@@ -114,12 +114,19 @@
 			console.log('로그인 정보 받아옴', res.data.userid);
 			const loginBtnLi = document.querySelector('.loginBtnLi');
 			const registerBtnLi = document.querySelector('.registerBtnLi');
+			const modifyBtn = document.querySelector('[data-bs-target="#modalModify"]');
 			if (res.data.userid == undefined) {
 				loginBtnLi.innerHTML = '<a href="/login">로그인</a>';
 				registerBtnLi.style.display = '';
+				if (location.href.includes('/articles')) {
+					modifyBtn.style.display = '';
+				}
 			} else {
 				loginBtnLi.innerHTML = `${res.data.userid}님 <a href="/logout">로그아웃</a>`;
 				registerBtnLi.style.display = 'none';
+				if (location.href.includes('/articles')) {
+					modifyBtn.style.display = 'none';
+				}
 			}
 		});
 	})();
