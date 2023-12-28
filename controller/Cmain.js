@@ -311,7 +311,7 @@ exports.postRegister = async (req, res) => {
 				res.send(newUser);
 			});
 	} catch (err) {
-		console.error('유저 생성 중 오류', err.code);
+		console.error('유저 생성 중 오류', err);
 		if (err.code == 11000) {
 			res.send({ existUser: true });
 		} else {

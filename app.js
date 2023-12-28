@@ -10,6 +10,8 @@ const cron = require('node-cron');
 const app = express();
 const PORT = 8000;
 
+dotenv.config();
+
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.urlencoded({ extended: true }));
@@ -19,8 +21,6 @@ app.use('/utils', express.static(__dirname + '/utils'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-dotenv.config();
 
 app.use(
   cors({
