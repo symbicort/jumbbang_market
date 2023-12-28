@@ -193,7 +193,7 @@ async function addpost() {
         form.priceDirect.value == "" ||
         form.dateLimit.value == ""
     ) {
-        await swal('로그인 성공', "정보를 모두 입력해주세요", 'success')
+        await swal('게시물 작성 실패', "정보를 모두 입력해주세요", 'error')
         return;
     }
 
@@ -204,7 +204,6 @@ async function addpost() {
     formData.append("subject", form.subject.value);
     formData.append("comment", form.comment.value);
     formData.append("category", form.category.value);
-    formData.append("state", form.state.value);
     formData.append("priceFirst", form.priceFirst.value);
     formData.append("priceDirect", form.priceDirect.value);
     formData.append("dateLimit", form.dateLimit.value);
@@ -239,20 +238,27 @@ async function enterbid() {
     console.log(lastSegment);
 
     const form = document.forms["formBid"];
-    await axios({
-        method: "POST",
-        url: "/market/bid",
-        data: {
-            bidprice: form.price.value,
-            productId: lastSegment,
-        },
-    }).then((res) => {
-        swal('경매 참여 완료', bidprice + "원에 입찰하셨습니다.", 'success');
+
+    try {
+        await axios({
+            method: "POST",
+            url: "/market/bid",
+            data: {
+                bidprice: form.price.value,
+                productId: lastSegment,
+            },
+        });
+
+        await swal('경매 참여 완료', form.price.value + "원에 입찰하셨습니다.", 'success');
         location.reload();
-    });
+    } catch (error) {
+        console.error("에러 발생:", error);
+        // 에러 처리 로직 추가
+    }
 }
 
-function buyDirect() {
+
+async function buyDirect() {
     const currentURL = window.location.href;
     console.log(currentURL);
 
@@ -262,45 +268,57 @@ function buyDirect() {
     console.log(lastSegment);
 
     const form = document.forms["formBid"];
-    axios({
-        method: "POST",
-        url: "/market/directBuy",
-        data: {
-            productId: lastSegment,
-        },
-    }).then((res) => {
-        console.log(res.data.msg);
-        swal('물품 구매 완료', bidprice + "원에 즉시 구매 하셨습니다.", 'success');
+
+    try {
+        const response = await axios({
+            method: "POST",
+            url: "/market/directBuy",
+            data: {
+                productId: lastSegment,
+            },
+        });
+
+        await swal('물품 구매 완료', bidprice + "원에 즉시 구매 하셨습니다.", 'success');
         location.reload();
-    });
+    } catch (error) {
+        console.error("에러 발생:", error);
+        // 에러 처리 로직 추가
+    }
 }
 
-function usercheck() {
-    const currentURL = window.location.href;
 
+async function usercheck() {
+    const currentURL = window.location.href;
     const urlWithoutQuery = currentURL.split("?")[0];
     const lastSegment = urlWithoutQuery.split("/").pop();
     console.log(lastSegment);
 
-    axios({
-        method: "POST",
-        url: "/market/userchk",
-        data: {
-            productId: lastSegment,
-        },
-    }).then((res) => {
-        console.log(res.data.islogin);
-        if (res.data.islogin == true) {
-            if (res.data.result == false) {
+    try {
+        const response = await axios({
+            method: "POST",
+            url: "/market/userchk",
+            data: {
+                productId: lastSegment,
+            },
+        });
+
+        console.log(response.data.islogin);
+
+        if (response.data.islogin == true) {
+            if (response.data.result == false) {
+                await swal('수정 실패', "본인이 작성한 게시물이 아닙니다", 'error');
                 location.reload();
-                swal('수정 실패', "본인이 작성한 게시물이 아닙니다", 'error');
             }
         } else {
-            swal('로그인 인증 실패', "로그인 상태가 아닙니다.", 'error');
+            await swal('로그인 인증 실패', "로그인 상태가 아닙니다.", 'error');
             document.location.href = "/login";
         }
-    });
+    } catch (error) {
+        console.error("에러 발생:", error);
+        // 에러 처리 로직 추가
+    }
 }
+
 
 async function editarticle() {
     const currentURL = window.location.href;
@@ -312,16 +330,22 @@ async function editarticle() {
     const content = document.getElementById("comment");
     const state = document.getElementById("state");
 
-    await axios({
-        method: "PATCH",
-        url: "/market/editArticle",
-        data: {
-            articleid: lastSegment,
-            subject: subject.value,
-            content: content.value,
-            state: state.value,
-        },
-    }).then((res) => {
-        swal('게시물 수정 완료',res.data.msg , 'success');
-    });
+    try {
+        const response = await axios({
+            method: "PATCH",
+            url: "/market/editArticle",
+            data: {
+                articleid: lastSegment,
+                subject: subject.value,
+                content: content.value,
+                state: state.value,
+            },
+        });
+
+        await swal('게시물 수정 완료', response.data.msg, 'success');
+    } catch (error) {
+        console.error("에러 발생:", error);
+        // 에러 처리 로직 추가
+    }
 }
+

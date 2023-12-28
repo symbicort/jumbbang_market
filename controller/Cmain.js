@@ -71,10 +71,14 @@ exports.getMypage = async (req, res) => {
 
 				const sellobject = await marketModel.find({ userid: user._id, state: 1});
 
-				const sellobject1 = await marketModel.find({ userid: user._id, state: { $ne: 1 }});
+				const sellobject1 = await marketModel.find({
+					userid: user._id,
+					$or: [{ state: 2 }, { state: 3 }],
+				});
+				
 
 				const buyobject = await marketModel.find({
-					buyer: decodedjwt.userid,
+					buyer: decodedjwt.userid, $or: [{ state: 2 }, { state: 3 }]
 				});
 
 				res.render('mypage', {
