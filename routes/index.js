@@ -14,14 +14,14 @@ router.get('/mypage', controller.getMypage);
 router.get('/profile', controller.getProfile);
 router.get('/search', controller.getSearch);
 router.get('/cs', controller.getCs);
-router.get('/reviewPost/:id', controller.getReviewPost);
+// router.get('/reviewPost/:id', controller.getReviewPost);
 router.get('/reviewReceive/:id', controller.getReviewReceive);
-router.get('/reviewWrite', controller.getReviewWrite);
-router.get('/contact', controller.getContact);
+// router.get('/reviewWrite', controller.getReviewWrite);
+// router.get('/contact', controller.getContact);
 
-router.get('/bookmark', controller.getBookmark);
-router.get('/sales', controller.getSales);
-router.get('/purchase', controller.getPurchase);
+// router.get('/bookmark', controller.getBookmark);
+// router.get('/sales', controller.getSales);
+// router.get('/purchase', controller.getPurchase);
 
 // 회원 가입(POST)
 router.post('/register', controller.postRegister);

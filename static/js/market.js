@@ -321,6 +321,7 @@ async function usercheck() {
 
 
 async function editarticle() {
+    console.log('게시물 수정 try')
     const currentURL = window.location.href;
 
     const urlWithoutQuery = currentURL.split("?")[0];
@@ -328,7 +329,6 @@ async function editarticle() {
 
     const subject = document.getElementById("subject");
     const content = document.getElementById("comment");
-    const state = document.getElementById("state");
 
     try {
         const response = await axios({
@@ -338,10 +338,8 @@ async function editarticle() {
                 articleid: lastSegment,
                 subject: subject.value,
                 content: content.value,
-                state: state.value,
             },
         });
-
         await swal('게시물 수정 완료', response.data.msg, 'success');
     } catch (error) {
         console.error("에러 발생:", error);

@@ -77,7 +77,7 @@ connect();
 
 const {processPosts} = require('./controller/Ccron');
 
-cron.schedule('0 12 * * *', async () => {
+cron.schedule('0 9 * * *', async () => {
   console.log('cron 실행');
   await processPosts();
 });
