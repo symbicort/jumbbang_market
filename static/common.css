@@ -178,9 +178,14 @@ button {
 	--bs-btn-bg: #008000;
 	--bs-btn-border-color: #627e6f;
 }
+
+.btn-primary:active,
 .btn-primary:hover {
+	--bs-btn-active-color: #fff;
 	--bs-btn-hover-color: #fff;
+	--bs-btn-active-bg: #008000c9;
 	--bs-btn-hover-bg: #008000c9;
+	--bs-btn-active-border-color: #008000c9;
 	--bs-btn-hover-border-color: #008000c9;
 }
 
@@ -247,4 +252,12 @@ button {
 		height: 200px;
 		background-position: center 0;
 	}
+}
+
+/* sweetalert */
+.swal-button {
+	background-color: #008000;
+}
+.swal-button:not([disabled]):hover {
+	background-color: #008000c9;
 }

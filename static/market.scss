@@ -45,6 +45,9 @@ $priceBgc3: #fff1f0;
 	&:hover {
 		background-color: #008000c9;
 	}
+	&:active {
+		background-color: #008000c9;
+	}
 }
 //서브 버튼
 @mixin btB {
@@ -401,6 +404,9 @@ li {
 				background-color: $priceBgc2;
 				button {
 					background-color: $priceTxtbg2;
+					&:hover {
+						opacity: 0.9;
+					}
 				}
 			}
 			&:nth-child(3) > div {
@@ -412,6 +418,9 @@ li {
 				background-color: $priceBgc3;
 				button {
 					background-color: $priceTxtbg3;
+					&:hover {
+						opacity: 0.9;
+					}
 				}
 			}
 			.period {
