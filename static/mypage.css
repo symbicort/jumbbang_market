@@ -21,11 +21,13 @@
 	width: 100%;
 	display: flex;
 	align-items: flex-start;
+	gap: 25px;
 }
 
 /* 프로필 및 목록 */
 .mypage-group {
-	width: 300px;
+	width: 280px;
+	flex-shrink: 0;
 	border-radius: 16px;
 	background-color: #008000;
 	display: flex;
@@ -96,25 +98,35 @@
 	margin: 0.5em 0;
 }
 
-/* 탭 버튼 */
 .mypage-record {
 	width: 100%;
-	height: 100%;
 }
+@media screen and (min-width: 768px) {
+	.mypage-record {
+		width: calc(100% - 320px);
+		/* width: 100%;
+    height: 100%; */
+	}
+}
+
 .mypage-record-inner {
-	width: 96%;
-	margin-left: auto;
+	/* width: 96%;
+	margin-left: auto; */
 }
 
 .mypage-record-title {
 	font-size: 2rem;
-	margin: 2.5rem 0 1rem 0;
+	margin: 0 0 1rem 0;
 }
 
 .mypage-tab-menu {
 	display: flex;
 	border-bottom: 1px solid #adadad;
 	padding-bottom: 1rem;
+	overflow: auto;
+}
+.mypage-tab-menu::-webkit-scrollbar {
+	display: none;
 }
 
 .mypage-tab-menu > li > a {
@@ -146,13 +158,24 @@
 	height: auto;
 	margin: 1rem 0;
 }
-
+@media screen and (max-width: 575px) {
+	.mypage-tab-product {
+		flex-direction: column;
+	}
+	.mypage-sale-img {
+		width: 100% !important;
+	}
+	.mypage-sale-img + div {
+		width: 100% !important;
+	}
+}
 .mypage-sale-img {
-	width: 30%;
-	height: 12rem;
+	width: 250px;
+	flex-shrink: 0;
+	height: 180px;
 	border-radius: 12px;
 	overflow: hidden;
-	margin-right: 1rem;
+	margin-right: 15px;
 }
 .mypage-sale-img > img {
 	width: 100%;
@@ -160,16 +183,27 @@
 	object-fit: cover;
 	background-position: center;
 }
-
+.mypage-sale-img + div {
+	width: calc(100% - 265px);
+}
 .date {
 	color: #333;
 	margin: 1rem 0;
+	display: -webkit-box;
+	word-wrap: break-word;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .record-product-title {
 	font-size: 1.6rem;
 	font-weight: 500;
 	margin: 1rem 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .tag {

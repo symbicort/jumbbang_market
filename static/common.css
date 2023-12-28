@@ -185,6 +185,11 @@ button {
 	--bs-btn-bg: #008000;
 	--bs-btn-border-color: #627e6f;
 }
+.btn-primary:hover {
+	--bs-btn-hover-color: #fff;
+	--bs-btn-hover-bg: #008000c9;
+	--bs-btn-hover-border-color: #008000c9;
+}
 
 /*
     --bs-btn-color: #fff;

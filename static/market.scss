@@ -21,7 +21,7 @@ $color2: #57855d; // 포인트 컬러
 $color3: #868e96; // 노트
 // $color4: #44612a;
 // $color4: #59882f;
-$color4: #8b9e70; //버튼 배경 주 컬러
+$color4: #008000; //버튼 배경 주 컬러
 $color5: #f3c41c; //
 // $priceBgc1: #dcde9f;
 // $priceBgc2: #c0c981;
@@ -42,6 +42,9 @@ $priceBgc3: #fff1f0;
 	border-radius: $bdrs5;
 	color: #fff;
 	background-color: $color4;
+	&:hover {
+		background-color: #008000c9;
+	}
 }
 //서브 버튼
 @mixin btB {
@@ -56,10 +59,6 @@ $priceBgc3: #fff1f0;
 [class^='ico-']:after,
 [class^='ibt-']:after {
 	font-family: 'Bootstrap-icons';
-}
-body {
-	min-width: 280px;
-	// font-family: 'Noto Sans KR', sans-serif;
 }
 .strike {
 	text-decoration: line-through;
@@ -163,6 +162,7 @@ input:checked + .ibt-filter:before {
 		width: 120px;
 		font-size: 12px;
 		display: flex;
+		display: none;
 		@media screen and (max-width: 767px) {
 			flex-direction: column;
 			button {
@@ -171,18 +171,25 @@ input:checked + .ibt-filter:before {
 			}
 		}
 	}
-	@media screen and (min-width: 992px) {
-		display: grid;
 
-		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: repeat(2, 1fr);
-		justify-content: space-between;
-		align-items: center;
-		dd {
-			justify-content: flex-end;
+	dd {
+		&:nth-child(2) {
+			display: none;
 		}
-		dd:last-child {
-			grid-column: span 2;
+
+		@media screen and (min-width: 992px) {
+			display: grid;
+
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: repeat(2, 1fr);
+			justify-content: space-between;
+			align-items: center;
+			& {
+				justify-content: flex-end;
+			}
+			&:last-child {
+				grid-column: span 2;
+			}
 		}
 	}
 }
@@ -351,6 +358,11 @@ li {
 		min-width: 120px;
 		@include btA;
 		// background-color: #140b46;
+	}
+	[class^='btn-']:disabled {
+		color: #808080;
+		background-color: #c0c0c0 !important;
+		text-shadow: 1px 1px 1px #d6d6d6;
 	}
 	[id^='price'] {
 		font-weight: 700;
