@@ -426,8 +426,7 @@ main {
 		height: 40px;
 	}
 
-	.subnav-user > li:nth-child(1),
-	.subnav-user > li:nth-child(3) {
+	.subnav-user > li {
 		display: none;
 	}
 

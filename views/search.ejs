@@ -25,7 +25,9 @@
 								</div>
 								<div class="card-desc">
 									<h2 class="card-title"><%= searchResult[i].subject %></h2>
-									<div class="card-price"><%= searchResult[i].priceLast %>원</div>
+									<div class="card-price">
+										<%= searchResult[i].priceLast.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') %>
+									</div>
 									<div class="card-region-name"><%= searchResult[i].userid.address %></div>
 									<div class="card-counts">
 										<span class="bookmarkHit" aria-label="관심"> <%= searchResult[i].bookmark_hit %> </span> ∙
