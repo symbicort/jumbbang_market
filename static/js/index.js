@@ -40,7 +40,7 @@ async function register() {
         console.log(result);
 
         if (!result) {
-            await swal('로그인 성공', form.id.value + "님 회원가입이 완료 되었어요", 'success');
+            await swal('회원가입 성공', form.id.value + "님 회원가입이 완료 되었어요", 'success');
             document.location.href = "/";
         } else {
             form.id.value = "";
