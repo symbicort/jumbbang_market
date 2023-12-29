@@ -22,7 +22,7 @@ const room = document.getElementById("roomid").value;
 const userid = document.getElementById("userid").value;
 // 이전 채팅 날짜
 let prevDate = null;
-const socket = io("ws://54.180.96.49:8000/socket.io");
+const socket = io("ws://54.180.96.49:8000");
 socket.on("connect", () => {
     console.log("Socket connected:", socket.id);
 });
