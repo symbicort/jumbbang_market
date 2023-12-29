@@ -64,14 +64,21 @@
 										">
 																							</span>
 																							<% } %>
-																								<% } %>
-																									<span>
-																										<%= chat.msg %>
-																									</span>
-																									<p class="date">
-																										<%= chat.chatTime
-																											%>
-																									</p>
+																								<% } else {%>
+																									<span class="thumb"
+																										style="
+											background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');
+										">
+																										<% } %>
+																											<span>
+																												<%= chat.msg
+																													%>
+																											</span>
+																											<p
+																												class="date">
+																												<%= chat.chatTime
+																													%>
+																											</p>
 																			</li>
 																			<% } %>
 																				<% } %>
@@ -88,10 +95,15 @@
 							<input type="hidden" id="roomname" value="<%= roomname%>" />
 							<input type="hidden" id="myprofileimage" value="<%= myinfo.image%>" />
 							<input type="hidden" id="hasyourinfo" value="<%= hasYourInfo %>">
+							<input type="hidden" id="yourinfo" value="<%= yourinfo%>" />
 							<% if (yourinfo) { %>
-								<input type="hidden" id="yourprofileimage" value="<%= yourinfo.image%>" />
-								<% } %>
-
+								<% if (yourinfo.image) { %>
+									<input type="hidden" id="yourprofileimage" value="<%= yourinfo.image %>">
+									<% } else { %>
+										<input type="hidden" id="yourprofileimage"
+											value='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png'>
+										<% } %>
+											<% } %>
 						</form>
 						<div class="chatFoot">
 							<a onclick="exit('<%= nowRoomId %>', '<%= from%>')"

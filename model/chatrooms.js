@@ -24,20 +24,4 @@ const chatroomsSchema = new Schema(
         timestamps: true,
     }
 );
-
-// 저장하기 전에 roomid를 _id 값으로 설정
-// chatroomsSchema.pre("save", function (next) {
-//     this.roomid = this._id;
-//     next();
-// });
-
-chatroomsSchema.pre("save", function (next) {
-    const currentDate = new Date();
-    this.updatedAt = currentDate;
-    if (!this.createdAt) {
-        this.createdAt = currentDate;
-    }
-    next();
-});
-
 module.exports = mongoose.model("chatrooms", chatroomsSchema);

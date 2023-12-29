@@ -4,6 +4,15 @@ const setroomName = document.getElementById("room_name");
 const userList = document.getElementById("userList");
 const getroomname = document.getElementById("roomname").value;
 let myprofileimage = document.getElementById("myprofileimage").value;
+let yourprofileimage = document.getElementById("yourprofileimage").value;
+if (!myprofileimage) {
+    myprofileimage =
+        "https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png";
+}
+if (!yourprofileimage) {
+    yourprofileimage =
+        "https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png";
+}
 
 // 입장 공지
 const usernick = document.getElementById("usernick").value;
@@ -23,7 +32,7 @@ const userid = document.getElementById("userid").value;
 // 이전 채팅 날짜
 let prevDate = null;
 const socket = io("ws://54.180.96.49", {
-    transports: ["websocket"]
+    transports: ["websocket"],
 });
 socket.on("connect", () => {
     console.log("Socket connected:", socket.id);
@@ -47,15 +56,15 @@ socket.on("message", (data) => {
     chatForm.scrollTop = chatForm.scrollHeight;
 });
 
+moment.locale("ko");
 function outputMessage(data) {
-    console.log(data);
     const li = document.createElement("li");
-    const newDate = data.date;
+    const newDate = moment().format("YYYY-MM-DD");
     if (newDate != prevDate) {
         // 새로운 날짜를 이전 날짜로 업데이트
         prevDate = newDate;
         li.classList.add("notice");
-        li.innerHTML = `<span>${newDate}</span>`;
+        li.innerHTML = `<span>${moment().format("YYYY-MM-DD")}</span>`;
         document.querySelector("#server-result").appendChild(li);
         li.innerHTML = "";
         li.classList.remove("notice");
@@ -67,7 +76,7 @@ function outputMessage(data) {
         style="background-image: url('${myprofileimage}')">
     </span>
         <span>${data.text}</span>
-        <p class="date">${data.time}</p>`;
+        <p class="date">${moment().format("a h:mm")}</p>`;
     } else {
         li.classList.add("other");
         li.innerHTML = `
@@ -75,7 +84,7 @@ function outputMessage(data) {
         style="background-image: url('${yourprofileimage}')">
     </span>
         <span>${data.text}</span>
-        <p class="date">${data.time}</p>`;
+        <p class="date">${moment().format("a h:mm")}</p>`;
     }
     document.querySelector("#server-result").appendChild(li);
 }
