@@ -6,6 +6,12 @@ main {
 	padding: 3rem 0;
 	background-color: #fff;
 }
+main > *:not(.main-review),
+main > *.container {
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
 /* 헤더 */
 #header {
 	width: 100%;
