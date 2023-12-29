@@ -3,7 +3,7 @@ const chats = require("../model/chats");
 const chatrooms = require("../model/chatrooms");
 const user = require("../model/user");
 const market = require("../model/market");
-const moment = require("moment");
+const moment = require("moment-timezone");
 const jwt = require("jsonwebtoken");
 const { verifyToken } = require("../utils/token");
 require("moment/locale/ko");
@@ -79,10 +79,12 @@ exports.getChats = async (req, res) => {
                     savedChats = savedChats.map((chat) => {
                         return {
                             ...chat._doc,
-                            chatDate: moment(chat.createdAt).format(
-                                "YYYY-MM-DD"
-                            ),
-                            chatTime: moment(chat.createdAt).format("a hh:mm"),
+                            chatDate: moment(chat.createdAt)
+                                .tz("Asia/Seoul")
+                                .format("YYYY-MM-DD"),
+                            chatTime: moment(chat.createdAt)
+                                .tz("Asia/Seoul")
+                                .format("a hh:mm"),
                         };
                     });
                     console.log("savedChats", savedChats);
