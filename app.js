@@ -66,7 +66,7 @@ app.use("/", chatRouter);
 const socketCtrl = require("./controller/Cchat");
 const http = require("http");
 const server = http.createServer(app);
-const io = socketIO(server, { path: "/socket.io" });
+const io = socketIO(server);
 io.on("connection", (socket) => socketCtrl.socketConnection(socket, io));
 
 // TODO: 404 처리
