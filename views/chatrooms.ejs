@@ -1,70 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<%- include('./component/head', { title: '채팅 - 완두점빵' }) %>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<%- include('./component/head', { title: '채팅 - 완두점빵' }) %>
 		<script src="https://kit.fontawesome.com/837ff3adc1.js" crossorigin="anonymous" async></script>
 		<link rel="stylesheet" href="/static/chats.min.css" />
-	</head>
+</head>
 
-	<body>
-		<div id="jumbbang">
-			<%- include('./component/header') %>
+<body>
+	<div id="jumbbang">
+		<%- include('./component/header') %>
 			<main class="">
 				<div class="mypage-inner container">
 					<div class="mypage-profile-list">
 						<%- include('./component/mypageMenu',{image:myimage, userid:userid}) %>
-						<!-- 내역 탭 -->
-						<!-- 구매 내역에는 받은후기 추가 -->
-						<section class="mypage-record">
-							<div class="mypage-record-inner">
-								<h2 class="mypage-record-title fw-bold">나의 채팅</h2>
-								<div class="chatsWrap">
-									<!-- <h1>My Chat</h1> -->
-									<ul class="chatList">
-										<% for(let i=0;i < mychatrooms.length;i++ ){ %>
-										<li>
-											<a
-												href="/chatroom?postid=<%= mychatrooms[i].takeId%>&userid=<%= mychatrooms[i].sendId%>&productid=<%= mychatrooms[i].productId%>&from=chatrooms">
-												<% if (yourProfileImgs[i]) { %>
-												<div class="profile1" style="background-image: url('<%= yourProfileImgs[i] %>')"></div>
-												<% } else{ %>
-												<div
-													class="profile1"
-													style="
+							<!-- 내역 탭 -->
+							<!-- 구매 내역에는 받은후기 추가 -->
+							<section class="mypage-record">
+								<div class="mypage-record-inner">
+									<h2 class="mypage-record-title fw-bold">나의 채팅</h2>
+									<div class="chatsWrap">
+										<!-- <h1>My Chat</h1> -->
+										<ul class="chatList">
+											<% for(let i=0;i < mychatrooms.length;i++ ){ %>
+												<li>
+													<a
+														href="/chatroom?postid=<%= mychatrooms[i].takeId%>&userid=<%= mychatrooms[i].sendId%>&productid=<%= mychatrooms[i].productId%>&from=chatrooms">
+														<% if (yourProfileImgs[i]) { %>
+															<div class="profile1"
+																style="background-image: url('<%= yourProfileImgs[i] %>')">
+															</div>
+															<% } else{ %>
+																<div class="profile1" style="
 														background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png');
 													"></div>
-												<% } %>
+																<% } %>
 
-												<div class="txt">
-													<strong class="subject h5"> <%= productNames[i]%> </strong>
-													<p>
-														<span id="chatyourname" class="userid"> <%= yourNames[i] %> </span>
-														<span class="date"> <%= mychatrooms[i].createdAt %> </span>
-													</p>
-												</div>
-											</a>
-											<div class="btns">
-												<button class="ibt-report" id="report" aria-label="신고하기"></button>
-												<a onclick="exit('<%= mychatrooms[i]._id%>')" class="ibt-chatLogout"></a>
-											</div>
-										</li>
-										<% } %>
-									</ul>
+																	<div class="txt">
+																		<strong class="subject h5">
+																			<%= productNames[i]%>
+																		</strong>
+																		<p>
+																			<% if (yourNickNames[i]) { %>
+																				<span id="chatyourname" class="userid">
+																					<%= yourNames[i] %>
+																				</span>
+																				<% } else {%>
+																					<span id="chatyourname"
+																						class="userid"><s>
+																							<%= yourNames[i] %>
+																						</s>
+																					</span>
+																					<% } %>
+																						<span class="date">
+																							<%= mychatrooms[i].createdAt
+																								%>
+																						</span>
+																		</p>
+																	</div>
+													</a>
+													<div class="btns">
+														<button class="ibt-report" id="report"
+															aria-label="신고하기"></button>
+														<a onclick="exit('<%= mychatrooms[i]._id%>')"
+															class="ibt-chatLogout"></a>
+													</div>
+												</li>
+												<% } %>
+										</ul>
+									</div>
 								</div>
-							</div>
-						</section>
+							</section>
 					</div>
 				</div>
 			</main>
 			<%- include('./component/footer') %>
-		</div>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"
-			integrity="sha512-/l6vieC+YxaZywUhmqs++8uF9DeMvJE61ua5g+UK0TuHZ4TkTgB1Gm1n0NiA86uEOM9JJ6JUwyR0hboKO0fCng=="
-			crossorigin="anonymous"
-			referrerpolicy="no-referrer"></script>
-		<script src="../static/js/chatrooms.js"></script>
-	</body>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"
+		integrity="sha512-/l6vieC+YxaZywUhmqs++8uF9DeMvJE61ua5g+UK0TuHZ4TkTgB1Gm1n0NiA86uEOM9JJ6JUwyR0hboKO0fCng=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="../static/js/chatrooms.js"></script>
+</body>
+
 </html>

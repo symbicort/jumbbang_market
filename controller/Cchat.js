@@ -44,6 +44,12 @@ exports.getChats = async (req, res) => {
                         { takeId: postid, sendId: userid },
                     ],
                 });
+                let hasYourInfo;
+                if (!yourinfo) {
+                    hasYourInfo = false;
+                } else {
+                    hasYourInfo = true;
+                }
                 // 검색한 채팅방의 채팅 내역 저장 변수
                 let savedChats;
                 if (!savedChatRooms) {
@@ -62,6 +68,7 @@ exports.getChats = async (req, res) => {
                         roomname,
                         myinfo,
                         yourinfo,
+                        hasYourInfo,
                     });
                 } else {
                     console.log("savedChatRooms", savedChatRooms);
@@ -86,6 +93,7 @@ exports.getChats = async (req, res) => {
                         roomname,
                         myinfo,
                         yourinfo,
+                        hasYourInfo,
                     });
                 }
             } else {
@@ -143,17 +151,19 @@ exports.getChatrooms = async (req, res) => {
                 let productNames = [];
                 let yourNames = [];
                 let yourProfileImgs = [];
-                let chatroomids = [];
+                let yourNickNames = [];
                 for (let i = 0; i < mychatrooms.length; i++) {
                     // console.log(mychatrooms[i].productId);
                     try {
                         if (mychatrooms[i].sendId != userid) {
-                            yourNames.push(
+                            yourNames.push(mychatrooms[i].sendId);
+                            yourNickNames.push(
                                 await getUsernameByUserid(mychatrooms[i].sendId)
                             );
                         } else {
-                            yourNames.push(
-                                await getUsernameByUserid(mychatrooms[i].takeId)
+                            yourNames.push(mychatrooms[i].takeId);
+                            yourNickNames.push(
+                                await getUsernameByUserid(mychatrooms[i].sendId)
                             );
                         }
                         const productName = await market.findOne({
@@ -165,7 +175,7 @@ exports.getChatrooms = async (req, res) => {
                             productNames.push({});
                         }
                         const profileImg = await user.findOne({
-                            nick: yourNames[i],
+                            userid: yourNames[i],
                         });
                         if (profileImg) {
                             yourProfileImgs.push(profileImg.image);
@@ -191,6 +201,7 @@ exports.getChatrooms = async (req, res) => {
                     yourNames,
                     yourProfileImgs,
                     myimage: myinfo.image,
+                    yourNickNames,
                 });
             } else {
                 res.render("login");

@@ -15,7 +15,9 @@
 			<main class="py-5" style="background-color: #eee">
 				<div class="container">
 					<div class="chatsWrap">
-						<h3 id="room_name"></h3>
+						<h3 id="room_name">
+							<%= roomname %>
+						</h3>
 						<form name="chating" class="chating">
 							<input type="hidden" value="<%= myinfo.nick %>" id="mynickname" />
 							<ul id="server-result" class="talkList">
@@ -51,7 +53,7 @@
 																		</li>
 																		<% } else { %>
 																			<li class="other">
-																				<% if (yourinfo.image) { %>
+																				<% if (yourinfo) { %>
 																					<span class="thumb"
 																						style="background-image: url('<%= yourinfo.image%>')">
 																					</span>
@@ -82,7 +84,11 @@
 							<input type="hidden" id="roomid" value="<%= nowRoomId %>" />
 							<input type="hidden" id="roomname" value="<%= roomname%>" />
 							<input type="hidden" id="myprofileimage" value="<%= myinfo.image%>" />
-							<input type="hidden" id="yourprofileimage" value="<%= yourinfo.image%>" />
+							<input type="hidden" id="hasyourinfo" value="<%= hasYourInfo %>">
+							<% if (yourinfo) { %>
+								<input type="hidden" id="yourprofileimage" value="<%= yourinfo.image%>" />
+								<% } %>
+
 						</form>
 						<div class="chatFoot">
 							<a onclick="exit('<%= nowRoomId %>', '<%= from%>')"

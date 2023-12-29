@@ -4,15 +4,6 @@ const setroomName = document.getElementById("room_name");
 const userList = document.getElementById("userList");
 const getroomname = document.getElementById("roomname").value;
 let myprofileimage = document.getElementById("myprofileimage").value;
-let yourprofileimage = document.getElementById("yourprofileimage").value;
-if (!myprofileimage) {
-    myprofileimage =
-        "https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png";
-}
-if (!yourprofileimage) {
-    yourprofileimage =
-        "https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-c649f052a34ebc4eee35048815d8e4f73061bf74552558bb70e07133f25524f9.png";
-}
 
 // 입장 공지
 const usernick = document.getElementById("usernick").value;
@@ -118,8 +109,32 @@ function exit(roomid, from) {
         });
 }
 
+// 상대방 회원정보 존재 여부 확인
+const hasYourInfo = document.getElementById("hasyourinfo").value;
+const msgInput = document.getElementById("msg");
+// const sendButton = document.querySelector("button");
+
+console.log(hasYourInfo);
+if (hasYourInfo === "false") {
+    msgInput.disabled = true;
+    msgInput.placeholder = "탈퇴한 회원입니다";
+    msgInput.classList.add("sendbtn_red");
+}
+
 // 채팅 보내기
 function send() {
+    // 상대방 회원정보 존재 여부 확인
+    const hasYourInfo = document.getElementById("hasyourinfo").value;
+    const msgInput = document.getElementById("msg");
+    // const sendButton = document.querySelector("button");
+
+    console.log(hasYourInfo);
+    if (hasYourInfo === "false") {
+        msgInput.disabled = true;
+        swal("메시지 전송 실패", "탈퇴한 회원입니다", "error");
+        return;
+    }
+
     const msg = document.getElementById("msg");
     axios({
         method: "post",
