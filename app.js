@@ -31,6 +31,8 @@ app.use(
     })
 );
 
+// AWS에 올라가는지 테스트
+
 // Preflight 요청에 대한 응답
 app.options("*", (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
