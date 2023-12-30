@@ -209,7 +209,7 @@ button {
 /* 404 페이지 */
 .notfound {
 	position: relative;
-	max-width: 600px;
+	max-width: 600px !important;
 	min-height: 600px;
 	margin: 5rem auto;
 	padding: 5rem 0 5rem 250px;
