@@ -67,18 +67,18 @@ exports.getMypage = async (req, res) => {
 
 				const user = await userModel.findOne({ userid: user_id }).exec();
 
-				console.log('유저 오브젝트 아이디',user._id);
+				console.log('유저 오브젝트 아이디', user._id);
 
-				const sellobject = await marketModel.find({ userid: user._id, state: 1});
+				const sellobject = await marketModel.find({ userid: user._id, state: 1 });
 
 				const sellobject1 = await marketModel.find({
 					userid: user._id,
 					$or: [{ state: 2 }, { state: 3 }],
 				});
-				
 
 				const buyobject = await marketModel.find({
-					buyer: decodedjwt.userid, $or: [{ state: 2 }, { state: 3 }]
+					buyer: decodedjwt.userid,
+					$or: [{ state: 2 }, { state: 3 }],
 				});
 
 				res.render('mypage', {
@@ -87,7 +87,7 @@ exports.getMypage = async (req, res) => {
 					image: user.image,
 					sellobj: sellobject,
 					sellobj1: sellobject1,
-					buyobj:buyobject
+					buyobj: buyobject,
 				});
 			} else {
 				res.render('login');
@@ -238,57 +238,6 @@ exports.getReviewReceive = async (req, res) => {
 		}
 	}
 };
-//후기 작성
-exports.getReviewWrite = (req, res) => {
-	res.render(`reviewWrite`);
-};
-//관심 목록
-exports.getContact = (req, res) => {
-	res.render('contact');
-};
-//관심 목록
-exports.getBookmark = (req, res) => {
-	res.render('bookmark');
-};
-//판매 내역
-exports.getSales = async (req, res) => {
-	const token = req.cookies.accessToken;
-	const refreshToken = req.cookies.refreshToken;
-
-	if (!token || !refreshToken) {
-		res.render('login');
-	} else {
-		try {
-			const decodedjwt = await verifyToken(token, refreshToken);
-
-			if (decodedjwt.token != undefined) {
-				const user_id = decodedjwt.userid;
-
-				const user = await userModel.findOne({ userid: user_id }).exec();
-
-				const sellobject = await marketModel.find({ userid: user._id.toString() }).populate('userid');
-
-				const buyobject = await marketModel.find({ buyer: decodedjwt.userid });
-
-				console.log('user 정보', user.userid, user.nick, user.image);
-				console.log('이미지 확인', typeof user.image);
-				console.log('해당 유저 판매 목록', sellobject);
-				console.log('해당 유저 구매 목록', buyobject);
-
-				res.render('sales', { userid: user.userid, usernickname: user.nick, image: user.image });
-			} else {
-				res.render('login');
-			}
-		} catch (err) {
-			console.error('메인 페이지 랜딩 에러', err);
-		}
-	}
-};
-//구매 내역
-exports.getPurchase = (req, res) => {
-	res.render('purchase');
-};
-
 exports.postRegister = async (req, res) => {
 	try {
 		const { userid, userpw, nickname, email, contact, address } = req.body;

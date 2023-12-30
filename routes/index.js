@@ -86,7 +86,7 @@ const controller = require('../controller/Cmain');
  *   get:
  *     summary: 고객센터 페이지 이동
  *     tags: [Index]
- * 
+ *
  *     parameters: []
  */
 
@@ -131,7 +131,6 @@ const controller = require('../controller/Cmain');
  *               - address
  */
 
-
 /**
  * @swagger
  * /login:
@@ -152,7 +151,6 @@ const controller = require('../controller/Cmain');
  *               userpw:
  *                 type: string
  */
-
 
 /**
  * @swagger
@@ -248,7 +246,6 @@ const controller = require('../controller/Cmain');
  *         - image
  */
 
-
 router.get('/', controller.main);
 router.get('/login', controller.getLogin);
 router.get('/logout', controller.getLogout);
@@ -257,14 +254,7 @@ router.get('/mypage', controller.getMypage);
 router.get('/profile', controller.getProfile);
 router.get('/search', controller.getSearch);
 router.get('/cs', controller.getCs);
-// router.get('/reviewPost/:id', controller.getReviewPost);
 router.get('/reviewReceive/:id', controller.getReviewReceive);
-// router.get('/reviewWrite', controller.getReviewWrite);
-// router.get('/contact', controller.getContact);
-
-// router.get('/bookmark', controller.getBookmark);
-// router.get('/sales', controller.getSales);
-// router.get('/purchase', controller.getPurchase);
 
 // 회원 가입(POST)
 router.post('/register', controller.postRegister);
