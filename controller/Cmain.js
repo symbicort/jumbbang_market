@@ -288,10 +288,12 @@ exports.postlogin = async (req, res) => {
 				res.cookie('accessToken', token, {
 					maxAge: 7200000,
 					httpOnly: true,
+					sameSite: 'lax'
 				});
 				res.cookie('refreshToken', refreshToken, {
 					maxAge: 604800000,
 					httpOnly: true,
+					sameSite: 'lax'
 				});
 				res.send({ result: true });
 			} else {
