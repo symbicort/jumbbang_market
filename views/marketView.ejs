@@ -430,7 +430,7 @@
 				.then((result) => {
 					const userid = result.data.userid;
 					console.log(result.data);
-					// 채팅 페이지로 이동
+					// 채팅 페이지로 이동 - chat
 					if (postid === userid) {
 						swal('채팅 실패', "자신이 게시한 게시물입니다", 'error');
 					} else {
