@@ -37,6 +37,7 @@ const socket = io("ws://54.180.96.49", {
 socket.on("connect", () => {
     console.log("Socket connected:", socket.id);
 });
+// 소켓
 
 socket.emit("joinRoom", { userid, room });
 
