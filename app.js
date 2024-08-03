@@ -71,7 +71,6 @@ const server = http.createServer(app);
 const io = socketIO(server);
 io.on("connection", (socket) => socketCtrl.socketConnection(socket, io));
 
-// TODO: 404 처리
 app.get("*", (req, res) => {
     res.render("404");
 });
