@@ -75,7 +75,7 @@ app.get("*", (req, res) => {
     res.render("404");
 });
 
-// DB 연동
+ß
 const connect = require("./model/index");
 connect();
 
