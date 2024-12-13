@@ -8,7 +8,6 @@ async function processPosts() {
         const postsToUpdate = await marketModel.find({
             dateLimit: { $lte: currentDate },
         });
-        console.log("시간 넘은 데이터 있는지", postsToUpdate);
 
         for (const post of postsToUpdate) {
             console.log(`게시물 ID ${post._id}의 dateLimit이 지나 상태값 변경`);
@@ -19,7 +18,6 @@ async function processPosts() {
                 { new: true }
             );
         }
-        console.log("게시물 처리 완료");
     } catch (error) {
         console.error("에러 발생:", error);
     }
