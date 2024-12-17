@@ -52,7 +52,6 @@ app.options("*", (req, res) => {
 const { swaggerUi, specs } = require("./swagger");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
-// 메인, 회원가입, 로그인, 회원탈퇴, 마이페이지, 고객센터,
 const indexRouter = require("./routes/index");
 app.use("/", indexRouter);
 
