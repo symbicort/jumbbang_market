@@ -48,7 +48,7 @@ app.options("*", (req, res) => {
     res.status(204).send();
 });
 
-// Swagger 설정 (해당 부분이 추가되었다고 가정)
+
 const { swaggerUi, specs } = require("./swagger");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
