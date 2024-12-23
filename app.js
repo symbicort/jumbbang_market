@@ -44,7 +44,7 @@ app.options("*", (req, res) => {
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
     );
-    res.header("Access-Control-Allow-Credentials", "true"); // 필요에 따라 추가
+    res.header("Access-Control-Allow-Credentials", "true");
     res.status(204).send();
 });
 
