@@ -63,7 +63,6 @@ app.use("/", marketRouter);
 const chatRouter = require("./routes/chat");
 app.use("/", chatRouter);
 
-// Socket
 const socketCtrl = require("./controller/Cchat");
 const http = require("http");
 const server = http.createServer(app);
